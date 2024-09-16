@@ -1,0 +1,39 @@
+:root{
+    --left-bar-font-color: #E1E8F0; 
+    --left-bar-background-color: #1C2A3A;
+}
+
+body{
+    margin:0;
+    font-family: 'Inter';
+    font-size: 16px; 
+}
+
+.container{
+    display: flex;
+}
+
+.sidebar{
+    width: 250px;
+    background-color: --left-bar-background-color; 
+    height: 100vh;
+    position: flxed;
+    top: 0;
+    left: 0;
+    overflow-y: auto; /* Allows scrolling if content overflows */
+}
+
+.sidebar ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li{
+    padding: 15px;
+}
+
+.sidebar ul li a{
+    color: var(--left-bar-font-color); 
+}
+
