@@ -3,7 +3,8 @@
     --left-bar-background-color: #1C2A3A;
     --background-color: #FEFEFF; 
     --background-box-design-color: #fff;
-    --logo-font-color: #F1F4F8; 
+    --logo-font-color: #F1F4F8;
+    --section-font-color: #304254; 
 }
 
 body{
@@ -39,7 +40,6 @@ body{
     width: 250px;
     background-color: var(--left-bar-background-color); 
     height: 100vh;
-    position: flex;
     top: 0;
     left: 0;
     overflow-y: auto; /* Allows scrolling if content overflows */
@@ -86,4 +86,11 @@ body{
 .icon{
     margin-right: 10px;
     vertical-align: middle; /* Align icon with text */
+}
+
+/* Side Bar - Events section */
+.event-style{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--section-font-color);
 }
