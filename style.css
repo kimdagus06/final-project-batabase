@@ -4,7 +4,7 @@
 }
 
 body{
-    margin:0;
+    margin: 0;
     font-family: 'Inter';
     font-size: 16px; 
 }
@@ -46,5 +46,26 @@ body{
 
 .sidebar ul li a{
     color: var(--left-bar-font-color); 
+    text-decoration: none; /* Remove underlines */
 }
 
+.sidebar-bottom{
+    position: absolute;
+    bottom: 0; /* Display Settings and Help Center in bottom */
+    width: 100%;
+}
+
+.sidebar-bottom ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-bottom ul li{
+    padding: 15px;
+}
+
+.sidebar-bottom ul li a{
+    color: var(--left-bar-font-color); 
+    text-decoration: none; /* Remove underlines */
+}
