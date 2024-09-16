@@ -27,6 +27,7 @@ body{
 
 .simplify-logo p{
     color: var(--logo-font-color);
+    padding: 8px;
 }
 
 .container{
@@ -51,7 +52,7 @@ body{
 }
 
 .sidebar ul li{
-    padding: 15px;
+    padding: 10px;
 }
 
 .sidebar ul li a{
@@ -69,14 +70,20 @@ body{
 .sidebar-bottom ul{
     list-style: none;
     padding: 0;
-    margin: 10px;
+    margin: 5px;
 }
 
 .sidebar-bottom ul li{
-    padding: 15px;
+    padding: 10px; 
 }
 
 .sidebar-bottom ul li a{
     color: var(--left-bar-font-color); 
     text-decoration: none; /* Remove underlines */
+}
+
+/* Icons next to menu names */
+.icon{
+    margin-right: 10px;
+    vertical-align: middle; /* Align icon with text */
 }
