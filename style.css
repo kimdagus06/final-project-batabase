@@ -10,8 +10,14 @@ body{
 }
 
 .simplify-logo{
-    font-size: 22px;
-    font-weight: 300;
+    font-size: 26px;
+    font-weight: 700;
+    display: flex;
+    padding: 20px;
+}
+
+.simplify-logo img {
+    margin-right: 20px;
 }
 
 .container{
