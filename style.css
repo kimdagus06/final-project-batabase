@@ -1,7 +1,7 @@
 :root{
     --left-bar-font-color: #E1E8F0; 
     --left-bar-background-color: #1C2A3A;
-    --background-color: #FBFBFC; 
+    --background-color: #FEFEFF; 
     --background-box-design-color: #fff;
     --logo-font-color: #F1F4F8; 
 }
@@ -13,7 +13,7 @@ body{
 }
 
 .simplify-logo{
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 700;
     display: flex;
     background-color: var(--left-bar-background-color);
