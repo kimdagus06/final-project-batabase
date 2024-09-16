@@ -16,9 +16,9 @@ body{
     font-size: 26px;
     font-weight: 700;
     display: flex;
-    width: 70px;
-    height: 70px;
     background-color: var(--left-bar-background-color);
+    padding: 10px;
+    width: 230px; /* In order to apply the same background color as the side bar*/
 }
 
 .simplify-logo img{
@@ -27,11 +27,10 @@ body{
 
 .simplify-logo p{
     color: var(--logo-font-color);
-    background-color: var(--left-bar-background-color);
 }
 
 .container{
-    display: fixed;
+    display: flex;
 }
 
 /* Side Bar / Home / Events / Log Out */
@@ -39,7 +38,7 @@ body{
     width: 250px;
     background-color: var(--left-bar-background-color); 
     height: 100vh;
-    position: flxed;
+    position: flex;
     top: 0;
     left: 0;
     overflow-y: auto; /* Allows scrolling if content overflows */
