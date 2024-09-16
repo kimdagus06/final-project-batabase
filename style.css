@@ -88,9 +88,16 @@ body{
     vertical-align: middle; /* Align icon with text */
 }
 
-/* Side Bar - Events section */
-.event-style{
-    font-size: 20px;
-    font-weight: 500;
+.main-content {
+    flex: 1; /* Takes up the remaining space */
+    background-color: var(--background-color);
+    padding: 20px; /* Add some padding for spacing */
+    overflow: auto; /* Allows scrolling if content overflows */
+}
+
+.events-style{
     color: var(--section-font-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
