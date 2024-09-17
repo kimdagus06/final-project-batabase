@@ -3,14 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     menuItems.forEach(item => {
         item.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent page from jumping
+            event.preventDefault(); // Prevent default link behavior
 
-            // Hide all other submenus
-            const allSubmenus = document.querySelectorAll('.submenu');
-            allSubmenus.forEach(submenu => submenu.classList.remove('show'));
-
-            // Toggle the visibility of the submenu next to the clicked menu item
+            // Find a submenu of the clicked menu
             const submenu = this.nextElementSibling;
+
+            // Hide all submenus 
+            document.querySelectorAll('.submenu').forEach(sub => {
+                if (sub !== submenu) {
+                    sub.classList.remove('show');
+                }
+            });
+
+            // Toggle a clicked menu's submenus 
             if (submenu && submenu.classList.contains('submenu')) {
                 submenu.classList.toggle('show');
             }

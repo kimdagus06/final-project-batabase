@@ -89,9 +89,13 @@ body{
     vertical-align: middle; /* Align icon with text */
 }
 
-/* When a menu (Big menus) is clicked */
-.sidebar ul li a:hover{
+/* When a submenu is hovered */
+.submenu a:hover{
     background-color: var(--menu-hover-color);
+}
+
+.submenu{
+    display: none;
 }
 
 /* When a submenu shows */
