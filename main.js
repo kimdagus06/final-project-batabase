@@ -1,55 +1,19 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const menuItems = document.querySelectorAll('.menu-item');
 
+    menuItems.forEach(item => {
+        item.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent page from jumping
 
-document.querySelectorAll('.sidebar a').forEach(anchor => {
-    anchor.addEventListener('click', function(event) {
-        event.preventDefault();
+            // Hide all other submenus
+            const allSubmenus = document.querySelectorAll('.submenu');
+            allSubmenus.forEach(submenu => submenu.classList.remove('show'));
 
-        const content = this.getAttribute('data-content'); // Get home, events, logout, etc. 
-        let mainContent = document.getElementById('main-content');
-
-        if (!mainContent) {
-            mainContent = document.createElement('main');
-            mainContent.id = 'main-content';
-            mainContent.classList.add('content');
-            document.body.appendChild(mainContent);
-        }
-
-        // TEST 
-        // Organize codes into seperate functions 
-        switch (content) {
-            case 'home':
-                sidebarHomeSection(); 
-                break;
-            case 'events':
-                sidebarEventsSection();
-                break;
-            case 'logout':
-                mainContent.innerHTML = '<h1>Log Out</h1><p>You have logged out.</p>';
-                break;
-            default:
-                mainContent.innerHTML = '<p>Welcome! Select an option from the sidebar.</p>';
-        }
+            // Toggle the visibility of the submenu next to the clicked menu item
+            const submenu = this.nextElementSibling;
+            if (submenu && submenu.classList.contains('submenu')) {
+                submenu.classList.toggle('show');
+            }
+        });
     });
 });
-
-/**
- * Home 
- */
-function sidebarHomeSection() {
-    let mainContent = document.getElementById('main-content');
-    if (mainContent) {
-        mainContent.innerHTML = '<h1>Home</h1><p>This is the home section.</p>';
-        mainContent.classList.add('home-style'); // Add class for Home section
-    }
-}
-
-/**
- * Event
- */
-function sidebarEventsSection() {
-    let mainContent = document.getElementById('main-content');
-    if (mainContent) {
-        mainContent.innerHTML = '<h1>Events</h1><p>This is the events section.</p>';
-        mainContent.classList.add('events-style'); // Add class for Events section
-    }
-}

@@ -5,6 +5,7 @@
     --background-box-design-color: #fff;
     --logo-font-color: #F1F4F8;
     --section-font-color: #304254; 
+    --menu-hover-color: #F8FAFC; 
 }
 
 body{
@@ -88,16 +89,12 @@ body{
     vertical-align: middle; /* Align icon with text */
 }
 
-.main-content {
-    flex: 1; /* Takes up the remaining space */
-    background-color: var(--background-color);
-    padding: 20px; /* Add some padding for spacing */
-    overflow: auto; /* Allows scrolling if content overflows */
+/* When a menu (Big menus) is clicked */
+.sidebar ul li a:hover{
+    background-color: var(--menu-hover-color);
 }
 
-.events-style{
-    color: var(--section-font-color);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+/* When a submenu shows */
+.show{
+    display: block;
 }
