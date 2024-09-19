@@ -5,7 +5,11 @@
     --background-box-design-color: #fff;
     --logo-font-color: #F1F4F8;
     --section-font-color: #304254; 
-    --menu-hover-color: #F8FAFC; 
+    --menu-hover-color: #F8FAFC;
+    --button-color: #EA6A5C; 
+    
+    /* create-account-page style */
+    --form-border-color: #D5D5D5; 
 }
 
 body{
@@ -32,13 +36,10 @@ body{
     padding: 8px;
 }
 
-.container{
-    display: flex;
-    flex-direction: column;
-}
 
 /* Side Bar / Home / Events / Log Out */
 .sidebar{
+    display: flex;
     width: 250px;
     background-color: var(--left-bar-background-color); 
     height: 100vh;
@@ -102,4 +103,21 @@ body{
 /* When a submenu shows */
 .show{
     display: block;
+}
+
+.create-account-button{
+    position: absolute;
+    /* Position */
+    top: 20px; 
+    right: 20px;
+    padding: 10px;
+}
+
+.create-account-button button {
+    background-color: #fff;
+    color: var(--button-color); /* Text color */
+    border: 2px solid var(--button-color); /* Border: thickness, style, border color setting */
+    padding: 8px 25px;
+    cursor: pointer;
+    border-radius: 16px;
 }

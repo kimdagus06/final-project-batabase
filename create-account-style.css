@@ -1,0 +1,46 @@
+/* Leftside area */
+.simplify-creat-account-leftside {
+    display: flex;
+    width: 750px;
+    background-color: var(--left-bar-background-color); 
+    height: 100vh;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    position: absolute;
+}
+
+.simplify-creat-account-leftside p {
+    color: var(--logo-font-color);
+    padding: 100px;
+    font-size: 22px;
+    font-weight: 300;
+}
+
+/* Forms container */
+.create-account-forms {
+    margin-left: 750px;
+    display: flex;
+    justify-content: center; /* Center forms horizontally */
+    align-items: center;
+    height: 70vh;
+    width: calc(100vw - 750px); /* Adjusted width calculation */
+    padding: 0 30px; /* Padding to ensure space on the sides */
+}
+
+/* Container for forms */
+.forms-wrapper {
+    display: flex;
+    gap: 40px; /* Space between the forms */
+}
+
+/* Form 1 and Form 2 */
+.create-form-left, .create-form-right {
+    padding: 20px;
+    border-radius: 16px; /* Rounded corners */
+    background-color: #fff; /* Background color for visibility */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visual separation */
+    width: 100%; /* Take full width of the container */
+    max-width: 400px; /* Limit maximum width for better layout */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+}
