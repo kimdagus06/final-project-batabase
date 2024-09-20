@@ -188,7 +188,7 @@ body{
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    margin-left: 10rem;
+    margin-left: 20rem;
     color: #1e1c1c;
 }
 
@@ -198,6 +198,6 @@ body{
     color: #0f0a0a;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    margin-left: 10rem;
+    margin-left: 20rem;
     text-align: justify;
 }
