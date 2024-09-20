@@ -14,17 +14,14 @@ app.set("views", "./views");
 
 const userName = '';
 
-
 app.use(express.static(path.join(__dirname, 'public'))); 
 
-/* https://stackoverflow.com/questions/62092010/use-nodejs-to-change-what-text-html-displays */
-
 app.get("/", function (req, res) {
-    res.render("home.handlebars"); 
-}); 
+    res.render("home"); 
+});
 
-app.get("/contact", function (req, res) {
-    res.render("contact.handlebars"); 
+app.get("/createaccount", function (req, res) {
+    res.render("createaccount"); 
 });
 
 app.listen (port, () => {
