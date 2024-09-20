@@ -10,6 +10,10 @@
 
     /* Contact */
     --form-border-color: #D5D5D5; 
+
+    /* About */
+    --about-title-color: #2051E5; 
+
 }
 
 body{
@@ -127,7 +131,7 @@ body{
     border-radius: 1rem;
 }
 
-/* Forms container */
+/* Contact page */
 .create-account-forms{
     flex-grow: 1;
     display: flex;
@@ -185,12 +189,13 @@ body{
     font-weight: 700;
     font-style: normal;
     margin-left: 10rem;
+    color: #1e1c1c;
 }
 
 .about-text{
     line-height: 1.8;
     max-width: 50rem;
-    color: #4A4A4A;
+    color: #0f0a0a;
     margin-top: 2rem;
     margin-bottom: 2rem;
     margin-left: 10rem;

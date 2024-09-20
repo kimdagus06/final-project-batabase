@@ -32,6 +32,10 @@ app.get("/contact", function (req, res) {
     res.render("contact"); 
 });
 
+app.get("/events", function (req, res) {
+    res.render("events"); 
+});
+
 app.listen (port, () => {
     console.log('Server up on port '+port+'...');
 }); 
