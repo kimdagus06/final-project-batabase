@@ -1,7 +1,11 @@
+:root{
+    --form-border-color: #D5D5D5; 
+}
+    
 /* Leftside area */
-.simplify-creat-account-leftside {
+.simplify-creat-account-leftside{
     display: flex;
-    width: 750px;
+    width: 50vw;
     background-color: var(--left-bar-background-color); 
     height: 100vh;
     top: 0;
@@ -10,37 +14,61 @@
     position: absolute;
 }
 
-.simplify-creat-account-leftside p {
+.simplify-creat-account-leftside p{
     color: var(--logo-font-color);
-    padding: 100px;
-    font-size: 22px;
+    padding: 5vw;
+    font-size: 2rem;
     font-weight: 300;
 }
 
+/* Guide text */
+.guide-text{
+    font-size: 2rem;
+    color: black;
+}
+
 /* Forms container */
-.create-account-forms {
-    margin-left: 750px;
+.create-account-forms{
+    margin-left: 45vw;
     display: flex;
-    justify-content: center; /* Center forms horizontally */
+    justify-content: center;
     align-items: center;
-    height: 70vh;
-    width: calc(100vw - 750px); /* Adjusted width calculation */
-    padding: 0 30px; /* Padding to ensure space on the sides */
+    height: 80vh;
+    width: 50vw;
+    padding: 2vw;
+    box-sizing: border-box;
 }
 
-/* Container for forms */
-.forms-wrapper {
+/* Form */
+.create-form{
     display: flex;
-    gap: 40px; /* Space between the forms */
+    flex-direction: column;
+    gap: 2rem; /* Between boxes */
+    padding: 4rem;
+    border-radius: 1rem;
+    background-color: #fff;
+    width: 100%;
+    max-width: 35rem;
+    box-sizing: border-box;
+    font-size: 0.8rem;
 }
 
-/* Form 1 and Form 2 */
-.create-form-left, .create-form-right {
-    padding: 20px;
-    border-radius: 16px; /* Rounded corners */
-    background-color: #fff; /* Background color for visibility */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for better visual separation */
-    width: 100%; /* Take full width of the container */
-    max-width: 400px; /* Limit maximum width for better layout */
-    box-sizing: border-box; /* Ensure padding and border are included in width */
+/* Form inputs */
+.form-input{
+    padding: 0.625rem;
+    border: 0.0625rem solid var(--form-border-color);
+    border-radius: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Signup button */
+.create {
+    padding: 0.625rem;
+    border-radius: 1rem;
+    border: 0.1rem solid var(--button-color);
+    color: var(--button-color);
+    cursor: pointer;
+    font-size: 1rem;
+    background-color: #fff;
 }
