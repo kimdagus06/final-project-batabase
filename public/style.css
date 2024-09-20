@@ -189,15 +189,42 @@ body{
     font-weight: 700;
     font-style: normal;
     margin-left: 20rem;
-    color: #1e1c1c;
+    color: #1d1c1c;
 }
 
 .about-text{
     line-height: 1.8;
     max-width: 50rem;
-    color: #0f0a0a;
+    color: #000000;
     margin-top: 2rem;
     margin-bottom: 2rem;
     margin-left: 20rem;
     text-align: justify;
+}
+
+/* Event page */
+.events-container{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Between boxes */
+    padding: 4rem;
+    border-radius: 1rem;
+    background-color: #fff;
+    width: 100%;
+    max-width: 35rem;
+    box-sizing: border-box;
+    font-size: 0.8rem;
+}
+
+.event-box{
+    background-color: var(--left-bar-background-color);
+    width: 100vh;
+}
+
+.event-box ul{    
+    list-style: none;
+}
+
+.event-box ul li a{
+    text-decoration: none; /* Remove underlines */
 }
