@@ -1,5 +1,5 @@
 :root{
-    --left-bar-font-color: #E1E8F0; 
+    --left-bar-font-color: #91A4B7; 
     --left-bar-background-color: #1C2A3A;
     --background-color: #FEFEFF; 
     --background-box-design-color: #fff;
@@ -189,7 +189,7 @@ body{
     font-weight: 700;
     font-style: normal;
     margin-left: 20rem;
-    color: #1d1c1c;
+    color: #2e2a2a;
 }
 
 .about-text{
@@ -203,6 +203,15 @@ body{
 }
 
 /* Event page */
+.event-title p{
+    color: #2e2a2a;
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1rem;
+}
+
 .events-container{
     display: flex;
     flex-direction: column;
@@ -218,7 +227,9 @@ body{
 
 .event-box{
     background-color: var(--left-bar-background-color);
-    width: 100vh;
+    width: 66rem;
+    height: 10rem;
+    border-radius: 1rem;
 }
 
 .event-box ul{    
@@ -226,5 +237,20 @@ body{
 }
 
 .event-box ul li a{
+    color: var(--left-bar-font-color);
     text-decoration: none; /* Remove underlines */
+    font-size: 1rem;
+}
+
+.event-box p{
+    color: #E1E8F0;
+    font-size: 1rem;
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }

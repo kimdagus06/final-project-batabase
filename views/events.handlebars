@@ -34,8 +34,8 @@
                 <label for="end-time">End Time</label>
                 <input type="time" id="end-time" class="form-input" required>
 
-                <label for="duration">Duration (minutes)</label>
-                <input type="number" id="duration-mins" class="form-input" min="1" required>
+                <label for="duration-mins">Duration (minutes)</label>
+                <input type="number" id="duration-mins" class="form-input" min="10" required>
 
                 <label for="event-type">Event Type</label>
                 <select id="event-type" class="form-input" required>
@@ -57,7 +57,7 @@
             <!-- Create New Event button -->
             <input type="submit" value="Create New Event" class="create-event">
             <!-- Undo button -->
-            <input type="submit" value="Undo" class="undo-event">
+            <input type="submit" value="Undo" class="undo-event" id="undo-button">
         </form>
     </div>
 </div>
