@@ -22,3 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+/**
+ * events page
+ * when Undo button is clicked, the event form is reset 
+ */
+document.getElementById('undo-button').addEventListener('click', function() {
+    document.getElementById('event-creating').reset();
+});

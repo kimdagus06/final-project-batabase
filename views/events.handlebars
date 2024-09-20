@@ -3,12 +3,61 @@
         <p>Add New Event</p>
     </div>
     <div class="event-box">
-        <li><a href="#" data-content="calendar"></a>
-        <img src="/icons/calendar.png" alt="Calendar icon" width="14" height="14" class="icon"> Pick a Date
-        </a></li>
-        <li><a href="#" data-content="address"></a>
-        <img src="/icons/address.png" alt="Address icon" width="14" height="14" class="icon"> Search Address
-        </a></li>
+        <ul>
+            <li>
+                <a href="#" data-content="calendar">
+                    <img src="/icons/calendar.png" alt="Calendar icon" width="14" height="14" class="icon"> Pick a Date
+                </a>
+            </li>
+            <li>
+                <a href="#" data-content="address">
+                    <img src="/icons/address.png" alt="Address icon" width="14" height="14" class="icon"> Search Address
+                </a>
+            </li>
+        </ul>
         <p>Write a small description for the event</p>
+
+        <!-- Three icons in the box -->
+        <img src="/icons/upload-picture.png" alt="Upload Picture icon" width="28" height="28" class="icon">
+        <img src="/icons/edit.png" alt="Edit icon" width="28" height="28" class="icon">
+        <img src="/icons/delete.png" alt="Delete icon" width="28" height="28" class="icon">
+    </div>
+    
+    <!-- 1st section: EVENT DETAILS -->
+    <div class="event-creating">
+        <div class="event-details">
+            <p>EVENT DETAILS</p>
+            <form action="" class="create-form">
+                <label for="start-time">Start Time</label>
+                <input type="time" id="start-time" class="form-input" required>
+
+                <label for="end-time">End Time</label>
+                <input type="time" id="end-time" class="form-input" required>
+
+                <label for="duration">Duration (minutes)</label>
+                <input type="number" id="duration-mins" class="form-input" min="1" required>
+
+                <label for="event-type">Event Type</label>
+                <select id="event-type" class="form-input" required>
+                    <option value="">Select Event Type</option>
+                    <option value="meeting">Meeting</option>
+                    <option value="conference">Conference</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="webinar">Webinar</option>
+                </select>
+            </form>
+        </div>
+        
+        <!-- 2nd section: EVENT PLACE -->
+        <p>EVENT PLACE</p>
+        <form action="" class="create-form">
+            <input type="text" placeholder="Address Line 01" class="form-input" required>
+            <input type="text" placeholder="Address Line 02" class="form-input" required>
+
+            <!-- Create New Event button -->
+            <input type="submit" value="Create New Event" class="create-event">
+            <!-- Undo button -->
+            <input type="submit" value="Undo" class="undo-event">
+        </form>
     </div>
 </div>
