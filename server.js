@@ -26,3 +26,7 @@ app.get("/", function (req, res) {
 app.get("/contact", function (req, res) {
     res.render("contact.handlebars"); 
 });
+
+app.listen (port, () => {
+    console.log('Server up on port '+port+'...');
+}); 
