@@ -1,6 +1,6 @@
 :root{
-    --left-bar-font-color: #91A4B7; 
-    --left-bar-background-color: #1C2A3A;
+    --menubar-font-color: #91A4B7; 
+    --menubar-background-color: #1C2A3A;
     --background-color: #FEFEFF; 
     --background-box-design-color: #fff;
     --logo-font-color: #F1F4F8;
@@ -20,12 +20,13 @@ body{
     margin: 0;
     font-family: 'Inter';
     display: flex;
+    flex-direction: column;
 }
 
 .simplify-logo{
     display: flex; /* Align logo and Simplify text */
     align-items: center; /* Center the logo image and Simplify text vertically */
-    background-color: var(--left-bar-background-color);
+    background-color: var(--menubar-background-color);
     padding: 1rem;
 }
 
@@ -37,60 +38,39 @@ body{
     color: var(--logo-font-color);
     font-size: 1.7rem;
     font-weight: 400;
-    background-color: var(--left-bar-background-color);
+    background-color: var(--menubar-background-color);
 }
 
-/* Side Bar / Home / Events / Log Out */
-.sidebar{
+/* Menu Bar / Home / Events / About / Contact */
+.menubar{
     font-size: 1.2rem;
     font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
 
-    flex-shrink: 0; /* Fix the size of sidebar */
-    width: 17rem;
-    background-color: var(--left-bar-background-color); 
-    height: 100vh;
-    top: 0;
-    left: 0;
-    overflow-y: auto; /* Allows scrolling if content overflows */
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+
+    background-color: var(--menubar-background-color);
 }
 
-.sidebar ul{
+.menubar ul{
+    display: flex;
+    flex-direction: row;
     list-style: none;
     padding: 0;
     margin: 1rem;
 }
 
-.sidebar ul li{
+.menubar ul li{
     padding: 1rem;
 }
 
-.sidebar ul li a{
-    color: var(--left-bar-font-color); 
-    text-decoration: none; /* Remove underlines */
-}
-
-/* Side Bar Bottom / Settings / Help Center */
-.sidebar-bottom{
-    position: absolute;
-    bottom: 0; /* Display Settings and Help Center in bottom */
-    width: 100%;
-}
-
-.sidebar-bottom ul{
-    list-style: none;
-    padding: 0;
-    margin: 0.5rem;
-}
-
-.sidebar-bottom ul li{
-    padding: 1rem; 
-}
-
-.sidebar-bottom ul li a{
-    color: var(--left-bar-font-color); 
+.menubar ul li a{
+    color: var(--logo-font-color);
     text-decoration: none; /* Remove underlines */
 }
 
