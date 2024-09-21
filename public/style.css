@@ -115,14 +115,14 @@ body{
 }
 
 /* Create Accound button orange */
-.create-account-button {
+.create-account-button{
     position: absolute; 
     top: 1.25rem;
     right: 1.25rem;
     padding: 0.625rem;
 }
 
-.create-account-button button {
+.create-account-button button{
     background-color: #fff;
     color: var(--button-color);
     border: 0.125rem solid var(--button-color);
@@ -137,6 +137,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
+    gap: 1rem; /* Spacing between forms */
 }
 
 /* Form inputs */
@@ -146,6 +148,8 @@ body{
     border-radius: 0.5rem;
     width: 100%;
     box-sizing: border-box;
+    margin-bottom: 1rem; /* Add space below each input box */
+    display: flex;
 }
 
 /* Signup button */
@@ -230,7 +234,7 @@ body{
     border-radius: 1rem;
     background-color: var(--background-box-design-color);
     width: 100%;
-    max-width: 66rem; /* Adjust container width */
+    max-width: 62rem; /* Adjust container width */
     box-sizing: border-box;
     font-size: 0.8rem;
 }
@@ -301,4 +305,10 @@ body{
     display: flex;
     align-items: center; /* Vertical alignment */
     gap: 2rem;
+}
+
+/* Home page */
+.welcome{
+    display: flex;
+    align-items: center;
 }
