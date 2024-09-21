@@ -1,117 +1,85 @@
 <div class="events-container">
-  <div class="event-box">
-    <ul class="details-set">
-      <li>
-        <a href="#" data-content="calendar">
-          <img
-            src="/icons/calendar.png"
-            alt="Calendar icon"
-            width="14"
-            height="14"
-            class="icon"
-          />
-          Pick a Date
-        </a>
-      </li>
-      <li>
-        <a href="#" data-content="address">
-          <img
-            src="/icons/address.png"
-            alt="Address icon"
-            width="14"
-            height="14"
-            class="icon"
-          />
-          Search Address
-        </a>
-      </li>
-    </ul>
-    <h2 class="your-event-name">Your Event Name</h2>
-    <h2>Write a small description for the event</h2>
-    <div class="three-icons">
-      <img
-        src="/icons/upload-picture.png"
-        alt="Upload Picture icon"
-        width="28"
-        height="28"
-        class="icon"
-      />
-      <img
-        src="/icons/edit.png"
-        alt="Edit icon"
-        width="28"
-        height="28"
-        class="icon"
-      />
-      <img
-        src="/icons/delete.png"
-        alt="Delete icon"
-        width="28"
-        height="28"
-        class="icon"
-      />
-    </div>
-  </div>
-  <!-- event-box 닫기 -->
-
-  <div class="event-creating">
-    <div class="event-details">
-      <p>EVENT DETAILS</p>
-
-      <div class="form-group">
-        <label for="event-name">Event Name</label>
-        <input type="text" id="event-name" class="form-input" required />
-      </div>
-
-      <div class="form-group">
-        <label for="event-type">Event Type</label>
-        <select id="event-type" class="form-input" required>
-          <option value="">Select Event Type</option>
-          <option value="meeting">Meeting</option>
-          <option value="conference">Conference</option>
-          <option value="workshop">Workshop</option>
-          <option value="webinar">Webinar</option>
-        </select>
-      </div>
-
-      <div class="time-duration-container">
-        <div class="form-group">
-          <label for="start-time">Start Time</label>
-          <input type="time" id="start-time" class="form-input" required />
+    <div class="event-box">
+        <ul class="details-set">
+            <li>
+                <a href="#" data-content="calendar">
+                    <img src="/icons/calendar.png" alt="Calendar icon" width="14" height="14" class="icon"> Pick a Date
+                </a>
+            </li>
+            <li>
+                <a href="#" data-content="address">
+                    <img src="/icons/address.png" alt="Address icon" width="14" height="14" class="icon"> Search Address
+                </a>
+            </li>
+        </ul>
+        <h2 class="your-event-name">Your Event Name</h2>
+        <h2 class="description">Write a small description for the event</h2>
+        <div class="three-icons">
+            <img src="/icons/upload-picture.png" alt="Upload Picture icon" width="28" height="28" class="icon">
+            <img src="/icons/edit.png" alt="Edit icon" width="28" height="28" class="icon">
+            <img src="/icons/delete.png" alt="Delete icon" width="28" height="28" class="icon">
         </div>
-
-        <div class="form-group">
-          <label for="end-time">End Time</label>
-          <input type="time" id="end-time" class="form-input" required />
-        </div>
-      </div>
-
-      <div class="form-group">
-        <p>EVENT PLACE</p>
-        <label for="address-line-1">Address Line 01</label>
-        <input
-          type="text"
-          id="address-line-1"
-          placeholder="Address Line 01"
-          class="form-input"
-          required
-        />
-      </div>
-
-      <div class="form-group address-spacing">
-        <label for="address-line-2">Address Line 02</label>
-        <input
-          type="text"
-          id="address-line-2"
-          placeholder="Address Line 02"
-          class="form-input"
-        />
-      </div>
-
-      <div class="event-buttons">
-        <input type="submit" value="Create New Event" class="create-event" />
-        <input type="button" value="Undo" class="undo-event" id="undo-button" />
-      </div>
     </div>
-  </div>
+
+    <div class="event-creating">
+        <div class="event-details">
+            <p>EVENT DETAILS</p>
+
+            <div class="form-group">
+                <label for="event-name">Event Name</label>
+                <input type="text" id="event-name" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label for="event-type">Event Type</label>
+                <select id="event-type" class="form-input" required>
+                    <option value="">Select Event Type</option>
+                    <option value="meeting">Meeting</option>
+                    <option value="conference">Conference</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="webinar">Webinar</option>
+                </select>
+            </div>
+
+            <div class="time-duration-container">
+                <div class="form-group">
+                    <label for="start-time">Start Time</label>
+                    <input type="time" id="start-time" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="end-time">End Time</label>
+                    <input type="time" id="end-time" class="form-input" required>
+                </div>
+            </div>
+
+<div class="checkbox-container">
+    <div class="form-group">
+        <input type="checkbox" id="online-check" name="event-type" value="online">
+        <label for="online-check">Set as Online</label>
+    </div>
+
+    <div class="form-group">
+        <input type="checkbox" id="offline-check" name="event-type" value="offline">
+        <label for="offline-check">Set as Offline</label>
+    </div>
+</div>
+
+            <div class="form-group">
+                <p>EVENT PLACE</p>
+                <label for="address-line-1">Address Line 01</label>
+                <input type="text" id="address-line-1" placeholder="Address Line 01" class="form-input" required>
+            </div>
+
+            <div class="form-group address-spacing">
+                <label for="address-line-2">Address Line 02</label>
+                <input type="text" id="address-line-2" placeholder="Address Line 02" class="form-input">
+            </div>
+
+            <div class="event-buttons">
+                <input type="submit" value="Create New Event" class="create-event">
+                <input type="button" value="Undo" class="undo-event" id="undo-button">
+            </div>
+        </div>
+    </div>
 </div>

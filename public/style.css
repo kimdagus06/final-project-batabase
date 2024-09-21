@@ -205,6 +205,15 @@ body{
     align-items: center;
 }
 
+.description{
+    color: #E1E8F0;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    font-weight: 200;
+    font-size: 1rem;
+}
+
 .event-title p{
     color: #2e2a2a;
     font-family: "Nunito", sans-serif;
@@ -212,13 +221,6 @@ body{
     font-weight: 600;
     font-style: normal;
     font-size: 1rem;
-}
-
-.your-event-name{
-    color: #E1E8F0;
-    display: flex;
-    justify-content: center; 
-    align-items: center;
 }
 
 .events-container{
@@ -282,7 +284,6 @@ body{
 
 .time-duration-container{
     display: flex;
-    justify-content: space-evenly; 
     gap: 2rem;
 }
 
@@ -292,6 +293,12 @@ body{
     margin-bottom: 1rem;
 }
 
-.address-spacing {
+.address-spacing{
     margin-top: 1rem; /* Adjust spacing between these specific groups */
+}
+
+.checkbox-container{
+    display: flex;
+    align-items: center; /* Vertical alignment */
+    gap: 2rem;
 }
