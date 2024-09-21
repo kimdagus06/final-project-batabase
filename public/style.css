@@ -139,20 +139,6 @@ body{
     align-items: center;
 }
 
-/* Form */
-.create-form{
-    display: flex;
-    flex-direction: column;
-    gap: 2rem; /* Between boxes */
-    padding: 4rem;
-    border-radius: 1rem;
-    background-color: #fff;
-    width: 100%;
-    max-width: 35rem;
-    box-sizing: border-box;
-    font-size: 0.8rem;
-}
-
 /* Form inputs */
 .form-input{
     padding: 0.625rem;
@@ -214,29 +200,47 @@ body{
 
 .your-event-name{
     color: #E1E8F0;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.event-title p{
+    color: #2e2a2a;
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+.your-event-name{
+    color: #E1E8F0;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
 }
 
 .events-container{
     display: flex;
     flex-direction: column;
-    gap: 2rem; /* Between boxes */
-    padding: 4rem;
+    padding: 5rem;
     border-radius: 1rem;
-    background-color: #fff;
+    background-color: var(--background-box-design-color);
     width: 100%;
-    max-width: 35rem;
+    max-width: 66rem; /* Adjust container width */
     box-sizing: border-box;
     font-size: 0.8rem;
 }
 
+/* Event blue box */
 .event-box{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     background-color: var(--left-bar-background-color);
-    width: 66rem;
-    height: 15rem;
+    width: 100%;
+    max-width: 66rem;
     border-radius: 1rem;
     padding: 1rem;
 }
@@ -244,11 +248,11 @@ body{
 .event-box ul{    
     list-style: none;
     display: flex;
-    flex-direction: row;
 }
 
+/* Between Pick a Date and Search Address */
 .event-box ul li{
-    margin-right: 3rem;
+    margin-right: 2rem;
 }
 
 .event-box ul li a{
@@ -268,24 +272,26 @@ body{
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .three-icons{
     display: flex;
-    justify-content: flex-end; /* Arrange rightside  */
+    justify-content: flex-end; /* Arrange rightside */
     align-items: center;
 }
 
 .time-duration-container{
     display: flex;
-    justify-content: space-between; 
-    gap: 1rem;
+    justify-content: space-evenly; 
+    gap: 2rem;
 }
 
+/* Form Inputs */
 .form-group{
     flex: 1;
+    margin-bottom: 1rem;
+}
+
+.address-spacing {
+    margin-top: 1rem; /* Adjust spacing between these specific groups */
 }
