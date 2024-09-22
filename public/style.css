@@ -302,6 +302,44 @@ body{
     text-align: justify;
 }
 
+/* Contact page */
+.section-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}
+
+.contact-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}
+
+.contact-input{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    font-family: "Work Sans", sans-serif;
+    font-size: 1rem; 
+    font-weight: 100; 
+    padding: 1rem;
+    border-radius: 2rem;
+    border: 1.5px solid #1f1e1e; /* Input field line color setting */
+    outline: none;
+    margin-bottom: 1rem;
+}
+
+.contact-button{
+    border: none;
+    outline: none;
+    font-size: 1rem; 
+    cursor: pointer;
+    margin-left: auto;
+    color: #111010;
+}
+
 /* Footer */
 .footer{
     margin-top: auto;
