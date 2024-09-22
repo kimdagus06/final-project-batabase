@@ -1,5 +1,5 @@
 :root{
-    --logo-font-color: #F1F4F8;
+    --simplify-main-color: #001aff; 
     --section-font-color: #304254; 
     --menu-hover-color: #F8FAFC;
     --button-color: #EA6A5C;
@@ -121,7 +121,6 @@ body{
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-    margin-left: 20rem;
     color: #2e2a2a;
 }
 
@@ -131,7 +130,6 @@ body{
     color: #000000;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    margin-left: 20rem;
     text-align: justify;
 }
 
@@ -171,18 +169,21 @@ body{
     max-width: 62rem; /* Adjust container width */
     box-sizing: border-box;
     font-size: 0.8rem;
+    margin: 0 auto; 
 }
 
 /* Event blue box */
 .event-box{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center; 
+    align-items: center;
     background-color: var(--left-bar-background-color);
     width: 100%;
     max-width: 66rem;
     border-radius: 1rem;
     padding: 1rem;
+    margin: 0 auto;
 }
 
 .event-box ul{    
@@ -203,15 +204,6 @@ body{
 
 .event-box ul li a img{
     margin-right: 0; /* Remove space between icon and text */
-}
-
-.event-box p{
-    color: #E1E8F0;
-    font-size: 1rem;
-    font-family: "Nunito", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: normal;
 }
 
 .three-icons{
@@ -256,7 +248,7 @@ body{
     font-size: 20rem;
     margin: 0;
     padding: 0;
-    color: #001aff; 
+    color: var(--simplify-main-color); 
 }
 
 /* Home page - search bar */
@@ -339,10 +331,9 @@ body{
 /* Footer */
 .footer{
     margin-top: auto;
-    background-color: #f8f8f8;
     padding: 1.5rem 0;
     font-family: "Work Sans", sans-serif;
-    border-top: 1px solid #e0e0e0;
+    border-top: 0.1rem solid #d8d8d8;
     margin-top: 3rem;
 }
 
@@ -350,14 +341,14 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 75rem;
     margin: 0 auto;
     padding: 0 2rem;
 }
 
 .footer-left p{
     font-size: 0.875rem;
-    color: #555;
+    color: #1a1a1a;
 }
 
 .footer-right{
@@ -377,12 +368,12 @@ body{
 
 .footer-links a{
     text-decoration: none;
-    color: #333;
+    color: #1a1a1a;
     font-size: 0.875rem;
 }
 
 .footer-links a:hover{
-    color: #ff7e5f;
+    color: #c0c0c0;
 }
 
 
