@@ -6,10 +6,6 @@
 
     /* Contact */
     --form-border-color: #D5D5D5; 
-
-    /* About */
-    --about-title-color: #2051E5; 
-
 }
 
 /* cite : https://cssgradient.io/ */
@@ -160,13 +156,7 @@ body{
 }
 
 .events-container{
-    display: flex;
-    flex-direction: column;
-    padding: 5rem;
-    border-radius: 1rem;
-    background-color: var(--background-box-design-color);
-    width: 100%;
-    max-width: 62rem; /* Adjust container width */
+    max-width: 50rem; /* Adjust container width */
     box-sizing: border-box;
     font-size: 0.8rem;
     margin: 0 auto; 
@@ -174,15 +164,9 @@ body{
 
 /* Event blue box */
 .event-box{
-    display: flex;
     flex-direction: column;
     justify-content: center; 
     align-items: center;
-    background-color: var(--left-bar-background-color);
-    width: 100%;
-    max-width: 66rem;
-    border-radius: 1rem;
-    padding: 1rem;
     margin: 0 auto;
 }
 
@@ -198,7 +182,7 @@ body{
 
 .event-box ul li a{
     color: var(--left-bar-font-color);
-    text-decoration: none; /* Remove underlines */
+    text-decoration: none;
     font-size: 1rem;
 }
 
@@ -252,7 +236,6 @@ body{
 }
 
 /* Home page - search bar */
-/* Cite https://cssgradient.io/ */ 
 .search-container{
     display: flex;
     justify-content: center;
