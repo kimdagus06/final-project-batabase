@@ -39,9 +39,12 @@ body{
 }
 
 .menubar ul{
-    list-style-type: none;
     display: flex;
-    gap: 5rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    gap: 1rem; /* Gap between menus */
     padding: 0; 
 }
 
@@ -51,14 +54,8 @@ body{
 }
 
 .menubar ul li a{
-    color: var(--logo-font-color);
+    color: #3d3d3d;
     text-decoration: none; /* Remove underlines */
-}
-
-/* Icons next to menu names */
-.icon{
-    margin-right: 1rem;
-    vertical-align: middle; /* Align icon with text */
 }
 
 .menu-items a:hover{
@@ -68,17 +65,14 @@ body{
 /* Create Accound button orange */
 .create-account-button{
     display: flex;
-    top: 1.25rem;
-    right: 1.25rem;
-    padding: 0.625rem;
-}
+    align-items: center;
+    justify-content: center;
 
-.create-account-button button{
     color: var(--button-color);
     border: 0.125rem solid var(--button-color);
-    padding: 0.5rem 1.5625rem;
+    padding: 0.1rem 0.1rem;
     cursor: pointer;
-    border-radius: 1rem;
+    border-radius: 3rem;
 }
 
 /* Contact page */
@@ -308,6 +302,7 @@ body{
     flex-direction: column;
     align-items: center;
     justify-items: center;
+
 }
 
 .contact-container{
@@ -388,6 +383,8 @@ body{
 .footer-links a:hover{
     color: #ff7e5f;
 }
+
+
 
 
 
