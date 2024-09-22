@@ -1,6 +1,4 @@
 :root{
-    --background-color: #FEFEFF; 
-    --background-box-design-color: #fff;
     --logo-font-color: #F1F4F8;
     --section-font-color: #304254; 
     --menu-hover-color: #F8FAFC;
@@ -14,6 +12,7 @@
 
 }
 
+/* cite : https://cssgradient.io/ */
 body{
     margin: 0;
     /*
@@ -22,24 +21,21 @@ body{
     background-position: center; 
     */
     font-family: "Nunito", sans-serif;
+    background-color: #fffdff;
 }
 
 .simplify-logo{
-    display: flex; /* Align logo and Simplify text */
-    align-items: center; /* Center the logo image and Simplify text vertically */
     padding-right: 8rem;
 }
 
 /* Menu Bar / Home / Events / About / Contact */
 .menubar{
-    color: var(--logo-font-color);
-    padding: 1rem;
-    font-size: 1.4rem;
-    font-family: "Nunito", sans-serif;
+    padding: 2rem 0;
+    font-size: 1rem;
     font-weight: 200;
     display: flex;
     align-items: center; 
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .menubar ul{
@@ -65,19 +61,8 @@ body{
     vertical-align: middle; /* Align icon with text */
 }
 
-/* When a submenu is hovered */
-.submenu a:hover{
-    background-color: var(--menu-hover-color);
-}
-
-.submenu{
-    display: none;
-}
-
-/* When a submenu shows */
-/* JavaScript */
-.show{
-    display: block;
+.menu-items a:hover{
+    background-color: var(--about-title-color);
 }
 
 /* Create Accound button orange */
@@ -271,35 +256,100 @@ body{
 }
 
 .main-title{
-    color: var(--logo-font-color);
+    color: #f6f6f6;
     font-family: "Work Sans", sans-serif;
-    font-weight: 800;
+    font-weight: 600;
     font-size: 20rem;
     margin: 0;
 }
 
+/* Home page - search bar */
+/* Cite https://cssgradient.io/ */ 
 .search-container{
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 80%;
     margin: 2rem auto;
 }
 
-.search-bar{
-    width: 100%;
-    padding: 1rem 2.5rem;
+.search-bar-wrapper{
+    display: flex;
+    align-items: center;
+    width: 40rem;
     border: 1px solid #ccc;
-    border-radius: 0.3125rem; 
+    border-radius: 5rem;
+    padding: 0.5rem 1rem;
+    background-color: #fff;
 }
 
-.search-icon{
-    position: absolute;
-    left: 0.625rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 1.25rem;
-    height: 1.25rem; 
+.search-bar{
+    flex: 1; /* Occupies the remaining space in the flex container */
+    border: none; /* Removes the default border */
+    outline: none; /* Removes the border when the input is focused */
+    padding-left: 1rem;
+    font-family: "Work Sans", sans-serif;
+    font-size: 1rem;
 }
 
+/* Home page - texts */
+.welcome-text{
+    line-height: 1.8;
+    max-width: 40rem;
+    color: #3d3d3d;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: justify;
+}
+
+/* Footer */
+.footer{
+    margin-top: auto;
+    background-color: #f8f8f8;
+    padding: 1.5rem 0;
+    font-family: "Work Sans", sans-serif;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 3rem;
+}
+
+.footer-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-left p{
+    font-size: 0.875rem;
+    color: #555;
+}
+
+.footer-right{
+    display: flex;
+    align-items: center;
+}
+
+.footer-links{
+    list-style: none;
+    display: flex;
+    margin-right: 1.5rem;
+}
+
+.footer-links li{
+    margin: 0 1rem;
+}
+
+.footer-links a{
+    text-decoration: none;
+    color: #333;
+    font-size: 0.875rem;
+}
+
+.footer-links a:hover{
+    color: #ff7e5f;
+}
 
 
 
