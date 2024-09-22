@@ -4,46 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <script src="/main.js" defer></script>
     <title>Simplify your life</title>
 </head>
 <body>
-    <!--  The menu MUST contain at least: Home, List (can be renamed depending on your project choice), About, Contact -->
-        <nav class="menubar">
-                <div class="upside-menu-bar"></div>
-        <div class="simplify-logo">
-            <img src="/image/logo.png" alt="Simplify logo" width="75" height="82">
-            <p>Simplify</p>
+    <nav class="menubar">
+        <!-- Logo -->
+        <div class="menu-items">
+            <img src="/image/logo.png" alt="Simplify logo" width="75" height="82" class="simplify-logo">
         </div>
-            <ul>
-                <li><a href="/" data-content="home">Home</a></li>
-
-                <li><a href="#" class="menu-item" data-content="events">Events</a></li>
-
-                <!-- Submenu for Events -->
-                    <ul class="submenu">
-                        <li><a href="/events">Create Event</a></li>
-                        <li><a href="#">View Events</a></li>
-                    </ul>
-                </li>
-
-                <li><a href="/about" data-content="about">About</a></li>
-                
-                <li><a href="/contact">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-
-    <!-- Right-aligned button -->
-    <div class="topside-menu-bar">
-        <div class="create-account-button">
-            <a href="/createaccount">
-                <button type="button">Create Account</button>
-            </a>
-        </div>
-    </div>
+        
+        <!-- Menu Items -->
+        <ul class="menu-items">
+            <li><a href="/" data-content="home">Home</a></li>
+            <li><a href="/events" class="menu-item" data-content="events">Create Event</a></li>
+            <li><a href="#" class="menu-item" data-content="events">View Event</a></li>
+            <li><a href="/about" data-content="about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            
+            <!-- Create Account Button -->
+            <li class="create-account-button"><a href="/createaccount"><button type="button">Create Account</button></a>
+            </li>
+        </ul>
+    </nav>
 
     {{{body}}}
 </body>
