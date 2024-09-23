@@ -89,6 +89,10 @@ app.get("/events", function (req, res) {
     res.render("events"); 
 });
 
+app.get("/upcomingactivities", function (req, res) {
+    res.render("upcomingactivities"); 
+});
+
 /**
  * Hash Passwords with bcrypt in Node.js
  * https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
@@ -122,7 +126,9 @@ app.post('/create-account', async (req, res) => {
         return res.status(500).send('Error hashing password');
     }
 });
-    
+
+// Log in
+// This code is from 5-authentication-slides.pdf 
 app.post('/login-simplify', async (req, res) => {
     const { username, password } = req.body;
     
@@ -137,7 +143,7 @@ app.post('/login-simplify', async (req, res) => {
     const result = await bcrypt.compare(password, user.password);
 
     if (result) {
-        console.log("Sucessfully log in."); 
+        console.log("Sucessfully log in.");
         req.session.user = user; // Store the user in the session
         res.redirect('/'); // Redirect to the home page
         } else {
