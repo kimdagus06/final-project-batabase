@@ -22,12 +22,19 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-// Create a table
 /**
  * NOT NULL: Can't have a NULL value. So it can't be left empty.
  * UNIQUE: All values in a column are distinct from each other. So no two users can have the same email address.
  */
 db.serialize(() => {
+    db.run(`DROP TABLE IF EXISTS users`, (err) => {
+        if (err) {
+            console.error("Error dropping table:", err.message);
+        } else {
+            console.log("Users table dropped successfully.");
+        }
+    });
+
     db.run(`
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,6 +44,8 @@ db.serialize(() => {
     `, (err) => {
         if (err) {
             console.error("Error creating table:", err.message);
+        } else {
+            console.log("Users table created successfully.");
         }
     });
 });
@@ -90,22 +99,24 @@ app.get("/events", function (req, res) {
 
 // node ./bcrypt-demo.js
 // getSalt method
-
 app.post('/create-account', async (req, res) => {
     const { username, password } = req.body;
-    
-    // Add validation here...
-    const hash = await bcrypt.hash(password, 14); // Hash the password
-    
-    // Store the user in the database
-    db.run('INSERT INTO users (username, password) VALUES (?, ?)', [username, hash], (err) => {
-        if (err) {
-            res.status(500).send('Server error');
-        } else {
-            res.redirect('/login'); // Redirect to the login page after registration
+
+    try {
+        const hash = await bcrypt.hash(password, 14);
+
+        db.run('INSERT INTO users (username, password) VALUES (?, ?)', [username, hash], (err) => {
+            if (err) {
+                console.error('Error inserting user:', err.message); // Print out an error message 
+                return res.status(500).send('Server error');
             }
+            res.redirect('/');
         });
-    });
+    } catch (err) {
+        console.error('Error hashing password:', err.message); // Print out a hash error message 
+        return res.status(500).send('Error hashing password');
+    }
+});
     
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
@@ -133,53 +144,3 @@ app.post('/login', async (req, res) => {
 app.listen (port, () => {
     console.log('Server up on port '+port+'...');
 }); 
-
-
-
-
-
-/**
- * 
-app.post("/create-account", async (req, res) => {
-    const { first_name, last_name, email, date_of_birth, password } = req.body;
-
-    try {
-        // Hash the password before saving to the database
-        const hash = await bcrypt.hash(password, 14); 
-        const sql = `INSERT INTO users (first_name, last_name, email, date_of_birth, password) VALUES (?, ?, ?, ?, ?)`;
-        
-        // Error check 
-        db.run(sql, [first_name, last_name, email, date_of_birth, hash], (err) => {
-            if (err) {
-                return res.status(500).send("Server error: " + err.message);
-            }
-            res.redirect("/main");
-        });
-    } catch (err) {
-        return res.status(500).send("Error hashing password: " + err.message);
-    }
-});
-
-app.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-
-    // Find the user in the database
-    db.get('SELECT * FROM users WHERE email = ?', [email], async (err, user) => {
-        if (err) {
-            res.status(500).send('Server error');
-        } else if (!user) {
-            res.status(401).send('User not found');
-        } else {
-            
-    const result = await bcrypt.compare(password, user.password);
-    
-    if (result) {
-        req.session.user = user; // Store the user in the session
-        res.redirect('/'); // Redirect to the home page
-        } else {
-            res.status(401).send('Wrong password');
-        }
-    }
-});
-});
- */
