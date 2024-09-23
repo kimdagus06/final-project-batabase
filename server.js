@@ -7,7 +7,7 @@ const { engine } = require("express-handlebars");
 const app = express();
 const dbFile = "data.sqlite3.db";
 const db = new sqlite3.Database(dbFile);
-const port = 3030;
+const port = 3333;
 const session = require('express-session');
 
 app.use(express.static("public"));
