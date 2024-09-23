@@ -8,12 +8,19 @@ const app = express();
 const dbFile = "data.sqlite3.db";
 const db = new sqlite3.Database(dbFile);
 const port = 3030;
+const session = require('express-session');
 
 app.use(express.static("public"));
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 app.use(express.urlencoded({ extended: true }));
+
+app.use(session({
+    secret: 'your-secret-key', // Use a strong secret
+    resave: false,
+    saveUninitialized: true,
+}));
 
 // Create a table
 /**
@@ -24,10 +31,7 @@ db.serialize(() => {
     db.run(`
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            first_name TEXT NOT NULL,
-            last_name TEXT NOT NULL,
-            email TEXT NOT NULL UNIQUE,
-            date_of_birth TEXT NOT NULL,
+            username TEXT NOT NULL,
             password TEXT NOT NULL
         );
     `, (err) => {
@@ -45,7 +49,7 @@ app.use((req, res, next) => {
     if (req.session.user) {
         res.locals.user = req.session.user;
     }
-    next (); 
+    next(); 
 }); 
 
 // https://coda.io/@peter-sigurdson/lab-workbook-setting-up-a-node-js-express-server-with-sqlite-and
@@ -87,15 +91,64 @@ app.get("/events", function (req, res) {
 // node ./bcrypt-demo.js
 // getSalt method
 
+app.post('/create-account', async (req, res) => {
+    const { username, password } = req.body;
+    
+    // Add validation here...
+    const hash = await bcrypt.hash(password, 14); // Hash the password
+    
+    // Store the user in the database
+    db.run('INSERT INTO users (username, password) VALUES (?, ?)', [username, hash], (err) => {
+        if (err) {
+            res.status(500).send('Server error');
+        } else {
+            res.redirect('/login'); // Redirect to the login page after registration
+            }
+        });
+    });
+    
+app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    
+    // Find the user in the database
+    db.get('SELECT * FROM users WHERE username = ?', [username], async (err, user) => {
+        if (err) {
+            res.status(500).send('Server error');
+        } else if (!user) {
+            res.status(401).send('User not found');
+        } else {
+            
+    const result = await bcrypt.compare(password, user.password);
+    if (result) {
+        req.session.user = user; // Store the user in the session
+        res.redirect('/'); // Redirect to the home page
+        } else {
+            res.status(401).send('Wrong password');
+        }
+        }
+        });
+        });
+
+/* Start a port */
+app.listen (port, () => {
+    console.log('Server up on port '+port+'...');
+}); 
+
+
+
+
+
+/**
+ * 
 app.post("/create-account", async (req, res) => {
     const { first_name, last_name, email, date_of_birth, password } = req.body;
 
     try {
         // Hash the password before saving to the database
         const hash = await bcrypt.hash(password, 14); 
-
         const sql = `INSERT INTO users (first_name, last_name, email, date_of_birth, password) VALUES (?, ?, ?, ?, ?)`;
         
+        // Error check 
         db.run(sql, [first_name, last_name, email, date_of_birth, hash], (err) => {
             if (err) {
                 return res.status(500).send("Server error: " + err.message);
@@ -129,8 +182,4 @@ app.post('/login', async (req, res) => {
     }
 });
 });
-
-/* Start a port */
-app.listen (port, () => {
-    console.log('Server up on port '+port+'...');
-}); 
+ */
