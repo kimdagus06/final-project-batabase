@@ -62,6 +62,14 @@ app.get("/events", function (req, res) {
  * https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
  */
 // Handle account creation
+
+
+// 모든 정보를 hashing 해둘 필요 없음 이 부분 fix 해야함 왜냐하면 해킹 같은거 당햇을때 정보복구가 힘들고 
+// 그냥 password만 해싱하면 됨
+
+// node ./bcrypt-demo.js
+// getSalt method
+
 app.post("/create-account", (req, res) => {
     const { first_name, last_name, email, date_of_birth, password } = req.body;
 
@@ -72,6 +80,7 @@ app.post("/create-account", (req, res) => {
         }
 
         const sql = `INSERT INTO users (first_name, last_name, email, date_of_birth, password) VALUES (?, ?, ?, ?, ?)`;
+        
         db.run(sql, [first_name, last_name, email, date_of_birth, hash], (err) => {
             if (err) {
                 return res.status(500).send("Error creating account: " + err.message);
