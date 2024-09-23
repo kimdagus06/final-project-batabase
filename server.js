@@ -110,15 +110,20 @@ app.post('/create-account', async (req, res) => {
                 console.error('Error inserting user:', err.message); // Print out an error message 
                 return res.status(500).send('Server error');
             }
+
+            console.log("New account has been created."); 
+
+            // Redirect after a use create a new account in Simplify. 
             res.redirect('/');
         });
+
     } catch (err) {
         console.error('Error hashing password:', err.message); // Print out a hash error message 
         return res.status(500).send('Error hashing password');
     }
 });
     
-app.post('/login', async (req, res) => {
+app.post('/login-simplify', async (req, res) => {
     const { username, password } = req.body;
     
     // Find the user in the database
@@ -130,7 +135,9 @@ app.post('/login', async (req, res) => {
         } else {
             
     const result = await bcrypt.compare(password, user.password);
+
     if (result) {
+        console.log("Sucessfully log in."); 
         req.session.user = user; // Store the user in the session
         res.redirect('/'); // Redirect to the home page
         } else {
