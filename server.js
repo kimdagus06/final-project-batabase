@@ -16,7 +16,7 @@ app.set("view engine", "handlebars");
 app.set("views", "./views");
 
 // Express middlewares
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); // url passing
 app.use(express.json());
 app.use(session({
     secret: 'your-secret-key', // Use a strong secret
