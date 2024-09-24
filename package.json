@@ -1,0 +1,22 @@
+{
+  "name": "final-project-batabase",
+  "version": "1.0.0",
+  "description": "Final project in  Web Development Fundamentals-database",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "Web",
+    "Development",
+    "database",
+    "finalproject",
+    "final",
+    "project",
+    "webdevelopment",
+    "assignment"
+  ],
+  "author": "Kim Dasha Gustavsson",
+  "license": "ISC"
+}
