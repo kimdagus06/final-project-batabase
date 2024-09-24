@@ -14,8 +14,10 @@ app.use(express.static("public"));
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./views");
-app.use(express.urlencoded({ extended: true }));
 
+// Express middlewares
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(session({
     secret: 'your-secret-key', // Use a strong secret
     resave: false,
@@ -89,8 +91,8 @@ app.get("/events", function (req, res) {
     res.render("events"); 
 });
 
-app.get("/upcomingactivities", function (req, res) {
-    res.render("upcomingactivities"); 
+app.get("/upcominghangouts", function (req, res) {
+    res.render("upcominghangouts"); 
 });
 
 /**
@@ -152,6 +154,12 @@ app.post('/login-simplify', async (req, res) => {
         }
         });
         });
+
+ 
+/**
+ * Hangout (Event create)
+ */
+
 
 /* Start a port */
 app.listen (port, () => {

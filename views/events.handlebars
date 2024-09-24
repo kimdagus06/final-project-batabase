@@ -9,65 +9,66 @@
         </div>
     </div>
 
-    <div class="event-creating">
-        <div class="event-details">
-            <p>EVENT DETAILS</p>
+<form id="create-hangout-form" class="event-creating" method="POST" action="/create-hangout">
+    <div class="event-details">
+        <p>EVENT DETAILS</p>
+        
+        <div class="form-group">
+            <label for="event-name">Event Name</label>
+            <input type="text" id="event-name" name="eventName" class="form-input" required>
+        </div>
 
+        <div class="form-group">
+            <label for="event-type">Event Type</label>
+            <select id="event-type" name="eventType" class="form-input" required>
+                <option value="">Select Event Type</option>
+                <option value="meeting">Meetup</option>
+                <option value="conference">Conference</option>
+                <option value="workshop">Workshop</option>
+                <option value="webinar">Webinar</option>
+            </select>
+        </div>
+
+        <div class="time-duration-container">
             <div class="form-group">
-                <label for="event-name">Event Name</label>
-                <input type="text" id="event-name" class="form-input" required>
-            </div>
-
-            <div class="form-group">
-                <label for="event-type">Event Type</label>
-                <select id="event-type" class="form-input" required>
-                    <option value="">Select Event Type</option>
-                    <option value="meeting">Meeting</option>
-                    <option value="conference">Conference</option>
-                    <option value="workshop">Workshop</option>
-                    <option value="webinar">Webinar</option>
-                </select>
-            </div>
-
-            <div class="time-duration-container">
-                <div class="form-group">
-                    <label for="start-time">Start Time</label>
-                    <input type="time" id="start-time" class="form-input" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="end-time">End Time</label>
-                    <input type="time" id="end-time" class="form-input" required>
-                </div>
-            </div>
-
-            <div class="checkbox-container">
-                <div class="form-group">
-                    <input type="checkbox" id="online-check" name="event-type" value="online">
-                    <label for="online-check">Set as Online</label>
-                </div>
-
-                <div class="form-group">
-                    <input type="checkbox" id="offline-check" name="event-type" value="offline">
-                    <label for="offline-check">Set as Offline</label>
-                </div>
+                <label for="start-time">Start Time</label>
+                <input type="time" id="start-time" name="startTime" class="form-input" required>
             </div>
 
             <div class="form-group">
-                <p>EVENT PLACE</p>
-                <label for="address-line-1">Address</label>
-                <input type="text" id="address-line-1" placeholder="Address Line 01" class="form-input" required>
-            </div>
-
-            <div class="form-group address-spacing">
-                <label for="address-line-2">Postcode</label>
-                <input type="text" id="address-line-2" placeholder="Address Line 02" class="form-input">
-            </div>
-
-            <div class="event-buttons">
-                <input type="submit" value="Create New Event" class="create-event">
-                <input type="button" value="Undo" class="undo-event" id="undo-event">
+                <label for="end-time">End Time</label>
+                <input type="time" id="end-time" name="endTime" class="form-input" required>
             </div>
         </div>
+
+        <div class="checkbox-container">
+            <div class="form-group">
+                <input type="checkbox" id="online-check" name="eventFormat" value="online">
+                <label for="online-check">Set as Online</label>
+            </div>
+
+            <div class="form-group">
+                <input type="checkbox" id="offline-check" name="eventFormat" value="offline">
+                <label for="offline-check">Set as Offline</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p>EVENT PLACE</p>
+            <label for="address-line-1">Address</label>
+            <input type="text" id="address-line-1" name="address" placeholder="Address Line 01" class="form-input" required>
+        </div>
+
+        <div class="form-group address-spacing">
+            <label for="address-line-2">Postcode</label>
+            <input type="text" id="address-line-2" name="postcode" placeholder="Address Line 02" class="form-input">
+        </div>
+
+        <div class="event-buttons">
+            <input type="submit" value="Create New Event" class="create-event">
+            <input type="button" value="Undo" class="undo-event" id="undo-event">
+        </div>
+    </div>
+</form>
     </div>
 </div>
