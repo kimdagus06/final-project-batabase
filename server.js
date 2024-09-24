@@ -181,6 +181,15 @@ app.post('/login-hangouts', async (req, res) => {
 });
 
 /**
+ * Log out
+ * 
+ */
+app.post('/logout-hangouts', async (req, res) => {
+    req.session.destroy(); // Log out = Clear the session
+    res.redirect('/'); // After log out a user is sent to main 
+});
+
+/**
  * Hangout (Event create)
  */
 app.post('/create-hangout', async (req, res) => {
