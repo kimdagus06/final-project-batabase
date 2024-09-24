@@ -29,14 +29,6 @@ app.use(session({
  * UNIQUE: All values in a column are distinct from each other. So no two users can have the same email address.
  */
 db.serialize(() => {
-    db.run(`DROP TABLE IF EXISTS users`, (err) => {
-        if (err) {
-            console.error("Error dropping table:", err.message);
-        } else {
-            console.log("Users table dropped successfully.");
-        }
-    });
-
     db.run(`
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
