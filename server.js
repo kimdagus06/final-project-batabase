@@ -100,6 +100,10 @@ app.get("/login", function (req, res) {
     res.render("login"); 
 });
 
+app.get("/logout", function (req, res) {
+    res.render("logout"); 
+});
+
 app.get("/about", function (req, res) {
     res.render("about"); 
 });
