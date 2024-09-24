@@ -18,8 +18,11 @@ app.set("views", "./views");
 // Express middlewares
 app.use(express.urlencoded({ extended: true })); // url passing
 app.use(express.json());
+
+// 'secret' is the key used to sign and encrypt session IDs stored in cookies.
+// It ensures the integrity and security of session data between the client and server.
 app.use(session({
-    secret: 'your-secret-key', // Use a strong secret
+    secret: 'd384@#s#$#juihss.sijsge', // Strong secret key for session encryption
     resave: false,
     saveUninitialized: true,
 }));
