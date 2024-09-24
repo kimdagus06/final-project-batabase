@@ -54,7 +54,7 @@ db.serialize(() => {
  */
 db.serialize(() => {
     db.run(`
-        CREATE TABLE IF NOT EXISTS users (
+        CREATE TABLE IF NOT EXISTS events (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             eventName TEXT NOT NULL,
             eventType TEXT NOT NULL,
@@ -85,7 +85,7 @@ app.use((req, res, next) => {
 }); 
 
 // https://coda.io/@peter-sigurdson/lab-workbook-setting-up-a-node-js-express-server-with-sqlite-and
-https://www.luisllamas.es/en/how-to-use-sqlite-with-nodejs/
+// https://www.luisllamas.es/en/how-to-use-sqlite-with-nodejs/
 
 // Routes 
 app.get("/", function (req, res) {
@@ -117,15 +117,14 @@ app.get("/upcominghangouts", function (req, res) {
 });
 
 /**
+ * Create Account
+ * 
  * Hash Passwords with bcrypt in Node.js
  * https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
+ * 
+ * It's not necessary to hash all information because recovering data can be difficult in the event of a hack. 
+ * Just hashing the password is sufficient.
  */
-
-// It's not necessary to hash all information because recovering data can be difficult in the event of a hack. 
-// Just hashing the password is sufficient.
-
-// node ./bcrypt-demo.js
-// getSalt method
 app.post('/create-account', async (req, res) => {
     const { username, password } = req.body;
 
@@ -183,24 +182,18 @@ app.post('/login-hangouts', async (req, res) => {
 app.post('/create-hangout', async (req, res) => {
     const { eventName, eventType, startTime, endTime, eventFormat, address, postcode } = req.body;
     
-    // Find the user in the database
-    db.get('SELECT * FROM users WHERE username = ?', [username], async (err, user) => {
+    db.run('INSERT INTO events (eventName, eventType, startTime, endTime, eventFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+        [eventName, eventType, startTime, endTime, eventFormat, address, postcode], (err) => {
         if (err) {
-            res.status(500).send('Server error');
-        } else if (!user) {
-            res.status(401).send('User not found');
-        } else {
-            
-    const result = await bcrypt.compare(password, user.password);
-
-    if (result) {
-        console.log("Sucessfully log in.");
-        req.session.user = user; // Store the user in the session
-        res.redirect('/'); // Redirect to the home page
-        } else {
-            res.status(401).send('Wrong password');
+            console.error('Error inserting event:', err.message); // Print out an error message 
+            return res.status(500).send('Server error');
         }
-    }});
+
+        console.log("New event has been created."); 
+
+        // Redirect after creating a new event 
+        res.redirect('/events');
+    });
 });
 
 /* Start a port */
