@@ -27,6 +27,8 @@ app.use(session({
 /**
  * NOT NULL: Can't have a NULL value. So it can't be left empty.
  * UNIQUE: All values in a column are distinct from each other. So no two users can have the same email address.
+ * 
+ * Table one | Create Account 
  */
 db.serialize(() => {
     db.run(`
@@ -45,6 +47,33 @@ db.serialize(() => {
 });
 
 /**
+ * NOT NULL: Can't have a NULL value. So it can't be left empty.
+ * UNIQUE: All values in a column are distinct from each other. So no two users can have the same email address.
+ * 
+ * Table two | Create Hangouts (events) 
+ */
+db.serialize(() => {
+    db.run(`
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            eventName TEXT NOT NULL,
+            eventType TEXT NOT NULL,
+            startTime TEXT NOT NULL,
+            endTime TEXT NOT NULL,
+            eventFormat TEXT NOT NULL,
+            address TEXT NOT NULL,
+            postcode TEXT
+        );
+    `, (err) => {
+        if (err) {
+            console.error("Error creating table:", err.message);
+        } else {
+            console.log("Hangouts table created successfully.");
+        }
+    });
+});
+
+/**
  * Session middleware
  * Update the session middleware to store the user in the session 
  */
@@ -58,7 +87,7 @@ app.use((req, res, next) => {
 // https://coda.io/@peter-sigurdson/lab-workbook-setting-up-a-node-js-express-server-with-sqlite-and
 https://www.luisllamas.es/en/how-to-use-sqlite-with-nodejs/
 
-// Routers 
+// Routes 
 app.get("/", function (req, res) {
     res.render("home"); 
 });
@@ -92,7 +121,7 @@ app.get("/upcominghangouts", function (req, res) {
  * https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
  */
 
-// // It's not necessary to hash all information because recovering data can be difficult in the event of a hack. 
+// It's not necessary to hash all information because recovering data can be difficult in the event of a hack. 
 // Just hashing the password is sufficient.
 
 // node ./bcrypt-demo.js
@@ -111,7 +140,7 @@ app.post('/create-account', async (req, res) => {
 
             console.log("New account has been created."); 
 
-            // Redirect after a use create a new account in Simplify. 
+            // Redirect after a use create a new account
             res.redirect('/');
         });
 
@@ -121,9 +150,11 @@ app.post('/create-account', async (req, res) => {
     }
 });
 
-// Log in
-// This code is from 5-authentication-slides.pdf 
-app.post('/login-simplify', async (req, res) => {
+/**
+ * Log in 
+ * This code is from 5-authentication-slides.pdf 
+ */
+app.post('/login-hangouts', async (req, res) => {
     const { username, password } = req.body;
     
     // Find the user in the database
@@ -143,15 +174,34 @@ app.post('/login-simplify', async (req, res) => {
         } else {
             res.status(401).send('Wrong password');
         }
-        }
-        });
-        });
+    }});
+});
 
- 
 /**
  * Hangout (Event create)
  */
+app.post('/create-hangout', async (req, res) => {
+    const { eventName, eventType, startTime, endTime, eventFormat, address, postcode } = req.body;
+    
+    // Find the user in the database
+    db.get('SELECT * FROM users WHERE username = ?', [username], async (err, user) => {
+        if (err) {
+            res.status(500).send('Server error');
+        } else if (!user) {
+            res.status(401).send('User not found');
+        } else {
+            
+    const result = await bcrypt.compare(password, user.password);
 
+    if (result) {
+        console.log("Sucessfully log in.");
+        req.session.user = user; // Store the user in the session
+        res.redirect('/'); // Redirect to the home page
+        } else {
+            res.status(401).send('Wrong password');
+        }
+    }});
+});
 
 /* Start a port */
 app.listen (port, () => {
