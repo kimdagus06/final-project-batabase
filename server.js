@@ -113,8 +113,8 @@ app.use((req, res, next) => {
     next(); 
 }); 
 
-// https://coda.io/@peter-sigurdson/lab-workbook-setting-up-a-node-js-express-server-with-sqlite-and
-// https://www.luisllamas.es/en/how-to-use-sqlite-with-nodejs/
+// Refer to this link: https://coda.io/@peter-sigurdson/lab-workbook-setting-up-a-node-js-express-server-with-sqlite-and
+// Refer to this link: https://www.luisllamas.es/en/how-to-use-sqlite-with-nodejs/
 
 // Routes 
 app.get("/", function (req, res) {
