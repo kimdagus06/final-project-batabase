@@ -26,7 +26,7 @@ body{
 
 /* Menu Bar / Home / class / About / Contact */
 .menubar{
-    padding: 2rem 0;
+    padding: 1rem 0;
     font-size: 1rem;
     font-weight: 200;
     display: flex;
@@ -71,46 +71,93 @@ body{
     border-radius: 3rem;
 }
 
-/* Contact page */
+/* Create page */
 .create-title{
-    color: #312f2f;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.create-account-forms{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.create-account-forms{
-    flex-grow: 1;
+.create-form{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    gap: 1.5rem; /* Spacing between forms */
+    flex-direction: column;
+    width: 100%;
+    max-width: 30rem;
+    gap: 1rem; 
 }
 
 /* Form inputs */
 .form-input{
-    padding: 0.8rem;
-    border: 0.06rem solid #C3C3C3;
-    border-radius: 0.8rem;
-    box-sizing: border-box;
-    margin-bottom: 1rem; /* Add space below each input box */
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent background */
+    box-shadow: 0 0 5px rgba(48, 47, 47, 0.1);
+    width: 100%;
+    color: #ffffff;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.form-input::placeholder{
+    color: #bdb9b9;
+}
+
+/* Label style */
+label{
+    align-self: flex-start; /* Align label to the left */
+    font-size: 1rem;
+}
+
+/* Password warning message under the password input field */
+small{
+    margin-top: 0; 
+    color: #cccccc;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.login-container{
     display: flex;
-    width: 80%;
+    justify-content: center;
+    align-items: center; 
+    margin-bottom: 1rem;
+
+    font-size: 0.4rem;
 }
 
 .have-an-account{
+    background-color: #fffdff;
     border: none;
+    color: #303030;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.6rem;
+    line-height: 5;
+    margin-left: 0.45rem;
 }
 
 /* Create an account button */
 .create{
     padding: 0.625rem;
     border-radius: 1rem;
-    border: 0.1rem solid var(--button-color);
-    color: var(--button-color);
+    border: none; /* Remove border */
+    background-color: #FF6B6B; /* Button color */
+    color: white;
     cursor: pointer;
     font-size: 1rem;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.create:hover{
+    background-color: #FF4949; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly grow on hover */
 }
 
 /* About page */
@@ -124,7 +171,7 @@ body{
 
 .about-title{
     font-size: 3rem;
-    font-family: "Nunito", sans-serif;
+    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
@@ -143,7 +190,7 @@ body{
 /* class page */
 .class-title p{
     color: #2e2a2a;
-    font-family: "Nunito", sans-serif;
+    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
@@ -155,15 +202,6 @@ body{
     display: flex;
     justify-content: center; 
     align-items: center;
-}
-
-.description{
-    color: #E1E8F0;
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    font-weight: 200;
-    font-size: 1rem;
 }
 
 .checkbox-container{
@@ -250,7 +288,7 @@ body{
     flex-direction: column;
     align-items: center;
     margin-top: 2rem;
-    font-family: "Nunito", sans-serif;
+    font-family: "Inter", sans-serif;
 }
 
 .stat{
@@ -351,8 +389,6 @@ body{
 /* Upcoming class */
 /* Refer to this link and cite: https://bbbootstrap.com/snippets/bootstrap-product-comparison-template-99013072 */
 .section-title, .description{
-    text-align: center;
-    margin-top: 1.3rem;
     color: #333;
 }
 
