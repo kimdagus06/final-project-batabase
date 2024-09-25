@@ -1,7 +1,7 @@
-<div class="events-container">
-    <div class="event-box">
-        <h2 class="your-event-name">Your Event Name</h2>
-        <h2 class="description">Write a small description for the event</h2>
+<div class="class-container">
+    <div class="class-box">
+        <h2 class="your-class-name">Your class Name</h2>
+        <h2 class="description">Write a small description for the class</h2>
         <div class="three-icons">
             <img src="/icons/upload-picture.png" alt="Upload Picture icon" width="28" height="28" class="icon">
             <img src="/icons/edit.png" alt="Edit icon" width="28" height="28" class="icon">
@@ -9,19 +9,19 @@
         </div>
     </div>
 
-<form id="create-hangout-form" class="event-creating" method="POST" action="/create-hangout">
-    <div class="event-details">
-        <p>EVENT DETAILS</p>
+<form id="create-class-form" class="class-creating" method="POST" action="/create-class">
+    <div class="class-details">
+        <p>class DETAILS</p>
         
         <div class="form-group">
-            <label for="event-name">Event Name</label>
-            <input type="text" id="event-name" name="eventName" class="form-input" required>
+            <label for="class-name">class Name</label>
+            <input type="text" id="class-name" name="className" class="form-input" required>
         </div>
 
         <div class="form-group">
-            <label for="event-type">Event Type</label>
-            <select id="event-type" name="eventType" class="form-input" required>
-                <option value="">Select Event Type</option>
+            <label for="class-type">class Type</label>
+            <select id="class-type" name="classType" class="form-input" required>
+                <option value="">Select class Type</option>
                 <option value="meeting">Meetup</option>
                 <option value="conference">Conference</option>
                 <option value="workshop">Workshop</option>
@@ -43,18 +43,18 @@
 
         <div class="checkbox-container">
             <div class="form-group">
-                <input type="checkbox" id="online-check" name="eventFormat" value="online">
+                <input type="checkbox" id="online-check" name="classFormat" value="online">
                 <label for="online-check">Set as Online</label>
             </div>
 
             <div class="form-group">
-                <input type="checkbox" id="offline-check" name="eventFormat" value="offline">
+                <input type="checkbox" id="offline-check" name="classFormat" value="offline">
                 <label for="offline-check">Set as Offline</label>
             </div>
         </div>
 
         <div class="form-group">
-            <p>EVENT PLACE</p>
+            <p>class PLACE</p>
             <label for="address-line-1">Address</label>
             <input type="text" id="address-line-1" name="address" placeholder="Address Line 01" class="form-input" required>
         </div>
@@ -64,9 +64,9 @@
             <input type="text" id="address-line-2" name="postcode" placeholder="Address Line 02" class="form-input">
         </div>
 
-        <div class="event-buttons">
-            <input type="submit" value="Create New Event" class="create-event">
-            <input type="button" value="Undo" class="undo-event" id="undo-event">
+        <div class="class-buttons">
+            <input type="submit" value="Create New class" class="create-class">
+            <input type="button" value="Undo" class="undo-class" id="undo-class">
         </div>
     </div>
 </form>

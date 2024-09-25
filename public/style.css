@@ -24,7 +24,7 @@ body{
     padding-right: 8rem;
 }
 
-/* Menu Bar / Home / Events / About / Contact */
+/* Menu Bar / Home / class / About / Contact */
 .menubar{
     padding: 2rem 0;
     font-size: 1rem;
@@ -129,8 +129,8 @@ body{
     text-align: justify;
 }
 
-/* Event page */
-.event-title p{
+/* class page */
+.class-title p{
     color: #2e2a2a;
     font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
@@ -139,7 +139,7 @@ body{
     font-size: 1rem;
 }
 
-.your-event-name{
+.your-class-name{
     color: #E1E8F0;
     display: flex;
     justify-content: center; 
@@ -155,38 +155,38 @@ body{
     font-size: 1rem;
 }
 
-.events-container{
+.class-container{
     max-width: 50rem; /* Adjust container width */
     box-sizing: border-box;
     font-size: 0.8rem;
     margin: 0 auto; 
 }
 
-/* Event blue box */
-.event-box{
+/* class blue box */
+.class-box{
     flex-direction: column;
     justify-content: center; 
     align-items: center;
     margin: 0 auto;
 }
 
-.event-box ul{    
+.class-box ul{    
     list-style: none;
     display: flex;
 }
 
 /* Between Pick a Date and Search Address */
-.event-box ul li{
+.class-box ul li{
     margin-right: 2rem;
 }
 
-.event-box ul li a{
+.class-box ul li a{
     color: var(--left-bar-font-color);
     text-decoration: none;
     font-size: 1rem;
 }
 
-.event-box ul li a img{
+.class-box ul li a img{
     margin-right: 0; /* Remove space between icon and text */
 }
 

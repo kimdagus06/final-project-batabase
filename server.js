@@ -56,17 +56,17 @@ db.serialize(() => {
  * NOT NULL: Can't have a NULL value. So it can't be left empty.
  * UNIQUE: All values in a column are distinct from each other. So no two users can have the same email address.
  * 
- * Table two | Create Hangouts (events) 
+ * Table two | Create class 
  */
 db.serialize(() => {
     db.run(`
-        CREATE TABLE IF NOT EXISTS events (
+        CREATE TABLE IF NOT EXISTS class (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            eventName TEXT NOT NULL,
-            eventType TEXT NOT NULL,
+            className TEXT NOT NULL,
+            classType TEXT NOT NULL,
             startTime TEXT NOT NULL,
             endTime TEXT NOT NULL,
-            eventFormat TEXT NOT NULL,
+            classFormat TEXT NOT NULL,
             address TEXT NOT NULL,
             postcode TEXT
         );
@@ -74,7 +74,7 @@ db.serialize(() => {
         if (err) {
             console.error("Error creating table:", err.message);
         } else {
-            console.log("Hangouts table created successfully.");
+            console.log("class table created successfully.");
         }
     });
 });
@@ -118,12 +118,12 @@ app.get("/contact", function (req, res) {
     res.render("contact"); 
 });
 
-app.get("/events", function (req, res) {
-    res.render("events"); 
+app.get("/class", function (req, res) {
+    res.render("class"); 
 });
 
-app.get("/upcominghangouts", function (req, res) {
-    res.render("upcominghangouts"); 
+app.get("/upcomingclass", function (req, res) {
+    res.render("upcomingclass"); 
 });
 
 /**
@@ -132,7 +132,7 @@ app.get("/upcominghangouts", function (req, res) {
  * Hash Passwords with bcrypt in Node.js
  * https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
  * 
- * It's not necessary to hash all information because recovering data can be difficult in the event of a hack. 
+ * It's not necessary to hash all information because recovering data can be difficult.
  * Just hashing the password is sufficient.
  */
 app.post('/create-account', async (req, res) => {
@@ -163,7 +163,7 @@ app.post('/create-account', async (req, res) => {
  * Log in 
  * This code is from 5-authentication-slides.pdf 
  */
-app.post('/login-hangouts', async (req, res) => {
+app.post('/login-class', async (req, res) => {
     const { username, password } = req.body;
     
     // Find the user in the database
@@ -190,28 +190,28 @@ app.post('/login-hangouts', async (req, res) => {
  * Log out
  * 
  */
-app.post('/logout-hangouts', async (req, res) => {
+app.post('/logout-class', async (req, res) => {
     req.session.destroy(); // Log out = Clear the session
     res.redirect('/'); // After log out a user is sent to main 
 });
 
 /**
- * Hangout (Event create)
+ * class (class create)
  */
-app.post('/create-hangout', async (req, res) => {
-    const { eventName, eventType, startTime, endTime, eventFormat, address, postcode } = req.body;
+app.post('/create-class', async (req, res) => {
+    const { className, classType, startTime, endTime, classFormat, address, postcode } = req.body;
     
-    db.run('INSERT INTO events (eventName, eventType, startTime, endTime, eventFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-        [eventName, eventType, startTime, endTime, eventFormat, address, postcode], (err) => {
+    db.run('INSERT INTO class (className, classType, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+        [className, classType, startTime, endTime, classFormat, address, postcode], (err) => {
         if (err) {
-            console.error('Error inserting event:', err.message); // Print out an error message 
+            console.error('Error inserting class:', err.message); // Print out an error message 
             return res.status(500).send('Server error');
         }
 
-        console.log("New event has been created."); 
+        console.log("New class has been created."); 
 
-        // Redirect after creating a new event 
-        res.redirect('/events');
+        // Redirect after creating a new class 
+        res.redirect('/class');
     });
 });
 
