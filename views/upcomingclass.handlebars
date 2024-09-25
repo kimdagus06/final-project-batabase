@@ -1,0 +1,14 @@
+<body>
+    <h1>Upcoming Classes</h1>
+    <ul>
+        {{#each classes}}
+            <li>
+                <strong>{{className}}</strong> - {{classType}} - {{startTime}} - {{endTime}} - {{classFormat}} - {{address}} - {{postcode}}
+            </li>
+        {{else}}
+            <li>No upcoming classes available.</li>
+        {{/each}}
+    </ul>
+    <a href="/registerclass">Register New Class</a>
+    <a href="/">Back to Home</a>
+</body>

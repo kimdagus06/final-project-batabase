@@ -56,25 +56,23 @@ db.serialize(() => {
  * NOT NULL: Can't have a NULL value. So it can't be left empty.
  * UNIQUE: All values in a column are distinct from each other. So no two users can have the same email address.
  * 
- * Table two | Create class 
+ * Table two | Create classes
  */
 db.serialize(() => {
-    db.run(`
-        CREATE TABLE IF NOT EXISTS class (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            className TEXT NOT NULL,
-            classType TEXT NOT NULL,
-            startTime TEXT NOT NULL,
-            endTime TEXT NOT NULL,
-            classFormat TEXT NOT NULL,
-            address TEXT NOT NULL,
-            postcode TEXT
-        );
-    `, (err) => {
+    db.run(`CREATE TABLE IF NOT EXISTS classes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        className TEXT NOT NULL,
+        classType TEXT NOT NULL,
+        startTime TEXT NOT NULL,
+        endTime TEXT NOT NULL,
+        classFormat TEXT NOT NULL,
+        address TEXT NOT NULL,
+        postcode TEXT
+    );`, (err) => {
         if (err) {
-            console.error("Error creating table:", err.message);
+            console.error("Error creating classes table:", err.message);
         } else {
-            console.log("class table created successfully.");
+            console.log("Classes table created successfully.");
         }
     });
 });
@@ -118,8 +116,8 @@ app.get("/contact", function (req, res) {
     res.render("contact"); 
 });
 
-app.get("/class", function (req, res) {
-    res.render("class"); 
+app.get("/registerclass", function (req, res) {
+    res.render("registerclass"); 
 });
 
 app.get("/upcomingclass", function (req, res) {
@@ -201,7 +199,7 @@ app.post('/logout-class', async (req, res) => {
 app.post('/create-class', async (req, res) => {
     const { className, classType, startTime, endTime, classFormat, address, postcode } = req.body;
     
-    db.run('INSERT INTO class (className, classType, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+    db.run('INSERT INTO classes (className, classType, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?)', 
         [className, classType, startTime, endTime, classFormat, address, postcode], (err) => {
         if (err) {
             console.error('Error inserting class:', err.message); // Print out an error message 
@@ -211,9 +209,49 @@ app.post('/create-class', async (req, res) => {
         console.log("New class has been created."); 
 
         // Redirect after creating a new class 
-        res.redirect('/class');
+        res.redirect('/upcomingclass');
     });
 });
+
+/**
+ * Getting data from the tables: lab-4-v1.1 (1).pdf
+ */
+app.get('/upcomingclass', async (req, res) => {
+    try {
+        // Bring all data from classes 
+        db.all("SELECT * FROM classes", (err, rows) => {
+            if (err) {
+                console.error('Error fetching classes:', err.message);
+                return res.status(500).send('Server error');
+            }
+            
+            // If no classes are found, you can handle it accordingly
+            if (!rows || rows.length === 0) {
+                return res.render('upcomingclass', { classes: [] }); // Render with an empty array
+            }
+
+            // Render the 'upcomingclass' view with the retrieved classes
+            res.render('upcomingclass', { classes: rows });
+        });
+    } catch (err) {
+        console.error('Error occurred:', err.message);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+/**
+ * To show class information to users 
+ * app.get('/class/:id', (req, res) => {
+    const classId = req.params.id;
+    db.get('SELECT * FROM classes WHERE id = ?', [classId], (error, classDetails) => {
+        if (error) {
+            console.error('Error fetching class details:', error.message);
+            return res.status(500).send('Server error');
+        }
+        res.render('classDetail', { class: classDetails });
+    });
+});
+ */
 
 /* Start a port */
 app.listen (port, () => {
