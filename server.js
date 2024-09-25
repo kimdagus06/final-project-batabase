@@ -120,8 +120,30 @@ app.get("/registerclass", function (req, res) {
     res.render("registerclass"); 
 });
 
-app.get("/upcomingclass", function (req, res) {
-    res.render("upcomingclass"); 
+/**
+ * Getting data from the tables: lab-4-v1.1 (1).pdf
+ */
+app.get('/upcomingclass', async (req, res) => {
+    try {
+        // Bring all data from classes 
+        db.all("SELECT * FROM classes", (err, rows) => {
+            if (err) {
+                console.error('Error fetching classes:', err.message);
+                return res.status(500).send('Server error');
+            }
+            
+            // If no classes are found, you can handle it accordingly
+            if (!rows || rows.length === 0) {
+                return res.render('upcomingclass', { classes: [] }); // Render with an empty array
+            }
+
+            // Render the 'upcomingclass' view with the retrieved classes
+            res.render('upcomingclass', { classes: rows });
+        });
+    } catch (err) {
+        console.error('Error occurred:', err.message);
+        res.status(500).send('Internal Server Error');
+    }
 });
 
 /**
@@ -211,32 +233,6 @@ app.post('/create-class', async (req, res) => {
         // Redirect after creating a new class 
         res.redirect('/upcomingclass');
     });
-});
-
-/**
- * Getting data from the tables: lab-4-v1.1 (1).pdf
- */
-app.get('/upcomingclass', async (req, res) => {
-    try {
-        // Bring all data from classes 
-        db.all("SELECT * FROM classes", (err, rows) => {
-            if (err) {
-                console.error('Error fetching classes:', err.message);
-                return res.status(500).send('Server error');
-            }
-            
-            // If no classes are found, you can handle it accordingly
-            if (!rows || rows.length === 0) {
-                return res.render('upcomingclass', { classes: [] }); // Render with an empty array
-            }
-
-            // Render the 'upcomingclass' view with the retrieved classes
-            res.render('upcomingclass', { classes: rows });
-        });
-    } catch (err) {
-        console.error('Error occurred:', err.message);
-        res.status(500).send('Internal Server Error');
-    }
 });
 
 /**
