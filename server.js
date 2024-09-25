@@ -40,7 +40,7 @@ db.serialize(() => {
     db.run(`
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT NOT NULL,
+            userName TEXT NOT NULL,
             password TEXT NOT NULL
         );
     `, (err) => {
@@ -53,9 +53,6 @@ db.serialize(() => {
 });
 
 /**
- * NOT NULL: Can't have a NULL value. So it can't be left empty.
- * UNIQUE: All values in a column are distinct from each other. So no two users can have the same email address.
- * 
  * Table two | Create classes
  */
 db.serialize(() => {
@@ -73,6 +70,34 @@ db.serialize(() => {
             console.error("Error creating classes table:", err.message);
         } else {
             console.log("Classes table created successfully.");
+        }
+    });
+});
+
+/**
+ * Table three | Create upcomings
+ * Refer to this link: https://www.w3schools.com/sql/sql_join_inner.asp
+ * Refer to this link: https://gent.tistory.com/376
+ * 
+ * Use INNER JOIN to combine data from users and classes tables based on their relationships in the upcomings table
+
+ * Example: SELECT column_name(s)
+ * FROM table1
+ * INNER JOIN table2
+ * ON table1.column_name = table2.column_name;
+ */
+db.serialize(() => {
+    db.run(`CREATE TABLE IF NOT EXISTS upcomings (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id TEXT NOT NULL,
+        classes_id INTEGER NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users(id),
+        FOREIGN KEY (classes_id) REFERENCES classes(id)
+    );`, (err) => {
+        if (err) {
+            console.error("Error creating upcomings table:", err.message);
+        } else {
+            console.log("upcomings table created successfully.");
         }
     });
 });
@@ -122,9 +147,29 @@ app.get("/registerclass", function (req, res) {
 
 /**
  * Getting data from the tables: lab-4-v1.1 (1).pdf
+ * 
  */
 app.get('/upcomingclass', async (req, res) => {
     try {
+        // Fetch user ID, userName, and class data from the upcomings table
+        const query = `
+    SELECT 
+        users.userName, 
+        classes.className, 
+        classes.classType, 
+        classes.startTime, 
+        classes.endTime, 
+        classes.classFormat, 
+        classes.address, 
+        classes.postcode
+    FROM 
+        upcomings
+    INNER JOIN 
+        users ON upcomings.user_id = user.id
+    INNER JOIN 
+        classes ON upcomings.classes_id = classes.id;
+        `;
+
         // Bring all data from classes 
         db.all("SELECT * FROM classes", (err, rows) => {
             if (err) {
@@ -156,12 +201,12 @@ app.get('/upcomingclass', async (req, res) => {
  * Just hashing the password is sufficient.
  */
 app.post('/create-account', async (req, res) => {
-    const { username, password } = req.body;
+    const { userName, password } = req.body;
 
     try {
         const hash = await bcrypt.hash(password, 14);
 
-        db.run('INSERT INTO users (username, password) VALUES (?, ?)', [username, hash], (err) => {
+        db.run('INSERT INTO users (userName, password) VALUES (?, ?)', [userName, hash], (err) => {
             if (err) {
                 console.error('Error inserting user:', err.message); // Print out an error message 
                 return res.status(500).send('Server error');
@@ -184,10 +229,10 @@ app.post('/create-account', async (req, res) => {
  * This code is from 5-authentication-slides.pdf 
  */
 app.post('/login-class', async (req, res) => {
-    const { username, password } = req.body;
+    const { userName, password } = req.body;
     
     // Find the user in the database
-    db.get('SELECT * FROM users WHERE username = ?', [username], async (err, user) => {
+    db.get('SELECT * FROM users WHERE userName = ?', [userName], async (err, user) => {
         if (err) {
             res.status(500).send('Server error');
         } else if (!user) {
@@ -231,6 +276,20 @@ app.post('/create-class', async (req, res) => {
         console.log("New class has been created."); 
 
         // Redirect after creating a new class 
+        res.redirect('/upcomingclass');
+    });
+});
+
+app.post('/register-upcoming', async (req, res) => {
+    const { user_id, classes_id } = req.body;
+
+    db.run('INSERT INTO upcomings (user_id, classes_id) VALUES (?, ?)', [user_id, classes_id], (err) => {
+        if (err) {
+            console.error('Error inserting upcoming:', err.message);
+            return res.status(500).send('Server Error');
+        }
+
+        console.log("Registered."); 
         res.redirect('/upcomingclass');
     });
 });

@@ -3,6 +3,8 @@
     <ul>
         {{#each classes}}
             <li>
+                <strong>Teacher: {{user_id}}</strong> - 
+                <strong>{{userName}}</strong> is holding this class
                 <strong>{{className}}</strong> - {{classType}} - {{startTime}} - {{endTime}} - {{classFormat}} - {{address}} - {{postcode}}
             </li>
         {{else}}
