@@ -1,17 +1,22 @@
+<h1 class="create-title">Create an account</h1>
+<h2 class="description">Already have an account?</h2>
+<input type="submit" value="Log in" class="have-an-account">
+
 <div class="create-account-forms">
     <form action="/create-account" method="POST" class="create-form">
         <label for="userName">What should we call you?</label>
         <input type="text" id="userName" name="userName" placeholder="Enter your profile name" class="form-input" required>
 
         <label for="email">What is your email?</label>
-        <input type="text" id="emailAddress" name="emailAddress" placeholder="Enter your email address" class="form-input" required>
+        <input type="email" id="emailAddress" name="emailAddress" placeholder="Enter your email address" class="form-input" required>
 
         <label for="password">Create a password</label>
         <input type="password" id="password" name="password" placeholder="Enter your password" class="form-input" required>
-        
+        <small>Use 8 or more characters with a mix of letters, numbers & symbols</small>
+
         <input type="checkbox" id="agreeterms" name="agreeterms" required>
         <label for="agreeterms">I agree to all the Terms and Privacy Policy</label>
 
-        <input type="submit" value="Create Account" class="create">
+        <input type="submit" value="Create an account" class="create">
     </form>
 </div>

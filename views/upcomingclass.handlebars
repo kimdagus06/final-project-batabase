@@ -1,26 +1,39 @@
 <body>
-    <h1>Upcoming Classes</h1>
-    <ul id="class-list">
-        {{#each classes}}
-            <li>
-                <strong>Teacher: {{id}}</strong> 
-                <strong>{{userName}}</strong> is holding this class: 
-                <strong>{{className}}</strong> - {{classType}} - {{startTime}} - {{endTime}} - {{classFormat}} - {{address}} - {{postcode}}
-            </li>
-        {{else}}
-            <li>No upcoming classes available.</li>
-        {{/each}}
-    </ul>
+    <h1 class="section-title">Upcoming Classes</h1>
+    <h2 class="description">Explore oneday classes, maybe you will find something interesting!</h2>
 
+    <div class="upcoming-container">
+        <ul id="class-list">
+            {{#each classes}}
+                <li class="class-item card">
+                    <div class="class-info">
+                        <span><strong>Teacher ID:</strong> {{id}}</span><br> 
+                        <span><strong>{{userName}}</strong> is holding this class:</span><br>
+                        <span><strong>{{className}}</strong></span><br>
+                        <span>{{classType}}</span> - 
+                        <span>{{classFormat}}</span> - 
+                        <span>{{address}}</span>
+                    </div>
+                    <div class="view-details-buttons">
+                        <input type="button" value="View Details" class="viewdetails" id="view-details-class">
+                    </div>
+                </li>
+            {{/each}}
+            {{#unless classes.length}}
+                <li>No upcoming classes available.</li>
+            {{/unless}}
+        </ul>
+    </div>
+    
     <!-- Pagination for grade 4 -->
     <div class="pagination">
-        <button id="prev-page">Previous</button>
+        <button id="prev-page" class="button-pagination">Previous</button>
         <span id="page-info">Page 1</span>
-        <button id="next-page">Next</button>
+        <button id="next-page" class="button-pagination">Next</button>
     </div>
 
-    <a href="/registerclass">Register New Class</a>
-    <a href="/">Back to Home</a>
-
-    <script src="pagination.js"></script> <!-- Link to your JavaScript file -->
+    <div class="upcoming-buttons">
+        <a href="/registerclass" class="button-register-new">Register New Class</a>
+        <a href="/" class="button-back-to-home">Back to Home</a>
+    </div>
 </body>
