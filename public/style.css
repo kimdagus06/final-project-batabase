@@ -211,12 +211,6 @@ body{
     margin-top: 1rem; /* Adjust spacing between these specific groups */
 }
 
-.checkbox-container{
-    display: flex;
-    align-items: center; /* Vertical alignment */
-    gap: 2rem;
-}
-
 /* Home page */
 .home-screen-page{
     display: flex;

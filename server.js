@@ -41,7 +41,9 @@ db.serialize(() => {
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             userName TEXT NOT NULL,
-            password TEXT NOT NULL
+            emailAddress TEXT NOT NULL,
+            password TEXT NOT NULL,
+            agreeterms checkbox NOT NULL
         );
     `, (err) => {
         if (err) {
@@ -201,12 +203,13 @@ app.get('/upcomingclass', async (req, res) => {
  * Just hashing the password is sufficient.
  */
 app.post('/create-account', async (req, res) => {
-    const { userName, password } = req.body;
+    const { userName, emailAddress, password } = req.body;
+    const agreeterms = req.body.agreeterms ? 1 : 0; // Convert checkbox to 1 (true) or 0 (false)
 
     try {
         const hash = await bcrypt.hash(password, 14);
 
-        db.run('INSERT INTO users (userName, password) VALUES (?, ?)', [userName, hash], (err) => {
+        db.run('INSERT INTO users (userName, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', [userName, emailAddress, hash, agreeterms], (err) => {
             if (err) {
                 console.error('Error inserting user:', err.message); // Print out an error message 
                 return res.status(500).send('Server error');

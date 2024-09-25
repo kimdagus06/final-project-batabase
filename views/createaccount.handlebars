@@ -1,16 +1,17 @@
 <div class="create-account-forms">
     <form action="/create-account" method="POST" class="create-form">
-        <label for="userName">Username</label>
-        <input type="text" id="userName" name="userName" placeholder="username" class="form-input" required>
+        <label for="userName">What should we call you?</label>
+        <input type="text" id="userName" name="userName" placeholder="Enter your profile name" class="form-input" required>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Password" class="form-input" required>
+        <label for="email">What is your email?</label>
+        <input type="text" id="emailAddress" name="emailAddress" placeholder="Enter your email address" class="form-input" required>
 
-      <!--  <div class="terms-checkbox">
-            <input type="checkbox" id="agree-terms" name="agree-terms" value="agree-terms" required>
-            <label for="agree-terms">I agree to all the Terms and Privacy Policy</label>
-        </div>
--->
+        <label for="password">Create a password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" class="form-input" required>
+        
+        <input type="checkbox" id="agreeterms" name="agreeterms" required>
+        <label for="agreeterms">I agree to all the Terms and Privacy Policy</label>
+
         <input type="submit" value="Create Account" class="create">
     </form>
 </div>
