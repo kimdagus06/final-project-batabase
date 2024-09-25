@@ -165,7 +165,7 @@ app.get('/upcomingclass', async (req, res) => {
     FROM 
         upcomings
     INNER JOIN 
-        users ON upcomings.user_id = user.id
+        upcomings ON users.id = upcoming.users_id
     INNER JOIN 
         classes ON upcomings.classes_id = classes.id;
         `;
@@ -280,7 +280,7 @@ app.post('/create-class', async (req, res) => {
     });
 });
 
-app.post('/register-upcoming', async (req, res) => {
+app.post('/upcomingclass', async (req, res) => {
     const { user_id, classes_id } = req.body;
 
     db.run('INSERT INTO upcomings (user_id, classes_id) VALUES (?, ?)', [user_id, classes_id], (err) => {
