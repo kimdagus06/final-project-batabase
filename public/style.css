@@ -123,7 +123,7 @@ small{
     margin-bottom: 2rem;
 }
 
-.login-container{
+.create-container{
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -309,7 +309,6 @@ small{
     color: #E1E8F0;
 }
 
-
 /* Home page - search bar */
 .search-container{
     display: flex;
@@ -453,6 +452,17 @@ span{
 #prev-page, #next-page{
     margin: 0 0.2rem;
     padding: 1rem;
+}
+
+/*Log in */
+.login-forms{
+    user-select: none;
+	overflow-y: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: hsl(218deg 50% 91%);
+	height: 100vh;
 }
 
 /* Footer */
