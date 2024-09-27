@@ -7,42 +7,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <script src="/main.js" defer></script>
-    <title>Create Moments, Share Experiences</title>
+    <title>Where Everyone Can Teach, Learn Something New Every Day</title>
 </head>
 <body>
     <nav class="menubar">
-        <!-- Logo 
-                    <img src="/image/logo.png" alt="Simplify logo" width="75" height="82" class="simplify-logo">
-        </div>-->
+        <!-- Logo (Uncomment if needed) -->
+        <!-- <img src="/image/logo.png" alt="Simplify logo" width="75" height="82" class="simplify-logo"> -->
+
         <div class="menu-items">
-        <ul class="menu-items">
-            <li><a href="/" data-content="home">Home</a></li>
-            <li><a href="/registerclass" class="menu-item" data-content="classes">Register Class</a></li>
-            <li><a href="/upcomingclass" class="menu-item" data-content="classes">Upcomings</a></li>
-            <li><a href="/about" data-content="about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-            
-            <!-- Sign up / Log in -->
-            <li class="create-account-button"><a href="/createaccount" class="button-link">Create Account</a></li>
-            <li class="login-button"><a href="/login" class="button-link">Log In</a></li>
-            <li class="logout-button"><a href="/logout" class="button-link">Log Out</a></li>
-        </ul>
-    </nav>
-    {{{body}}}
-    
-    <footer class="footer">
-    <div class="footer-container">
-        <div class="footer-left">
-            <p>&copy; 2024 Oneday 101. All rights reserved.</p>
-        </div>
-        <div class="footer-right">
-            <ul class="footer-links">
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
+            <ul>
+                <li><a href="/" data-content="home">Home</a></li>
+                <li><a href="/registerclass" class="menu-item" data-content="classes">Register Class</a></li>
+                <li><a href="/upcomingclass" class="menu-item" data-content="classes">Upcomings</a></li>
+                <li><a href="/about" data-content="about">About</a></li>
                 <li><a href="/contact">Contact</a></li>
+
+                <!-- Sign up / Log in -->
+                <li class="create-account-button"><a href="/createaccount" class="button-link">Create Account</a></li>
+
+                {{#if isLoggedIn}}
+                <li id="menulogin">Hi, {{name}} - <a href="/logout">Logout</a></li>
+                {{else}}
+                <li id="menulogin"><a href="/login">Login</a></li>
+                {{/if}}
             </ul>
         </div>
-    </div>
-</footer>
+    </nav>
+
+    {{{body}}}
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <p>&copy; 2024 Oneday 101. All rights reserved.</p>
+            </div>
+            <div class="footer-right">
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

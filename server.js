@@ -148,7 +148,11 @@ app.get("/", function (req, res) {
         isAdmin: req.session.isAdmin
     }
 
-    console.log("Home model: " + JSON.stringify(model));
+    if (!req.session.isLoggedIn) {
+        console.log("Home model (not logged in):", model);
+    }
+    // console.log("Home model: " + JSON.stringify(model));
+    
     res.render("home", model);
 });
 
@@ -267,10 +271,10 @@ app.post('/create-account', async (req, res) => {
 app.post('/login-class', async (req, res) => {
     console.log("Login attempt with:", req.body);
 
-    const { userName, emailAddress, password } = req.body;
+    const { username, emailAddress, password } = req.body;
 
     // Validate if it's the admin account 
-    if (userName === adminUser.userName && emailAddress === adminUser.emailAddress) {
+    if (username === adminUser.username && emailAddress === adminUser.emailAddress) {
         // Get the hashed admin password from the database
         db.get('SELECT password FROM users WHERE emailAddress = ?', [adminUser.emailAddress], async (err, user) => {
             if (err) {
@@ -290,7 +294,7 @@ app.post('/login-class', async (req, res) => {
                 // Admin session data setting
                 req.session.isAdmin = true;
                 req.session.isLoggedIn = true;
-                req.session.name = userName;
+                req.session.name = username;
                 req.session.emailAddress = emailAddress;
 
                 console.log("Session information: " + JSON.stringify(req.session));
