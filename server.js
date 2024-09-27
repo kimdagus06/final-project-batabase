@@ -4,18 +4,17 @@ const path = require('path');
 const bcrypt = require('bcrypt'); // For hasing password 
 const { engine } = require("express-handlebars");
 const session = require("express-session");
-const SQLiteStore = require("connect-sqlite3")(session); // Import  
-
-// Define adminUser globally outside the handler functions to make it accessible in all routes.
-const adminUser = {
-    userName: "admin",
-    password: "$2b$12$yourhashedadminpassword"
-};
-
+const conntectSqlite3 = require("connect-sqlite3"); // Store the sessions in a SQLite3 database file   
 const app = express();
 const dbFile = "data.sqlite3.db";
 const db = new sqlite3.Database(dbFile);
 const port = 3333;
+
+const adminUser = {
+    userName: 'admin',
+    emailAddress: 'admin@example.com',
+    password: 'adminpassword'
+};
 
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
@@ -33,8 +32,8 @@ app.use(express.json());
   * 
   * Define the session 
   */
+ const SQLite3Store = conntectSqlite3(session); // Store sessions in the database 
  app.use(session({
-    store: new SQLiteStore({db: "session-db.db"}),
     secret: 'd384@#s#$#juihss.sijsge',
     resave: false,
     saveUninitialized: false
@@ -46,20 +45,16 @@ app.use(express.json());
  * 
  * Table one | Create Account 
  */
-db.serialize(() => {
-    db.run(`
-        CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            userName TEXT NOT NULL,
-            emailAddress TEXT NOT NULL,
-            password TEXT NOT NULL,
-            agreeterms checkbox NOT NULL
-        );
-    `, (err) => {
+db.serialize(async () => {
+    db.run(`CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        userName TEXT NOT NULL,
+        emailAddress TEXT NOT NULL,
+        password TEXT NOT NULL,
+        agreeterms INTEGER NOT NULL
+    );`, (err) => {
         if (err) {
-            console.error("Error creating table:", err.message);
-        } else {
-            console.log("Users table created successfully.");
+            console.error("Error creating users table:", err.message);
         }
     });
 });
@@ -130,13 +125,14 @@ app.use((req, res, next) => {
 
 // Routes 
 app.get("/", function (req, res) {
-    const model = {
+    const model={
         isLoggedIn: req.session.isLoggedIn,
-        name: req.session.user ? req.session.user.userName : null,
-        isAdmin: req.session.user ? req.session.user.isAdmin : false
-    };
+        name: req.session.name,
+        emailAddress: req.session.emailAddress,
+        isAdmin: req.session.isAdmin
+    }
     console.log("Home model: " + JSON.stringify(model));
-    res.render("home", model);
+    res.render("home", model); 
 });
 
 app.get("/createaccount", function (req, res) {
@@ -164,11 +160,7 @@ app.get("/registerclass", function (req, res) {
 });
 
 app.get('/admin', (req, res) => {
-    if (req.session.user && req.session.user.isAdmin) {
-        res.render('admin');
-    } else {
-        res.status(403).send('Please log in with admin account. ');
-    }
+    res.render("registerclass"); 
 });
 
 /**
@@ -255,27 +247,29 @@ app.post('/create-account', async (req, res) => {
  * Log in 
  * This code is from 5-authentication-slides.pdf 
  */
-app.post('/login-class', (req, res) => {
-    const { userName, password } = req.body;
+app.post('/login-class', async (req, res) => {
+    const { userName, emailAddress, password } = req.body;
 
-    // Validate if it's admin account 
-    if (userName === adminUser.userName) {
-        bcrypt.compare(password, adminUser.password, (err, result) => {
-            if (result) {
-                req.session.user = {
-                    userName: adminUser.userName,
-                    isAdmin: true
-                };
-                console.log("Admin successfully logged in.");
-                return res.redirect('/');
-            } else {
-                console.log("Wrong password for admin.");
-                return res.status(401).send('Wrong password for admin');
-            }
-        });
+    // Validate if it's the admin account 
+    if (userName === adminUser.userName && emailAddress === adminUser.emailAddress) {
+        const result = await bcrypt.compare(password, adminUser.password);
+        if (result) {
+            console.log('The password is the admin one.');
+
+            // Save the information into the session
+            req.session.isAdmin = true;
+            req.session.isLoggedIn = true;
+            req.session.name = userName;
+            req.session.emailAddress = emailAddress;
+
+            res.redirect("/");
+        } else {
+            console.log("Wrong password for admin.");
+            return res.status(401).send('Wrong password for admin');
+        }
     } else {
         // Handling general users 
-        db.get('SELECT * FROM users WHERE userName = ?', [userName], async (err, user) => {
+        db.get('SELECT * FROM users WHERE userName = ? OR emailAddress = ?', [userName, emailAddress], async (err, user) => {
             if (err) {
                 console.error("Database error:", err);
                 return res.status(500).send('Server error');
@@ -293,6 +287,7 @@ app.post('/login-class', (req, res) => {
                 req.session.user = {
                     id: user.id,
                     userName: user.userName,
+                    emailAddress: user.emailAddress,
                     isAdmin: false // General users 
                 };
 
