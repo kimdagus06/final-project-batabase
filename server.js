@@ -37,7 +37,8 @@ app.use(express.json());
  app.use(session({
     secret: 'd384@#s#$#juihss.sijsge',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new SQLite3Store({db: "session-db.db"})
 }));
 
 /**
@@ -136,7 +137,9 @@ app.use((req, res, next) => {
 // Refer to this link: https://coda.io/@peter-sigurdson/lab-workbook-setting-up-a-node-js-express-server-with-sqlite-and
 // Refer to this link: https://www.luisllamas.es/en/how-to-use-sqlite-with-nodejs/
 
-// Routes 
+// -----------
+// ---ROUTE---
+// -----------
 app.get("/", function (req, res) {
     const model = {
         isLoggedIn: req.session.isLoggedIn,
@@ -144,6 +147,7 @@ app.get("/", function (req, res) {
         emailAddress: req.session.emailAddress,
         isAdmin: req.session.isAdmin
     }
+
     console.log("Home model: " + JSON.stringify(model));
     res.render("home", model);
 });
@@ -276,8 +280,8 @@ app.post('/login-class', async (req, res) => {
             req.session.name = username;
             req.session.emailAddress = emailAddress;
         
-            console.log("Session data: ", req.session); // Debugging log 
-            return res.redirect("/");
+            console.log("Session information: ", + JSON.stringify(req.session)); // Debugging log 
+            res.redirect("/");
         }
          else {
             return res.status(401).send('Wrong password for admin');
