@@ -12,7 +12,7 @@ const db = new sqlite3.Database(dbFile);
 const port = 3333;
 
 const adminUser = {
-    userName: 'admin',
+    username: 'admin',
     emailAddress: 'admin@example.com',
     password: 'adminpassword', 
     agreeterms: '1'
@@ -59,8 +59,8 @@ db.get('SELECT * FROM users WHERE emailAddress = ?', [adminUser.emailAddress], (
                 return;
             }
             // Insert the admin user into the database
-            db.run('INSERT INTO users (userName, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', 
-                [adminUser.userName, adminUser.emailAddress, hash, adminUser.agreeterms], 
+            db.run('INSERT INTO users (username, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', 
+                [adminUser.username, adminUser.emailAddress, hash, adminUser.agreeterms], 
                 (insertErr) => {
                     if (insertErr) {
                         console.error('Error inserting admin user:', insertErr.message);
@@ -186,10 +186,10 @@ app.get('/admin', (req, res) => {
  */
 app.get('/upcomingclass', async (req, res) => {
     try {
-        // Fetch user ID, userName, and class data from the upcomings table
+        // Fetch user ID, username, and class data from the upcomings table
         const query = `
     SELECT 
-        users.userName, 
+        users.username, 
         classes.className, 
         classes.classType, 
         classes.startTime, 
@@ -242,7 +242,7 @@ app.post('/create-account', async (req, res) => {
     try {
         const hash = await bcrypt.hash(password, 12);
 
-        db.run('INSERT INTO users (userName, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', [userName, emailAddress, hash, agreeterms], (err) => {
+        db.run('INSERT INTO users (username, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', [username, emailAddress, hash, agreeterms], (err) => {
             if (err) {
                 console.error('Error inserting user:', err.message); // Print out an error message 
                 return res.status(500).send('Server error');
@@ -265,57 +265,43 @@ app.post('/create-account', async (req, res) => {
  * This code is from 5-authentication-slides.pdf 
  */
 app.post('/login-class', async (req, res) => {
-    console.log("Login attempt with:", req.body); // Double check it's logged in with admin account 
+    console.log("Login attempt with:", req.body);
 
     const { userName, emailAddress, password } = req.body;
 
     // Validate if it's the admin account 
     if (userName === adminUser.userName && emailAddress === adminUser.emailAddress) {
-        const result = await bcrypt.compare(password, adminUser.password);
-
-        if (result) {
-            // Admin session data setting
-            req.session.isAdmin = true;
-            req.session.isLoggedIn = true;
-            req.session.name = username;
-            req.session.emailAddress = emailAddress;
-        
-            console.log("Session information: ", + JSON.stringify(req.session)); // Debugging log 
-            res.redirect("/");
-        }
-         else {
-            return res.status(401).send('Wrong password for admin');
-        }
-    } else {
-        // Handling general users 
-        db.get('SELECT * FROM users WHERE userName = ? OR emailAddress = ?', [userName, emailAddress], async (err, user) => {
+        // Get the hashed admin password from the database
+        db.get('SELECT password FROM users WHERE emailAddress = ?', [adminUser.emailAddress], async (err, user) => {
             if (err) {
                 console.error("Database error:", err);
                 return res.status(500).send('Server error');
-            } 
-            
-            if (!user) {
-                console.log("User not found:", userName);
-                return res.status(401).send('User not found');
             }
+
+            if (!user) {
+                console.log("Admin not found");
+                return res.status(401).send('Admin user not found');
+            }
+
+            // Compare provided password with hashed password in the database
+            const result = await bcrypt.compare(password, user.password);
             
-            const passwordMatch = await bcrypt.compare(password, user.password);
+            if (result) {
+                // Admin session data setting
+                req.session.isAdmin = true;
+                req.session.isLoggedIn = true;
+                req.session.name = userName;
+                req.session.emailAddress = emailAddress;
 
-            if (passwordMatch) {
-                console.log("Successfully logged in.");
-                
-                req.session.user = {
-                    id: user.id,
-                    userName: user.userName,
-                    emailAddress: user.emailAddress,
-                    isAdmin: false // General users 
-                };
-
-                return res.redirect('/');
+                console.log("Session information: " + JSON.stringify(req.session));
+                res.redirect("/");
             } else {
-                return res.status(401).send('Wrong password');
+                return res.status(401).send('Wrong password for admin');
             }
         });
+    } else {
+        // General users login (already handled)
+        console.log('General user login...');
     }
 });
 
