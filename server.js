@@ -3,17 +3,24 @@ const sqlite3 = require("sqlite3");
 const path = require('path');
 const bcrypt = require('bcrypt'); // For hasing password 
 const { engine } = require("express-handlebars");
+const session = require("express-session");
+const SQLiteStore = require("connect-sqlite3")(session); // Import  
+
+// Define adminUser globally outside the handler functions to make it accessible in all routes.
+const adminUser = {
+    userName: "admin",
+    password: "$2b$12$yourhashedadminpassword"
+};
 
 const app = express();
 const dbFile = "data.sqlite3.db";
 const db = new sqlite3.Database(dbFile);
 const port = 3333;
-const session = require('express-session');
 
-app.use(express.static("public"));
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./views");
+app.use(express.static("public"));
 
 // Express middlewares
 app.use(express.urlencoded({ extended: true })); // url passing
@@ -22,12 +29,15 @@ app.use(express.json());
  /**
   * 'secret' is the key used to sign and encrypt session IDs stored in cookies.
   * It ensures the integrity and security of session data between the client and server.
-  * This part shouldn't be hardcoded for security reasons 
+  * **This part shouldn't be hardcoded for security reasons (.env file)
+  * 
+  * Define the session 
   */
-app.use(session({
-    secret: 'd384@#s#$#juihss.sijsge', // Strong secret key for session encryption
+ app.use(session({
+    store: new SQLiteStore({db: "session-db.db"}),
+    secret: 'd384@#s#$#juihss.sijsge',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false
 }));
 
 /**
@@ -120,7 +130,13 @@ app.use((req, res, next) => {
 
 // Routes 
 app.get("/", function (req, res) {
-    res.render("home"); 
+    const model = {
+        isLoggedIn: req.session.isLoggedIn,
+        name: req.session.user ? req.session.user.userName : null,
+        isAdmin: req.session.user ? req.session.user.isAdmin : false
+    };
+    console.log("Home model: " + JSON.stringify(model));
+    res.render("home", model);
 });
 
 app.get("/createaccount", function (req, res) {
@@ -147,6 +163,14 @@ app.get("/registerclass", function (req, res) {
     res.render("registerclass"); 
 });
 
+app.get('/admin', (req, res) => {
+    if (req.session.user && req.session.user.isAdmin) {
+        res.render('admin');
+    } else {
+        res.status(403).send('Please log in with admin account. ');
+    }
+});
+
 /**
  * Getting data from the tables: lab-4-v1.1 (1).pdf
  * 
@@ -167,10 +191,10 @@ app.get('/upcomingclass', async (req, res) => {
     FROM 
         upcomings
     INNER JOIN 
-        upcomings ON users.id = upcoming.users_id
+        users ON users.id = upcomings.user_id
     INNER JOIN 
         classes ON upcomings.classes_id = classes.id;
-        `;
+`;
 
         // Bring all data from classes 
         db.all("SELECT * FROM classes", (err, rows) => {
@@ -207,7 +231,7 @@ app.post('/create-account', async (req, res) => {
     const agreeterms = req.body.agreeterms ? 1 : 0; // Convert checkbox to 1 (true) or 0 (false)
 
     try {
-        const hash = await bcrypt.hash(password, 14);
+        const hash = await bcrypt.hash(password, 12);
 
         db.run('INSERT INTO users (userName, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', [userName, emailAddress, hash, agreeterms], (err) => {
             if (err) {
@@ -231,27 +255,54 @@ app.post('/create-account', async (req, res) => {
  * Log in 
  * This code is from 5-authentication-slides.pdf 
  */
-app.post('/login-class', async (req, res) => {
+app.post('/login-class', (req, res) => {
     const { userName, password } = req.body;
-    
-    // Find the user in the database
-    db.get('SELECT * FROM users WHERE userName = ?', [userName], async (err, user) => {
-        if (err) {
-            res.status(500).send('Server error');
-        } else if (!user) {
-            res.status(401).send('User not found');
-        } else {
-            
-    const result = await bcrypt.compare(password, user.password);
 
-    if (result) {
-        console.log("Sucessfully log in.");
-        req.session.user = user; // Store the user in the session
-        res.redirect('/'); // Redirect to the home page
-        } else {
-            res.status(401).send('Wrong password');
-        }
-    }});
+    // Validate if it's admin account 
+    if (userName === adminUser.userName) {
+        bcrypt.compare(password, adminUser.password, (err, result) => {
+            if (result) {
+                req.session.user = {
+                    userName: adminUser.userName,
+                    isAdmin: true
+                };
+                console.log("Admin successfully logged in.");
+                return res.redirect('/');
+            } else {
+                console.log("Wrong password for admin.");
+                return res.status(401).send('Wrong password for admin');
+            }
+        });
+    } else {
+        // Handling general users 
+        db.get('SELECT * FROM users WHERE userName = ?', [userName], async (err, user) => {
+            if (err) {
+                console.error("Database error:", err);
+                return res.status(500).send('Server error');
+            } 
+            
+            if (!user) {
+                console.log("User not found:", userName);
+                return res.status(401).send('User not found');
+            }
+            
+            const passwordMatch = await bcrypt.compare(password, user.password);
+            if (passwordMatch) {
+                console.log("Successfully logged in.");
+                
+                req.session.user = {
+                    id: user.id,
+                    userName: user.userName,
+                    isAdmin: false // General users 
+                };
+
+                res.redirect('/');
+            } else {
+                console.log("Wrong password for user:", userName);
+                return res.status(401).send('Wrong password');
+            }
+        });
+    }
 });
 
 /**
