@@ -46,13 +46,23 @@ app.use(express.json());
 
 /**
  * Session middleware
- * Update the session middleware to store the user in the session 
+ * This middleware sets up local variables to hold session information
+ * that can be accessed in views rendered in response to requests.
  */
 app.use((req, res, next) => {
+    // Check if the user is logged in; default to false if not
     res.locals.isLoggedIn = req.session.isLoggedIn || false;
+
+    // Store the user's name in a local variable; default to an empty string if not available
     res.locals.name = req.session.name || '';
+
+    // Store the user's email address in a local variable; default to an empty string if not available
     res.locals.emailAddress = req.session.emailAddress || '';
+
+    // Check if the user is an admin; default to false if not
     res.locals.isAdmin = req.session.isAdmin || false;
+
+    // Call the next middleware in the stack
     next();
 });
 
@@ -179,7 +189,6 @@ app.get("/about", function (req, res) {
 app.get("/contact", function (req, res) {
     res.render("contact");
 });
-
 
 app.get("/registerclass", function (req, res) {
     res.render("registerclass"); 
