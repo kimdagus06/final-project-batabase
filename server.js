@@ -38,8 +38,23 @@ app.use(express.json());
     secret: 'd384@#s#$#juihss.sijsge',
     resave: false,
     saveUninitialized: false,
-    store: new SQLite3Store({db: "session-db.db"})
+    store: new SQLite3Store({db: "session-db.db"}),
+    cookie: {
+        maxAge: 24 * 60 * 60 * 1000 // 24 hours 
+    }
 }));
+
+/**
+ * Session middleware
+ * Update the session middleware to store the user in the session 
+ */
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = req.session.isLoggedIn || false;
+    res.locals.name = req.session.name || '';
+    res.locals.emailAddress = req.session.emailAddress || '';
+    res.locals.isAdmin = req.session.isAdmin || false;
+    next();
+});
 
 /**
  * NOT NULL: Can't have a NULL value. So it can't be left empty.
@@ -123,17 +138,6 @@ db.serialize(() => {
     });
 });
 
-/**
- * Session middleware
- * Update the session middleware to store the user in the session 
- */
-app.use((req, res, next) => {
-    if (req.session.user) {
-        res.locals.user = req.session.user;
-    }
-    next(); 
-});
-
 // Refer to this link: https://coda.io/@peter-sigurdson/lab-workbook-setting-up-a-node-js-express-server-with-sqlite-and
 // Refer to this link: https://www.luisllamas.es/en/how-to-use-sqlite-with-nodejs/
 
@@ -169,18 +173,15 @@ app.get("/logout", function (req, res) {
 });
 
 app.get("/about", function (req, res) {
-    res.render("about"); 
+    res.render("about");
 });
 
 app.get("/contact", function (req, res) {
-    res.render("contact"); 
+    res.render("contact");
 });
+
 
 app.get("/registerclass", function (req, res) {
-    res.render("registerclass"); 
-});
-
-app.get('/admin', (req, res) => {
     res.render("registerclass"); 
 });
 
@@ -273,7 +274,7 @@ app.post('/login-class', async (req, res) => {
 
     const { username, emailAddress, password } = req.body;
 
-    // Validate if it's the admin account 
+    // Validate if it's the admin account
     if (username === adminUser.username && emailAddress === adminUser.emailAddress) {
         // Get the hashed admin password from the database
         db.get('SELECT password FROM users WHERE emailAddress = ?', [adminUser.emailAddress], async (err, user) => {
@@ -304,8 +305,31 @@ app.post('/login-class', async (req, res) => {
             }
         });
     } else {
-        // General users login (already handled)
-        console.log('General user login...');
+        db.get('SELECT * FROM users WHERE username = ? AND emailAddress = ?', [username, emailAddress], async (err, user) => {
+            if (err) {
+                console.error("Database error:", err);
+                return res.status(500).send('Server error');
+            }
+
+            if (!user) {
+                console.log("User not found");
+                return res.status(401).send('User not found');
+            }
+
+            // Compare provided password with hashed password in the database
+            const result = await bcrypt.compare(password, user.password);
+            
+            if (result) {
+                req.session.isLoggedIn = true;
+                req.session.name = user.username;
+                req.session.emailAddress = user.emailAddress;
+
+                console.log("Session information: " + JSON.stringify(req.session));
+                res.redirect("/");
+            } else {
+                return res.status(401).send('Wrong password for user');
+            }
+        });
     }
 });
 
