@@ -66,6 +66,13 @@ app.use((req, res, next) => {
     next();
 });
 
+function isAdmin(req, res, next) {
+    if (req.session.isLoggedIn && req.session.isAdmin) {
+        return next(); // If a user log in with admin account it goes to next 
+    }
+    res.status(403).send('Log in error');
+}
+
 /**
  * NOT NULL: Can't have a NULL value. So it can't be left empty.
  * UNIQUE: All values in a column are distinct from each other. So no two users can have the same email address.
@@ -192,6 +199,26 @@ app.get("/contact", function (req, res) {
 
 app.get("/registerclass", function (req, res) {
     res.render("registerclass"); 
+});
+
+/**
+ * Hidden page
+ * When an admin account is logged in it checks
+ */
+app.get('/admin/edit-user/:id', isAdmin, (req, res) => {
+    const userId = req.params.id;
+
+    db.get('SELECT * FROM users WHERE id = ?', [userId], (err, user) => {
+        if (err) {
+            console.error('Error fetching user:', err.message);
+            return res.status(500).send('Server error.');
+        }
+
+        if (!user) {
+            return res.status(404).send('Admin user not found');
+        }
+        res.render('admin/edit-user', { user });
+    });
 });
 
 /**
@@ -382,6 +409,21 @@ app.post('/upcomingclass', async (req, res) => {
 
         console.log("Registered."); 
         res.redirect('/upcomingclass');
+    });
+});
+
+app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
+    const userId = req.params.id;
+    const { username, emailAddress } = req.body;
+
+    db.run('UPDATE users SET username = ?, emailAddress = ? WHERE id = ?', [username, emailAddress, userId], (err) => {
+        if (err) {
+            console.error('Error updating user:', err.message);
+            return res.status(500).send('Server error');
+        }
+
+        console.log("User information has been updated.");
+        res.redirect('/admin/users');
     });
 });
 

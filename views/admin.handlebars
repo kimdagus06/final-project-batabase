@@ -1,0 +1,11 @@
+    <h1>Edit User</h1>
+    <form action="/admin/edit-user/{{user.id}}" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="{{user.username}}" required>
+        
+        <label for="emailAddress">Email Address:</label>
+        <input type="email" id="emailAddress" name="emailAddress" value="{{user.emailAddress}}" required>
+        
+        <button type="submit">Update User</button>
+    </form>
+    <a href="/admin/users">Cancel</a>
