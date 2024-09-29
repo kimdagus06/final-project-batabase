@@ -7,19 +7,27 @@
           <th>ID</th>
           <th>User Name</th>
           <th>Email Address</th>
-          <th>Status</th>
+          <th>Actions</th> <!-- Edit, Save, Delete 버튼을 위한 열 -->
         </tr>
       </thead>
       <tbody>
         {{#each users}}
-        <tr>
+        <tr data-id="{{this.id}}">
           <td>{{this.id}}</td>
-          <td>{{this.username}}</td>
-          <td>{{this.emailAddress}}</td>
           <td>
-            <a href="/admin/edit-user/{{this.id}}">Edit</a> |
+            <span class="user-name">{{this.username}}</span>
+            <input type="text" class="edit-name" value="{{this.username}}" style="display:none;">
+          </td>
+          <td>
+            <span class="user-email">{{this.emailAddress}}</span>
+            <input type="email" class="edit-email" value="{{this.emailAddress}}" style="display:none;">
+          </td>
+          <td>
+            <!-- Edit and delete buttons -->
+            <button class="edit-btn">Edit</button>
+            <button class="save-btn" style="display:none;">Save</button> |
             <form action="/admin/delete-user/{{this.id}}" method="POST" style="display:inline;">
-              <button type="submit">Delete</button>
+              <button type="submit" class="delete-btn">Delete</button>
             </form>
           </td>
         </tr>

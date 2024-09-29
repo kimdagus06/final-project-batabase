@@ -11,12 +11,100 @@ const dbFile = "data.sqlite3.db";
 const db = new sqlite3.Database(dbFile);
 const port = 3333;
 
+/* Set admin account for checking - grade 3 */
 const adminUser = {
     username: 'admin',
     emailAddress: 'admin@example.com',
     password: 'adminpassword', 
     agreeterms: '1'
 };
+
+/* 5 users in users table - grade 3 */
+const predefinedUsers = [
+    {
+        username: 'Kim Gustavsson',
+        emailAddress: 'user1@example.com',
+        password: 'user1password',
+        agreeterms: '1'
+    },
+
+    {
+        username: 'Kori Kimsson',
+        emailAddress: 'user2@example.com',
+        password: 'user2password',
+        agreeterms: '1'
+    },
+
+    {
+        username: 'Elias Gustavsson',
+        emailAddress: 'user3@example.com',
+        password: 'user3password',
+        agreeterms: '1'
+    },
+    
+    {
+        username: 'Zoey Park',
+        emailAddress: 'user4@example.com',
+        password: 'user4password',
+        agreeterms: '1'
+    },
+
+    {
+        username: 'Alen Park',
+        emailAddress: 'user5@example.com',
+        password: 'user5password',
+        agreeterms: '1'
+    },
+];
+
+/* 5 elements (classes) in class table - grade 3 */
+const predefinedClasses = [
+    {
+        className: 'Swedish Class for Beginners',
+        classType: 'Free class',
+        startTime: '10:00',
+        endTime: '12:00', 
+        classFormat: 'online',
+        address: 'N/A',
+        postcode: 'N/A'
+    },
+    {
+        className: 'Advanced Web Development',
+        classType: 'Workshop',
+        startTime: '10:00',
+        endTime: '17:00',
+        classFormat: 'offline',
+        address: '123 Developer gatan, Jönköping',
+        postcode: '11432'
+    },
+    {
+        className: 'One-day Painting Class',
+        classType: 'Oneday class',
+        startTime: '09:00',
+        endTime: '18:00', 
+        classFormat: 'offline',
+        address: '12 Dashagatan, Gothenburg',
+        postcode: '41104'
+    },
+    {
+        className: 'AI and Machine Learning Conference',
+        classType: 'Conference',
+        startTime: '09:40',
+        endTime: '14:00',
+        classFormat: 'offline',
+        address: '123 ju, Developer Hall, Malmö',
+        postcode: '21122'
+    },
+    {
+        className: 'Wine and Beer brewing',
+        classType: 'Oneday class',
+        startTime: '15:00',
+        endTime: '20:00', 
+        classFormat: 'offline',
+        address: '456 wine and beer factory, Uppsala',
+        postcode: '98456'
+    }
+];
 
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
@@ -30,7 +118,7 @@ app.use(express.json());
  /**
   * 'secret' is the key used to sign and encrypt session IDs stored in cookies.
   * It ensures the integrity and security of session data between the client and server.
-  * **This part shouldn't be hardcoded for security reasons (.env file)
+  * Note: This part shouldn't be hardcoded for security reasons (.env file)
   * 
   * Define the session 
   */
@@ -73,42 +161,100 @@ function isAdmin(req, res, next) {
     res.status(403).send('Log in error');
 }
 
+// -----------
+// ---CREATE--
+// ---TABLE---
+// -----------
+
 /**
  * NOT NULL: Can't have a NULL value. So it can't be left empty.
  * UNIQUE: All values in a column are distinct from each other. So no two users can have the same email address.
  * 
- * Table one | Create Account 
+ * Table one | Create users  
+ * Create predefined 5 users and create a users table if it doens't exist 
  */
-// Check if the admin user exists and create if it doesn't
-db.get('SELECT * FROM users WHERE emailAddress = ?', [adminUser.emailAddress], (err, user) => {
-    if (err) {
-        console.error('Error checking for admin user:', err.message);
-    } else if (!user) {
-        // Hash the password before storing it
-        bcrypt.hash(adminUser.password, 12, (hashErr, hash) => {
-            if (hashErr) {
-                console.error('Error hashing admin password:', hashErr.message);
-                return;
-            }
-            // Insert the admin user into the database
-            db.run('INSERT INTO users (username, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', 
-                [adminUser.username, adminUser.emailAddress, hash, adminUser.agreeterms], 
-                (insertErr) => {
-                    if (insertErr) {
-                        console.error('Error inserting admin user:', insertErr.message);
-                    } else {
-                        console.log('Admin user created successfully.');
-                    }
+db.serialize(() => {
+    db.run(`CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT NOT NULL,
+        emailAddress TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL,
+        agreeterms INTEGER NOT NULL
+    );`, (err) => {
+        if (err) {
+            console.error("Error creating users table:", err.message);
+        } else {
+            console.log("Users table created successfully.");
+            
+            // Check if the admin user exists
+            db.get('SELECT * FROM users WHERE emailAddress = ?', [adminUser.emailAddress], (err, user) => {
+                if (err) {
+                    console.error('Error checking for admin user:', err.message);
+                } else if (!user) { // If admin user does not exist
+                    // Hash the password before storing it
+                    bcrypt.hash(adminUser.password, 12, (hashErr, hash) => {
+                        if (hashErr) {
+                            console.error('Error hashing admin password:', hashErr.message);
+                            return;
+                        }
+
+                        // Insert the admin user into the database
+                        db.run('INSERT INTO users (username, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', 
+                            [adminUser.username, adminUser.emailAddress, hash, adminUser.agreeterms], 
+                            (insertErr) => {
+                                if (insertErr) {
+                                    console.error('Error inserting admin user:', insertErr.message);
+                                } else {
+                                    console.log('Admin user created successfully.');
+                                }
+                            }
+                        );
+                    });
                 }
-            );
-        });
-    }
+            });
+
+            // Insert predefined users into the database
+            // Using predefinedUsers global variable 
+            predefinedUsers.forEach(user => {
+                // Check if the user already exists by email
+                db.get('SELECT * FROM users WHERE emailAddress = ?', [user.emailAddress], (err, existingUser) => {
+                    if (err) {
+                        console.error('Error checking predefined user:', err.message);
+                        return;
+                    }
+                    if (!existingUser) { // If user does not exist
+                        // Hash the password before storing it
+                        bcrypt.hash(user.password, 12, (hashErr, hash) => {
+                            if (hashErr) {
+                                console.error('Error hashing predefined user password:', hashErr.message);
+                                return;
+                            }
+
+                            // Insert the predefined user into the database
+                            db.run('INSERT INTO users (username, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', 
+                                [user.username, user.emailAddress, hash, user.agreeterms], 
+                                (insertErr) => {
+                                    if (insertErr) {
+                                        console.error('Error inserting predefined user:', insertErr.message);
+                                    } else {
+                                        console.log(`Predefined user ${user.username} created successfully.`);
+                                    }
+                                }
+                            );
+                        });
+                    }
+                });
+            });
+        }
+    });
 });
 
 /**
  * Table two | Create classes
+ * Create predefined 5 classes and create a classes table if it doens't exist 
  */
 db.serialize(() => {
+    // Create the classes table if it doesn't exist
     db.run(`CREATE TABLE IF NOT EXISTS classes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         className TEXT NOT NULL,
@@ -124,6 +270,32 @@ db.serialize(() => {
         } else {
             console.log("Classes table created successfully.");
         }
+    });
+
+    // Insert predefined classes into the database
+    predefinedClasses.forEach(cls => {
+        // Check if the class already exists by className and startTime to avoid duplicates
+        db.get('SELECT * FROM classes WHERE className = ? AND startTime = ?', [cls.className, cls.startTime], (err, existingClass) => {
+            if (err) {
+                console.error('Error checking predefined class:', err.message);
+                return;
+            }
+
+            if (!existingClass) { // If class does not exist, insert it
+                db.run('INSERT INTO classes (className, classType, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+                    [cls.className, cls.classType, cls.startTime, cls.endTime, cls.classFormat, cls.address, cls.postcode], 
+                    (insertErr) => {
+                        if (insertErr) {
+                            console.error('Error inserting predefined class:', insertErr.message);
+                        } else {
+                            console.log(`Predefined class "${cls.className}" created successfully.`);
+                        }
+                    }
+                );
+            } else {
+                console.log(`Class "${cls.className}" at ${cls.startTime} already exists in the database.`);
+            }
+        });
     });
 });
 
@@ -221,7 +393,6 @@ app.get('/admin', isAdmin, (req, res) => {
  */
 app.get('/upcomingclass', async (req, res) => {
     try {
-        // Fetch user ID, username, and class data from the upcomings table
         const query = `
     SELECT 
         users.username, 
@@ -247,12 +418,10 @@ app.get('/upcomingclass', async (req, res) => {
                 return res.status(500).send('Server error');
             }
             
-            // If no classes are found, you can handle it accordingly
             if (!rows || rows.length === 0) {
                 return res.render('upcomingclass', { classes: [] }); // Render with an empty array
             }
 
-            // Render the 'upcomingclass' view with the retrieved classes
             res.render('upcomingclass', { classes: rows });
         });
     } catch (err) {
@@ -413,11 +582,11 @@ app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
     db.run('UPDATE users SET username = ?, emailAddress = ? WHERE id = ?', [username, emailAddress, userId], (err) => {
         if (err) {
             console.error('Error updating user:', err.message);
-            return res.status(500).send('Server error');
+            return res.status(500).json({ success: false, message: 'Server error' });
         }
 
         console.log("User information has been updated.");
-        res.redirect('/admin/users');
+        return res.json({ success: true });
     });
 });
 
