@@ -205,19 +205,13 @@ app.get("/registerclass", function (req, res) {
  * Hidden page
  * When an admin account is logged in it checks
  */
-app.get('/admin/edit-user/:id', isAdmin, (req, res) => {
-    const userId = req.params.id;
-
-    db.get('SELECT * FROM users WHERE id = ?', [userId], (err, user) => {
+app.get('/admin', isAdmin, (req, res) => {
+    db.all('SELECT * FROM users', (err, users) => {
         if (err) {
-            console.error('Error fetching user:', err.message);
+            console.error('Error fetching users:', err.message);
             return res.status(500).send('Server error.');
         }
-
-        if (!user) {
-            return res.status(404).send('Admin user not found');
-        }
-        res.render('admin/edit-user', { user });
+        res.render('admin', { users }); // All user data to admin 
     });
 });
 

@@ -1,11 +1,30 @@
-    <h1>Edit User</h1>
-    <form action="/admin/edit-user/{{user.id}}" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="{{user.username}}" required>
-        
-        <label for="emailAddress">Email Address:</label>
-        <input type="email" id="emailAddress" name="emailAddress" value="{{user.emailAddress}}" required>
-        
-        <button type="submit">Update User</button>
-    </form>
-    <a href="/admin/users">Cancel</a>
+<div class="user-management">
+  <h1>User Management</h1>
+  <div class="table-container">
+    <table class="user-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User Name</th>
+          <th>Email Address</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each users}}
+        <tr>
+          <td>{{this.id}}</td>
+          <td>{{this.username}}</td>
+          <td>{{this.emailAddress}}</td>
+          <td>
+            <a href="/admin/edit-user/{{this.id}}">Edit</a> |
+            <form action="/admin/delete-user/{{this.id}}" method="POST" style="display:inline;">
+              <button type="submit">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

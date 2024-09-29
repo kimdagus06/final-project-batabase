@@ -517,7 +517,50 @@ span{
     font-weight: 600;
 }
 
-
+.user-management{
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+  
+.table-container{
+    margin-top: 20px;
+    overflow-x: auto;
+}
+  
+.user-table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+  
+.user-table th, .user-table td{
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+  
+.user-table th{
+    background-color: #f0f0f0;
+}
+  
+.user-table tr:nth-child(even){
+    background-color: #fafafa;
+}
+  
+.user-table a{
+    color: #007bff;
+    text-decoration: none;
+}
+  
+.user-table a:hover{
+    text-decoration: underline;
+}
+  
+.user-table button{
+    color: #d9534f;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}  
 
 /* Responsive Design - grade 5*/
 @media (max-width: 768px) {
