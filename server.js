@@ -299,7 +299,7 @@ app.post('/create-account', async (req, res) => {
  * Log in 
  * This code is from 5-authentication-slides.pdf 
  */
-app.post('/login', async (req, res) => {
+app.post('/login-class', async (req, res) => {
     console.log("Login attempt with:", req.body);
 
     const { username, emailAddress, password } = req.body;

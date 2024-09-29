@@ -155,30 +155,58 @@ small{
 }
 
 /* About page */
-.about-container{
+.about-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 2rem;
+    background-color: rgba(245, 245, 245, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .about-title{
     font-size: 3rem;
     font-family: "Inter", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 700;
-    font-style: normal;
     color: #2e2a2a;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
 }
 
 .about-text{
     line-height: 1.8;
-    max-width: 50rem;
-    color: #000000;
-    margin-top: 2rem;
+    max-width: 60rem; 
+    color: #333;
+    margin-top: 1rem;
     margin-bottom: 2rem;
     text-align: justify;
+    font-size: 1.125rem; 
+    padding: 0 1rem;
+}
+
+.about-image{
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+    margin-top: 1.5rem;
+}
+
+.about-button{
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.about-button:hover{
+    background-color: #0056b3; 
 }
 
 /* class page */
@@ -346,37 +374,54 @@ small{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-items: center;
-
+    justify-content: center;
+    margin-bottom: 2rem;
 }
 
 .contact-container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-items: center;
+    width: 100%;
+    max-width: 600px; 
+    padding: 2rem;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .contact-input{
-    display: flex;
-    align-items: center;
-    justify-items: center;
+    width: 100%;
     font-family: "Work Sans", sans-serif;
     font-size: 1rem; 
-    font-weight: 100; 
+    font-weight: 400;
     padding: 1rem;
-    border-radius: 2rem;
-    border: 1rem solid #1f1e1e; /* Input field line color setting */
+    border-radius: 1rem;
+    border: 1px solid #1f1e1e;
     outline: none;
     margin-bottom: 1rem;
+    transition: border-color 0.3s;
+}
+
+.contact-input:focus{
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .contact-button{
-    border: none;
-    outline: none;
+    width: 100%;
+    padding: 1rem;
     font-size: 1rem; 
     cursor: pointer;
-    margin-left: auto;
+    border-radius: 1rem;
+    background-color: #007BFF;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.contact-button:hover {
+    background-color: #0056b3;
 }
 
 /* Upcoming class */
@@ -472,8 +517,8 @@ span{
     border: 1px solid rgba(209, 213, 219, 0.3);
 }
 
-.login-container h1{
-    color: #fff;
+.login-title{
+    color: #1e1c1c;
     text-align: center;
 }
 
