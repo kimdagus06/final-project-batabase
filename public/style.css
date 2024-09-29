@@ -512,8 +512,10 @@ span{
     color: #c0c0c0;
 }
 
-
-
+/* Admin page - only shown when a user is admin */
+#menuadmin{
+    font-weight: 600;
+}
 
 
 
