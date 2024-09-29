@@ -1,10 +1,24 @@
-<!-- https://codepen.io/sowg/pen/qBXjXoE -->
-<div class="login-forms">
-    <form action="/login-class" method="POST" class="login-form">
-        <input type="text" name="username" placeholder="username" class="form-input" required>
-        <input type="email" name="emailAddress" placeholder="Email" class="form-input" required>
-        <input type="password" name="password" placeholder="Password" class="form-input" required>
+<!-- Change background in login page -->
+<body class="{{#if isLoginPage}}login-page{{/if}}">
+    <div class="login-container">
+        <h1 class="login-title">Log In</h1>
+        <div class="login-forms">
+            <form action="/login" method="POST" class="login-form">
+                <input type="email" name="emailAddress" placeholder="Your Email" class="form-input" required>
 
-        <input type="submit" value="Log In" class="login">
-    </form>
-</div>
+                <input type="password" name="password" placeholder="Your Password" class="form-input" required>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" name="remember" id="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+
+                <input type="submit" value="Sign In" class="login">
+
+                <div class="lost-password">
+                    <a href="/">Lost password?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

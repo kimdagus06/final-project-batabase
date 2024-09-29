@@ -181,8 +181,8 @@ app.get("/createaccount", function (req, res) {
     res.render("createaccount"); 
 });
 
-app.get("/login", function (req, res) {
-    res.render("login"); 
+app.get('/login', (req, res) => {
+    res.render('login', { isLoginPage: true });
 });
 
 app.get("/logout", function (req, res) {
@@ -299,7 +299,7 @@ app.post('/create-account', async (req, res) => {
  * Log in 
  * This code is from 5-authentication-slides.pdf 
  */
-app.post('/login-class', async (req, res) => {
+app.post('/login', async (req, res) => {
     console.log("Login attempt with:", req.body);
 
     const { username, emailAddress, password } = req.body;
