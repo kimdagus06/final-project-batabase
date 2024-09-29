@@ -18,40 +18,6 @@ const adminUser = {
     agreeterms: '1'
 };
 
-// Define 5 users to insert to the users table
-const users = [
-    {
-        username: 'user1',
-        emailAddress: 'user1@example.com',
-        password: 'user1password',
-        agreeterms: '1'
-    },
-    {
-        username: 'user2',
-        emailAddress: 'user2@example.com',
-        password: 'user2password',
-        agreeterms: '1'
-    },
-    {
-        username: 'user3',
-        emailAddress: 'user3@example.com',
-        password: 'user3password',
-        agreeterms: '1'
-    },
-    {
-        username: 'user4',
-        emailAddress: 'user4@example.com',
-        password: 'user4password',
-        agreeterms: '1'
-    },
-    {
-        username: 'user5',
-        emailAddress: 'user5@example.com',
-        password: 'user5password',
-        agreeterms: '1'
-    },
-];
-
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./views");
@@ -118,7 +84,7 @@ db.get('SELECT * FROM users WHERE emailAddress = ?', [adminUser.emailAddress], (
     if (err) {
         console.error('Error checking for admin user:', err.message);
     } else if (!user) {
-        // Hash the password before storing it for admin user
+        // Hash the password before storing it
         bcrypt.hash(adminUser.password, 12, (hashErr, hash) => {
             if (hashErr) {
                 console.error('Error hashing admin password:', hashErr.message);
@@ -137,26 +103,6 @@ db.get('SELECT * FROM users WHERE emailAddress = ?', [adminUser.emailAddress], (
             );
         });
     }
-});
-
-// Register the 5 users without using a function
-users.forEach(user => {
-    bcrypt.hash(user.password, 12, (hashErr, hash) => {
-        if (hashErr) {
-            console.error(`Error hashing password for ${user.username}:`, hashErr.message);
-            return;
-        }
-        db.run('INSERT INTO users (username, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', 
-            [user.username, user.emailAddress, hash, user.agreeterms], 
-            (insertErr) => {
-                if (insertErr) {
-                    console.error(`Error inserting user ${user.username}:`, insertErr.message);
-                } else {
-                    console.log(`User ${user.username} created successfully.`);
-                }
-            }
-        );
-    });
 });
 
 /**
@@ -235,7 +181,7 @@ app.get("/createaccount", function (req, res) {
     res.render("createaccount"); 
 });
 
-app.get('/login-class', (req, res) => {
+app.get('/login', (req, res) => {
     res.render('login', { isLoginPage: true });
 });
 
