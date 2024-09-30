@@ -304,8 +304,6 @@ db.serialize(() => {
  * Refer to this link: https://www.w3schools.com/sql/sql_join_inner.asp
  * Refer to this link: https://gent.tistory.com/376
  * 
- * Use INNER JOIN to combine data from users and classes tables based on their relationships in the upcomings table
-
  * Example: SELECT column_name(s)
  * FROM table1
  * INNER JOIN table2
