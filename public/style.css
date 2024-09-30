@@ -463,11 +463,12 @@ span{
     font-size: 1rem;
 }
 
-.view-details-buttons{
+.upcoming-buttons{
     text-align: center;
     margin-top: 0.6rem;
 }
 
+/* Upcoming classes buttons in cards */ 
 .viewdetails{
     width: 100%;
     border-radius: 0.2rem;
@@ -480,6 +481,21 @@ span{
 }
 
 .viewdetails:hover{
+    background-color: #FF4949;
+}
+
+.registerclass{
+    width: 100%;
+    border-radius: 0.2rem;
+    padding: 1rem 0;
+    font-size: 1rem;
+    background-color: #FF6B6B;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.registerclass{
     background-color: #FF4949;
 }
 

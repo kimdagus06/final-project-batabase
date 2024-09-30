@@ -23,8 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
  * Pagination for grade 4
  * Cite: https://www.sitepoint.com/simple-pagination-html-css-javascript/
  * Function: 
- */
-document.addEventListener('DOMContentLoaded', () => {
+ * 
+ * document.addEventListener('DOMContentLoaded', () => {
     const itemsPerPage = 3; // Condition: 3 elements per page
     const items = Array.from(document.querySelectorAll('#class-list li')); // Get all class list items
 
@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the first page
     showPage(currentPage);
 });
+ */
 
 /**
  * When a user clicks edit/delete/save button in admin page

@@ -307,7 +307,15 @@ db.serialize(() => {
  * Example: SELECT column_name(s)
  * FROM table1
  * INNER JOIN table2
- * ON table1.column_name = table2.column_name;
+ * ON table1.column_name = table2.column_name; : ON is how to connect these tables. 
+ * 
+ * This upcomings table is created for handling many-to-many relations.
+ * In this case, a user can register for many courses. 
+ * Because if only two tables: users and classes exist, database normally doesn't have a function
+ * to connect many-to-many relations.  
+ * It is a bridge table for users table and classes table.
+ * 
+ * db.serialize: Define the sturcture of database and initial data. >>> creating tables, inserting data
  */
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS upcomings (
@@ -387,7 +395,13 @@ app.get('/admin', isAdmin, (req, res) => {
 
 /**
  * Getting data from the tables: lab-4-v1.1 (1).pdf
+ * 6-security-slides.marp.pdf
  * 
+ * app.get is to handle client's requests. 
+ * When a client sends a request via url >>> app.get gets data or some specific tasks; 
+ * and return results.
+ * 
+ * INNER JOIN is about getting data from database in runtime. 
  */
 app.get('/upcomingclass', async (req, res) => {
     try {
@@ -402,11 +416,11 @@ app.get('/upcomingclass', async (req, res) => {
         classes.address, 
         classes.postcode
     FROM 
-        upcomings
+        upcomings 
     INNER JOIN 
-        users ON users.id = upcomings.user_id
-    INNER JOIN 
-        classes ON upcomings.classes_id = classes.id;
+        users ON upcomings_user.id = users.id
+    INNER JOIN
+        classes ON upcomings_classes.id = classes.id; 
 `;
 
         // Bring all data from classes 
@@ -559,10 +573,13 @@ app.post('/create-class', async (req, res) => {
     });
 });
 
-app.post('/upcomingclass', async (req, res) => {
+/**
+ * 
+ */
+app.post('/registerclass', async (req, res) => {
     const { user_id, classes_id } = req.body;
 
-    db.run('INSERT INTO upcomings (user_id, classes_id) VALUES (?, ?)', [user_id, classes_id], (err) => {
+    db.run('INSERT INTO upcomings (users_id, classes_id) VALUES (?, ?)', [user_id, classes_id], (err) => {
         if (err) {
             console.error('Error inserting upcoming:', err.message);
             return res.status(500).send('Server Error');
