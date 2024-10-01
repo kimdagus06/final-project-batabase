@@ -66,7 +66,8 @@ const predefinedClasses = [
         endTime: '12:00', 
         classFormat: 'online',
         address: 'N/A',
-        postcode: 'N/A'
+        postcode: 'N/A', 
+        userId: 1
     },
     {
         className: 'Advanced Web Development',
@@ -75,7 +76,8 @@ const predefinedClasses = [
         endTime: '17:00',
         classFormat: 'offline',
         address: '123 Developer gatan, Jönköping',
-        postcode: '11432'
+        postcode: '11432',
+        userId: 2
     },
     {
         className: 'One-day Painting Class',
@@ -84,7 +86,8 @@ const predefinedClasses = [
         endTime: '18:00', 
         classFormat: 'offline',
         address: '12 Dashagatan, Gothenburg',
-        postcode: '41104'
+        postcode: '41104',
+        userId: 3
     },
     {
         className: 'AI and Machine Learning Conference',
@@ -93,7 +96,8 @@ const predefinedClasses = [
         endTime: '14:00',
         classFormat: 'offline',
         address: '123 ju, Developer Hall, Malmö',
-        postcode: '21122'
+        postcode: '21122',
+        userId: 4
     },
     {
         className: 'Wine and Beer brewing',
@@ -102,7 +106,8 @@ const predefinedClasses = [
         endTime: '20:00', 
         classFormat: 'offline',
         address: '456 wine and beer factory, Uppsala',
-        postcode: '98456'
+        postcode: '98456',
+        userId: 5
     }
 ];
 
@@ -259,6 +264,7 @@ db.serialize(() => {
     // Create the classes table if it doesn't exist
     db.run(`CREATE TABLE IF NOT EXISTS classes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
         className TEXT NOT NULL,
         classType TEXT NOT NULL,
         startTime TEXT NOT NULL,
@@ -266,7 +272,6 @@ db.serialize(() => {
         classFormat TEXT NOT NULL,
         address TEXT NOT NULL,
         postcode TEXT NOT NULL,
-        user_id INTEGER NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(id)
     );`, (err) => {
         if (err) {
