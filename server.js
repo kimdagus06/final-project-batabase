@@ -252,11 +252,16 @@ db.serialize(() => {
 /**
  * Table two | Create classes
  * Create predefined 5 classes and create a classes table if it doens't exist 
- */
+ * 
+ * To create INNER JOIN, createdby should be created.
+ * To connect INNER JOIN, it doesn't have to have the same column in both tables: users/classes 
+ * createdby INTEGER: Save users' ID  
+*/
 db.serialize(() => {
     // Create the classes table if it doesn't exist
     db.run(`CREATE TABLE IF NOT EXISTS classes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        createdby INTEGER, 
         className TEXT NOT NULL,
         classType TEXT NOT NULL,
         startTime TEXT NOT NULL,
@@ -415,12 +420,9 @@ app.get('/upcomingclass', async (req, res) => {
         classes.classFormat, 
         classes.address, 
         classes.postcode
-    FROM 
-        upcomings 
-    INNER JOIN 
-        users ON upcomings_user.id = users.id
-    INNER JOIN
-        classes ON upcomings_classes.id = classes.id; 
+    FROM upcomings 
+    INNER JOIN users ON upcomings.user_id = users.id
+    INNER JOIN classes ON upcomings.classes_id = classes.id; 
 `;
 
         // Bring all data from classes 
@@ -441,6 +443,10 @@ app.get('/upcomingclass', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+// -----------
+// -APP.POST--
+// -----------
 
 /**
  * Create Account
@@ -568,7 +574,7 @@ app.post('/create-class', async (req, res) => {
 
         console.log("New class has been created."); 
 
-        // Redirect after creating a new class 
+        // Redirect to upcoming class page after creating a new class 
         res.redirect('/upcomingclass');
     });
 });
@@ -576,10 +582,16 @@ app.post('/create-class', async (req, res) => {
 /**
  * 
  */
-app.post('/registerclass', async (req, res) => {
-    const { user_id, classes_id } = req.body;
+app.post('/upcomingclass', async (req, res) => {
+    const classes_id = req.body.classes_id; // Get class ID from the request
+    const user_id = req.session.userId; // Assuming you store user ID in session during login
 
-    db.run('INSERT INTO upcomings (users_id, classes_id) VALUES (?, ?)', [user_id, classes_id], (err) => {
+    if (!user_id) {
+        console.error('User not logged in');
+        return res.status(401).send('User not logged in');
+    }
+
+    db.run('INSERT INTO upcomings (user_id, classes_id) VALUES (?, ?)', [user_id, classes_id], (err) => {
         if (err) {
             console.error('Error inserting upcoming:', err.message);
             return res.status(500).send('Server Error');
@@ -590,6 +602,10 @@ app.post('/registerclass', async (req, res) => {
     });
 });
 
+/**
+ * app.post edit
+ * Description: 
+ */
 app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
     const userId = req.params.id;
     const { username, emailAddress } = req.body;
