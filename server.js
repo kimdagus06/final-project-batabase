@@ -30,11 +30,11 @@ const predefinedUsers = [
 
 /* 5 elements (classes) in class table - grade 3 */
 const predefinedClasses = [
-  { className: 'Swedish Class for Beginners', classType: 'Free class', startTime: '10:00', endTime: '12:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
-  { className: 'Advanced Web Development', classType: 'Workshop', startTime: '10:00', endTime: '17:00', classFormat: 'offline', address: '123 Developer gatan, Jönköping', postcode: '11432' },
-  { className: 'One-day Painting Class', classType: 'Oneday class', startTime: '09:00', endTime: '18:00', classFormat: 'offline', address: '12 Dashagatan, Gothenburg', postcode: '41104' },
-  { className: 'AI and Machine Learning Conference', classType: 'Conference', startTime: '09:40', endTime: '14:00', classFormat: 'offline', address: '123 ju, Developer Hall, Malmö', postcode: '21122' },
-  { className: 'Wine and Beer brewing', classType: 'Oneday class', startTime: '15:00', endTime: '20:00', classFormat: 'offline', address: '456 wine and beer factory, Uppsala', postcode: '98456' }
+  { userId: 1, className: 'Swedish Class for Beginners', classType: 'Free class', startTime: '10:00', endTime: '12:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+  { userId: 2, className: 'Advanced Web Development', classType: 'Workshop', startTime: '10:00', endTime: '17:00', classFormat: 'offline', address: '123 Developer gatan, Jönköping', postcode: '11432' },
+  { userId: 3, className: 'One-day Painting Class', classType: 'Oneday class', startTime: '09:00', endTime: '18:00', classFormat: 'offline', address: '12 Dashagatan, Gothenburg', postcode: '41104' },
+  { userId: 4, className: 'AI and Machine Learning Conference', classType: 'Conference', startTime: '09:40', endTime: '14:00', classFormat: 'offline', address: '123 ju, Developer Hall, Malmö', postcode: '21122' },
+  { userId: 5, className: 'Wine and Beer brewing', classType: 'Oneday class', startTime: '15:00', endTime: '20:00', classFormat: 'offline', address: '456 wine and beer factory, Uppsala', postcode: '98456' }
 ];
 
 app.engine("handlebars", engine());
@@ -185,50 +185,66 @@ db.serialize(() => {
  * Create predefined 5 classes and create a classes table if it doens't exist 
  */
 db.serialize(() => {
-    // Create the classes table if it doesn't exist
-    db.run(`CREATE TABLE IF NOT EXISTS classes (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        className TEXT NOT NULL,
-        classType TEXT NOT NULL,
-        startTime TEXT NOT NULL,
-        endTime TEXT NOT NULL,
-        classFormat TEXT NOT NULL,
-        address TEXT NOT NULL,
-        postcode TEXT
-    );`, (err) => {
-        if (err) {
-            console.error("Error creating classes table:", err.message);
-        } else {
-            console.log("Classes table created successfully.");
-        }
-    });
+  // Drop the classes table if it exists
+  db.run(`DROP TABLE IF EXISTS classes`, (err) => {
+      if (err) {
+          console.error('Error dropping classes table:', err.message);
+      } else {
+          console.log("Classes table dropped successfully.");
+      }
 
-    // Insert predefined classes into the database
-    predefinedClasses.forEach(cls => {
-        // Check if the class already exists by className and startTime to avoid duplicates
-        db.get('SELECT * FROM classes WHERE className = ? AND startTime = ?', [cls.className, cls.startTime], (err, existingClass) => {
-            if (err) {
-                console.error('Error checking predefined class:', err.message);
-                return;
-            }
-
-            if (!existingClass) { // If class does not exist, insert it
-                db.run('INSERT INTO classes (className, classType, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-                    [cls.className, cls.classType, cls.startTime, cls.endTime, cls.classFormat, cls.address, cls.postcode], 
-                    (insertErr) => {
-                        if (insertErr) {
-                            console.error('Error inserting predefined class:', insertErr.message);
-                        } else {
-                            console.log(`Predefined class "${cls.className}" created successfully.`);
-                        }
-                    }
-                );
-            } else {
-                console.log(`Class "${cls.className}" at ${cls.startTime} already exists in the database.`);
-            }
-        });
-    });
+      // Create the classes table
+      db.run(`CREATE TABLE IF NOT EXISTS classes (
+          user_id INTEGER NOT NULL,
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          className TEXT NOT NULL,
+          classType TEXT NOT NULL,
+          startTime TEXT NOT NULL,
+          endTime TEXT NOT NULL,
+          classFormat TEXT NOT NULL,
+          address TEXT NOT NULL,
+          postcode TEXT,
+          FOREIGN KEY (user_id) REFERENCES users(id)
+      );`, (err) => {
+          if (err) {
+              console.error("Error creating classes table:", err.message);
+          } else {
+              console.log("Classes table created successfully.");
+              
+              // Insert predefined classes after the table is created
+              insertPredefinedClasses();
+          }
+      });
+  });
 });
+
+function insertPredefinedClasses() {
+  predefinedClasses.forEach(cls => {
+      // Check if the class already exists by className and startTime to avoid duplicates
+      db.get('SELECT * FROM classes WHERE className = ? AND startTime = ?', [cls.className, cls.startTime], (err, existingClass) => {
+          if (err) {
+              console.error('Error checking predefined class:', err.message);
+              return;
+          }
+
+          if (!existingClass) { // If class does not exist, insert it
+              db.run('INSERT INTO classes (user_id, className, classType, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+                  [cls.userId, cls.className, cls.classType, cls.startTime, cls.endTime, cls.classFormat, cls.address, cls.postcode], 
+                  (insertErr) => {
+                      if (insertErr) {
+                          console.error('Error inserting predefined class:', insertErr.message);
+                      } else {
+                          console.log(`Predefined class "${cls.className}" created successfully.`);
+                      }
+                  }
+              );
+          } else {
+              console.log(`Class "${cls.className}" at ${cls.startTime} already exists in the database.`);
+          }
+      });
+  });
+}
+
 
 /**
  * Table three | Create upcomings
@@ -247,8 +263,8 @@ db.serialize(() => {
  * It is a bridge table for users table and classes table.
  * 
  * db.serialize: Define the sturcture of database and initial data. >>> creating tables, inserting data
- */
-db.serialize(() => {
+ * 
+ * db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS upcomings (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         user_id TEXT NOT NULL,
@@ -263,6 +279,7 @@ db.serialize(() => {
         }
     });
 });
+ */
 
 // Refer to this link: https://coda.io/@peter-sigurdson/lab-workbook-setting-up-a-node-js-express-server-with-sqlite-and
 // Refer to this link: https://www.luisllamas.es/en/how-to-use-sqlite-with-nodejs/
@@ -336,8 +353,12 @@ app.get('/admin', isAdmin, (req, res) => {
  */
 app.get('/upcomingclass', async (req, res) => {
   try {
-      // Bring all data from classes 
-      db.all("SELECT * FROM classes", (err, rows) => {
+      // Bring all data from classes with user information
+      db.all(`
+          SELECT classes.*, users.username
+          FROM classes
+INNER JOIN users ON classes.user_id = users.id 
+      `, (err, rows) => {
           if (err) {
               console.error('Error fetching classes:', err.message);
               return res.status(500).send('Server error');
@@ -354,7 +375,6 @@ app.get('/upcomingclass', async (req, res) => {
       res.status(500).send('Internal Server Error');
   }
 });
-
 
 /**
  * Create Account
@@ -395,67 +415,70 @@ app.post('/create-account', async (req, res) => {
  * This code is from 5-authentication-slides.pdf 
  */
 app.post('/login-class', async (req, res) => {
-    console.log("Login attempt with:", req.body);
+  console.log("Login attempt with:", req.body);
 
-    const { username, emailAddress, password } = req.body;
+  const { username, emailAddress, password } = req.body;
 
-    // Validate if it's the admin account
-    if (username === adminUser.username && emailAddress === adminUser.emailAddress) {
-        // Get the hashed admin password from the database
-        db.get('SELECT password FROM users WHERE emailAddress = ?', [adminUser.emailAddress], async (err, user) => {
-            if (err) {
-                console.error("Database error:", err);
-                return res.status(500).send('Server error');
-            }
+  // Validate if it's the admin account
+  if (username === adminUser.username && emailAddress === adminUser.emailAddress) {
+      // Get the hashed admin password from the database
+      db.get('SELECT id, password FROM users WHERE emailAddress = ?', [adminUser.emailAddress], async (err, user) => {
+          if (err) {
+              console.error("Database error:", err);
+              return res.status(500).send('Server error');
+          }
 
-            if (!user) {
-                console.log("Admin not found");
-                return res.status(401).send('Admin user not found');
-            }
+          if (!user) {
+              console.log("Admin not found");
+              return res.status(401).send('Admin user not found');
+          }
 
-            // Compare provided password with hashed password in the database
-            const result = await bcrypt.compare(password, user.password);
-            
-            if (result) {
-                // Admin session data setting
-                req.session.isAdmin = true;
-                req.session.isLoggedIn = true;
-                req.session.name = username;
-                req.session.emailAddress = emailAddress;
+          // Compare provided password with hashed password in the database
+          const result = await bcrypt.compare(password, user.password);
+          
+          if (result) {
+              // Admin session data setting
+              req.session.isAdmin = true;
+              req.session.isLoggedIn = true;
+              req.session.userId = user.id; // Set user ID for admin
+              req.session.name = username;
+              req.session.emailAddress = emailAddress;
 
-                console.log("Session information: " + JSON.stringify(req.session));
-                res.redirect("/");
-            } else {
-                return res.status(401).send('Wrong password for admin');
-            }
-        });
-    } else {
-        db.get('SELECT * FROM users WHERE username = ? AND emailAddress = ?', [username, emailAddress], async (err, user) => {
-            if (err) {
-                console.error("Database error:", err);
-                return res.status(500).send('Server error');
-            }
+              console.log("Session information: " + JSON.stringify(req.session));
+              res.redirect("/");
+          } else {
+              return res.status(401).send('Wrong password for admin');
+          }
+      });
+  } else {
+      // Handle regular user login
+      db.get('SELECT id, * FROM users WHERE username = ? AND emailAddress = ?', [username, emailAddress], async (err, user) => {
+          if (err) {
+              console.error("Database error:", err);
+              return res.status(500).send('Server error');
+          }
 
-            if (!user) {
-                console.log("User not found");
-                return res.status(401).send('User not found');
-            }
+          if (!user) {
+              console.log("User not found");
+              return res.status(401).send('User not found');
+          }
 
-            // Compare provided password with hashed password in the database
-            const result = await bcrypt.compare(password, user.password);
-            
-            if (result) {
-                req.session.isLoggedIn = true;
-                req.session.name = user.username;
-                req.session.emailAddress = user.emailAddress;
+          // Compare provided password with hashed password in the database
+          const result = await bcrypt.compare(password, user.password);
+          
+          if (result) {
+              req.session.isLoggedIn = true;
+              req.session.userId = user.id; // Set user ID for regular user
+              req.session.name = user.username;
+              req.session.emailAddress = user.emailAddress;
 
-                console.log("Session information: " + JSON.stringify(req.session));
-                res.redirect("/");
-            } else {
-                return res.status(401).send('Wrong password for user');
-            }
-        });
-    }
+              console.log("Session information: " + JSON.stringify(req.session));
+              res.redirect("/");
+          } else {
+              return res.status(401).send('Wrong password for user');
+          }
+      });
+  }
 });
 
 /**
@@ -466,6 +489,29 @@ app.post('/logout-class', async (req, res) => {
     req.session.destroy(); // Log out = Clear the session
     res.redirect('/'); // After log out a user is sent to main 
 });
+
+/**
+ * class (class create)
+ */
+app.post('/create-class', async (req, res) => {
+  const userId = req.session.userId; // Bring user id from the session 
+  if (!userId) {
+      return res.status(400).send('User ID is required.');
+  }
+
+  const { className, classType, startTime, endTime, classFormat, address, postcode } = req.body;
+
+  // Creat a class including user_id
+  db.run('INSERT INTO classes (user_id, className, classType, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+      [userId, className, classType, startTime, endTime, classFormat, address, postcode], (err) => {
+      if (err) {
+          console.error('Error create a class:', err.message);
+          return res.status(500).send('Server error');
+      } 
+      res.redirect('/upcomingclass');
+  });
+});
+
 
 /**
  * 
