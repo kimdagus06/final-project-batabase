@@ -590,12 +590,12 @@ app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
 });
 
 app.post('/user/edit-user/:id', isLoggedIn, (req, res) => {
+    console.log('POST request received at /settings/edit-user/:id');
+    console.log('Request params:', req.params);
+    console.log('Request body:', req.body); // 요청 본문 로그 추가
+
     const userId = req.params.id;
     const { username, emailAddress } = req.body;
-
-    if (!username || !emailAddress) {
-        return res.status(400).json({ success: false, message: 'Username and email address are required.' });
-    }
 
     db.run('UPDATE users SET username = ?, emailAddress = ? WHERE id = ?', [username, emailAddress, userId], function(err) {
         if (err) {
@@ -603,14 +603,12 @@ app.post('/user/edit-user/:id', isLoggedIn, (req, res) => {
             return res.status(500).json({ success: false, message: 'Server error' });
         }
 
-        if (this.changes === 0) {
-            return res.status(404).json({ success: false, message: 'User not found' });
-        }
-
         console.log("User information has been updated.");
         return res.json({ success: true });
     });
 });
+
+
 
 /**
  * 

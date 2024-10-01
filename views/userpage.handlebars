@@ -16,14 +16,13 @@
         <section class="classes-section">
             <h3>Your Registered Classes</h3>
             <ul>
-                {{#if isLoggedIn}}
-                <li id="menulogin"><a href="/logout">Logout</a></li>
-                <li id="menuuserpage"><a href="/userpage">User Page</a></li>
-                {{#if isAdmin}} <!-- Show admin menu if user is admin -->
-                <li id="menuadmin"><a href="/admin">User manage</a></li>
-                {{/if}}
-                {{else}}
-                <li id="menulogin"><a href="/login">Login</a></li>
-                {{/if}}
+                {{#each classes}}
+                    <li>
+                        {{className}} - {{classType}} 
+                        <br> Time: {{startTime}} to {{endTime}} 
+                        <br> Format: {{classFormat}}
+                        <br> Address: {{address}}, Postcode: {{postcode}}
+                    </li>
+                {{/each}}
             </ul>
         </section>
