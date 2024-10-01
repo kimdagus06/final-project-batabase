@@ -2,6 +2,7 @@
     {{#each classes}}
         <li class="class-item card">
             <div class="class-info">
+                <!-- INNER JOIN part -->
                 <span><strong>Teacher ID:</strong> {{user_id}}</span><br> <!-- teacher ID -->
                 <span><strong>{{username}}</strong> is holding this class:</span><br>
                 <span><strong>{{className}}</strong></span><br>
@@ -16,10 +17,10 @@
         </li>
     {{/each}}
     {{#unless classes.length}}
+    <!-- If there is no registered class, this text will be displayed. -->
         <li>No upcoming classes available.</li>
     {{/unless}}
 </ul>
-
 
     <div class="pagination">
         <button id="prev-page" class="button-pagination">Previous</button>

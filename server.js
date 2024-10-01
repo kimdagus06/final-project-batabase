@@ -63,6 +63,10 @@ app.use(express.json());
     }
 }));
 
+// -----------
+// ---MIDDLE--
+// ---WARES---
+// -----------
 /**
  * Session middleware
  * This middleware sets up local variables to hold session information
@@ -85,6 +89,15 @@ app.use((req, res, next) => {
     next();
 });
 
+/**
+ * function isAdmin(req, res, next)
+ * Description:
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ */
 function isAdmin(req, res, next) {
     if (req.session.isLoggedIn && req.session.isAdmin) {
         return next(); // If a user log in with admin account it goes to next 
@@ -218,6 +231,11 @@ db.serialize(() => {
   });
 });
 
+/**
+ * function insertPredefinedClasses()
+ * Description: 
+ * 
+ */
 function insertPredefinedClasses() {
   predefinedClasses.forEach(cls => {
       // Check if the class already exists by className and startTime to avoid duplicates
@@ -244,7 +262,6 @@ function insertPredefinedClasses() {
       });
   });
 }
-
 
 /**
  * Table three | Create upcomings
@@ -328,7 +345,9 @@ app.get("/registerclass", function (req, res) {
 });
 
 /**
- * Hidden page
+ * app.get('/admin', isAdmin, (req, res)
+ * Descriptio: 
+ * This is a hidden page, only shown when the program varifies admin account log in
  * When an admin account is logged in it checks
  */
 app.get('/admin', isAdmin, (req, res) => {
