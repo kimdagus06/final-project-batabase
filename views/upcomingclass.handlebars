@@ -1,34 +1,26 @@
-<body>
-    <h1 class="section-title">Upcoming Classes</h1>
-    <h2 class="description">Explore oneday classes, maybe you will find something interesting!</h2>
+<ul id="class-list">
+    {{#each classes}}
+        <li class="class-item card">
+            <div class="class-info">
+                <span><strong>Teacher ID:</strong> {{user_id}}</span><br> <!-- teacher ID -->
+                <span><strong>{{username}}</strong> is holding this class:</span><br>
+                <span><strong>{{className}}</strong></span><br>
+                <span>{{classType}}</span> - 
+                <span>{{classFormat}}</span> - 
+                <span>{{address}}</span>
+            </div>
+            <div class="upcoming-buttons">
+                <input type="button" value="View Details" class="viewdetails">
+                <input type="button" value="Register class" class="registerclass">
+            </div>
+        </li>
+    {{/each}}
+    {{#unless classes.length}}
+        <li>No upcoming classes available.</li>
+    {{/unless}}
+</ul>
 
-    <div class="upcoming-container">
-        <ul id="class-list">
-            {{#each classes}}
-                <li class="class-item card">
-                    <div class="class-info">
-                        <span><strong>Teacher ID:</strong> {{id}}</span><br> 
-                        <span><strong>{{userName}}</strong> is holding this class:</span><br>
-                        <span><strong>{{className}}</strong></span><br>
-                        <span>{{classType}}</span> - 
-                        <span>{{classFormat}}</span> - 
-                        <span>{{address}}</span>
-                    </div>
-                    <div class="upcoming-buttons">
-                        <input type="button" value="View Details" class="viewdetails">
-                        <input type="button" value="Register class" class="registerclass">
-                    </div>
-                </li>
-            {{/each}}
-            {{#unless classes.length}}
-                <li>No upcoming classes available.</li>
-            {{/unless}}
-        </ul>
-    </div>
 
-    <!-- preimage (foreach loop 이용) 넣어야됨 -->
-    
-    <!-- Pagination for grade 4 -->
     <div class="pagination">
         <button id="prev-page" class="button-pagination">Previous</button>
         <span id="page-info">Page 1</span>
@@ -39,4 +31,3 @@
         <a href="/registerclass" class="button-register-new">Register New Class</a>
         <a href="/" class="button-back-to-home">Back to Home</a>
     </div>
-</body>

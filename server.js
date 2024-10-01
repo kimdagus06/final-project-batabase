@@ -60,7 +60,6 @@ const predefinedUsers = [
 /* 5 elements (classes) in class table - grade 3 */
 const predefinedClasses = [
     {
-        createdby: 1, // assuming user with ID 1 created this class
         className: 'Swedish Class for Beginners',
         classType: 'Free class',
         startTime: '10:00',
@@ -70,7 +69,6 @@ const predefinedClasses = [
         postcode: 'N/A'
     },
     {
-        createdby: 2, // assuming user with ID 2 created this class
         className: 'Advanced Web Development',
         classType: 'Workshop',
         startTime: '10:00',
@@ -80,7 +78,6 @@ const predefinedClasses = [
         postcode: '11432'
     },
     {
-        createdby: 3, // assuming user with ID 3 created this class
         className: 'One-day Painting Class',
         classType: 'Oneday class',
         startTime: '09:00',
@@ -90,7 +87,6 @@ const predefinedClasses = [
         postcode: '41104'
     },
     {
-        createdby: 4, // assuming user with ID 4 created this class
         className: 'AI and Machine Learning Conference',
         classType: 'Conference',
         startTime: '09:40',
@@ -100,7 +96,6 @@ const predefinedClasses = [
         postcode: '21122'
     },
     {
-        createdby: 5, // assuming user with ID 5 created this class
         className: 'Wine and Beer brewing',
         classType: 'Oneday class',
         startTime: '15:00',
@@ -258,22 +253,21 @@ db.serialize(() => {
  * Table two | Create classes
  * Create predefined 5 classes and create a classes table if it doens't exist 
  * 
- * To create INNER JOIN, createdby should be created.
  * To connect INNER JOIN, it doesn't have to have the same column in both tables: users/classes 
- * createdby INTEGER: Save users' ID  
 */
 db.serialize(() => {
     // Create the classes table if it doesn't exist
     db.run(`CREATE TABLE IF NOT EXISTS classes (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        createdby INTEGER, 
         className TEXT NOT NULL,
         classType TEXT NOT NULL,
         startTime TEXT NOT NULL,
         endTime TEXT NOT NULL,
         classFormat TEXT NOT NULL,
         address TEXT NOT NULL,
-        postcode TEXT
+        postcode TEXT NOT NULL,
+        user_id INTEGER NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users(id)
     );`, (err) => {
         if (err) {
             console.error("Error creating classes table:", err.message);
@@ -314,23 +308,13 @@ db.serialize(() => {
  * Refer to this link: https://www.w3schools.com/sql/sql_join_inner.asp
  * Refer to this link: https://gent.tistory.com/376
  * 
- * Example: SELECT column_name(s)
- * FROM table1
- * INNER JOIN table2
- * ON table1.column_name = table2.column_name; : ON is how to connect these tables. 
- * 
- * This upcomings table is created for handling many-to-many relations.
- * In this case, a user can register for many courses. 
- * Because if only two tables: users and classes exist, database normally doesn't have a function
- * to connect many-to-many relations.  
- * It is a bridge table for users table and classes table.
- * 
+ * Description: 
  * db.serialize: Define the sturcture of database and initial data. >>> creating tables, inserting data
- */
-db.serialize(() => {
+ * 
+ * db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS upcomings (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id TEXT NOT NULL,
+        user_id INTEGER NOT NULL,
         classes_id INTEGER NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users(id),
         FOREIGN KEY (classes_id) REFERENCES classes(id)
@@ -342,13 +326,13 @@ db.serialize(() => {
         }
     });
 });
-
-// Refer to this link: https://coda.io/@peter-sigurdson/lab-workbook-setting-up-a-node-js-express-server-with-sqlite-and
-// Refer to this link: https://www.luisllamas.es/en/how-to-use-sqlite-with-nodejs/
+ */
 
 // -----------
 // ---ROUTE---
 // -----------
+// Refer to this link: https://coda.io/@peter-sigurdson/lab-workbook-setting-up-a-node-js-express-server-with-sqlite-and
+// Refer to this link: https://www.luisllamas.es/en/how-to-use-sqlite-with-nodejs/
 app.get("/", function (req, res) {
     const model = {
         isLoggedIn: req.session.isLoggedIn,
@@ -388,42 +372,37 @@ app.get("/registerclass", function (req, res) {
     res.render("registerclass"); 
 });
 
+/**
+ * INNER JOIN - grade 4 
+ */
 app.get('/userpage', (req, res) => {
-    const userId = req.session.userId;
+    const userId = req.session.userId; // Log in user's id 
 
-    db.all(`
-        SELECT 
-            users.username, 
-            classes.className, 
-            classes.classType, 
-            classes.startTime, 
-            classes.endTime, 
-            classes.classFormat, 
-            classes.address
-        FROM 
-            users 
-        INNER JOIN 
-            classes 
-        ON 
-            users.id = classes.createdby
-        WHERE 
-            users.id = ?
-    `, 
-    
-    [userId], (err, rows) => {
+    const query = `
+    SELECT 
+        users.id AS userId, 
+        users.username AS username, 
+        classes.className, 
+        classes.classType, 
+        classes.startTime, 
+        classes.endTime, 
+        classes.classFormat, 
+        classes.address, 
+        classes.postcode
+    FROM upcomings 
+    INNER JOIN users ON upcomings.user_id = users.id
+    INNER JOIN classes ON upcomings.classes_id = classes.id; 
+`;
+
+    db.all(query, [userId], (err, rows) => {
         if (err) {
-            if (err) {
-                console.error("Error retrieving user classes:", err); // 기존 코드
-                console.error("SQL Query Error:", err.message); // 추가 정보 출력
-                res.status(500).send("An error occurred while retrieving your classes.");
-            }
-            
-        } else {
-            res.render('userpage', {
-                username: req.session.username, 
-                classes: rows 
-            });
+            console.error("Error retrieving user classes:", err);
+            return res.status(500).send("An error occurred while retrieving your classes.");
         }
+        res.render('userpage', {
+            username: req.session.username, 
+            classes: rows 
+        });
     });
 });
 
