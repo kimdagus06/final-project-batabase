@@ -92,6 +92,7 @@ app.use((req, res, next) => {
 /**
  * function isAdmin(req, res, next)
  * Description:
+ * Middlewear 
  * 
  * @param {*} req 
  * @param {*} res 
@@ -101,6 +102,22 @@ app.use((req, res, next) => {
 function isAdmin(req, res, next) {
     if (req.session.isLoggedIn && req.session.isAdmin) {
         return next(); // If a user log in with admin account it goes to next 
+    }
+    res.status(403).send('Log in error');
+}
+
+/**
+ * function isLoggedIn(req, res, next)
+ * Description:
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ */
+function isLoggedIn(req, res, next) {
+    if (req.session.isLoggedIn) {
+        return next(); // If a user log in it goes to next 
     }
     res.status(403).send('Log in error');
 }
@@ -344,6 +361,10 @@ app.get("/registerclass", function (req, res) {
     res.render("registerclass"); 
 });
 
+app.get("/userpage", function (req, res) {
+    res.render("userpage"); 
+});
+
 /**
  * app.get('/admin', isAdmin, (req, res)
  * Descriptio: 
@@ -531,7 +552,6 @@ app.post('/create-class', async (req, res) => {
   });
 });
 
-
 /**
  * 
  */
@@ -549,6 +569,11 @@ app.post('/registerclass', async (req, res) => {
     });
 });
 
+/**
+ * app.post('/admin/edit-user/:id', isAdmin, (req, res)
+ * Description: 
+ * This is for user page when a user log in; not admin. 
+ */
 app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
     const userId = req.params.id;
     const { username, emailAddress } = req.body;
@@ -563,6 +588,33 @@ app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
         return res.json({ success: true });
     });
 });
+
+app.post('/user/edit-user/:id', isLoggedIn, (req, res) => {
+    const userId = req.params.id;
+    const { username, emailAddress } = req.body;
+
+    if (!username || !emailAddress) {
+        return res.status(400).json({ success: false, message: 'Username and email address are required.' });
+    }
+
+    db.run('UPDATE users SET username = ?, emailAddress = ? WHERE id = ?', [username, emailAddress, userId], function(err) {
+        if (err) {
+            console.error('Error updating user:', err.message);
+            return res.status(500).json({ success: false, message: 'Server error' });
+        }
+
+        if (this.changes === 0) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        console.log("User information has been updated.");
+        return res.json({ success: true });
+    });
+});
+
+/**
+ * 
+ */
 
 /**
  * To show class information to users 
