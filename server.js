@@ -361,8 +361,14 @@ app.get("/registerclass", function (req, res) {
     res.render("registerclass"); 
 });
 
-app.get("/userpage", function (req, res) {
-    res.render("userpage"); 
+app.get('/userpage', isLoggedIn, (req, res) => {
+    db.all('SELECT * FROM users', (err, users) => {
+        if (err) {
+            console.error('Error fetching users:', err.message);
+            return res.status(500).send('Server error.');
+        }
+        res.render('admin', { users }); // All user data to admin 
+    });
 });
 
 /**
