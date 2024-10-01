@@ -1,679 +1,155 @@
-const express = require("express");
-const sqlite3 = require("sqlite3");
-const path = require('path');
-const bcrypt = require('bcrypt'); // For hasing password 
-const { engine } = require("express-handlebars");
-const session = require("express-session");
-const conntectSqlite3 = require("connect-sqlite3"); // Store the sessions in a SQLite3 database file   
-const SQLite3Store = conntectSqlite3(session); // Store sessions in the database 
-const app = express();
-const dbFile = "data.sqlite3.db";
-const db = new sqlite3.Database(dbFile);
-const port = 3333;
-
-/* Set admin account for checking - grade 3 */
-const adminUser = {
-    username: 'admin',
-    emailAddress: 'admin@example.com',
-    password: 'adminpassword', 
-    agreeterms: '1'
-};
-
-/* 5 users in users table - grade 3 */
-const predefinedUsers = [
-    {
-        username: 'Kim Gustavsson',
-        emailAddress: 'user1@example.com',
-        password: 'user1password',
-        agreeterms: '1'
-    },
-
-    {
-        username: 'Kori Kimsson',
-        emailAddress: 'user2@example.com',
-        password: 'user2password',
-        agreeterms: '1'
-    },
-
-    {
-        username: 'Elias Gustavsson',
-        emailAddress: 'user3@example.com',
-        password: 'user3password',
-        agreeterms: '1'
-    },
-    
-    {
-        username: 'Zoey Park',
-        emailAddress: 'user4@example.com',
-        password: 'user4password',
-        agreeterms: '1'
-    },
-
-    {
-        username: 'Alen Park',
-        emailAddress: 'user5@example.com',
-        password: 'user5password',
-        agreeterms: '1'
-    },
-];
-
-/* 5 elements (classes) in class table - grade 3 */
-const predefinedClasses = [
-    {
-        className: 'Swedish Class for Beginners',
-        classType: 'Free class',
-        startTime: '10:00',
-        endTime: '12:00', 
-        classFormat: 'online',
-        address: 'N/A',
-        postcode: 'N/A', 
-        userId: 1
-    },
-    {
-        className: 'Advanced Web Development',
-        classType: 'Workshop',
-        startTime: '10:00',
-        endTime: '17:00',
-        classFormat: 'offline',
-        address: '123 Developer gatan, Jönköping',
-        postcode: '11432',
-        userId: 2
-    },
-    {
-        className: 'One-day Painting Class',
-        classType: 'Oneday class',
-        startTime: '09:00',
-        endTime: '18:00', 
-        classFormat: 'offline',
-        address: '12 Dashagatan, Gothenburg',
-        postcode: '41104',
-        userId: 3
-    },
-    {
-        className: 'AI and Machine Learning Conference',
-        classType: 'Conference',
-        startTime: '09:40',
-        endTime: '14:00',
-        classFormat: 'offline',
-        address: '123 ju, Developer Hall, Malmö',
-        postcode: '21122',
-        userId: 4
-    },
-    {
-        className: 'Wine and Beer brewing',
-        classType: 'Oneday class',
-        startTime: '15:00',
-        endTime: '20:00', 
-        classFormat: 'offline',
-        address: '456 wine and beer factory, Uppsala',
-        postcode: '98456',
-        userId: 5
-    }
-];
-
-app.engine("handlebars", engine());
-app.set("view engine", "handlebars");
-app.set("views", "./views");
-app.use(express.static("public"));
-
-// Express middlewares
-app.use(express.urlencoded({ extended: true })); // url passing
-app.use(express.json());
-
- /**
-  * 'secret' is the key used to sign and encrypt session IDs stored in cookies.
-  * It ensures the integrity and security of session data between the client and server.
-  * Note: This part shouldn't be hardcoded for security reasons (.env file)
-  * 
-  * Define the session 
-  */
- app.use(session({
-    secret: 'd384@#s#$#juihss.sijsge',
-    resave: false,
-    saveUninitialized: false,
-    store: new SQLite3Store({db: "session-db.db"}),
-    cookie: {
-        maxAge: 24 * 60 * 60 * 1000 // 24 hours 
-    }
-}));
-
 /**
- * Session middleware
- * This middleware sets up local variables to hold session information
- * that can be accessed in views rendered in response to requests.
+ * Events page
+ * When the Undo button is clicked, the event form will be reset.
  */
-app.use((req, res, next) => {
-    // Check if the user is logged in; default to false if not
-    res.locals.isLoggedIn = req.session.isLoggedIn || false;
+document.addEventListener('DOMContentLoaded', () => {
+    const undoButton = document.getElementById('undo-event');
 
-    // Store the user's name in a local variable; default to an empty string if not available
-    res.locals.name = req.session.name || '';
-
-    // Store the user's email address in a local variable; default to an empty string if not available
-    res.locals.emailAddress = req.session.emailAddress || '';
-
-    // Check if the user is an admin; default to false if not
-    res.locals.isAdmin = req.session.isAdmin || false;
-
-    // Call the next middleware in the stack
-    next();
-});
-
-function isAdmin(req, res, next) {
-    if (req.session.isLoggedIn && req.session.isAdmin) {
-        return next(); // If a user log in with admin account it goes to next 
-    }
-    res.status(403).send('Log in error');
-}
-
-// -----------
-// ---CREATE--
-// ---TABLE---
-// -----------
-
-/**
- * NOT NULL: Can't have a NULL value. So it can't be left empty.
- * UNIQUE: All values in a column are distinct from each other. So no two users can have the same email address.
- * 
- * Table one | Create users  
- * Create predefined 5 users and create a users table if it doens't exist 
- */
-db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT NOT NULL,
-        emailAddress TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL,
-        agreeterms INTEGER NOT NULL
-    );`, (err) => {
-        if (err) {
-            console.error("Error creating users table:", err.message);
-        } else {
-            console.log("Users table created successfully.");
-            
-            // Check if the admin user exists
-            db.get('SELECT * FROM users WHERE emailAddress = ?', [adminUser.emailAddress], (err, user) => {
-                if (err) {
-                    console.error('Error checking for admin user:', err.message);
-                } else if (!user) { // If admin user does not exist
-                    // Hash the password before storing it
-                    bcrypt.hash(adminUser.password, 12, (hashErr, hash) => {
-                        if (hashErr) {
-                            console.error('Error hashing admin password:', hashErr.message);
-                            return;
-                        }
-
-                        // Insert the admin user into the database
-                        db.run('INSERT INTO users (username, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', 
-                            [adminUser.username, adminUser.emailAddress, hash, adminUser.agreeterms], 
-                            (insertErr) => {
-                                if (insertErr) {
-                                    console.error('Error inserting admin user:', insertErr.message);
-                                } else {
-                                    console.log('Admin user created successfully.');
-                                }
-                            }
-                        );
-                    });
-                }
-            });
-
-            // Insert predefined users into the database
-            // Using predefinedUsers global variable 
-            predefinedUsers.forEach(user => {
-                // Check if the user already exists by email
-                db.get('SELECT * FROM users WHERE emailAddress = ?', [user.emailAddress], (err, existingUser) => {
-                    if (err) {
-                        console.error('Error checking predefined user:', err.message);
-                        return;
-                    }
-                    if (!existingUser) { // If user does not exist
-                        // Hash the password before storing it
-                        bcrypt.hash(user.password, 12, (hashErr, hash) => {
-                            if (hashErr) {
-                                console.error('Error hashing predefined user password:', hashErr.message);
-                                return;
-                            }
-
-                            // Insert the predefined user into the database
-                            db.run('INSERT INTO users (username, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', 
-                                [user.username, user.emailAddress, hash, user.agreeterms], 
-                                (insertErr) => {
-                                    if (insertErr) {
-                                        console.error('Error inserting predefined user:', insertErr.message);
-                                    } else {
-                                        console.log(`Predefined user ${user.username} created successfully.`);
-                                    }
-                                }
-                            );
-                        });
-                    }
-                });
-            });
-        }
-    });
-});
-
-/**
- * Table two | Create classes
- * Create predefined 5 classes and create a classes table if it doens't exist 
- * 
- * To connect INNER JOIN, it doesn't have to have the same column in both tables: users/classes 
-*/
-db.serialize(() => {
-    // Create the classes table if it doesn't exist
-    db.run(`CREATE TABLE IF NOT EXISTS classes (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER NOT NULL,
-        className TEXT NOT NULL,
-        classType TEXT NOT NULL,
-        startTime TEXT NOT NULL,
-        endTime TEXT NOT NULL,
-        classFormat TEXT NOT NULL,
-        address TEXT NOT NULL,
-        postcode TEXT NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES users(id)
-    );`, (err) => {
-        if (err) {
-            console.error("Error creating classes table:", err.message);
-        } else {
-            console.log("Classes table created successfully.");
-        }
-    });
-
-    // Insert predefined classes into the database
-    predefinedClasses.forEach(cls => {
-        // Check if the class already exists by className and startTime to avoid duplicates
-        db.get('SELECT * FROM classes WHERE className = ? AND startTime = ?', [cls.className, cls.startTime], (err, existingClass) => {
-            if (err) {
-                console.error('Error checking predefined class:', err.message);
-                return;
-            }
-
-            if (!existingClass) { // If class does not exist, insert it
-                db.run('INSERT INTO classes (className, classType, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-                    [cls.className, cls.classType, cls.startTime, cls.endTime, cls.classFormat, cls.address, cls.postcode], 
-                    (insertErr) => {
-                        if (insertErr) {
-                            console.error('Error inserting predefined class:', insertErr.message);
-                        } else {
-                            console.log(`Predefined class "${cls.className}" created successfully.`);
-                        }
-                    }
-                );
-            } else {
-                console.log(`Class "${cls.className}" at ${cls.startTime} already exists in the database.`);
-            }
+    // Check if the Undo button exists in the DOM
+    if (undoButton) {
+        undoButton.addEventListener('click', function() {
+            // Logic to reset the event form goes here
+            // Example: document.getElementById('event-form').reset();
+            console.log("Event form has been reset."); // Example log for debugging
         });
-    });
-});
-
-/**
- * Table three | Create upcomings
- * Refer to this link: https://www.w3schools.com/sql/sql_join_inner.asp
- * Refer to this link: https://gent.tistory.com/376
- * 
- * Description: 
- * db.serialize: Define the sturcture of database and initial data. >>> creating tables, inserting data
- * 
- * db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS upcomings (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id INTEGER NOT NULL,
-        classes_id INTEGER NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES users(id),
-        FOREIGN KEY (classes_id) REFERENCES classes(id)
-    );`, (err) => {
-        if (err) {
-            console.error("Error creating upcomings table:", err.message);
-        } else {
-            console.log("upcomings table created successfully.");
-        }
-    });
-});
- */
-
-// -----------
-// ---ROUTE---
-// -----------
-// Refer to this link: https://coda.io/@peter-sigurdson/lab-workbook-setting-up-a-node-js-express-server-with-sqlite-and
-// Refer to this link: https://www.luisllamas.es/en/how-to-use-sqlite-with-nodejs/
-app.get("/", function (req, res) {
-    const model = {
-        isLoggedIn: req.session.isLoggedIn,
-        name: req.session.name,
-        emailAddress: req.session.emailAddress,
-        isAdmin: req.session.isAdmin
-    }
-
-    if (!req.session.isLoggedIn) {
-        console.log("Home model (not logged in):", model);
-    }
-    // console.log("Home model: " + JSON.stringify(model));
-    res.render("home", model);
-});
-
-app.get("/createaccount", function (req, res) {
-    res.render("createaccount"); 
-});
-
-app.get('/login', (req, res) => {
-    res.render('login', { isLoginPage: true });
-});
-
-app.get("/logout", function (req, res) {
-    res.render("logout"); 
-});
-
-app.get("/about", function (req, res) {
-    res.render("about");
-});
-
-app.get("/contact", function (req, res) {
-    res.render("contact");
-});
-
-app.get("/registerclass", function (req, res) {
-    res.render("registerclass"); 
-});
-
-/**
- * INNER JOIN - grade 4 
- */
-app.get('/userpage', (req, res) => {
-    const userId = req.session.userId; // Log in user's id 
-
-    const query = `
-    SELECT 
-        users.id AS userId, 
-        users.username AS username, 
-        classes.className, 
-        classes.classType, 
-        classes.startTime, 
-        classes.endTime, 
-        classes.classFormat, 
-        classes.address, 
-        classes.postcode
-    FROM upcomings 
-    INNER JOIN users ON upcomings.user_id = users.id
-    INNER JOIN classes ON upcomings.classes_id = classes.id; 
-`;
-
-    db.all(query, [userId], (err, rows) => {
-        if (err) {
-            console.error("Error retrieving user classes:", err);
-            return res.status(500).send("An error occurred while retrieving your classes.");
-        }
-        res.render('userpage', {
-            username: req.session.username, 
-            classes: rows 
-        });
-    });
-});
-
-/**
- * Hidden page
- * When an admin account is logged in it checks
- */
-app.get('/admin', isAdmin, (req, res) => {
-    db.all('SELECT * FROM users', (err, users) => {
-        if (err) {
-            console.error('Error fetching users:', err.message);
-            return res.status(500).send('Server error.');
-        }
-        res.render('admin', { users }); // All user data to admin 
-    });
-});
-
-/**
- * Getting data from the tables: lab-4-v1.1 (1).pdf
- * 6-security-slides.marp.pdf
- * 
- * app.get is to handle client's requests. 
- * When a client sends a request via url >>> app.get gets data or some specific tasks; 
- * and return results.
- * 
- * INNER JOIN is about getting data from database in runtime. 
- */
-app.get('/upcomingclass', async (req, res) => {
-    try {
-        const query = `
-    SELECT 
-        users.username, 
-        classes.className, 
-        classes.classType, 
-        classes.startTime, 
-        classes.endTime, 
-        classes.classFormat, 
-        classes.address, 
-        classes.postcode
-    FROM upcomings 
-    INNER JOIN users ON upcomings.user_id = users.id
-    INNER JOIN classes ON upcomings.classes_id = classes.id; 
-`;
-
-        // Bring all data from classes 
-        db.all("SELECT * FROM classes", (err, rows) => {
-            if (err) {
-                console.error('Error fetching classes:', err.message);
-                return res.status(500).send('Server error');
-            }
-            
-            if (!rows || rows.length === 0) {
-                return res.render('upcomingclass', { classes: [] }); // Render with an empty array
-            }
-
-            res.render('upcomingclass', { classes: rows });
-        });
-    } catch (err) {
-        console.error('Error occurred:', err.message);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
-// -----------
-// -APP.POST--
-// -----------
-
-/**
- * Create Account
- * 
- * Hash Passwords with bcrypt in Node.js
- * https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
- * 
- * It's not necessary to hash all information because recovering data can be difficult.
- * Just hashing the password is sufficient.
- */
-app.post('/create-account', async (req, res) => {
-    const { username, emailAddress, password } = req.body;
-    const agreeterms = req.body.agreeterms ? 1 : 0; // Convert checkbox to 1 (true) or 0 (false)
-
-    try {
-        const hash = await bcrypt.hash(password, 12);
-
-        db.run('INSERT INTO users (username, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', [username, emailAddress, hash, agreeterms], (err) => {
-            if (err) {
-                console.error('Error inserting user:', err.message); // Print out an error message 
-                return res.status(500).send('Server error');
-            }
-
-            console.log("New account has been created."); 
-
-            // Redirect after a use create a new account
-            res.redirect('/');
-        });
-
-    } catch (err) {
-        console.error('Error hashing password:', err.message); // Print out a hash error message 
-        return res.status(500).send('Error hashing password');
-    }
-});
-
-/**
- * Log in 
- * This code is from 5-authentication-slides.pdf 
- */
-app.post('/login-class', async (req, res) => {
-    console.log("Login attempt with:", req.body);
-
-    const { username, emailAddress, password } = req.body;
-
-    // Validate if it's the admin account
-    if (username === adminUser.username && emailAddress === adminUser.emailAddress) {
-        // Get the hashed admin password from the database
-        try {
-            const user = await new Promise((resolve, reject) => {
-                db.get('SELECT password FROM users WHERE emailAddress = ?', [adminUser.emailAddress], (err, user) => {
-                    if (err) reject(err);
-                    else resolve(user);
-                });
-            });
-
-            if (!user) {
-                console.log("Admin not found");
-                return res.status(401).send('Invalid credentials');
-            }
-
-            // Compare provided password with hashed password in the database
-            const isMatch = await bcrypt.compare(password, user.password);
-            
-            if (isMatch) {
-                // Admin session data setting
-                req.session.isAdmin = true;
-                req.session.isLoggedIn = true;
-                req.session.username = username; // 사용자 이름 저장
-                req.session.emailAddress = emailAddress;
-
-                console.log("Session information: " + JSON.stringify(req.session));
-                return res.redirect("/");
-            } else {
-                return res.status(401).send('Invalid credentials');
-            }
-        } catch (err) {
-            console.error("Database error:", err);
-            return res.status(500).send('Server error');
-        }
     } else {
-        try {
-            const user = await new Promise((resolve, reject) => {
-                db.get('SELECT * FROM users WHERE username = ? AND emailAddress = ?', [username, emailAddress], (err, user) => {
-                    if (err) reject(err);
-                    else resolve(user);
-                });
-            });
-
-            if (!user) {
-                console.log("User not found");
-                return res.status(401).send('Invalid credentials');
-            }
-
-            // Compare provided password with hashed password in the database
-            const isMatch = await bcrypt.compare(password, user.password);
-            
-            if (isMatch) {
-                req.session.isLoggedIn = true;
-                req.session.username = user.username; // 사용자 이름 저장
-                req.session.emailAddress = user.emailAddress;
-
-                console.log("Session information: " + JSON.stringify(req.session));
-                return res.redirect("/");
-            } else {
-                return res.status(401).send('Invalid credentials');
-            }
-        } catch (err) {
-            console.error("Database error:", err);
-            return res.status(500).send('Server error');
-        }
+        // If the Undo button is not found, show a message.
+        // This is expected when on pages where the button doesn't exist.
+        console.log("Element with ID 'undo-event' not found, skipping it.");
     }
 });
 
-
 /**
- * Log out
+ * Pagination for grade 4
+ * Cite: https://www.sitepoint.com/simple-pagination-html-css-javascript/
+ * Function: 
  * 
- */
-app.post('/logout-class', async (req, res) => {
-    req.session.destroy(); // Log out = Clear the session
-    res.redirect('/'); // After log out a user is sent to main 
-});
+ * document.addEventListener('DOMContentLoaded', () => {
+    const itemsPerPage = 3; // Condition: 3 elements per page
+    const items = Array.from(document.querySelectorAll('#class-list li')); // Get all class list items
 
-/**
- * class (class create)
- */
-app.post('/create-class', async (req, res) => {
-    const { className, classType, startTime, endTime, classFormat, address, postcode } = req.body;
-    
-    db.run('INSERT INTO classes (className, classType, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-        [className, classType, startTime, endTime, classFormat, address, postcode], (err) => {
-        if (err) {
-            console.error('Error inserting class:', err.message); // Print out an error message 
-            return res.status(500).send('Server error');
-        }
+    // Math. ceil() function returns the smallest integer greater than or equal to a given number
+    const totalPages = Math.ceil(items.length / itemsPerPage);
+    // Initialize current page to 0 (first page)
+    let currentPage = 0; 
 
-        console.log("New class has been created."); 
+    // Function to show the current page of items
+    function showPage(page) {
+        const startIndex = page * itemsPerPage; // 
+        const endIndex = startIndex + itemsPerPage;
 
-        // Redirect to upcoming class page after creating a new class 
-        res.redirect('/upcomingclass');
-    });
-});
+        items.forEach((item, index) => {
+            item.style.display = (index >= startIndex && index < endIndex) ? 'list-item' : 'none';
+        });
 
-/**
- * 
- */
-app.post('/upcomingclass', async (req, res) => {
-    const classes_id = req.body.classes_id; // Get class ID from the request
-    const user_id = req.session.userId; // Assuming you store user ID in session during login
-
-    if (!user_id) {
-        console.error('User not logged in');
-        return res.status(401).send('User not logged in');
+        // Update page info
+        document.getElementById('page-info').textContent = `Page ${page + 1} of ${totalPages}`;
+        updateButtonStates();
     }
 
-    db.run('INSERT INTO upcomings (user_id, classes_id) VALUES (?, ?)', [user_id, classes_id], (err) => {
-        if (err) {
-            console.error('Error inserting upcoming:', err.message);
-            return res.status(500).send('Server Error');
+    // Update button states
+    function updateButtonStates() {
+        document.getElementById('prev-page').disabled = currentPage === 0;
+        document.getElementById('next-page').disabled = currentPage === totalPages - 1;
+    }
+
+    // Event listeners for pagination buttons
+    document.getElementById('prev-page').addEventListener('click', () => {
+        if (currentPage > 0) {
+            currentPage--;
+            showPage(currentPage);
         }
-
-        console.log("Registered."); 
-        res.redirect('/upcomingclass');
     });
-});
 
-/**
- * app.post edit
- * Description: 
- */
-app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
-    const userId = req.params.id;
-    const { username, emailAddress } = req.body;
-
-    db.run('UPDATE users SET username = ?, emailAddress = ? WHERE id = ?', [username, emailAddress, userId], (err) => {
-        if (err) {
-            console.error('Error updating user:', err.message);
-            return res.status(500).json({ success: false, message: 'Server error' });
+    document.getElementById('next-page').addEventListener('click', () => {
+        if (currentPage < totalPages - 1) {
+            currentPage++;
+            showPage(currentPage);
         }
-
-        console.log("User information has been updated.");
-        return res.json({ success: true });
     });
-});
 
-/**
- * To show class information to users 
- * app.get('/class/:id', (req, res) => {
-    const classId = req.params.id;
-    db.get('SELECT * FROM classes WHERE id = ?', [classId], (error, classDetails) => {
-        if (error) {
-            console.error('Error fetching class details:', error.message);
-            return res.status(500).send('Server error');
-        }
-        res.render('classDetail', { class: classDetails });
-    });
+    // Initialize the first page
+    showPage(currentPage);
 });
  */
 
-/* Start a port */
-app.listen (port, () => {
-    console.log('Server up on port '+port+'...');
-}); 
+/**
+ * When a user clicks edit/delete/save button in admin page
+ * https://docs.netlify.com/visual-editor/visual-editing/inline-editor/
+ * 
+ * Help cite 
+ * https://chatgpt.com/share/66f9b4f5-66c8-800f-a454-d6770be5e37f
+ * 
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    const editButtons = document.querySelectorAll('.edit-btn');
+    const saveButtons = document.querySelectorAll('.save-btn');
+  
+    editButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const row = button.closest('tr');
+        const userNameField = row.querySelector('.user-name');
+        const userEmailField = row.querySelector('.user-email');
+        const editNameInput = row.querySelector('.edit-name');
+        const editEmailInput = row.querySelector('.edit-email');
+  
+        // Show the input fields and hide the text
+        userNameField.style.display = 'none';
+        editNameInput.style.display = 'inline';
+        userEmailField.style.display = 'none';
+        editEmailInput.style.display = 'inline';
+  
+        // Toggle buttons
+        button.style.display = 'none'; // Hide edit button
+        const saveButton = row.querySelector('.save-btn');
+        saveButton.style.display = 'inline'; // Show save button
+      });
+    });
+  
+    saveButtons.forEach(button => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent the default form submission
+  
+        const row = button.closest('tr');
+        const editNameInput = row.querySelector('.edit-name');
+        const editEmailInput = row.querySelector('.edit-email');
+  
+        // Prepare data to be sent to the server
+        const userId = row.dataset.id;
+        const updatedUsername = editNameInput.value;
+        const updatedEmail = editEmailInput.value;
+  
+        // Here you would typically make a fetch or AJAX call to your backend API
+        // For example, using fetch:
+        fetch(`/admin/update-user/${userId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: updatedUsername,
+            email: updatedEmail
+          })
+        })
+        .then(response => {
+          if (response.ok) {
+            // Update the displayed user name and email
+            row.querySelector('.user-name').textContent = updatedUsername;
+            row.querySelector('.user-email').textContent = updatedEmail;
+          } else {
+            console.error('Error updating user');
+          }
+        })
+        .catch(err => console.error('Fetch error:', err))
+        .finally(() => {
+          // Hide input fields and show text again
+          editNameInput.style.display = 'none';
+          editEmailInput.style.display = 'none';
+          row.querySelector('.user-name').style.display = 'inline';
+          row.querySelector('.user-email').style.display = 'inline';
+          button.style.display = 'none'; // Hide save button
+          row.querySelector('.edit-btn').style.display = 'inline'; // Show edit button
+        });
+      });
+    });
+  });
