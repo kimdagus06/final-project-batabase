@@ -60,6 +60,7 @@ const predefinedUsers = [
 /* 5 elements (classes) in class table - grade 3 */
 const predefinedClasses = [
     {
+        createdby: 1, // assuming user with ID 1 created this class
         className: 'Swedish Class for Beginners',
         classType: 'Free class',
         startTime: '10:00',
@@ -69,6 +70,7 @@ const predefinedClasses = [
         postcode: 'N/A'
     },
     {
+        createdby: 2, // assuming user with ID 2 created this class
         className: 'Advanced Web Development',
         classType: 'Workshop',
         startTime: '10:00',
@@ -78,6 +80,7 @@ const predefinedClasses = [
         postcode: '11432'
     },
     {
+        createdby: 3, // assuming user with ID 3 created this class
         className: 'One-day Painting Class',
         classType: 'Oneday class',
         startTime: '09:00',
@@ -87,6 +90,7 @@ const predefinedClasses = [
         postcode: '41104'
     },
     {
+        createdby: 4, // assuming user with ID 4 created this class
         className: 'AI and Machine Learning Conference',
         classType: 'Conference',
         startTime: '09:40',
@@ -96,6 +100,7 @@ const predefinedClasses = [
         postcode: '21122'
     },
     {
+        createdby: 5, // assuming user with ID 5 created this class
         className: 'Wine and Beer brewing',
         classType: 'Oneday class',
         startTime: '15:00',
@@ -356,7 +361,6 @@ app.get("/", function (req, res) {
         console.log("Home model (not logged in):", model);
     }
     // console.log("Home model: " + JSON.stringify(model));
-    
     res.render("home", model);
 });
 
@@ -382,6 +386,45 @@ app.get("/contact", function (req, res) {
 
 app.get("/registerclass", function (req, res) {
     res.render("registerclass"); 
+});
+
+app.get('/userpage', (req, res) => {
+    const userId = req.session.userId;
+
+    db.all(`
+        SELECT 
+            users.username, 
+            classes.className, 
+            classes.classType, 
+            classes.startTime, 
+            classes.endTime, 
+            classes.classFormat, 
+            classes.address
+        FROM 
+            users 
+        INNER JOIN 
+            classes 
+        ON 
+            users.id = classes.createdby
+        WHERE 
+            users.id = ?
+    `, 
+    
+    [userId], (err, rows) => {
+        if (err) {
+            if (err) {
+                console.error("Error retrieving user classes:", err); // 기존 코드
+                console.error("SQL Query Error:", err.message); // 추가 정보 출력
+                res.status(500).send("An error occurred while retrieving your classes.");
+            }
+            
+        } else {
+            res.render('userpage', {
+                username: req.session.username, 
+                classes: rows 
+            });
+        }
+    });
 });
 
 /**
@@ -494,61 +537,72 @@ app.post('/login-class', async (req, res) => {
     // Validate if it's the admin account
     if (username === adminUser.username && emailAddress === adminUser.emailAddress) {
         // Get the hashed admin password from the database
-        db.get('SELECT password FROM users WHERE emailAddress = ?', [adminUser.emailAddress], async (err, user) => {
-            if (err) {
-                console.error("Database error:", err);
-                return res.status(500).send('Server error');
-            }
+        try {
+            const user = await new Promise((resolve, reject) => {
+                db.get('SELECT password FROM users WHERE emailAddress = ?', [adminUser.emailAddress], (err, user) => {
+                    if (err) reject(err);
+                    else resolve(user);
+                });
+            });
 
             if (!user) {
                 console.log("Admin not found");
-                return res.status(401).send('Admin user not found');
+                return res.status(401).send('Invalid credentials');
             }
 
             // Compare provided password with hashed password in the database
-            const result = await bcrypt.compare(password, user.password);
+            const isMatch = await bcrypt.compare(password, user.password);
             
-            if (result) {
+            if (isMatch) {
                 // Admin session data setting
                 req.session.isAdmin = true;
                 req.session.isLoggedIn = true;
-                req.session.name = username;
+                req.session.username = username; // 사용자 이름 저장
                 req.session.emailAddress = emailAddress;
 
                 console.log("Session information: " + JSON.stringify(req.session));
-                res.redirect("/");
+                return res.redirect("/");
             } else {
-                return res.status(401).send('Wrong password for admin');
+                return res.status(401).send('Invalid credentials');
             }
-        });
+        } catch (err) {
+            console.error("Database error:", err);
+            return res.status(500).send('Server error');
+        }
     } else {
-        db.get('SELECT * FROM users WHERE username = ? AND emailAddress = ?', [username, emailAddress], async (err, user) => {
-            if (err) {
-                console.error("Database error:", err);
-                return res.status(500).send('Server error');
-            }
+        try {
+            const user = await new Promise((resolve, reject) => {
+                db.get('SELECT * FROM users WHERE username = ? AND emailAddress = ?', [username, emailAddress], (err, user) => {
+                    if (err) reject(err);
+                    else resolve(user);
+                });
+            });
 
             if (!user) {
                 console.log("User not found");
-                return res.status(401).send('User not found');
+                return res.status(401).send('Invalid credentials');
             }
 
             // Compare provided password with hashed password in the database
-            const result = await bcrypt.compare(password, user.password);
+            const isMatch = await bcrypt.compare(password, user.password);
             
-            if (result) {
+            if (isMatch) {
                 req.session.isLoggedIn = true;
-                req.session.name = user.username;
+                req.session.username = user.username; // 사용자 이름 저장
                 req.session.emailAddress = user.emailAddress;
 
                 console.log("Session information: " + JSON.stringify(req.session));
-                res.redirect("/");
+                return res.redirect("/");
             } else {
-                return res.status(401).send('Wrong password for user');
+                return res.status(401).send('Invalid credentials');
             }
-        });
+        } catch (err) {
+            console.error("Database error:", err);
+            return res.status(500).send('Server error');
+        }
     }
 });
+
 
 /**
  * Log out

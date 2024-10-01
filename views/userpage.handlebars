@@ -1,0 +1,20 @@
+   <h1>Welcome, {{username}}!</h1>
+
+    <h2>Your Created Classes</h2>
+
+    {{#if classes.length}}
+        <ul>
+            {{#each classes}}
+            <li>
+                <h3>Class Name: {{className}}</h3>
+                <p>Type: {{classType}}</p>
+                <p>Start Time: {{startTime}}</p>
+                <p>End Time: {{endTime}}</p>
+                <p>Format: {{classFormat}}</p>
+                <p>Address: {{address}}</p>
+            </li>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>You haven't created any classes yet.</p>
+    {{/if}}
