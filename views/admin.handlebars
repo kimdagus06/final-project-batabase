@@ -1,4 +1,4 @@
-<div class="user-management">
+<div class="user-management"></div>
   <h1>User Management</h1>
   <div class="table-container">
     <table class="user-table">
@@ -24,10 +24,8 @@
           </td>
           <td>
             <!-- Edit and delete buttons -->
-            <form action="/admin/edit-user/{{user.id}}" method="POST">
-            <button type="submit" class="edit-btn">Edit</button>
-            </form>
-            <button class="save-btn" style="display:none;">Save</button>
+            <button class="edit-btn">Edit</button>
+            <button class="save-btn" style="display:none;">Save</button> |
             <form action="/admin/delete-user/{{this.id}}" method="POST" style="display:inline;">
               <button type="submit" class="delete-btn">Delete</button>
             </form>
