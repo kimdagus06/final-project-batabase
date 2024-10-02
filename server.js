@@ -361,13 +361,17 @@ app.get("/registerclass", function (req, res) {
     res.render("registerclass"); 
 });
 
+/**
+ * Hidden page
+ * When an admin account is logged in it checks
+ */
 app.get('/admin', isAdmin, (req, res) => {
     db.all('SELECT * FROM users', (err, users) => {
         if (err) {
             console.error('Error fetching users:', err.message);
             return res.status(500).send('Server error.');
         }
-        res.render("admin", { users }); // All user data to admin 
+        res.render('admin', { users }); // All user data to admin 
     });
 });
 
@@ -397,7 +401,7 @@ app.get('/upcomingclass', async (req, res) => {
       db.all(`
           SELECT classes.*, users.username
           FROM classes
-INNER JOIN users ON classes.user_id = users.id 
+          INNER JOIN users ON classes.user_id = users.id 
       `, (err, rows) => {
           if (err) {
               console.error('Error fetching classes:', err.message);
@@ -535,6 +539,7 @@ app.post('/logout-class', async (req, res) => {
  */
 app.post('/create-class', async (req, res) => {
   const userId = req.session.userId; // Bring user id from the session 
+
   if (!userId) {
       return res.status(400).send('User ID is required.');
   }
@@ -575,20 +580,24 @@ app.post('/registerclass', async (req, res) => {
  * This is for user page when a user log in; not admin. 
  */
 app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
+    console.log('Received request to update user:', req.params.id);
     const userId = req.params.id;
     const { username, emailAddress } = req.body;
 
     db.run('UPDATE users SET username = ?, emailAddress = ? WHERE id = ?', [username, emailAddress, userId], (err) => {
         if (err) {
             console.error('Error updating user:', err.message);
-            return res.status(500).json({ success: false, message: 'Server error' });
+            return res.status(500).send('Server error');
         }
 
         console.log("User information has been updated.");
-        return res.json({ success: true });
+        res.redirect('/admin/users');
     });
 });
 
+/**
+ * 
+ */
 app.post('/user/edit-user/:id', isLoggedIn, (req, res) => {
     const userId = req.params.id;
     const { username, emailAddress } = req.body;
@@ -600,7 +609,7 @@ app.post('/user/edit-user/:id', isLoggedIn, (req, res) => {
             }
 
             console.log("User information has been updated.");
-            return res.json({ success: true, message: 'User information has been updated.' });
+            return res.json({ success: true });
         });
 });
 
