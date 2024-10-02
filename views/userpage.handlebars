@@ -1,28 +1,13 @@
  <!-- User Profile Information -->
-        <section class="profile-section">
-            <h3>Your Profile</h3>
-            <form id="update-user-form" method="POST" action="/user/edit-user/{{userId}}">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" value="{{name}}" required>
+<section class="profile-section">
+    <h3>Your Profile</h3>
+    <form id="update-user-form" method="POST" action="/user/edit-user/:id{{userId}}">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="{{name}}" required>
 
-                <label for="emailAddress">Email:</label>
-                <input type="email" id="emailAddress" name="emailAddress" value="{{emailAddress}}" required>
+        <label for="emailAddress">Email:</label>
+        <input type="email" id="emailAddress" name="emailAddress" value="{{emailAddress}}" required>
 
-                <button type="submit">Update Profile</button>
-            </form>
-        </section>
-
-        <!-- Registered Classes -->
-        <section class="classes-section">
-            <h3>Your Registered Classes</h3>
-            <ul>
-                {{#each classes}}
-                    <li>
-                        {{className}} - {{classType}} 
-                        <br> Time: {{startTime}} to {{endTime}} 
-                        <br> Format: {{classFormat}}
-                        <br> Address: {{address}}, Postcode: {{postcode}}
-                    </li>
-                {{/each}}
-            </ul>
-        </section>
+        <button type="submit">Update Profile</button>
+    </form>
+</section>

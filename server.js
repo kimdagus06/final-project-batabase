@@ -361,29 +361,23 @@ app.get("/registerclass", function (req, res) {
     res.render("registerclass"); 
 });
 
-app.get('/userpage', isLoggedIn, (req, res) => {
-    db.all('SELECT * FROM users', (err, users) => {
-        if (err) {
-            console.error('Error fetching users:', err.message);
-            return res.status(500).send('Server error.');
-        }
-        res.render('admin', { users }); // All user data to admin 
-    });
-});
-
-/**
- * app.get('/admin', isAdmin, (req, res)
- * Descriptio: 
- * This is a hidden page, only shown when the program varifies admin account log in
- * When an admin account is logged in it checks
- */
 app.get('/admin', isAdmin, (req, res) => {
     db.all('SELECT * FROM users', (err, users) => {
         if (err) {
             console.error('Error fetching users:', err.message);
             return res.status(500).send('Server error.');
         }
-        res.render('admin', { users }); // All user data to admin 
+        res.render("admin", { users }); // All user data to admin 
+    });
+});
+
+app.get("/userpage", isLoggedIn, (req, res) => {
+    db.get('SELECT * FROM users WHERE id = ?', [req.session.userId], (err, user) => {
+        if (err) {
+            console.error('Error fetching users:', err.message);
+            return res.status(500).send('Server error.');
+        }
+        res.render("userpage");
     });
 });
 
@@ -596,25 +590,19 @@ app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
 });
 
 app.post('/user/edit-user/:id', isLoggedIn, (req, res) => {
-    console.log('POST request received at /settings/edit-user/:id');
-    console.log('Request params:', req.params);
-    console.log('Request body:', req.body); // 요청 본문 로그 추가
-
     const userId = req.params.id;
     const { username, emailAddress } = req.body;
 
-    db.run('UPDATE users SET username = ?, emailAddress = ? WHERE id = ?', [username, emailAddress, userId], function(err) {
-        if (err) {
-            console.error('Error updating user:', err.message);
-            return res.status(500).json({ success: false, message: 'Server error' });
-        }
+    db.run('UPDATE users SET username = ?, emailAddress = ? WHERE id = ?', [username, emailAddress, userId], (err) => {
+            if (err) {
+                console.error('Error updating user:', err.message);
+                return res.status(500).json({ success: false, message: 'Server error' });
+            }
 
-        console.log("User information has been updated.");
-        return res.json({ success: true });
-    });
+            console.log("User information has been updated.");
+            return res.json({ success: true, message: 'User information has been updated.' });
+        });
 });
-
-
 
 /**
  * 
