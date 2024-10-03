@@ -22,12 +22,14 @@
     {{/unless}}
 </ul>
 
-{{#if totalPages}}
-    <!-- Display the Next button if there are more pages -->
-    {{#if (gt page totalPages)}}
+
+    <!-- Display the Next button if there are more pages
+    {{#if totalPages}}
+        {{#if (gt page totalPages)}}
         <a href="/upcomingclass?page={{add page 1}}">Next</a>
     {{/if}}
 {{/if}}
+ -->
 
     <div class="upcoming-buttons">
         <a href="/registerclass" class="button-register-new">Register New Class</a>

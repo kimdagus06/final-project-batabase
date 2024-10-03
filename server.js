@@ -144,6 +144,7 @@ db.serialize(() => {
                 }
             });
 
+            // I need to make it as a function like predefinedClasses this code is too long 
             // Insert predefined users into the database
             // Using predefinedUsers global variable 
             predefinedUsers.forEach(user => {
@@ -195,16 +196,16 @@ db.serialize(() => {
   
         // Create the classes table
         db.run(`CREATE TABLE IF NOT EXISTS classes (
-            user_id INTEGER NOT NULL,
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            className TEXT NOT NULL,
-            classType TEXT NOT NULL,
-            startTime TEXT NOT NULL,
-            endTime TEXT NOT NULL,
-            classFormat TEXT NOT NULL,
-            address TEXT NOT NULL,
-            postcode TEXT,
-            FOREIGN KEY (user_id) REFERENCES users(id)
+          user_id INTEGER NOT NULL,
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          className TEXT NOT NULL,
+          classType TEXT NOT NULL,
+          startTime TEXT NOT NULL,
+          endTime TEXT NOT NULL,
+          classFormat TEXT NOT NULL,
+          address TEXT NOT NULL,
+          postcode TEXT,
+          FOREIGN KEY (user_id) REFERENCES users(id)
         );`, (err) => {
             if (err) {
                 console.error("Error creating classes table:", err.message);
@@ -212,6 +213,7 @@ db.serialize(() => {
                 console.log("Classes table created successfully.");
                 
                 // Insert predefined classes after the table is created
+                // Simplify code lines by using function
                 insertPredefinedClasses();
             }
         });
@@ -404,23 +406,23 @@ app.post('/create-account', async (req, res) => {
  */
 app.post('/login-class', async (req, res) => {
     console.log("Login attempt with:", req.body);
-
+  
     const { username, emailAddress, password } = req.body;
-
+  
     // Validate if it's the admin account
     if (username === adminUser.username && emailAddress === adminUser.emailAddress) {
         // Get the hashed admin password from the database
-        db.get('SELECT password FROM users WHERE emailAddress = ?', [adminUser.emailAddress], async (err, user) => {
+        db.get('SELECT id, password FROM users WHERE emailAddress = ?', [adminUser.emailAddress], async (err, user) => {
             if (err) {
                 console.error("Database error:", err);
                 return res.status(500).send('Server error');
             }
-
+  
             if (!user) {
                 console.log("Admin not found");
                 return res.status(401).send('Admin user not found');
             }
-
+  
             // Compare provided password with hashed password in the database
             const result = await bcrypt.compare(password, user.password);
             
@@ -428,9 +430,10 @@ app.post('/login-class', async (req, res) => {
                 // Admin session data setting
                 req.session.isAdmin = true;
                 req.session.isLoggedIn = true;
+                req.session.userId = user.id; // Set user ID for admin
                 req.session.name = username;
                 req.session.emailAddress = emailAddress;
-
+  
                 console.log("Session information: " + JSON.stringify(req.session));
                 res.redirect("/");
             } else {
@@ -438,25 +441,27 @@ app.post('/login-class', async (req, res) => {
             }
         });
     } else {
-        db.get('SELECT * FROM users WHERE username = ? AND emailAddress = ?', [username, emailAddress], async (err, user) => {
+        // Handle regular user login
+        db.get('SELECT id, * FROM users WHERE username = ? AND emailAddress = ?', [username, emailAddress], async (err, user) => {
             if (err) {
                 console.error("Database error:", err);
                 return res.status(500).send('Server error');
             }
-
+  
             if (!user) {
                 console.log("User not found");
                 return res.status(401).send('User not found');
             }
-
+  
             // Compare provided password with hashed password in the database
             const result = await bcrypt.compare(password, user.password);
             
             if (result) {
                 req.session.isLoggedIn = true;
+                req.session.userId = user.id; // Set user ID for regular user
                 req.session.name = user.username;
                 req.session.emailAddress = user.emailAddress;
-
+  
                 console.log("Session information: " + JSON.stringify(req.session));
                 res.redirect("/");
             } else {
@@ -464,7 +469,7 @@ app.post('/login-class', async (req, res) => {
             }
         });
     }
-});
+  });
 
 /**
  * Log out
@@ -475,30 +480,24 @@ app.post('/logout-class', async (req, res) => {
     res.redirect('/'); // After log out a user is sent to main 
 });
 
-/**
- * class (class create)
- */
-app.post('/create-class', async (req, res) => {
-    const { className, classType, startTime, endTime, classFormat, address, postcode } = req.body;
-    
-    db.run('INSERT INTO classes (className, classType, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-        [className, classType, startTime, endTime, classFormat, address, postcode], (err) => {
-        if (err) {
-            console.error('Error inserting class:', err.message); // Print out an error message 
-            return res.status(500).send('Server error');
-        }
-
-        console.log("New class has been created."); 
-
-        // Redirect after creating a new class 
-        res.redirect('/upcomingclass');
-    });
-});
-
 app.post('/upcomingclass', async (req, res) => {
     const { user_id, classes_id } = req.body;
 
     db.run('INSERT INTO upcomings (user_id, classes_id) VALUES (?, ?)', [user_id, classes_id], (err) => {
+        if (err) {
+            console.error('Error inserting upcoming:', err.message);
+            return res.status(500).send('Server Error');
+        }
+
+        console.log("Registered."); 
+        res.redirect('/upcomingclass');
+    });
+});
+
+app.post('/registerclass', async (req, res) => {
+    const { user_id, classes_id } = req.body;
+
+    db.run('INSERT INTO upcomings (users_id, classes_id) VALUES (?, ?)', [user_id, classes_id], (err) => {
         if (err) {
             console.error('Error inserting upcoming:', err.message);
             return res.status(500).send('Server Error');
