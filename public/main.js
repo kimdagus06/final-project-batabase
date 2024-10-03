@@ -1,6 +1,7 @@
 /**
 * When a user clicks edit/delete/save button in admin page
 * https://docs.netlify.com/visual-editor/visual-editing/inline-editor/
+* https://chatgpt.com/c/66f9b4e6-4308-800f-89c4-4d525efca4ec
 * 
 */
 document.addEventListener('DOMContentLoaded', function () {
