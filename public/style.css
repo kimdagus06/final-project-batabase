@@ -82,6 +82,71 @@ body{
 }
 
 /* ---------------------------------------------------------------
+   Home page styles
+   --------------------------------------------------------------- */
+.home-screen-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-size: cover;
+}
+
+.hero-box{
+    width: 100%;
+}
+
+.color-box{
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: rgba(232, 10, 6, 0.8); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container{
+    padding: 1rem;
+    text-align: center;
+    margin-top: 1.25rem;
+    z-index: 2;
+}
+
+.hero-image{
+    max-width: 30rem;
+    height: auto;
+    display: block;
+    margin: 0 auto; 
+    border: none; 
+}
+
+/* Text inside of the main box*/
+.text-in-main{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    z-index: 3;
+}
+
+.main-title{
+    font-size: 4rem;
+    margin-bottom: 0.625rem;
+    color: rgb(255, 244, 244);
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.2;
+    padding: 0 1rem;
+}
+
+.sub-main-title{
+    color: rgba(254, 194, 193, 0.8); 
+    font-size: 1rem;
+
+    align-self: flex-start;
+    padding-left: 1.4rem;
+}
+
+/* ---------------------------------------------------------------
    Create page styles
    --------------------------------------------------------------- */
 .create-title{
@@ -311,58 +376,6 @@ small{
 
 .address-spacing{
     margin-top: 1rem; /* Adjust spacing between these specific groups */
-}
-
-/* Home page */
-.home-screen-page{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.main-title{
-    color: #f6f6f6;
-    font-weight: 600;
-    font-size: 20rem;
-    margin: 0;
-    padding: 2.5rem;
-    color: var(--simplify-main-color); 
-}
-
-.company-stats{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2rem;
-}
-
-.stat{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0.5rem 0;
-}
-
-.number{
-    font-size: 2rem;
-    font-weight: bold;
-    color: #2e2a2a;
-}
-
-.label{
-    font-size: 1rem;
-    color: #E1E8F0;
-}
-
-/* Home page - texts */
-.welcome-text{
-    line-height: 1.8;
-    max-width: 40rem;
-    color: #3d3d3d;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    text-align: justify;
 }
 
 /* Contact page */
