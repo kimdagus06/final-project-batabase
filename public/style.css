@@ -15,8 +15,11 @@ body{
     padding-right: 7rem;
 }
 
+/* ---------------------------------------------------------------
+   Main styles 
+   --------------------------------------------------------------- */
 /* Menubar items */
-.menubar {
+.menubar{
     padding: 1rem 0;
     font-size: 1rem;
     font-weight: 200;
@@ -25,28 +28,62 @@ body{
     justify-content: center;
 }
 
-.menubar ul {
+.menubar ul{
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     list-style-type: none;
-    gap: 1rem; /* Gap between menus */
+    gap: 2rem; /* Gap between menus */
     padding: 0; 
 }
 
-.menu-items li {
-    align-items: center;
+.menu-items li{
     margin-right: 2rem;
     font-weight: 500;
 }
 
-.menubar ul li a {
+.menubar ul li a{
     color: #3d3d3d;
     text-decoration: none; /* Remove underlines */
 }
 
-/* Create page */
+/* ---------------------------------------------------------------
+   Searchbar in menu styles
+   --------------------------------------------------------------- */
+.search-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 4rem;
+    padding-right: 4rem; 
+}
+
+.search-bar-wrapper{
+    display: flex;
+    align-items: center;
+    border-radius: 1rem;
+    padding: 0.7rem 2rem; 
+    background-color: #F8F8F8;
+}
+
+.search-bar{
+    border: none;
+    outline: none;
+    padding-left: 1rem; 
+    background-color: #F8F8F8;
+    flex: 1; 
+    font-family: "Comfortaa", sans-serif;
+    font-size: 0.8rem;
+}
+
+.search-icon{
+    margin-left: 3rem; 
+}
+
+/* ---------------------------------------------------------------
+   Create page styles
+   --------------------------------------------------------------- */
 .create-title{
     text-align: center;
     font-size: 2rem;
@@ -316,33 +353,6 @@ small{
 .label{
     font-size: 1rem;
     color: #E1E8F0;
-}
-
-/* Home page - search bar */
-.search-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 80%;
-    margin: 2rem auto;
-}
-
-.search-bar-wrapper{
-    display: flex;
-    align-items: center;
-    width: 40rem;
-    border: 1rem solid #ccc;
-    border-radius: 5rem;
-    padding: 0.5rem 1rem;
-    background-color: #fff;
-}
-
-.search-bar{
-    flex: 1; /* Occupies the remaining space in the flex container */
-    border: none; /* Removes the default border */
-    outline: none; /* Removes the border when the input is focused */
-    padding-left: 1rem;
-    font-size: 1rem;
 }
 
 /* Home page - texts */
