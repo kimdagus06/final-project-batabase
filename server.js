@@ -85,6 +85,16 @@ app.use((req, res, next) => {
     next();
 });
 
+/**
+ * function isAdmin(req, res, next)
+ * Description: 
+ * 
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ * @returns 
+ */
 function isAdmin(req, res, next) {
     if (req.session.isLoggedIn && req.session.isAdmin) {
         return next(); // If a user log in with admin account it goes to next 
@@ -98,11 +108,12 @@ function isAdmin(req, res, next) {
 // -----------
 
 /**
+ * Table one | Create users  
+ * Create predefined 5 users and create a users table if it doens't exist 
+ * 
  * NOT NULL: Can't have a NULL value. So it can't be left empty.
  * UNIQUE: All values in a column are distinct from each other. So no two users can have the same email address.
  * 
- * Table one | Create users  
- * Create predefined 5 users and create a users table if it doens't exist 
  */
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS users (
@@ -182,6 +193,12 @@ db.serialize(() => {
 });
 
 /**
+ * function insertPredefinedUsers() {
+    
+}
+ */
+
+/**
  * Table two | Create classes
  * Create predefined 5 classes and create a classes table if it doens't exist 
  */
@@ -220,6 +237,9 @@ db.serialize(() => {
     });
   });
 
+  /**
+   * 
+   */
   function insertPredefinedClasses() {
     predefinedClasses.forEach(cls => {
         // Check if the class already exists by className and startTime to avoid duplicates
@@ -248,36 +268,21 @@ db.serialize(() => {
   }
 
 /**
- * Table three | Create upcomings
- * Refer to this link: https://www.w3schools.com/sql/sql_join_inner.asp
- * Refer to this link: https://gent.tistory.com/376
- * 
- * Use INNER JOIN to combine data from users and classes tables based on their relationships in the upcomings table
-
- * Example: SELECT column_name(s)
- * FROM table1
- * INNER JOIN table2
- * ON table1.column_name = table2.column_name;
+ * Table three | Create store - grade 4
+ * Description:
  * 
  * db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS upcomings (
+    db.run(`CREATE TABLE IF NOT EXISTS store (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        user_id TEXT NOT NULL,
-        classes_id INTEGER NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES users(id),
-        FOREIGN KEY (classes_id) REFERENCES classes(id)
     );`, (err) => {
         if (err) {
-            console.error("Error creating upcomings table:", err.message);
+            console.error("Error creating store table:", err.message);
         } else {
-            console.log("upcomings table created successfully.");
+            console.log("store table created successfully.");
         }
     });
 });
  */
-
-// Refer to this link: https://coda.io/@peter-sigurdson/lab-workbook-setting-up-a-node-js-express-server-with-sqlite-and
-// Refer to this link: https://www.luisllamas.es/en/how-to-use-sqlite-with-nodejs/
 
 // -----------
 // ---ROUTE---
@@ -337,8 +342,14 @@ app.get('/admin', isAdmin, (req, res) => {
 });
 
 /**
- * Getting data from the tables: lab-4-v1.1 (1).pdf
+ * app.get('/upcomingclass', async (req, res)
+ * Description: 
+ * 1. 
+ * 2. Pagination 
  * 
+ * Refer to this link: https://www.w3schools.com/sql/sql_join_inner.asp
+ * Refer to this link: https://gent.tistory.com/376
+ * Getting data from the tables: lab-4-v1.1 (1).pdf
  */
 app.get('/upcomingclass', async (req, res) => {
     try {
@@ -346,7 +357,7 @@ app.get('/upcomingclass', async (req, res) => {
         db.all(`
             SELECT classes.*, users.username
             FROM classes
-  INNER JOIN users ON classes.user_id = users.id 
+            INNER JOIN users ON classes.user_id = users.id 
         `, (err, rows) => {
             if (err) {
                 console.error('Error fetching classes:', err.message);
@@ -364,9 +375,10 @@ app.get('/upcomingclass', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
   });
-  
 
 /**
+ * app.post('/create-account', async (req, res)
+ * Description:
  * Create Account
  * 
  * Hash Passwords with bcrypt in Node.js
@@ -401,7 +413,9 @@ app.post('/create-account', async (req, res) => {
 });
 
 /**
- * Log in 
+ * app.post('/login-class', async (req, res)
+ * Description:
+ * Login-class 
  * This code is from 5-authentication-slides.pdf 
  */
 app.post('/login-class', async (req, res) => {
