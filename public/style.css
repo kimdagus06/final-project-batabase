@@ -1,8 +1,3 @@
-:root{
-    /* Contact */
-    --form-border-color: #D5D5D5; 
-}
-
 /* cite : https://cssgradient.io/ */
 body{
     margin: 0;
@@ -11,17 +6,17 @@ body{
     background-size: cover;
     background-position: center; 
     */
-    font-family: "Inter", sans-serif;
+    font-family: "Comfortaa", sans-serif;
     background-color: #fffdff;
 }
 
 /* DIGG logo */
 .digg-logo{
-    padding-right: 8rem;
+    padding-right: 7rem;
 }
 
-/* Menu Bar / Home / class / About / Contact */
-.menubar{
+/* Menubar items */
+.menubar {
     padding: 1rem 0;
     font-size: 1rem;
     font-weight: 200;
@@ -30,7 +25,7 @@ body{
     justify-content: center;
 }
 
-.menubar ul{
+.menubar ul {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -40,31 +35,15 @@ body{
     padding: 0; 
 }
 
-.menu-items li{
+.menu-items li {
     align-items: center;
     margin-right: 2rem;
+    font-weight: 500;
 }
 
-.menubar ul li a{
+.menubar ul li a {
     color: #3d3d3d;
     text-decoration: none; /* Remove underlines */
-}
-
-.menu-items a:hover{
-    background-color: #007bff;
-}
-
-/* Create Accound button in the menu bar */
-.create-account-button{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 0.1rem solid #34353b;
-    padding: 0.5rem 0.5rem;
-    margin-top: 0.4rem;
-    cursor: pointer;
-    border-radius: 3rem;
 }
 
 /* Create page */
@@ -138,6 +117,17 @@ small{
     margin-left: 0.45rem;
 }
 
+.not-a-member-yet{
+    background-color: #fffdff;
+    border: none;
+    color: #303030;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.6rem;
+    line-height: 5;
+    margin-left: 0.45rem;
+}
+
 /* Create an account button */
 .create{
     padding: 0.625rem;
@@ -170,7 +160,6 @@ small{
 
 .about-title{
     font-size: 3rem;
-    font-family: "Inter", sans-serif;
     font-weight: 700;
     color: #2e2a2a;
     margin-bottom: 1.5rem;
@@ -213,7 +202,6 @@ small{
 /* class page */
 .class-title p{
     color: #2e2a2a;
-    font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600;
     font-style: normal;
@@ -298,7 +286,6 @@ small{
 
 .main-title{
     color: #f6f6f6;
-    font-family: "Work Sans", sans-serif;
     font-weight: 600;
     font-size: 20rem;
     margin: 0;
@@ -311,7 +298,6 @@ small{
     flex-direction: column;
     align-items: center;
     margin-top: 2rem;
-    font-family: "Inter", sans-serif;
 }
 
 .stat{
@@ -356,7 +342,6 @@ small{
     border: none; /* Removes the default border */
     outline: none; /* Removes the border when the input is focused */
     padding-left: 1rem;
-    font-family: "Work Sans", sans-serif;
     font-size: 1rem;
 }
 
@@ -394,7 +379,6 @@ small{
 
 .contact-input{
     width: 100%;
-    font-family: "Work Sans", sans-serif;
     font-size: 1rem; 
     font-weight: 400;
     padding: 1rem;
@@ -510,7 +494,26 @@ span{
     padding: 1rem;
 }
 
-/*Log in */
+/*Login button in the menu */
+.login-items{
+    display: flex;
+    align-items: center;
+    padding-left: 14rem;
+}
+
+.login-items a {
+    color: #3d3d3d;
+    text-decoration: none;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: transparent;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.login-items a:hover{
+    color: #fff;
+    background-color: #625deb;
+}
 
 /* Glassmorphism card effect */
 .login-container{
@@ -530,7 +533,7 @@ span{
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     background-color: rgba(255, 255, 255, 0.75);
-    border-radius: 12px;
+    border-radius: 1rem;
     border: 1px solid rgba(209, 213, 219, 0.3);
 }
 
@@ -587,7 +590,6 @@ span{
 .footer{
     margin-top: auto;
     padding: 1.5rem 0;
-    font-family: "Work Sans", sans-serif;
     border-top: 0.1rem solid #d8d8d8;
     margin-top: 3rem;
 }

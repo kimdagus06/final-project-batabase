@@ -4,27 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Dosis:wght@200..800&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
     <script src="/main.js" defer></script>
     <title>Digg | Where Everyone Can Teach, Learn Something New Every Day</title>
 </head>
 <body>
     <nav class="menubar">
         <!-- Logo -->
-        <div class="digg-logo" alt="digg-logo" img src="public\image\digg-logotype2.png" width="75" height="82"></div>
+        <div class="digg-logo">
+            <img src="/image/digg-logotype1.png" alt="digg-logo" width="80" height="82">
+        </div>
 
         <div class="menu-items">
             <ul>
                 <li><a href="/" data-content="home">Home</a></li>
-                <li><a href="/registerclass" class="menu-item" data-content="classes">Register Class</a></li>
-                <li><a href="/upcomingclass" class="menu-item" data-content="classes">Upcomings</a></li>
+                <li><a href="/registerclass" class="register-class-menu" data-content="register-class">Register Class</a></li>
+                <li><a href="/upcomingclass" class="menu-item" data-content="upcoming-class">Upcomings</a></li>
                 <li><a href="/about" data-content="about">About</a></li>
                 <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
 
-                <!-- Sign up / Log in -->
-                <li class="create-account-button"><a href="/createaccount" class="button-link">Create Account</a></li>
-
+        <div class="login-items">
+            <ul>
                 {{#if isLoggedIn}}
                 <li id="menulogin"><a href="/logout">Logout</a></li>
                 <li id="menuuserpage"><a href="/userpage">User Page</a></li>

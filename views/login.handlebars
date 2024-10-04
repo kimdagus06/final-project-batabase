@@ -5,9 +5,7 @@
         <div class="login-forms">
             <form action="/login-class" method="POST" class="login-form">
                 <input type="text" id="username" name="username" placeholder="Enter your name" class="form-input" required>
-
                 <input type="email" name="emailAddress" placeholder="Your Email" class="form-input" required>
-
                 <input type="password" name="password" placeholder="Your Password" class="form-input" required>
 
                 <div class="checkbox-container">
@@ -17,9 +15,10 @@
 
                 <input type="submit" value="Sign In" class="login">
 
-                <div class="lost-password">
-                    <a href="/">Lost password?</a>
-                </div>
+                <div class="create-container">
+                    <h2 class="description">Not a Digg member yet?</h2>
+                    <a href="/createaccount" class="not-a-member-yet">Create Account</a>
+                    </div>
             </form>
         </div>
     </div>
