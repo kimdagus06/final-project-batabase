@@ -10,41 +10,46 @@
 </head>
 <body>
     <nav class="menubar">
-        <!-- Logo is a home button, it links to home page / -->
-    <div class="digg-logo">
-        <a href="/" data-content="home">
-            <img src="/image/digg-logotype1.png" alt="digg-logo" width="80" height="82">
-        </a>
-    </div>
-
-        <div class="menu-items">
-            <ul>
-                <li><a href="/registerclass" class="register-class-menu" data-content="register-class">Register Class</a></li>
-                <li><a href="/upcomingclass" class="menu-item" data-content="upcoming-class">Upcomings</a></li>
-                <li><a href="/about" data-content="about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
+        <div class="digg-logo">
+            <a href="/" data-content="home">
+                <img src="/image/digg-logotype1.png" alt="digg-logo" width="80" height="82">
+            </a>
         </div>
 
-        <div class="search-container">
+        <!-- Menu items are displyed only when it's not logged in beside the logo -->
+        <!-- This part is executed only if isLoginPage is false. 
+        It displays all items, logo, and search bar when the user is not on the login page -->
+        {{#unless isLoginPage}}
+            <div class="menu-items">
+                <ul>
+                    <li><a href="/registerclass" class="register-class-menu" data-content="register-class">Register Class</a></li>
+                    <li><a href="/upcomingclass" class="menu-item" data-content="upcoming-class">Upcomings</a></li>
+                    <li><a href="/about" data-content="about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="search-container">
             <div class="search-bar-wrapper">
                 <input type="text" class="search-bar" placeholder="Find a new hobby">
                 <img src="icons/search-icon.png" alt="Search Icon" class="search-icon">
+            </div>
         </div>
 
-        <div class="login-items">
-            <ul>
+            <div class="login-items">
+             <ul>
                 {{#if isLoggedIn}}
-                <li id="menulogin"><a href="/logout">Logout</a></li>
-                <li id="menuuserpage"><a href="/userpage">User Page</a></li>
-                {{#if isAdmin}} <!-- Show admin menu if user is admin -->
-                <li id="menuadmin"><a href="/admin">User manage</a></li>
-                {{/if}}
+                    <li id="menulogin"><a href="/logout">Logout</a></li>
+                    <li id="menuuserpage"><a href="/userpage">User Page</a></li>
+                    {{#if isAdmin}}
+                        <li id="menuadmin"><a href="/admin">User manage</a></li>
+                    {{/if}}
                 {{else}}
-                <li id="menulogin"><a href="/login">Login</a></li>
+                    <li id="menulogin"><a href="/login">Login</a></li>
                 {{/if}}
             </ul>
         </div>
+        {{/unless}}
     </nav>
 
     {{{body}}}

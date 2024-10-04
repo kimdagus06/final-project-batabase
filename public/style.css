@@ -10,19 +10,13 @@ body{
     background-color: #fffdff;
 }
 
-/* DIGG logo */
-.digg-logo{
-    padding-right: 7rem;
-}
-
 /* ---------------------------------------------------------------
    Main styles 
    --------------------------------------------------------------- */
 /* Menubar items */
 .menubar{
-    padding: 1rem 0;
+    padding: 2rem 0; /* Space in menu bar up,down sides */
     font-size: 1rem;
-    font-weight: 200;
     display: flex;
     align-items: center; 
     justify-content: center;
@@ -35,12 +29,12 @@ body{
     justify-content: center;
     list-style-type: none;
     gap: 2rem; /* Gap between menus */
-    padding: 0; 
+    margin-left: 1rem;
 }
 
 .menu-items li{
     margin-right: 2rem;
-    font-weight: 500;
+    font-weight: 700;
 }
 
 .menubar ul li a{
@@ -56,7 +50,6 @@ body{
     justify-content: center;
     align-items: center;
     padding-left: 4rem;
-    padding-right: 4rem; 
 }
 
 .search-bar-wrapper{
@@ -144,6 +137,45 @@ body{
 
     align-self: flex-start;
     padding-left: 1.4rem;
+}
+
+/* Upcoming classes in home page */
+.upcoming-classes{
+    margin-top: 4rem;
+}
+
+.upcoming-title{
+    font-size: 1.75rem;
+    color: #444;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.class-items{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+    margin: 3rem;
+}
+
+.class-item{
+    background: #f8f8f8;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1);
+    margin: 0.625rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+.class-image{
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+.class-title{
+    margin-top: 0.625rem;
+    font-size: 1.25rem;
+    color: #333;
 }
 
 /* ---------------------------------------------------------------
