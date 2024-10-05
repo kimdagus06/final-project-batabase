@@ -19,27 +19,42 @@ const adminUser = {
     agreeterms: '1'
 };
 
-/* 5 users in users table - grade 3 */
+/* 15 users in users table - grade 3 */
 const predefinedUsers = [
     { username: 'Kim Gustavsson', emailAddress: 'user1@example.com', password: 'user1password', agreeterms: '1' },
     { username: 'Kori Kimsson', emailAddress: 'user2@example.com', password: 'user2password', agreeterms: '1' },
     { username: 'Elias Gustavsson', emailAddress: 'user3@example.com', password: 'user3password', agreeterms: '1' },
     { username: 'Zoey Park', emailAddress: 'user4@example.com', password: 'user4password', agreeterms: '1' },
     { username: 'Alen Park', emailAddress: 'user5@example.com', password: 'user5password', agreeterms: '1' },
-  ];
+    { username: 'Mikael Svensson', emailAddress: 'user6@example.com', password: 'user6password', agreeterms: '1' },
+    { username: 'Sofia Lindström', emailAddress: 'user7@example.com', password: 'user7password', agreeterms: '1' },
+    { username: 'Oliver Nordin', emailAddress: 'user8@example.com', password: 'user8password', agreeterms: '1' },
+    { username: 'Lina Andersson', emailAddress: 'user9@example.com', password: 'user9password', agreeterms: '1' },
+    { username: 'Noah Olofsson', emailAddress: 'user10@example.com', password: 'user10password', agreeterms: '1' },
+    { username: 'Emma Eriksson', emailAddress: 'user11@example.com', password: 'user11password', agreeterms: '1' },
+    { username: 'Felix Persson', emailAddress: 'user12@example.com', password: 'user12password', agreeterms: '1' },
+    { username: 'Freja Karlsson', emailAddress: 'user13@example.com', password: 'user13password', agreeterms: '1' },
+    { username: 'William Björk', emailAddress: 'user14@example.com', password: 'user14password', agreeterms: '1' },
+    { username: 'Elin Jansson', emailAddress: 'user15@example.com', password: 'user15password', agreeterms: '1' },
+];
   
-/* 5 elements (classes) in class table - grade 3 */
+/* 15 classes in class table - grade 3 */
 const predefinedClasses = [
-    { userId: 1, className: 'Swedish Class for Beginners', classType: 'Free class', startTime: '10:00', endTime: '12:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
-    { userId: 2, className: 'Advanced Web Development', classType: 'Workshop', startTime: '10:00', endTime: '17:00', classFormat: 'offline', address: '123 Developer gatan, Jönköping', postcode: '11432' },
-    { userId: 3, className: 'One-day Painting Class', classType: 'Oneday class', startTime: '09:00', endTime: '18:00', classFormat: 'offline', address: '12 Dashagatan, Gothenburg', postcode: '41104' },
-    { userId: 4, className: 'AI and Machine Learning Conference', classType: 'Conference', startTime: '09:40', endTime: '14:00', classFormat: 'offline', address: '123 ju, Developer Hall, Malmö', postcode: '21122' },
-    { userId: 5, className: 'Wine and Beer Brewing Basics', classType: 'Oneday class', startTime: '15:00', endTime: '20:00', classFormat: 'offline', address: '456 Wine and Beer Factory, Uppsala', postcode: '98456' },
-    { userId: 6, className: 'Photography 101', classType: 'Workshop', startTime: '11:00', endTime: '15:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
-    { userId: 7, className: 'Introduction to Graphic Design', classType: 'Free class', startTime: '13:00', endTime: '16:00', classFormat: 'offline', address: '789 Design St, Stockholm', postcode: '12345' },
-    { userId: 8, className: 'Baking Artisan Bread', classType: 'Workshop', startTime: '09:00', endTime: '12:00', classFormat: 'offline', address: '321 Baker Lane, Gothenburg', postcode: '41105' },
-    { userId: 9, className: 'Yoga for Beginners', classType: 'Oneday class', startTime: '17:00', endTime: '18:30', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
-    { userId: 10, className: 'Intro to Coding', classType: 'Workshop', startTime: '10:00', endTime: '14:00', classFormat: 'offline', address: '654 Code Way, Malmö', postcode: '21123' }
+    { userId: 1, className: 'Swedish Painting Class', classType: 'art', startTime: '10:00', endTime: '12:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 2, className: 'Advanced Web Development', classType: 'technology', startTime: '10:00', endTime: '17:00', classFormat: 'offline', address: '123 Developer gatan, Jönköping', postcode: '11432' },
+    { userId: 3, className: 'Baking Artisan Bread', classType: 'baking', startTime: '09:00', endTime: '18:00', classFormat: 'offline', address: '12 Dashagatan, Gothenburg', postcode: '41104' },
+    { userId: 4, className: 'Plant Care Basics', classType: 'plants', startTime: '09:40', endTime: '14:00', classFormat: 'offline', address: '123 ju, Developer Hall, Malmö', postcode: '21122' },
+    { userId: 5, className: 'Photography 101', classType: 'photography', startTime: '15:00', endTime: '20:00', classFormat: 'offline', address: '456 Wine and Beer Factory, Uppsala', postcode: '98456' },
+    { userId: 6, className: 'Social Media Strategies', classType: 'business', startTime: '11:00', endTime: '15:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 7, className: 'Korean Language Basics', classType: 'language', startTime: '13:00', endTime: '16:00', classFormat: 'offline', address: '789 Design St, Stockholm', postcode: '12345' },
+    { userId: 8, className: 'Yoga for Beginners', classType: 'fitness', startTime: '09:00', endTime: '12:00', classFormat: 'offline', address: '321 Baker Lane, Gothenburg', postcode: '41105' },
+    { userId: 9, className: 'Digital Art Techniques', classType: 'art', startTime: '17:00', endTime: '18:30', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 10, className: 'Introduction to AI', classType: 'technology', startTime: '10:00', endTime: '14:00', classFormat: 'offline', address: '654 Code Way, Malmö', postcode: '21123' },
+    { userId: 11, className: 'Watercolor Techniques', classType: 'art', startTime: '09:00', endTime: '12:00', classFormat: 'offline', address: '78 Artistic St, Stockholm', postcode: '11223' },
+    { userId: 12, className: 'Web Design Basics', classType: 'technology', startTime: '14:00', endTime: '16:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 13, className: 'Gourmet Cooking Class', classType: 'baking', startTime: '09:00', endTime: '17:00', classFormat: 'offline', address: '45 Chef Ave, Gothenburg', postcode: '41108' },
+    { userId: 14, className: 'Flower Arrangement Workshop', classType: 'plants', startTime: '10:00', endTime: '12:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 15, className: 'Fitness Bootcamp', classType: 'fitness', startTime: '18:00', endTime: '20:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
 ];
 
 app.engine("handlebars", engine());
@@ -365,28 +380,55 @@ app.get('/admin', isAdmin, (req, res) => {
  */
 app.get('/upcomingclass', async (req, res) => {
     try {
-        // Bring all data from classes with user information
-        db.all(`
-            SELECT classes.*, users.username
-            FROM classes
+        const page = parseInt(req.query.page) || 1; // Get the current page
+        const limit = 10; // Number of items per page
+        const offset = (page - 1) * limit; // Calculate offset for SQL query
+
+        const query = `
+            SELECT classes.*, users.username 
+            FROM classes 
             INNER JOIN users ON classes.user_id = users.id 
-        `, (err, rows) => {
+            LIMIT ? OFFSET ?`;
+
+        db.all(query, [limit, offset], (err, rows) => {
             if (err) {
                 console.error('Error fetching classes:', err.message);
                 return res.status(500).send('Server error');
             }
-            
-            if (!rows || rows.length === 0) {
-                return res.render('upcomingclass', { classes: [] }); // Render with an empty array
-            }
-  
-            res.render('upcomingclass', { classes: rows });
+
+            // Get total count for pagination
+            db.get(`SELECT COUNT(*) as count FROM classes`, (err, countRow) => {
+                if (err) {
+                    console.error('Error fetching class count:', err.message);
+                    return res.status(500).send('Server error');
+                }
+
+                const totalClasses = countRow.count; // Total number of classes
+                const totalPages = Math.ceil(totalClasses / limit); // Total pages
+                const nextPage = page < totalPages ? page + 1 : null; // Calculate next page number
+                const pageMinus1 = page > 1 ? page - 1 : null; // Calculate previous page number
+
+                // Determine if "Previous" and "Next" buttons should be shown
+                const showPrev = page > 1;
+                const showNext = nextPage !== null;
+
+                res.render('upcomingclass', { 
+                    classes: rows, 
+                    page, 
+                    nextPage, 
+                    pageMinus1, 
+                    showPrev, 
+                    showNext,
+                    totalPages // Pass totalPages to the template
+                });
+            });
         });
     } catch (err) {
         console.error('Error occurred:', err.message);
         res.status(500).send('Internal Server Error');
     }
-  });
+});
+
 
 app.get("/detail", function (req, res) {
     res.render("detail"); 
@@ -560,7 +602,6 @@ app.post('/create-class', async (req, res) => {
         res.redirect('/upcomingclass'); // Redirect to upcoming classes
     });
 });
-
 
 app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
     const userId = req.params.id;
