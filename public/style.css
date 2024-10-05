@@ -314,7 +314,7 @@ small{
 }
 
 .about-button:hover{
-    background-color: #0056b3; 
+    background-color: #007BFF; 
 }
 
 /* ---------------------------------------------------------------
@@ -327,16 +327,6 @@ small{
 .checkbox-container{
     display: flex;
     flex-direction: row;
-    padding: 0;
-    margin: 0;
-}
-
-.class-container{
-    max-width: 50rem;
-    box-sizing: border-box;
-    font-size: 0.8rem;
-    margin: 0 auto; 
-    font-family: "Comfortaa", sans-serif;
 }
 
 .class-box{
@@ -349,11 +339,50 @@ small{
     text-align: center;
 }
 
+.class-box ul{    
+    list-style: none;
+    display: flex;
+}
+
+/* Between Pick a Date and Search Address */
+.class-box ul li{
+    margin-right: 2rem;
+}
+
+.class-box ul li a{
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.class-container{
+    max-width: 50rem;
+    box-sizing: border-box;
+    font-size: 0.8rem;
+    margin: 0 auto; 
+    font-family: "Comfortaa", sans-serif;
+}
+
 .three-icons{
     display: flex;
     justify-content: flex-end; /* Arrange rightside */
     align-items: center;
 }
+
+.class-creating{
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.class-details p {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: rgba(27, 26, 26);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    margin: 2rem;
+}
+
 
 .time-duration-container{
     display: flex;
@@ -364,8 +393,6 @@ small{
 .form-group{
     flex: 1;
     margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
 }
 
 /* Form inputs */
