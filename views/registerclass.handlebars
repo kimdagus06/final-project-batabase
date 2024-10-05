@@ -1,7 +1,7 @@
 <div class="class-container">
     <div class="class-box">
-        <h2 class="your-class-name">Register Your Class</h2>
-        <h2 class="description">Write a small description for the class</h2>
+        <h2 class="register-class-main-text">Do you want to hold a class?</h2>
+        <h2 class="register-class-sub-text">Write a small description for the class.</h2>
         <div class="three-icons">
             <img src="/icons/upload-picture.png" alt="Upload Picture icon" width="28" height="28" class="icon">
             <img src="/icons/edit.png" alt="Edit icon" width="28" height="28" class="icon">
@@ -9,67 +9,78 @@
         </div>
     </div>
 
-<form id="create-class-form" class="class-creating" method="POST" action="/create-class">
-    <div class="class-details">
-        <p>class DETAILS</p>
-        
-        <div class="form-group">
-            <label for="class-name">class Name</label>
-            <input type="text" id="class-name" name="className" class="form-input" required>
-        </div>
-
-        <div class="form-group">
-            <label for="class-type">class Type</label>
-            <select id="class-type" name="classType" class="form-input" required>
-                <option value="">Select class Type</option>
-                <option value="freeclass">Free class</option>
-                <option value="freeclass">Oneday class</option>
-                <option value="conference">Conference</option>
-                <option value="workshop">Workshop</option>
-                <option value="webinar">Webinar</option>
-            </select>
-        </div>
-
-        <div class="time-duration-container">
+    <form class="class-creating" method="POST" action="/create-class">
+        <div class="class-details">
+            <p>Class DETAILS</p>
+            
             <div class="form-group">
-                <label for="start-time">Start Time</label>
-                <input type="time" id="start-time" name="startTime" class="form-input" required>
+                <label for="class-name">Class Name</label>
+                <input type="text" id="class-name" name="className" class="form-input" required>
             </div>
 
             <div class="form-group">
-                <label for="end-time">End Time</label>
-                <input type="time" id="end-time" name="endTime" class="form-input" required>
+                <label for="class-type">Class Type</label>
+                <select id="class-type" name="classType" class="form-input" required>
+                    <option value="">Select Class Type</option>
+                    <option value="freeclass">Free Class</option>
+                    <option value="onedayclass">One-day Class</option> <!-- Fixed value -->
+                    <option value="conference">Conference</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="webinar">Webinar</option>
+                </select>
             </div>
-        </div>
 
-        <div class="checkbox-container">
+            <div class="time-duration-container">
+                <div class="form-group">
+                    <label for="start-time">Start Time</label>
+                    <input type="time" id="start-time" name="startTime" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="end-time">End Time</label>
+                    <input type="time" id="end-time" name="endTime" class="form-input" required>
+                </div>
+            </div>
+
+            <div class="checkbox-container">
+                <div class="form-group">
+                    <input type="checkbox" id="online-check" name="classFormat" value="online">
+                    <label for="online-check">Set as Online</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" id="offline-check" name="classFormat" value="offline">
+                    <label for="offline-check">Set as Offline</label>
+                </div>
+            </div>
+
             <div class="form-group">
-                <input type="checkbox" id="online-check" name="classFormat" value="online">
-                <label for="online-check">Set as Online</label>
+                <p>Class PLACE</p>
+                <label for="address-line-1">Address</label>
+                <input type="text" id="address-line-1" name="address" placeholder="Address Line 01" class="form-input" required>
             </div>
 
             <div class="form-group">
-                <input type="checkbox" id="offline-check" name="classFormat" value="offline">
-                <label for="offline-check">Set as Offline</label>
+                <label for="address-line-2">Postcode</label>
+                <input type="text" id="address-line-2" name="postcode" placeholder="Address Line 02" class="form-input" required>
             </div>
-        </div>
 
-        <div class="form-group">
-            <p>class PLACE</p>
-            <label for="address-line-1">Address</label>
-            <input type="text" id="address-line-1" name="address" placeholder="Address Line 01" class="form-input" required>
-        </div>
+            <!-- Cite: https://uiverse.io/reshades/dull-snake-38 -->
+            <button type="submit" class="button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+                </svg>
+                <div class="text">
+                    Submit
+                </div>
+            </button>
 
-        <div class="form-group address-spacing">
-            <label for="address-line-2">Postcode</label>
-            <input type="text" id="address-line-2" name="postcode" placeholder="Address Line 02" class="form-input">
-        </div>
+            <button type="submit" class="remove-button">
 
-        <div class="class-buttons">
-            <input type="submit" value="Create New class" class="create-class">
-            <input type="button" value="Undo" class="undo-class" id="undo-class">
+                <div class="text">
+                    Remove
+                </div>
+            </button>
         </div>
-    </div>
-</form>
-    </div>
+    </form>
 </div>
