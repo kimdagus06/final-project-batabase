@@ -201,22 +201,6 @@ body{
     gap: 1rem; 
 }
 
-/* Form inputs */
-.form-input{
-    padding: 1rem;
-    border: none;
-    border-radius: 0.5rem;
-    background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent background */
-    box-shadow: 0 0 5px rgba(48, 47, 47, 0.1);
-    width: 100%;
-    font-size: 1rem;
-    margin-bottom: 0;
-}
-
-.form-input::placeholder{
-    color: #bdb9b9;
-}
-
 /* Label style */
 label{
     align-self: flex-start; /* Align label to the left */
@@ -337,20 +321,18 @@ small{
    Register Class page styles
    --------------------------------------------------------------- */
 .register-class-main-text{
-    color: rgb(255, 244, 244);
-    display: flex;
-    justify-content: center; 
-    align-items: center;
+    color: #2b2a2a; 
 }
 
 .checkbox-container{
     display: flex;
     flex-direction: row;
-    gap: 2rem; 
+    padding: 0;
+    margin: 0;
 }
 
 .class-container{
-    max-width: 50rem; /* Adjust container width */
+    max-width: 50rem;
     box-sizing: border-box;
     font-size: 0.8rem;
     margin: 0 auto; 
@@ -358,29 +340,13 @@ small{
 }
 
 .class-box{
-    background-color: rgba(232, 10, 6, 0.8); 
+    background-color: #F8F8F8;
     border-radius: 2rem;
-    padding: 2.2rem;
-    margin: 1.5rem;
-}
-
-.class-box ul{    
-    list-style: none;
+    padding: 3rem;
+    margin: 1.7rem 0;
     display: flex;
-}
-
-/* Between Pick a Date and Search Address */
-.class-box ul li{
-    margin-right: 2rem;
-}
-
-.class-box ul li a{
-    text-decoration: none;
-    font-size: 1rem;
-}
-
-.class-box ul li a img{
-    margin-right: 0; /* Remove space between icon and text */
+    flex-direction: column;
+    text-align: center;
 }
 
 .three-icons{
@@ -398,10 +364,25 @@ small{
 .form-group{
     flex: 1;
     margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
 }
 
-.address-spacing{
-    margin-top: 1rem; /* Adjust spacing between these specific groups */
+/* Form inputs */
+.form-input{
+    padding: 0.6rem;
+    border: none; 
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 5px rgba(23, 22, 22, 0.1);
+    font-size: 0.8rem;
+    width: 100%; /* It takes the full width of the form group */
+    box-sizing: border-box;
+    font-family: "Comfortaa", sans-serif;
+}
+
+.form-input::placeholder{
+    color: #7d7676;
 }
 
 /* Buttons in Register Class page */

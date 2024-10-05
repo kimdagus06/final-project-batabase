@@ -268,21 +268,28 @@ db.serialize(() => {
   }
 
 /**
- * Table three | Create store - grade 4
+ * Table three | Create feedback - grade 4
  * Description:
- * 
- * db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS store (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+ * rating INT CHECK (rating BETWEEN 1 AND 5): Allow users to give feedback to classes 
+*/
+db.serialize(() => {
+    db.run(`CREATE TABLE IF NOT EXISTS feedback (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    class_id INT NOT NULL,
+    feedback_text TEXT NOT NULL,
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (class_id) REFERENCES classes(id)
     );`, (err) => {
         if (err) {
-            console.error("Error creating store table:", err.message);
+            console.error("Error creating feedback table:", err.message);
         } else {
-            console.log("store table created successfully.");
+            console.log("feedback table created successfully.");
         }
     });
 });
- */
 
 // -----------
 // ---ROUTE---
@@ -375,6 +382,10 @@ app.get('/upcomingclass', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
   });
+
+app.get("/detail", function (req, res) {
+    res.render("detail"); 
+});
 
 /**
  * app.post('/create-account', async (req, res)
