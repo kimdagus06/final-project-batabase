@@ -34,8 +34,13 @@ const predefinedClasses = [
     { userId: 2, className: 'Advanced Web Development', classType: 'Workshop', startTime: '10:00', endTime: '17:00', classFormat: 'offline', address: '123 Developer gatan, Jönköping', postcode: '11432' },
     { userId: 3, className: 'One-day Painting Class', classType: 'Oneday class', startTime: '09:00', endTime: '18:00', classFormat: 'offline', address: '12 Dashagatan, Gothenburg', postcode: '41104' },
     { userId: 4, className: 'AI and Machine Learning Conference', classType: 'Conference', startTime: '09:40', endTime: '14:00', classFormat: 'offline', address: '123 ju, Developer Hall, Malmö', postcode: '21122' },
-    { userId: 5, className: 'Wine and Beer brewing', classType: 'Oneday class', startTime: '15:00', endTime: '20:00', classFormat: 'offline', address: '456 wine and beer factory, Uppsala', postcode: '98456' }
-  ];
+    { userId: 5, className: 'Wine and Beer Brewing Basics', classType: 'Oneday class', startTime: '15:00', endTime: '20:00', classFormat: 'offline', address: '456 Wine and Beer Factory, Uppsala', postcode: '98456' },
+    { userId: 6, className: 'Photography 101', classType: 'Workshop', startTime: '11:00', endTime: '15:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 7, className: 'Introduction to Graphic Design', classType: 'Free class', startTime: '13:00', endTime: '16:00', classFormat: 'offline', address: '789 Design St, Stockholm', postcode: '12345' },
+    { userId: 8, className: 'Baking Artisan Bread', classType: 'Workshop', startTime: '09:00', endTime: '12:00', classFormat: 'offline', address: '321 Baker Lane, Gothenburg', postcode: '41105' },
+    { userId: 9, className: 'Yoga for Beginners', classType: 'Oneday class', startTime: '17:00', endTime: '18:30', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 10, className: 'Intro to Coding', classType: 'Workshop', startTime: '10:00', endTime: '14:00', classFormat: 'offline', address: '654 Code Way, Malmö', postcode: '21123' }
+];
 
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
@@ -532,6 +537,30 @@ app.post('/registerclass', async (req, res) => {
         res.redirect('/upcomingclass');
     });
 });
+
+app.post('/create-class', async (req, res) => {
+    const userId = req.session.userId; // Bring user id from the session 
+
+    // Check if user ID is present
+    if (!userId) {
+        console.error('User ID is required.');
+        return res.redirect('/login'); // Redirect to login if user ID is missing
+    }
+
+    const { className, classType, startTime, endTime, classFormat, address, postcode } = req.body;
+
+    // Create a class including user_id
+    db.run('INSERT INTO classes (user_id, className, classType, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
+        [userId, className, classType, startTime, endTime, classFormat, address, postcode], (err) => {
+        if (err) {
+            console.error('Error creating a class:', err.message);
+            return res.status(500).send('Server error'); // Send a server error response
+        } 
+
+        res.redirect('/upcomingclass'); // Redirect to upcoming classes
+    });
+});
+
 
 app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
     const userId = req.params.id;

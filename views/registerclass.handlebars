@@ -12,7 +12,7 @@
     <form class="class-creating" method="POST" action="/create-class">
         <div class="class-details">
             <p>Class DETAILS</p>
-            
+
             <div class="form-group">
                 <label for="class-name">Class Name</label>
                 <input type="text" id="class-name" name="className" class="form-input" required>
@@ -21,12 +21,15 @@
             <div class="form-group">
                 <label for="class-type">Class Type</label>
                 <select id="class-type" name="classType" class="form-input" required>
-                    <option value="">Select Class Type</option>
-                    <option value="freeclass">Free Class</option>
-                    <option value="onedayclass">One-day Class</option> <!-- Fixed value -->
-                    <option value="conference">Conference</option>
-                    <option value="workshop">Workshop</option>
-                    <option value="webinar">Webinar</option>
+                    <option value="">Select Class Type</option> <!-- Fixed value -->
+                    <option value="freeclass">Art</option>
+                    <option value="onedayclass">Technology</option>
+                    <option value="conference">Baking/Cooking</option>
+                    <option value="workshop">Plants</option>
+                    <option value="webinar">Photography</option>
+                    <option value="webinar">Business</option>
+                    <option value="webinar">Language</option>
+                    <option value="webinar">Fitness</option>
                 </select>
             </div>
 
@@ -42,6 +45,7 @@
                 </div>
             </div>
 
+            <input type="hidden" name="classFormat" value="offline"> <!-- Default value setting to avoid server error -->
             <div class="checkbox-container">
                 <div class="form-group">
                     <input type="checkbox" id="online-check" name="classFormat" value="online">
@@ -68,7 +72,8 @@
                     <div class="text">Submit</div>
                 </button>
 
-                <button type="button" class="remove-button">
+                <!-- When the remove button is clicked all the input fields are cleared. -->
+                <button type="button" class="remove-button" onclick="resetForm()">
                     <div class="text">Remove</div>
                 </button>
             </div>

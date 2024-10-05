@@ -71,3 +71,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+
+/**
+ * When the remove button is clicked all the input fields are cleared.
+ * This function resets the form
+ *  
+ */
+function resetForm() {
+  // Select the form element
+  const form = document.querySelector('.class-creating');
+  form.reset();
+}

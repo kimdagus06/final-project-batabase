@@ -1,39 +1,21 @@
+<h2 class="trending-title">Trending Classes</h2>
 <ul id="class-list">
     {{#each classes}}
         <li class="class-item card">
             <div class="class-info">
-                <!-- INNER JOIN part -->
-                <span><strong>Teacher ID:</strong> {{user_id}}</span><br> <!-- teacher ID -->
-                <span><strong>{{username}}</strong> is holding this class:</span><br>
+                <div class="image-container">
+                    <img src="/image/upcomings-image.png" alt="{{image}} image" class="class-image">
+                    <img src="/icons/bookmark-icon.png" alt="Bookmark Icon" class="bookmark">
+                </div>
                 <span><strong>{{className}}</strong></span><br>
-                <span>{{classType}}</span> - 
-                <span>{{classFormat}}</span> - 
-                <span>{{address}}</span>
+                <span><strong>Tutor:</strong> {{user_id}} - {{username}}</span><br>
             </div>
-            <div class="upcoming-buttons">
-                <input type="button" value="View Details" class="viewdetails">
-                <input type="button" value="Register class" class="registerclass">
+            <div class="upcoming-button">
+                <a href="/detail" class="registerclass button">Register class</a>
             </div>
         </li>
     {{/each}}
     {{#unless classes.length}}
-    <!-- If there is no registered class, this text will be displayed. -->
         <li>No upcoming classes available.</li>
     {{/unless}}
 </ul>
-
-
-        <!-- Pagination - grade 4 -->
-
-    <!-- Display the Next button if there are more pages
-    {{#if totalPages}}
-        {{#if (gt page totalPages)}}
-        <a href="/upcomingclass?page={{add page 1}}">Next</a>
-    {{/if}}
-{{/if}}
-
- -->
-    <div class="upcoming-buttons">
-        <a href="/registerclass" class="button-register-new">Register New Class</a>
-        <a href="/" class="button-back-to-home">Back to Home</a>
-    </div>

@@ -1,3 +1,7 @@
+:root{
+    --button-color: #625deb;
+}
+
 /* cite : https://cssgradient.io/ */
 body{
     margin: 0;
@@ -370,19 +374,17 @@ small{
 
 .class-creating{
     font-size: 1rem;
-    font-weight: 700;
 }
 
 .class-details p {
     font-size: 1.2rem;
-    font-weight: 800;
+    font-weight: bold;
     color: rgba(27, 26, 26);
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     margin: 2rem;
 }
-
 
 .time-duration-container{
     display: flex;
@@ -424,23 +426,18 @@ small{
 }
 
 .button{
-    background-color: #ffffff00;
-    color: #2b2a2a;
     width: 9rem;
     height: 2.9rem;
-    border: #625deb 0.1rem solid;
-    border-radius: 1rem;
-    text-align: right;
-    transition: all 0.6s ease;
-    font-family: "Comfortaa", sans-serif;
-  }
-  
-.button:hover{
     background-color: #625deb;
     cursor: pointer;
     color: #fff;
-  }
-  
+    border-radius: 1rem;
+    border: none;
+    text-align: right;
+    transition: all 0.6s ease;
+    font-family: "Comfortaa", sans-serif;
+}
+
 .button svg{
     width: 1.6rem;
     margin: -0.3rem 0.8rem 1rem;
@@ -454,11 +451,10 @@ small{
 }
 
 .remove-button{
-    background-color: #ffffff00;
+    border: none;
     color: #2b2a2a;
     width: 9rem;
     height: 2.9rem;
-    border: #625e5e 0.1rem solid;
     border-radius: 1rem;
     text-align: center;
     transition: all 0.6s ease;
@@ -535,31 +531,35 @@ small{
     background-color: #0056b3;
 }
 
-/* Upcoming class */
+/* ---------------------------------------------------------------
+   Upcomings page styles
+   --------------------------------------------------------------- */
 /* Refer to this link and cite: https://bbbootstrap.com/snippets/bootstrap-product-comparison-template-99013072 */
-.section-title, .description{
-    color: #333;
-}
-
-.upcoming-container{
-    grid-gap: 1rem; /* Space between cards */
-    justify-content: center;
+.trending-title {
+    font-size: 2rem;
+    color: #2b2a2a;
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
 }
 
 #class-list{
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+    grid-template-columns: repeat(5, 1fr); /* 5 cards per row */
     margin: 4rem;
 }
 
 .class-item{
-    width: 19rem;
-    background: #fff;
-    border-radius: 0.8rem;
-    box-shadow: 0 0.3rem 0.4rem rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
+    width: 20rem;
     padding: 1rem;
+    border: none; 
+    border-radius: 1rem;
+    box-shadow: 0 0 5px rgba(23, 22, 22, 0.1);
+    margin-bottom: 1rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 0.8rem;
+    box-sizing: border-box;
 }
 
 .class-info{
@@ -568,57 +568,51 @@ small{
     color: #444;
 }
 
+.image-container{
+    position: relative; /* Positioning context for the image and the icon */
+}
+
+.class-image{
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+.bookmark{
+    position: absolute;
+    top: 1.8rem;
+    right: 1.7rem;
+    width: 1.5rem;
+    height: auto;
+    cursor: pointer;
+}
+
 span{
     display: block;
     margin-bottom: 0.5rem;
     font-size: 1rem;
 }
 
-.upcoming-buttons{
+/* Upcoming classes page buttonn in cards */ 
+.upcoming-button{
     text-align: center;
     margin-top: 0.6rem;
-}
-
-/* Upcoming classes buttons in cards */ 
-.viewdetails{
-    width: 100%;
-    border-radius: 0.2rem;
-    padding: 1rem 0;
-    font-size: 1rem;
-    background-color: #FF6B6B;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.viewdetails:hover{
-    background-color: #FF4949;
+    margin-bottom: 2rem;
 }
 
 .registerclass{
     width: 100%;
-    border-radius: 0.2rem;
-    padding: 1rem 0;
-    font-size: 1rem;
-    background-color: #FF6B6B;
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+    background-color: #625deb;
     color: white;
     border: none;
     cursor: pointer;
-}
-
-.registerclass{
-    background-color: #FF4949;
+    text-decoration: none;
 }
 
 /* Pagination - grade 4 */
-.pagination{
-    margin: 1.2rem 0;
-}
-
-#prev-page, #next-page{
-    margin: 0 0.2rem;
-    padding: 1rem;
-}
 
 /*Login button in the menu */
 .login-items{
