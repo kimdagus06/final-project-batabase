@@ -1,6 +1,31 @@
-<form method="POST" action="/submit-feedback">
-    <input type="hidden" name="class_id" value="1">
-    <textarea name="feedback_text" placeholder="Leave a feedback." required></textarea>
-    <input type="number" name="rating" min="1" max="5" required>
-    <button type="submit">Submit my review</button>
-</form>
+<!-- When a user clicks items, it links to detail page. Users can leave a feedback at the end of the page. - grade 4 (at least three tables) -->
+<div class="product-page">
+    <div class="product-info">
+        <div class="product-images">
+            <div class="image-grid">
+                <img src="/image/upcomings-image.png" alt="Class Image 1">
+                <img src="/image/upcomings-image.png" alt="Class Image 2">
+                <img src="/image/upcomings-image.png" alt="Class Image 3">
+                <img src="/image/upcomings-image.png" alt="Class Image 4">
+            </div>
+        </div>
+        <div class="details">
+            <span class="class-name">{{className}}</span>
+            <span class="tutor"><strong>Tutor:</strong> {{user_id}} - {{username}}</span>
+            <span class="class-type"><strong>Class Type:</strong> {{classType}}</span>
+            <span class="start-time"><strong>Start Time:</strong> {{startTime}}</span>
+            <span class="end-time"><strong>End Time:</strong> {{endTime}}</span>
+            <span class="class-format"><strong>Class Format:</strong> {{classFormat}}</span>
+            <span class="address"><strong>Address:</strong> {{address}}</span>
+            <span class="postcode"><strong>Postcode:</strong> {{postcode}}</span>
+            <span class="price"><strong>Price:</strong> ${{price}}</span>
+            <form method="POST" action="/submit-feedback" class="feedback-form">
+                <input type="hidden" name="class_id" value="1">
+                <textarea name="feedback_text" placeholder="Leave a feedback." required></textarea>
+                <input type="number" name="rating" min="1" max="5" required>
+                <button type="submit">Submit my review</button>
+            </form>
+        </div>
+    </div>
+</div>
+

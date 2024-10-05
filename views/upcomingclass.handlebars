@@ -13,7 +13,7 @@
                 <span><strong>Tutor:</strong> {{user_id}} - {{username}}</span><br>
             </div>
             <div class="upcoming-button">
-                <a href="/detail" class="registerclass button">Register class</a>
+                <a href="/detail" class="upcomingclass-button">Register class</a>
             </div>
         </li>
     {{/each}}
@@ -23,10 +23,12 @@
 </ul>
 
 <!-- Pagination - grade 4 -->
-<div class="pagination">
-        <a href="/upcomingclass?page={{pageMinus1}}" class="prev-button">Previous</a>
-
-    <span>Page {{page}} of {{totalPages}}</span>
-
-        <a href="/upcomingclass?page={{nextPage}}" class="next-button">Next</a>
+<div class="pagination-container">
+    <div class="pagination">
+        <ul>
+            <li class="prev-button"><a href="/upcomingclass?page={{pageMinus1}}">Previous</a></li>
+            <li><span>Page {{page}} of {{totalPages}}</span></li>
+            <li class="next-button"><a href="/upcomingclass?page={{nextPage}}">Next</a></li>
+        </ul>
+    </div>
 </div>

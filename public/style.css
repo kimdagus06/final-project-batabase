@@ -79,7 +79,7 @@ body{
 }
 
 /* ---------------------------------------------------------------
-   Home page styles
+   Home page (logo) styles
    --------------------------------------------------------------- */
 .home-screen-page{
     display: flex;
@@ -183,7 +183,130 @@ body{
 }
 
 /* ---------------------------------------------------------------
-   Create page styles
+   Upcomings page styles
+   --------------------------------------------------------------- */
+/* Refer to this link and cite: https://bbbootstrap.com/snippets/bootstrap-product-comparison-template-99013072 */
+.trending-title {
+    font-size: 2rem;
+    color: #2b2a2a;
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+#class-list{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 cards per row */
+    margin: 4rem;
+}
+
+.class-item{
+    width: 20rem;
+    padding: 1rem;
+    border: none; 
+    border-radius: 1rem;
+    box-shadow: 0 0 5px rgba(23, 22, 22, 0.1);
+    margin-bottom: 1rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 0.8rem;
+    box-sizing: border-box;
+}
+
+.class-info{
+    padding: 0.8rem;
+    text-align: center;
+    color: #444;
+}
+
+.image-container{
+    position: relative; /* Positioning context for the image and the icon */
+}
+
+.class-image{
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+
+.bookmark{
+    position: absolute;
+    top: 1.8rem;
+    right: 1.7rem;
+    width: 1.5rem;
+    height: auto;
+    cursor: pointer;
+}
+
+span{
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Upcoming classes page buttonn in cards */ 
+.upcoming-button{
+    text-align: center;
+    margin-top: 0.6rem;
+    margin-bottom: 2rem;
+}
+
+.upcomingclass-button{
+    width: 100%;
+    border-radius: 1rem;
+    padding: 0.8rem 3rem;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+    background-color: rgba(232, 10, 6, 0.8); 
+}
+
+/* Pagination - grade 4 */
+.pagination-container{
+    display: flex;
+    justify-content: center;
+}
+
+.pagination{
+    display: flex;
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination ul{
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination li{
+    margin: 1.5rem;
+}
+
+.pagination li a{
+    text-decoration: none;
+    padding: 0.7rem 1rem; 
+    border-radius: 2rem; 
+    transition: background 0.3s, color 0.3s;
+    color: #2b2a2a;
+}
+
+.pagination li a:hover{
+    background-color: #a6a5b3;
+    color: #ffffff;
+}
+
+.pagination li span{
+    font-size: 1rem;
+    color: #2b2a2a;
+}
+
+/* ---------------------------------------------------------------
+   Create Account page styles
    --------------------------------------------------------------- */
 .create-title{
     text-align: center;
@@ -428,7 +551,7 @@ small{
 .button{
     width: 9rem;
     height: 2.9rem;
-    background-color: #625deb;
+    background-color: #0d0b5f;
     cursor: pointer;
     color: #fff;
     border-radius: 1rem;
@@ -522,97 +645,14 @@ small{
     font-size: 1rem; 
     cursor: pointer;
     border-radius: 1rem;
-    background-color: #007BFF;
+    background-color: #625deb;
     color: white;
     transition: background-color 0.3s;
 }
 
 .contact-button:hover {
-    background-color: #0056b3;
-}
-
-/* ---------------------------------------------------------------
-   Upcomings page styles
-   --------------------------------------------------------------- */
-/* Refer to this link and cite: https://bbbootstrap.com/snippets/bootstrap-product-comparison-template-99013072 */
-.trending-title {
-    font-size: 2rem;
-    color: #2b2a2a;
-    text-align: center;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-}
-
-#class-list{
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* 5 cards per row */
-    margin: 4rem;
-}
-
-.class-item{
-    width: 20rem;
-    padding: 1rem;
-    border: none; 
-    border-radius: 1rem;
-    box-shadow: 0 0 5px rgba(23, 22, 22, 0.1);
-    margin-bottom: 1rem;
-    background-color: rgba(255, 255, 255, 0.2);
-    font-size: 0.8rem;
-    box-sizing: border-box;
-}
-
-.class-info{
-    padding: 0.8rem;
-    text-align: center;
-    color: #444;
-}
-
-.image-container{
-    position: relative; /* Positioning context for the image and the icon */
-}
-
-.class-image{
-    max-width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-}
-
-.bookmark{
-    position: absolute;
-    top: 1.8rem;
-    right: 1.7rem;
-    width: 1.5rem;
-    height: auto;
-    cursor: pointer;
-}
-
-span{
-    display: block;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-}
-
-/* Upcoming classes page buttonn in cards */ 
-.upcoming-button{
-    text-align: center;
-    margin-top: 0.6rem;
-    margin-bottom: 2rem;
-}
-
-.registerclass{
-    width: 100%;
-    border-radius: 1rem;
-    padding: 1rem 1.5rem;
-    font-size: 0.9rem;
     background-color: #625deb;
-    color: white;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
 }
-
-/* Pagination - grade 4 */
 
 /*Login button in the menu */
 .login-items{
