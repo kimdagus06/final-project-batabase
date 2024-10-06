@@ -101,6 +101,8 @@ app.use((req, res, next) => {
     // Check if the user is an admin; default to false if not
     res.locals.isAdmin = req.session.isAdmin || false;
 
+    res.locals.isCreateAccountPage = req.session.isCreateAccountPage || false; 
+
     // Call the next middleware in the stack
     next();
 });
@@ -320,7 +322,8 @@ app.get("/", function (req, res) {
         isLoggedIn: req.session.isLoggedIn,
         name: req.session.name,
         emailAddress: req.session.emailAddress,
-        isAdmin: req.session.isAdmin
+        isAdmin: req.session.isAdmin,
+        isCreateAccountPage: req.session.isCreateAccountPage
     }
 
     if (!req.session.isLoggedIn) {
@@ -331,8 +334,9 @@ app.get("/", function (req, res) {
     res.render("home", model);
 });
 
-app.get("/createaccount", function (req, res) {
-    res.render("createaccount"); 
+app.get('/createaccount', (req, res) => {
+    req.session.isCreateAccountPage = true; // Set this session variable
+    res.render('createaccount', { isCreateAccountPage: true }); // Ensure this points to your correct view
 });
 
 app.get('/login', (req, res) => {
@@ -382,7 +386,7 @@ app.get('/admin', isAdmin, (req, res) => {
 app.get('/upcomingclass', async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1; // Get the current page
-        const limit = 8; // Number of items per page
+        const limit = 10; // Number of items per page
         const offset = (page - 1) * limit; // Calculate offset for SQL query
 
         const query = `

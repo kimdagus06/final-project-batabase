@@ -2,15 +2,9 @@
     --button-color: #625deb;
 }
 
-/* cite : https://cssgradient.io/ */
 body{
     margin: 0;
-    /*
-    *    background-image: url('image/try3.jpg');
-    background-size: cover;
-    background-position: center; 
-    */
-    font-family: "Comfortaa", sans-serif;
+    font-family: "Quicksand", sans-serif;
     background-color: #fffdff;
 }
 
@@ -19,7 +13,6 @@ body{
    --------------------------------------------------------------- */
 /* Menubar items */
 .menubar{
-    padding: 2rem 0; /* Space in menu bar up,down sides */
     font-size: 1rem;
     display: flex;
     align-items: center; 
@@ -70,7 +63,7 @@ body{
     padding-left: 1rem; 
     background-color: #F8F8F8;
     flex: 1; 
-    font-family: "Comfortaa", sans-serif;
+    font-family: "Quicksand", sans-serif;
     font-size: 0.8rem;
 }
 
@@ -225,7 +218,7 @@ body{
     box-sizing: border-box;
     font-size: 0.8rem;
     margin: 0 auto; 
-    font-family: "Comfortaa", sans-serif;
+    font-family: "Quicksand", sans-serif;
 }
 
 .three-icons{
@@ -270,7 +263,7 @@ body{
     font-size: 0.8rem;
     width: 100%; /* It takes the full width of the form group */
     box-sizing: border-box;
-    font-family: "Comfortaa", sans-serif;
+    font-family: "Quicksand", sans-serif;
 }
 
 .form-input::placeholder{
@@ -300,7 +293,7 @@ body{
     border: none;
     text-align: right;
     transition: all 0.6s ease;
-    font-family: "Comfortaa", sans-serif;
+    font-family: "Quicksand", sans-serif;
 }
 
 .button svg{
@@ -323,7 +316,7 @@ body{
     border-radius: 1rem;
     text-align: center;
     transition: all 0.6s ease;
-    font-family: "Comfortaa", sans-serif;
+    font-family: "Quicksand", sans-serif;
     margin-left: 2rem;
 }
   
@@ -473,8 +466,88 @@ span{
 /* ---------------------------------------------------------------
    About page styles
    --------------------------------------------------------------- */
+.about-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-   
+.about-title{
+    margin-top: 3rem;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: rgba(232, 70, 6, 0.8);
+}
+
+.about-sub-title{
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.about-core-values{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-core-values ul{
+    margin-top: 1rem;
+    padding-left: 0;
+    counter-reset: item;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.about-core-values li{
+    margin-bottom: 2rem;
+    position: relative;
+    padding-left: 3rem;
+    text-decoration: none; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+    margin-right: 4rem;
+    margin-left: 4rem;
+}
+
+/* Number buttons */
+.about-core-values li::before{
+    counter-increment: item; /* Counter +1 +1 +1 +1 ... */
+    content: "0" counter(item); /* It displays with 0 e.g 01, 02, 03 ...*/
+    left: 0;
+    top: 0;
+    width: 4rem;
+    height: 2rem;
+    background-color: #FF5600;
+    color: white;
+    border-radius: 1rem;
+    font-size: 1rem; /* Number font size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+.highlight{
+    font-weight: 900; 
+    font-size: 1.3rem;
+}
+
+.additional-info{
+    font-weight: 300;
+    font-size: 0.8rem;
+    color: #3d3d3d;
+}
+
 /* ---------------------------------------------------------------
    Create Account page styles
    --------------------------------------------------------------- */
