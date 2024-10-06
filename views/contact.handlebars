@@ -1,42 +1,73 @@
-<!-- Contact section -->
 <div class="contact-container">
     <h2 class="contact-title">Help Center</h2>
-    <div class="contact-sub-text">Chat with us or call us</div>
-    <div class="contact-sub-text">Leave a feedback for better experience</div>
-    <div class="contact-sub-text">Support different languages</div>
-    
-    <button class="contact-button">
-        <span class="contact-text">Get help</span>
-    </button>
-</div>
 
-
-    <div class="contact-container">
-        <form method="POST" action="/submit-feedback" class="contact-feedback-form">
-            <!-- Contact Fields -->
-            <input type="text" placeholder="Name" class="contact-input" name="name" required>
-            <input type="email" placeholder="Email" class="contact-input" name="email" required>
-            <textarea name="message" cols="30" rows="5" class="contact-input" placeholder="Your Message" required></textarea>
-
-            <!-- Feedback Fields -->
-            <input type="hidden" name="class_id" value="1">
-            <textarea name="feedback_text" cols="30" rows="5" class="contact-input" placeholder="Leave feedback" required></textarea>
-            <!-- Rating using a dropdown (select) -->
-<div class="rating-container">
-    <label for="rating">Rate Us:</label>
-    <select name="rating" id="rating" class="contact-input" required>
-        <option value="" disabled selected>Select a rating</option>
-        <option value="1">1 - Very Poor</option>
-        <option value="2">2 - Poor</option>
-        <option value="3">3 - Average</option>
-        <option value="4">4 - Good</option>
-        <option value="5">5 - Excellent</option>
-    </select>
-</div>
-
-
-            <!-- Submit Button -->
-            <input type="submit" value="Send" class="contact-button">
-        </form>
+    <div class="contact-sub-text">
+        <img src="/icons/check-double.png" alt="Check icon" class="double-check-icon">
+        Chat with us or call us
     </div>
 
+    <div class="contact-sub-text">
+        <img src="/icons/check-double.png" alt="Check icon" class="double-check-icon">
+        Leave feedback for a better experience
+    </div>
+
+    <div class="contact-sub-text">
+        <img src="/icons/check-double.png" alt="Check icon" class="double-check-icon">
+        Support different languages
+    </div>
+
+    <div class="guide-text">
+        <p>For immediate assistance, reach out to our support team 24/7</p>
+    </div>
+</div>
+
+<div class="about-digg-container">
+    <div class="about-digg-card">
+        <img src="/icons/world.png" alt="World icon" class="digg-icon">
+        <p>Online Platform<br>Learn anytime, anywhere</p>
+    </div>
+
+    <div class="about-digg-card">
+        <img src="/icons/trophy.png" alt="Trophy icon" class="digg-icon">
+        <p>Awarded Best App 2023<br>95% User Satisfaction</p>
+    </div>
+
+    <div class="about-digg-card">
+        <img src="/icons/like.png" alt="Like icon" class="digg-icon">
+        <p>Daily Lecture Updates<br>Fresh content every day</p>
+    </div>
+
+    <div class="about-digg-card">
+        <img src="/icons/gift.png" alt="Gift icon" class="digg-icon">
+        <p>Send a Gift<br>New feature now available</p>
+    </div>
+</div>
+
+<div class="contact-container">
+    <form method="POST" action="/submit-feedback" class="contact-feedback-form">
+        <!-- Contact Fields -->
+        <input type="text" placeholder="Name" class="contact-input" name="name" required>
+        <input type="email" placeholder="Email" class="contact-input" name="email" required>
+        <textarea name="message" cols="30" rows="5" class="contact-input" placeholder="Your Message" required></textarea>
+
+        <!-- Feedback Fields -->
+        <input type="hidden" name="class_id" value="1">
+        <textarea name="feedback_text" cols="30" rows="5" class="contact-input" placeholder="Leave feedback" required></textarea>
+
+        <!-- Rating using a dropdown (select) -->
+        <div class="rating-container">
+            <label for="rating">Rate Us:</label>
+            <select name="rating" id="rating" class="contact-input" required>
+                <option value="" disabled selected>Select a rating</option>
+                <option value="1">1 - Very Poor</option>
+                <option value="2">2 - Poor</option>
+                <option value="3">3 - Average</option>
+                <option value="4">4 - Good</option>
+                <option value="5">5 - Excellent</option>
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <input type="submit" value="Send" class="contact-button">
+    </form>
+</div>
