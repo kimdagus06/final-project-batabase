@@ -10,3 +10,10 @@
         </form>
     </div>
 </section>
+
+            <form method="POST" action="/submit-feedback" class="feedback-form">
+                <input type="hidden" name="class_id" value="1">
+                <textarea name="feedback_text" placeholder="Leave a feedback." required></textarea>
+                <input type="number" name="rating" min="1" max="5" required>
+                <button type="submit">Submit my review</button>
+            </form>
