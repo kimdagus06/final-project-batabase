@@ -343,8 +343,6 @@ body{
 
 /* ---------------------------------------------------------------
    Upcomings page styles
-   
-   Refer to this link and cite: https://bbbootstrap.com/snippets/bootstrap-product-comparison-template-99013072
    --------------------------------------------------------------- */
 .trending-title{
     font-size: 2rem;
@@ -354,6 +352,7 @@ body{
     padding-bottom: 0.5rem;
 }
 
+/* Refer to this link and cite: https://bbbootstrap.com/snippets/bootstrap-product-comparison-template-99013072 */
 #class-list{
     list-style: none;
     display: grid;
@@ -467,6 +466,27 @@ span{
 .pagination li span{
     font-size: 1rem;
     color: #2b2a2a;
+}
+
+/* ---------------------------------------------------------------
+   Sticky banner styles
+   --------------------------------------------------------------- */
+.sticky-banner{
+    position: fixed; /* It should be always botton fixed */
+    z-index: 1000;
+    background-color: #141313;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    font-size: 1.2rem;
+    color: white;
+    text-align: center;
+    padding: 1.9rem;
+}
+
+.sticky-banner a{
+    text-decoration: underline;
+    color: #ffd700;
 }
 
 /* ---------------------------------------------------------------
@@ -649,7 +669,68 @@ span{
     );
     transition: all 0.475s;
 }
-  
+
+/* ---------------------------------------------------------------
+   Contact page styles
+   --------------------------------------------------------------- */
+.contact-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+    margin-right: 4rem;
+}
+
+.contact-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; 
+    padding: 2rem;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-input{
+    width: 100%;
+    font-size: 1rem; 
+    font-weight: 400;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid #1f1e1e;
+    outline: none;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s;
+}
+
+.contact-input:focus{
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.contact-button{
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem; 
+    cursor: pointer;
+    border-radius: 1rem;
+    background-color: #625deb;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.contact-button:hover {
+    background-color: #625deb;
+}
+
+.contact-section{
+    background-color: #625deb;
+}
+
 /* ---------------------------------------------------------------
    Create Account page styles
    --------------------------------------------------------------- */
@@ -733,60 +814,6 @@ small{
 .create:hover{
     background-color: #FF4949; /* Darker shade on hover */
     transform: scale(1.05); /* Slightly grow on hover */
-}
-
-/* Contact page */
-.section-title{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
-}
-
-.contact-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 600px; 
-    padding: 2rem;
-    margin: auto;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.contact-input{
-    width: 100%;
-    font-size: 1rem; 
-    font-weight: 400;
-    padding: 1rem;
-    border-radius: 1rem;
-    border: 1px solid #1f1e1e;
-    outline: none;
-    margin-bottom: 1rem;
-    transition: border-color 0.3s;
-}
-
-.contact-input:focus{
-    border-color: #007BFF;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-.contact-button{
-    width: 100%;
-    padding: 1rem;
-    font-size: 1rem; 
-    cursor: pointer;
-    border-radius: 1rem;
-    background-color: #625deb;
-    color: white;
-    transition: background-color 0.3s;
-}
-
-.contact-button:hover {
-    background-color: #625deb;
 }
 
 /*Login button in the menu */

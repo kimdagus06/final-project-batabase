@@ -1,34 +1,41 @@
-<h2 class="trending-title">Trending Classes</h2>
-<ul id="class-list">
-    {{#each classes}}
-        <li class="class-item card">
-            <div class="class-info">
-                <div class="image-container">
-                    <a href="/detail">
-                        <img src="/image/upcomings-image.png" alt="{{image}} image" class="class-image">
-                    </a>
-                    <img src="/icons/bookmark-icon.png" alt="Bookmark Icon" class="bookmark">
+<div class="upcoming-page-container"> <!-- To chance the background color -->
+    <h2 class="trending-title">Trending Classes</h2>
+    <ul id="class-list">
+        {{#each classes}}
+            <li class="class-item card">
+                <div class="class-info">
+                    <div class="image-container">
+                        <a href="/detail">
+                            <img src="/image/upcomings-image.png" alt="{{image}} image" class="class-image">
+                        </a>
+                        <img src="/icons/bookmark-icon.png" alt="Bookmark Icon" class="bookmark">
+                    </div>
+                    <span><strong>{{className}}</strong></span><br>
+                    <span><strong>Tutor:</strong> {{user_id}} - {{username}}</span><br>
                 </div>
-                <span><strong>{{className}}</strong></span><br>
-                <span><strong>Tutor:</strong> {{user_id}} - {{username}}</span><br>
-            </div>
-            <div class="upcoming-button">
-                <a href="/detail" class="upcomingclass-button">Register class</a>
-            </div>
-        </li>
-    {{/each}}
-    {{#unless classes.length}}
-        <li>No upcoming classes available.</li>
-    {{/unless}}
-</ul>
+                <div class="upcoming-button">
+                    <a href="/detail" class="upcomingclass-button">Register class</a>
+                </div>
+            </li>
+        {{/each}}
+        {{#unless classes.length}}
+            <li>No upcoming classes available.</li>
+        {{/unless}}
+    </ul>
 
-<!-- Pagination - grade 4 -->
-<div class="pagination-container">
-    <div class="pagination">
-        <ul>
-            <li class="prev-button"><a href="/upcomingclass?page={{pageMinus1}}">Previous</a></li>
-            <li><span>Page {{page}} of {{totalPages}}</span></li>
-            <li class="next-button"><a href="/upcomingclass?page={{nextPage}}">Next</a></li>
-        </ul>
+    <!-- Pagination - grade 4 -->
+    <div class="pagination-container">
+        <div class="pagination">
+            <ul>
+                <li class="prev-button"><a href="/upcomingclass?page={{pageMinus1}}">Previous</a></li>
+                <li><span>Page {{page}} of {{totalPages}}</span></li>
+                <li class="next-button"><a href="/upcomingclass?page={{nextPage}}">Next</a></li>
+            </ul>
+        </div>
+    
+        <!-- Sticky Banner -->
+        <div class="sticky-banner">
+            <p>sticky banner test<a href="#">Click here</a> for more information</p>
+        </div>
     </div>
 </div>

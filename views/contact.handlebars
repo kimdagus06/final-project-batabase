@@ -1,19 +1,42 @@
-<!-- Contact form -->
-<section class="contact-section" id="contact">
-    <h2 class="section-title">Contact</h2>
+<!-- Contact section -->
+<div class="contact-container">
+    <h2 class="contact-title">Help Center</h2>
+    <div class="contact-sub-text">Chat with us or call us</div>
+    <div class="contact-sub-text">Leave a feedback for better experience</div>
+    <div class="contact-sub-text">Support different languages</div>
+    
+    <button class="contact-button">
+        <span class="contact-text">Get help</span>
+    </button>
+</div>
+
+
     <div class="contact-container">
-        <form action="" class="contact-form">
+        <form method="POST" action="/submit-feedback" class="contact-feedback-form">
+            <!-- Contact Fields -->
             <input type="text" placeholder="Name" class="contact-input" name="name" required>
             <input type="email" placeholder="Email" class="contact-input" name="email" required>
-            <textarea name="message" id="" cols="30" rows="10" class="contact-input" placeholder="Contact Us" required></textarea>
+            <textarea name="message" cols="30" rows="5" class="contact-input" placeholder="Your Message" required></textarea>
+
+            <!-- Feedback Fields -->
+            <input type="hidden" name="class_id" value="1">
+            <textarea name="feedback_text" cols="30" rows="5" class="contact-input" placeholder="Leave feedback" required></textarea>
+            <!-- Rating using a dropdown (select) -->
+<div class="rating-container">
+    <label for="rating">Rate Us:</label>
+    <select name="rating" id="rating" class="contact-input" required>
+        <option value="" disabled selected>Select a rating</option>
+        <option value="1">1 - Very Poor</option>
+        <option value="2">2 - Poor</option>
+        <option value="3">3 - Average</option>
+        <option value="4">4 - Good</option>
+        <option value="5">5 - Excellent</option>
+    </select>
+</div>
+
+
+            <!-- Submit Button -->
             <input type="submit" value="Send" class="contact-button">
         </form>
     </div>
-</section>
 
-            <form method="POST" action="/submit-feedback" class="feedback-form">
-                <input type="hidden" name="class_id" value="1">
-                <textarea name="feedback_text" placeholder="Leave a feedback." required></textarea>
-                <input type="number" name="rating" min="1" max="5" required>
-                <button type="submit">Submit my review</button>
-            </form>

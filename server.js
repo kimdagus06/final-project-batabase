@@ -329,14 +329,12 @@ app.get("/", function (req, res) {
     if (!req.session.isLoggedIn) {
         console.log("Home model (not logged in):", model);
     }
-    // console.log("Home model: " + JSON.stringify(model));
     
     res.render("home", model);
 });
 
 app.get('/createaccount', (req, res) => {
-    req.session.isCreateAccountPage = true; // Set this session variable
-    res.render('createaccount', { isCreateAccountPage: true }); // Ensure this points to your correct view
+    res.render('createaccount', { isCreateAccountPage: true });
 });
 
 app.get('/login', (req, res) => {
