@@ -565,6 +565,92 @@ span{
 }
 
 /* ---------------------------------------------------------------
+   Join us section styles - end of the about page
+   --------------------------------------------------------------- */
+.join-us-section{
+    position: relative;
+    background-image: url('/image/join-us3.jpg');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 20rem; 
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    color: white; 
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+    font-weight: 800;
+}
+
+.join-us-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(28, 27, 27, 0.5); /* Black overray */
+    z-index: 1; /* Set as 1, it make text and button above the image */
+}
+
+.join-us-text p{
+    padding: 0.5rem 1rem;
+    font-size: 2rem;
+}
+
+/* Position join us text and button above of the image (overray) */
+.join-us-section p, .join-us-section button{
+    position: relative;
+    z-index: 2;
+}
+
+/* Cite: Madflows Folarin Lawal. (May 10, 2022). Universe. https://uiverse.io/Madflows/stale-baboon-45 */
+.view-job-offer-button{
+    position: relative;
+    overflow: hidden;
+    height: 3rem;
+    padding: 0 2rem;
+    border-radius: 1.5rem;
+    background: #33323b;
+    background-size: 400%;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 1.8rem;
+    font-family: "Quicksand", sans-serif;
+}
+  
+.view-job-offer-button:hover::before{
+    transform: scaleX(1);
+}
+  
+.view-job-offer-text{
+    position: relative;
+    z-index: 1;
+  }
+  
+.view-job-offer-button::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    width: 100%;
+    height: inherit;
+    border-radius: inherit;
+    background: linear-gradient(
+      82.3deg,
+      rgba(150, 93, 233, 1) 10.8%,
+      rgba(99, 88, 238, 1) 94.3%
+    );
+    transition: all 0.475s;
+}
+  
+/* ---------------------------------------------------------------
    Create Account page styles
    --------------------------------------------------------------- */
 .create-title{
