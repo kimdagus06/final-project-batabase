@@ -4,8 +4,8 @@
 
 body{
     margin: 0;
-    font-family: "Quicksand", sans-serif;
-    background-color: #f4f4f4;
+    font-family: "Red Hat Display", sans-serif;
+    background-color: #fbfbfb;
 }
 
 *{
@@ -69,7 +69,7 @@ body{
     padding-left: 1rem; 
     background-color: #dcd7d7;
     flex: 1; 
-    font-family: "Quicksand", sans-serif;
+    font-family: "Red Hat Display", sans-serif;
     font-size: 0.8rem;
 }
 
@@ -165,7 +165,7 @@ body{
     border-radius: 1rem;
     box-shadow: 0 0 5px rgba(23, 22, 22, 0.1);
     margin: 0.8rem;
-    background: #f6f1f1;
+    background: #ffffff;
     font-size: 0.8rem;
     box-sizing: border-box;
     text-align: center;
@@ -231,7 +231,7 @@ body{
     box-sizing: border-box;
     font-size: 0.8rem;
     margin: 0 auto; 
-    font-family: "Quicksand", sans-serif;
+    font-family: "Red Hat Display", sans-serif;
 }
 
 .three-icons{
@@ -276,7 +276,7 @@ body{
     font-size: 0.8rem;
     width: 100%; /* It takes the full width of the form group */
     box-sizing: border-box;
-    font-family: "Quicksand", sans-serif;
+    font-family: "Red Hat Display", sans-serif;
 }
 
 .form-input::placeholder{
@@ -306,7 +306,7 @@ body{
     border: none;
     text-align: right;
     transition: all 0.6s ease;
-    font-family: "Quicksand", sans-serif;
+    font-family: "Red Hat Display", sans-serif;
 }
 
 .button svg{
@@ -329,7 +329,7 @@ body{
     border-radius: 1rem;
     text-align: center;
     transition: all 0.6s ease;
-    font-family: "Quicksand", sans-serif;
+    font-family: "Red Hat Display", sans-serif;
     margin-left: 2rem;
 }
   
@@ -643,7 +643,7 @@ span{
     border: none;
     cursor: pointer;
     margin-top: 1.8rem;
-    font-family: "Quicksand", sans-serif;
+    font-family: "Red Hat Display", sans-serif;
 }
   
 .view-job-offer-button:hover::before{
@@ -709,6 +709,49 @@ span{
 }
 
 /* ---------------------------------------------------------------
+   Frequently Asked Questions section 
+   Refer to this link: https://codepen.io/Tuna_/pen/KKzXEVO
+   --------------------------------------------------------------- */
+.faq-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: #fff;
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    align-items: center;
+}
+
+.frequently-asked-questions-text{
+    width: 40%;
+    text-align: left;
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-top: 1.2rem;
+}
+
+/* Right side Q&A */
+.frequently-asked-questions-content{
+    width: 60%;
+    text-align: right;
+}
+
+.frequently-asked-questions-question{
+    margin: 1rem;
+}
+
+.frequently-asked-questions-answer{
+    margin-bottom: 2rem;
+    border: 0.1rem solid rgba(255, 255, 255, 0.5);
+}
+
+.frequently-asked-questions-question p{
+    font-weight: 700;
+}
+
+/* ---------------------------------------------------------------
    about Digg card container
    --------------------------------------------------------------- */
 .about-digg-container{
@@ -727,7 +770,7 @@ span{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #f6f1f1;
+    background-color: #ffffff;
     box-shadow: 0 0 0.3125rem rgba(23, 22, 22, 0.1);
     padding: 1rem;
     text-align: center;
@@ -749,33 +792,80 @@ span{
 /* ---------------------------------------------------------------
    Feedback Form Styling
    --------------------------------------------------------------- */
+/* Basic styling for the form */
 .contact-feedback-form{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    font-family: "Red Hat Display", sans-serif;
 }
 
+/* General input and textarea styling */
 .contact-input{
     width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 1rem;
+    border: 0.2rem solid #ccc;
+    box-sizing: border-box;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border 0.3s ease;
 }
 
+.contact-input:focus{
+    border-color: #141414; /* Blue outline on focus */
+    outline: none;
+}
+
+textarea{
+    resize: vertical; /* Allow resizing only vertically */
+}
+
+/* This part not sure */
 .rating-container{
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    margin-top: 1rem;
 }
 
+.rating-container label{
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+#rating{
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.4;
+    border: 0.1rem solid #ccc;
+    background-color: #fff;
+    font-size: 1rem;
+    transition: border 0.3s ease;
+}
+
+#rating:focus{
+    border-color: #007BFF;
+}
+
+/* Submit button styling */
 .contact-button{
-    padding: 0.75rem 1rem;
-    background-color: #007bff;
-    color: white;
+    width: 100%;
+    padding: 1rem;
+    background-color: #007BFF;
+    color: #fff;
     border: none;
     border-radius: 0.5rem;
+    font-size: 1rem;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover{
+    background-color: #0056b3;
 }
 
 /* ---------------------------------------------------------------
@@ -870,7 +960,7 @@ small{
     padding-left: 14rem;
 }
 
-.login-items a {
+.login-items a{
     color: #3d3d3d;
     text-decoration: none;
     border-radius: 1rem;
@@ -903,7 +993,7 @@ small{
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     background-color: rgba(255, 255, 255, 0.75);
     border-radius: 1rem;
-    border: 1px solid rgba(209, 213, 219, 0.3);
+    border: 0.1rem solid rgba(209, 213, 219, 0.3);
 }
 
 .login-title{
@@ -978,7 +1068,7 @@ small{
   
 .user-table th, .user-table td{
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 0.1rem solid #ddd;
 }
   
 .user-table th{
@@ -1102,7 +1192,7 @@ small{
     margin-top: 3rem;
     padding: 4rem 0;
     border-top: 0.1rem solid #ebe8e8; /* Line */
-    background-color: #f4f4f4;
+    background-color: #fbfbfb;
 }
 
 .footer-container{
