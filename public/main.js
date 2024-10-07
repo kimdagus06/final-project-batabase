@@ -82,3 +82,32 @@ function resetForm() {
   const form = document.querySelector('.class-creating');
   form.reset();
 }
+
+/**
+ * https://chatgpt.com/share/67043ebd-6690-800f-8d48-006d2f56c77d
+ */
+// Select all accordion items
+const accordionItems = document.querySelectorAll('.accordion-item');
+
+accordionItems.forEach(item => {
+    // Select the accordion link (question) and answer (hidden content)
+    const accordionLink = item.querySelector('.accordion-link');
+    const answer = item.querySelector('.answer');
+    const arrowIcons = item.querySelectorAll('.arrow-icon');
+
+    // Initially hide the answer
+    answer.style.maxHeight = null;
+
+    // Add click event listener to each accordion link
+    accordionLink.addEventListener('click', () => {
+        // Check if the answer is already visible
+        const isActive = answer.style.maxHeight !== '0px';
+
+        // Toggle the max-height of the answer for animation
+        answer.style.maxHeight = isActive ? '0px' : answer.scrollHeight + 'px'; // Show/Hide answer
+
+        // Toggle the arrow icons
+        arrowIcons[0].style.display = isActive ? 'block' : 'none'; // Right arrow
+        arrowIcons[1].style.display = isActive ? 'none' : 'block'; // Down arrow
+    });
+});

@@ -21,28 +21,8 @@
     </div>
 </div>
 
-<div class="about-digg-container">
-    <div class="about-digg-card">
-        <img src="/icons/world.png" alt="World icon" class="digg-icon">
-        <p>Online Platform<br>Learn anytime, anywhere</p>
-    </div>
-
-    <div class="about-digg-card">
-        <img src="/icons/trophy.png" alt="Trophy icon" class="digg-icon">
-        <p>Awarded Best App 2023<br>95% User Satisfaction</p>
-    </div>
-
-    <div class="about-digg-card">
-        <img src="/icons/like.png" alt="Like icon" class="digg-icon">
-        <p>Daily Lecture Updates<br>Fresh content every day</p>
-    </div>
-
-    <div class="about-digg-card">
-        <img src="/icons/gift.png" alt="Gift icon" class="digg-icon">
-        <p>Send a Gift<br>New feature now available</p>
-    </div>
-</div>
-
+<!-- Q&A - Accordion style -->
+<!-- Refer to this link: https://codepen.io/Tuna_/pen/KKzXEVO -->
 <div class="faq-container">
     <!-- Left aligned title -->
     <div class="frequently-asked-questions-text">
@@ -51,32 +31,44 @@
 
     <!-- Right aligned questions and answers -->
     <div class="frequently-asked-questions-content">
-        <div class="frequently-asked-questions-question">
-            <p>Q. What kinds of classes can I create?</p>
-        </div>
-        <div class="frequently-asked-questions-answer">
-            <p>Digg offers a variety of both online and offline classes, ranging from hobbies to side jobs.</p>
-        </div>
-
-        <div class="frequently-asked-questions-question">
-            <p>Q. Does it cost anything to create a class?</p>
-        </div>
-        <div class="frequently-asked-questions-answer">
-            <p>You can create classes for free on Digg.</p>
+        <div class="accordion-item" id="question1">
+            <div class="accordion-link">
+                <h3>Q. What kinds of classes can I create?</h3>
+                <img src="/icons/right-arrow.png" alt="Arrow Icon" class="arrow-icon">
+                <img src="/icons/down-arrow.png" alt="Arrow Icon" class="arrow-icon down-arrow" style="display:none;">
+            </div>
+            <div class="answer">
+                <p>Digg offers a variety of both online and offline classes, ranging from hobbies to side jobs.</p>
+            </div>
         </div>
 
-        <div class="frequently-asked-questions-question">
-            <p>Q. Can I buy just one class instead of a whole course?</p>
+        <div class="accordion-item" id="question2">
+            <div class="accordion-link">
+                <h3>Q. Does it cost anything to create a class?</h3>
+                <img src="/icons/right-arrow.png" alt="Arrow Icon" class="arrow-icon">
+                <img src="/icons/down-arrow.png" alt="Arrow Icon" class="arrow-icon down-arrow" style="display:none;">
+            </div>
+            <div class="answer">
+                <p>You can create classes for free on Digg.</p>
+            </div>
         </div>
-        <div class="frequently-asked-questions-answer">
-            <p>Yes, you can purchase individual classes. However, a subscription is recommended as it offers better value.</p>
+
+        <div class="accordion-item" id="question3">
+            <div class="accordion-link">
+                <h3>Q. Can I buy just one class instead of a whole course?</h3>
+                <img src="/icons/right-arrow.png" alt="Arrow Icon" class="arrow-icon">
+                <img src="/icons/down-arrow.png" alt="Arrow Icon" class="arrow-icon down-arrow" style="display:none;">
+            </div>
+            <div class="answer">
+                <p>Yes, you can purchase individual classes. However, a subscription is recommended as it offers better value.</p>
+            </div>
         </div>
     </div>
 </div>
 
-
 <div class="contact-container">
-    <form method="POST" action="/submit-feedback" class="contact-feedback-form">
+        <div class="inquire-text">Inquire Digg</div>
+    <form method="POST" action="/submit-feedback" class="contact-feedback-form"
         <!-- Contact Fields -->
         <input type="text" placeholder="Name" class="contact-input" name="name" required>
         <input type="email" placeholder="Email" class="contact-input" name="email" required>

@@ -5,7 +5,7 @@
 body{
     margin: 0;
     font-family: "Red Hat Display", sans-serif;
-    background-color: #fbfbfb;
+    background-color: #ffffff;
 }
 
 *{
@@ -500,10 +500,11 @@ span{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 7rem;
 }
 
 .about-title{
-    margin-top: 3rem;
+    margin-top: 1rem;
     font-weight: 600;
     font-size: 1.3rem;
     color: rgba(232, 70, 6, 0.8);
@@ -512,7 +513,7 @@ span{
 
 .about-sub-title{
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 800;
     margin-bottom: 0.5rem;
 }
 
@@ -585,6 +586,45 @@ span{
     font-weight: 300;
     font-size: 0.8rem;
     color: #3d3d3d;
+}
+
+/* ---------------------------------------------------------------
+   about Digg card container
+   --------------------------------------------------------------- */
+.about-digg-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    justify-content: center; 
+    align-items: center;
+    gap: 2rem; 
+    padding: 1rem;
+    margin-top: 2.8rem;
+    max-width: 50rem;
+    margin-bottom: 4.4rem;
+}
+
+.about-digg-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0 0 0.3125rem rgba(23, 22, 22, 0.1);
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+    max-width: 16rem;
+    border: none;
+    border-radius: 0.6rem;
+    margin: 0.1rem;
+    font-size: 0.5rem;
+    box-sizing: border-box;
+}
+
+.digg-icon{
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 /* ---------------------------------------------------------------
@@ -716,12 +756,11 @@ span{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    background-color: #fff;
-    width: 100%;
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    align-items: center;
+    max-width: 75rem;
+    margin: 5rem auto;
+    padding: 0 1.3rem;
+    border-radius: 1rem;
+    transition: max-height 0.3s ease; 
 }
 
 .frequently-asked-questions-text{
@@ -735,72 +774,85 @@ span{
 /* Right side Q&A */
 .frequently-asked-questions-content{
     width: 60%;
-    text-align: right;
+    text-align: left;
 }
 
-.frequently-asked-questions-question{
-    margin: 1rem;
+.accordion-item{
+    margin-bottom: 1rem;
+    border-bottom: 0.1rem solid #ddd;
 }
 
-.frequently-asked-questions-answer{
-    margin-bottom: 2rem;
-    border: 0.1rem solid rgba(255, 255, 255, 0.5);
-}
-
-.frequently-asked-questions-question p{
-    font-weight: 700;
-}
-
-/* ---------------------------------------------------------------
-   about Digg card container
-   --------------------------------------------------------------- */
-.about-digg-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
-    justify-content: center; 
-    align-items: center;
-    gap: 1rem; 
-    padding: 1rem;
-    margin: 0 auto;
-    max-width: 50rem;
-}
-
-.about-digg-card{
+.accordion-link{
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    background-color: #ffffff;
-    box-shadow: 0 0 0.3125rem rgba(23, 22, 22, 0.1);
-    padding: 1rem;
-    text-align: center;
-    width: 100%;
-    max-width: 16rem;
-    border: none;
-    border-radius: 0.6rem;
-    margin: 0.1rem;
-    font-size: 0.5rem;
-    box-sizing: border-box;
+    cursor: pointer;
+    padding: 1rem 0;
 }
 
-.digg-icon{
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-bottom: 0.5rem;
+.accordion-link h3{
+    font-weight: 500;
+    font-size: 1rem;
+    margin-right: 1rem;
+}
+
+.accordion-link i{
+    font-size: 1rem;
+    color: #007bff;
+    transition: transform 0.4s ease;
+}
+
+.accordion-link .ion-md-arrow-down{
+    display: none;
+}
+
+.answer{
+    overflow: hidden;
+    transition: max-height 0.6s ease;
+}
+
+.answer p{
+    font-size: 1rem;
+    color: #555;
+    padding: 1rem 0;
+}
+
+.accordion-item:target .answer{
+    max-height: 20rem;
+}
+
+.accordion-item:target .accordion-link .ion-md-arrow-forward{
+    display: none;
+}
+
+.accordion-item:target .accordion-link .ion-md-arrow-down{
+    display: block;
+}
+
+.accordion-item:target .accordion-link .ion-md-arrow-down{
+    transform: rotate(180deg);
 }
 
 /* ---------------------------------------------------------------
    Feedback Form Styling
    --------------------------------------------------------------- */
-/* Basic styling for the form */
+.inquire-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
 .contact-feedback-form{
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f9f9f9; /* Light background */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
     font-family: "Red Hat Display", sans-serif;
 }
 
@@ -826,7 +878,6 @@ textarea{
     resize: vertical; /* Allow resizing only vertically */
 }
 
-/* This part not sure */
 .rating-container{
     margin-top: 1rem;
 }
@@ -1192,7 +1243,7 @@ small{
     margin-top: 3rem;
     padding: 4rem 0;
     border-top: 0.1rem solid #ebe8e8; /* Line */
-    background-color: #fbfbfb;
+    background-color: #ffffff;
 }
 
 .footer-container{
