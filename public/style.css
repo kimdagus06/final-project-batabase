@@ -1099,9 +1099,9 @@ small{
    Footer styles
    --------------------------------------------------------------- */
 .footer{
-    margin-top: auto;
+    margin-top: 3rem;
     padding: 4rem 0;
-    border-top: 0.1rem solid #d8d8d8;
+    border-top: 0.1rem solid #ebe8e8; /* Line */
     background-color: #f4f4f4;
 }
 
