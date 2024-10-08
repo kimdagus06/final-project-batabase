@@ -433,35 +433,13 @@ app.get('/upcomingclass', async (req, res) => {
     }
 });
 
-
-app.get('/detail', async (req, res) => {
-    const classId = req.params.id; // Get the class ID from the URL parameter
-
-    // Replace this with your actual database query to fetch class details
-    db.get("SELECT * FROM classes WHERE id = ?", [classId], (err, row) => {
+app.get('/detail', isAdmin, (req, res) => {
+    db.all('SELECT * FROM users', (err, users) => {
         if (err) {
-            console.error('Error fetching class details:', err.message);
-            return res.status(500).send('Internal Server Error');
+            console.error('Error fetching users:', err.message);
+            return res.status(500).send('Server error.');
         }
-
-        if (!row) {
-            return res.status(404).send('Class not found');
-        }
-
-        // Render the detail page with the class details
-        res.render("detail", { 
-            className: row.className,
-            classDate: row.classDate,
-            user_id: row.user_id,
-            username: "Example User", // Fetch the username based on user_id if necessary
-            classType: row.classType,
-            startTime: row.startTime,
-            endTime: row.endTime,
-            classFormat: row.classFormat,
-            address: row.address,
-            postcode: row.postcode,
-            price: row.classPrice
-        }); 
+        res.render('detail', { users }); // All user data to admin 
     });
 });
 
@@ -663,24 +641,6 @@ app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
 
         console.log("User information has been updated.");
         return res.json({ success: true });
-    });
-});
-
-app.post('/detail', async (req, res) => {
-    const classId = req.params.id;
-    const { className, classDate, startTime, endTime, classFormat, address, postcode, classPrice } = req.body;
-
-    // Replace this with your actual database query to update class details
-    db.run(`UPDATE classes SET className = ?, classDate = ?, startTime = ?, endTime = ?, classFormat = ?, address = ?, postcode = ?, classPrice = ? WHERE id = ?`, 
-    [className, classDate, startTime, endTime, classFormat, address, postcode, classPrice, classId], 
-    function(err) {
-        if (err) {
-            console.error('Error updating class details:', err.message);
-            return res.status(500).send('Internal Server Error');
-        }
-
-        // After successfully updating, redirect to the detail page to see the changes
-        res.redirect(`/detail/${classId}`);
     });
 });
 
