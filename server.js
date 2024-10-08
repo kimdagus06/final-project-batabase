@@ -448,8 +448,13 @@ app.get('/upcomingclass', async (req, res) => {
     }
 });
 
-
-app.get('/detail', (req, res) => {
+/**
+ * app.get('/detail/:id', (req, res)
+ * Description:
+ * This is for each detail page. When a user clicks one of cards in the upcoming classes page, 
+ * it brings saved data from the database.
+ */
+app.get('/detail/:id', (req, res) => {
     const classId = req.params.id; // Get the class ID from the URL
 
     const query = `

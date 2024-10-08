@@ -688,21 +688,18 @@ span{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 7rem;
 }
 
 .about-title{
-    margin-top: 1rem;
     font-weight: 600;
     font-size: 1.3rem;
     color: rgba(232, 70, 6, 0.8);
-    margin-bottom: 1.4rem;
+    margin-top: 2rem;
 }
 
 .about-sub-title{
     font-size: 2rem;
     font-weight: 800;
-    margin-bottom: 0.5rem;
 }
 
 .about-sub-sub-title{
@@ -788,7 +785,7 @@ span{
     padding: 1rem;
     margin-top: 2.8rem;
     max-width: 50rem;
-    margin-bottom: 4.4rem;
+    margin-bottom: 3rem;
 }
 
 .about-digg-card{
@@ -1178,11 +1175,6 @@ textarea{
     justify-content: center;
 }
 
-.image-container{
-    position: relative;
-    width: 65%;
-}
-
 .image-grid img{
     height: auto;
     max-height: 30rem;
@@ -1191,7 +1183,11 @@ textarea{
 }
 
 /* first-child: image 1 // last child: image 2 */
-.image-grid img:first-child, .image-grid img:last-child{
+.image-grid img:first-child{
+    height: 100%;
+}
+
+.image-grid img:last-child{
     height: 100%;
 }
 
@@ -1230,12 +1226,22 @@ textarea{
 /* ---------------------------------------------------------------
    Sections in detail page styles 
    --------------------------------------------------------------- */
+.class-information-title{
+    display: flex;
+    margin-top: 1.6rem;
+    width: 100%;
+    flex-direction: row;
+    font-weight: 800;
+}
+
 .sections{
     display: flex;
-    margin-top: 4rem;
+    margin-top: 6.5rem;
     width: 100%;
     flex-direction: row;
     font-weight: 100;
+    border-bottom: 0.1rem solid #ebe8e8;
+    padding: 1rem 0; 
 }
 
 section{
@@ -1251,6 +1257,15 @@ section{
 section h2{
     font-weight: 200;
     color: #635d61;
+}
+
+#reviews{
+    border-bottom: 0.3rem solid #2b2a2a;
+}
+
+#reviews h2{
+    color: #101010;
+    font-weight: 600;
 }
 
 /* ---------------------------------------------------------------
@@ -1401,7 +1416,7 @@ section h2{
 .footer{
     margin-top: 3rem;
     padding: 4rem 0;
-    border-top: 0.1rem solid #ebe8e8; /* Line */
+    border-top: 0.1rem solid #ebe8e8; /* Border line */
     background-color: #ffffff;
 }
 
