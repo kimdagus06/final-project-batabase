@@ -1152,7 +1152,7 @@ textarea{
 /* ---------------------------------------------------------------
    Detail page Styling
    --------------------------------------------------------------- */
-.product-page{
+.product-page-container{
     display: flex;
     justify-content: center; 
     align-items: flex-start;

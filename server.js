@@ -65,6 +65,7 @@ app.use(express.static("public"));
 // Express middlewares
 app.use(express.urlencoded({ extended: true })); // url passing
 app.use(express.json());
+app.use(express.static('public'));
 
  /**
   * 'secret' is the key used to sign and encrypt session IDs stored in cookies.
@@ -170,14 +171,22 @@ db.serialize(() => {
                                     console.error('Error inserting admin user:', insertErr.message);
                                 } else {
                                     console.log('Admin user created successfully.');
+
+                                    insertPredefinedUsers();
                                 }
                             }
                         );
                     });
                 }
             });
+        }
+    });
+});
 
-            // I need to make it as a function like predefinedClasses this code is too long 
+/**
+ * 
+ */
+function insertPredefinedUsers() {
             // Insert predefined users into the database
             // Using predefinedUsers global variable 
             predefinedUsers.forEach(user => {
@@ -210,15 +219,7 @@ db.serialize(() => {
                     }
                 });
             });
-        }
-    });
-});
-
-/**
- * function insertPredefinedUsers() {
-    
 }
- */
 
 /**
  * Table two | Create classes
@@ -400,6 +401,19 @@ app.get('/upcomingclass', async (req, res) => {
                 return res.status(500).send('Server error');
             }
 
+            if (!rows || rows.length === 0) {
+                // 데이터가 없을 경우에 대한 처리
+                return res.render('upcomingclass', { 
+                    classes: [], 
+                    page, 
+                    nextPage: null, 
+                    pageMinus1: page > 1 ? page - 1 : null, 
+                    showPrev: false, 
+                    showNext: false,
+                    totalPages: 0 // 페이지도 0으로 설정
+                });
+            }
+
             // Get total count for pagination
             db.get(`SELECT COUNT(*) as count FROM classes`, (err, countRow) => {
                 if (err) {
@@ -416,6 +430,7 @@ app.get('/upcomingclass', async (req, res) => {
                 const showPrev = page > 1;
                 const showNext = nextPage !== null;
 
+                // `rows`는 classes 데이터로 렌더링할 준비가 되어 있습니다.
                 res.render('upcomingclass', { 
                     classes: rows, 
                     page, 
@@ -433,13 +448,31 @@ app.get('/upcomingclass', async (req, res) => {
     }
 });
 
-app.get('/detail', isAdmin, (req, res) => {
-    db.all('SELECT * FROM users', (err, users) => {
+
+app.get('/detail', (req, res) => {
+    const classId = req.params.id; // Get the class ID from the URL
+
+    const query = `
+        SELECT classes.*, users.username 
+        FROM classes 
+        INNER JOIN users ON classes.user_id = users.id 
+        WHERE classes.id = ?`;
+
+    db.get(query, [classId], (err, row) => {
         if (err) {
-            console.error('Error fetching users:', err.message);
-            return res.status(500).send('Server error.');
+            console.error('Error fetching class detail:', err.message);
+            return res.status(500).send('Server error');
         }
-        res.render('detail', { users }); // All user data to admin 
+
+        if (!row) {
+            // If no class is found, send a 404 error
+            return res.status(404).send('Class not found');
+        }
+
+        // Render the class detail page with the fetched data
+        res.render('detail', {
+            classDetail: row
+        });
     });
 });
 
