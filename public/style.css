@@ -1147,12 +1147,13 @@ textarea{
 }
 
 /* ---------------------------------------------------------------
-   Detail page Styling
+   Detail page Styles
    --------------------------------------------------------------- */
 .product-page-container{
     display: flex;
+    flex-direction: column;
     justify-content: center; 
-    align-items: flex-start;
+    align-items: center;
     padding: 2rem;
 }
 
@@ -1160,6 +1161,8 @@ textarea{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    position: relative;
+    justify-content: space-between;
 }
 
 .product-images{
@@ -1265,6 +1268,103 @@ section h2{
 
 #reviews h2{
     color: #101010;
+    font-weight: 600;
+}
+
+/* ---------------------------------------------------------------
+   Center detail information - Detail page styles 
+   --------------------------------------------------------------- */
+.details{
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+}
+
+.class-information-title{
+    font-size: 1.1rem;
+}
+
+/* Title */
+.class-date, .class-type, .class-format{
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    font-size: 0.8rem;
+    gap: 1rem; 
+}
+
+/* Information text */
+.class-date h3, .class-type h3, .class-format h3{
+    font-weight: 200;
+    color: #635d61;
+    font-size: 0.9rem;
+}
+
+.review{
+    width: 100%;
+    background-color: #2b2a2a;
+    height: auto;
+}
+
+.register-button{
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #1A1A1A;
+    color: white;
+    border-radius: 0.5rem;
+    text-decoration: none; 
+    transition: background-color 0.3s;
+}
+
+.register-button:hover{
+    background-color: #333;
+}
+
+.intro-text{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+    max-width: 40rem;
+}
+
+/* ---------------------------------------------------------------
+   Right side detail information - Detail page styles 
+   --------------------------------------------------------------- */   
+.right-side-detail-container{
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    gap: 5rem;
+    margin-top: 1rem;
+}
+
+.right-side-detail-card{
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-top: 1rem;
+    max-width: 24rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.right-side-detail-card:hover{
+    box-shadow: 0 0.25rem 1.2rem rgba(0, 0, 0, 0.1); 
+}
+
+.google-review-section{
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+}
+
+.class-price, .class-time, .class-address{
+    margin-bottom: 1rem;
+}
+
+.class-price h3, .class-time h3, .class-address h3{
+    margin: 0;
     font-weight: 600;
 }
 

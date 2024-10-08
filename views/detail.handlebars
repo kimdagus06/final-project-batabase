@@ -4,11 +4,14 @@
             <div class="image-grid">
                 <div class="image-container">
                     <img src="/image/detail-page-right.jpg" alt="Class detail image">
-                    <div class="class-name"><h2>{{classDetail.className}}</h2></div>
+                    <div class="class-name">
+                        <h2>{{classDetail.className}}</h2>
+                    </div>
                     
                     <!-- Preview button -->
                     <button class="preview">
-                        <img src="/icons/detail-arrow.png" alt="Preview icon" class="icon">Preview</button>
+                        <img src="/icons/detail-arrow.png" alt="Preview icon" class="icon">Preview
+                    </button>
                 </div>
                 <img src="/image/detail-page-left.png" alt="Class detail image">
             </div>
@@ -42,31 +45,64 @@
             </section>
         </div>
         
-        <!-- Detail information of a class -->
+        <!-- Class detail information (Center) -->
+        <div class="class-information-title">Class Information</div>
+        
         <div class="details">
-            <div class="class-information-title">Class Information</div>
-            <div class="class-date-title">Class start date
-                <div class="class-date-text"><h3>{{classDetail.classDate}}</h3></div>
-            </div>
-            
-            <div class="class-type-title">Type of class
-                <div class="class-type-text"><h3>{{classDetail.classType}}</h3></div>
+            <div class="class-date">
+                <h3>Class Start Date</h3>
+                <div class="class-date-text">{{classDetail.classDate}}</div>
             </div>
 
-            <div class="class-format-title">Format
-                <div class="class-format-text"><h3>{{classDetail.classFormat}}</h3></div>
+            <div class="class-type">
+                <h3>Type of Class</h3>
+                <div class="class-type-text">{{classDetail.classType}}</div>
             </div>
 
-            <div class="class-detail-container">
-
-                <p><strong>Price:</strong> {{classDetail.classPrice}} SEK</p>
-                <p><strong>Time:</strong> {{classDetail.startTime}} - {{classDetail.endTime}}</p>
-                <p><strong>Format:</strong> {{classDetail.classFormat}}</p>
-                {{#if classDetail.address}}
-                    <p><strong>Address:</strong> {{classDetail.address}}, {{classDetail.postcode}}</p>
-                {{/if}}
-                <a href="/registerclass" class="register-button">Register Now</a>
+            <div class="class-format">
+                <h3>Format</h3>
+                <div class="class-format-text">{{classDetail.classFormat}}</div>
             </div>
+        </div>
+
+        <!-- Right side class detail information -->
+        <div class="right-side-detail-container">
+    <div class="intro-text">
+        <h2>Welcome to Digg October Class</h2>
+        <p>Join us on an exciting journey where creativity meets skill! This class is designed for both beginners and those looking to enhance their existing knowledge. 
+            You will explore various techniques and gain practical experience that will empower you to express your artistic vision.</p>
+        <p>Throughout this course, we will cover essential topics such as color theory, composition, and digital tools that will help you bring your ideas to life. 
+            Our experienced instructors will provide personalized guidance, 
+            ensuring that you develop the skills needed to succeed in your creative endeavors.</p>
+        <p>Whether you're passionate about painting, graphic design, or any form of artistic expression, 
+            this class will inspire you to unleash your creativity. 
+            Come and be part of a vibrant community where you can connect with fellow art enthusiasts and showcase your work!</p>
+    </div>
+    
+    <div class="right-side-detail-card">
+        <div class="class-price">
+            <h3>Price</h3>
+            <div class="class-price-text">{{classDetail.classPrice}} SEK</div> <!-- Always display with Swedish krona -->
+        </div>
+
+        <div class="class-time">
+            <h3>Class Time</h3>
+            <div class="class-start-time-text">{{classDetail.startTime}} - {{classDetail.endTime}}</div>
+        </div>
+
+        <div class="class-address">
+            <h3>Address</h3>
+            <div class="class-start-time-text">{{classDetail.address}}, {{classDetail.postcode}}</div>
+        </div>
+
+        <a href="/registerclass" class="register-button">Register Now</a>
+    </div>
+</div>
+
+
+        <div class="google-review-section">
+            <h2>Vivid Stories from Real Students</h2>
+            <img src="/image/user-rating.png" alt="User rating image" class="user-rating-image">
         </div>
     </div>
 </div>
