@@ -537,7 +537,7 @@ small{
 }
 
 /* ---------------------------------------------------------------
-   Upcomings page styles
+   Upcoming Class page styles - upcomings
    --------------------------------------------------------------- */
 .trending-title{
     font-size: 2rem;
@@ -596,9 +596,6 @@ span{
     margin-top: 2rem;
 }
 
-/* ---------------------------------------------------------------
-   Pagination styles - grade 4
-   --------------------------------------------------------------- */
 .upcoming-button{
     text-align: center;
     margin-top: 0.6rem;
@@ -617,7 +614,9 @@ span{
     background-color: rgba(232, 10, 6, 0.8); 
 }
 
-/* Pagination - grade 4 */
+/* ---------------------------------------------------------------
+   Pagination styles - grade 4
+   --------------------------------------------------------------- */
 .pagination-container{
     display: flex;
     justify-content: center;
@@ -1306,14 +1305,22 @@ section h2{
     height: auto;
 }
 
+/* Register button in the detail page*/
 .register-button{
     display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: #1A1A1A;
+    background-color: #ED3B38;
     color: white;
-    border-radius: 0.5rem;
     text-decoration: none; 
     transition: background-color 0.3s;
+    width: 100%;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    text-align: center;
 }
 
 .register-button:hover{
@@ -1337,6 +1344,7 @@ section h2{
     width: 100%;
     gap: 5rem;
     margin-top: 1rem;
+    justify-content: center;
 }
 
 .right-side-detail-card{
@@ -1347,6 +1355,11 @@ section h2{
     margin-top: 1rem;
     max-width: 24rem;
     transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
 }
 
 .right-side-detail-card:hover{
@@ -1356,7 +1369,6 @@ section h2{
 .google-review-section{
     display: flex; 
     flex-direction: column;
-    align-items: center;
 }
 
 .class-price, .class-time, .class-address{
