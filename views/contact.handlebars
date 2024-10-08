@@ -2,17 +2,17 @@
     <h2 class="contact-title">Help Center</h2>
 
     <div class="contact-sub-text">
-        <img src="/icons/check-double.png" alt="Check icon" class="double-check-icon">
+        <img src="/icons/check-double.png" alt="Double check icon" class="double-check-icon">
         Begin Your Journey as a World-Changing Creator on Digg
     </div>
 
     <div class="contact-sub-text">
-        <img src="/icons/check-double.png" alt="Check icon" class="double-check-icon">
+        <img src="/icons/check-double.png" alt="Double check icon" class="double-check-icon">
         Leave feedback for a better experience
     </div>
 
     <div class="contact-sub-text">
-        <img src="/icons/check-double.png" alt="Check icon" class="double-check-icon">
+        <img src="/icons/check-double.png" alt="Double check icon" class="double-check-icon">
         Support different languages
     </div>
 
@@ -31,33 +31,33 @@
 
     <!-- Right aligned questions and answers -->
     <div class="frequently-asked-questions-content">
-        <div class="accordion-item" id="question1">
+        <div class="accordion-item" id="faq-question1">
             <div class="accordion-link">
                 <h3>Q. What kinds of classes can I create?</h3>
-                <img src="/icons/right-arrow.png" alt="Arrow Icon" class="arrow-icon">
-                <img src="/icons/down-arrow.png" alt="Arrow Icon" class="arrow-icon down-arrow" style="display:none;">
+                <img src="/icons/right-arrow.png" alt="Arrow icon" class="arrow-icon">
+                <img src="/icons/down-arrow.png" alt="Downward arrow icon" class="arrow-icon down-arrow" style="display:none;">
             </div>
             <div class="answer">
                 <p>Digg offers a variety of both online and offline classes, ranging from hobbies to side jobs.</p>
             </div>
         </div>
 
-        <div class="accordion-item" id="question2">
+        <div class="accordion-item" id="faq-question2">
             <div class="accordion-link">
                 <h3>Q. Does it cost anything to create a class?</h3>
-                <img src="/icons/right-arrow.png" alt="Arrow Icon" class="arrow-icon">
-                <img src="/icons/down-arrow.png" alt="Arrow Icon" class="arrow-icon down-arrow" style="display:none;">
+                <img src="/icons/right-arrow.png" alt="Arrow icon" class="arrow-icon">
+                <img src="/icons/down-arrow.png" alt="Downward arrow icon" class="arrow-icon down-arrow" style="display:none;">
             </div>
             <div class="answer">
                 <p>You can create classes for free on Digg.</p>
             </div>
         </div>
 
-        <div class="accordion-item" id="question3">
+        <div class="accordion-item" id="faq-question3">
             <div class="accordion-link">
                 <h3>Q. Can I buy just one class instead of a whole course?</h3>
-                <img src="/icons/right-arrow.png" alt="Arrow Icon" class="arrow-icon">
-                <img src="/icons/down-arrow.png" alt="Arrow Icon" class="arrow-icon down-arrow" style="display:none;">
+                <img src="/icons/right-arrow.png" alt="Arrow icon" class="arrow-icon">
+                <img src="/icons/down-arrow.png" alt="Downward arrow icon" class="arrow-icon down-arrow" style="display:none;">
             </div>
             <div class="answer">
                 <p>Yes, you can purchase individual classes. However, a subscription is recommended as it offers better value.</p>
@@ -66,9 +66,15 @@
     </div>
 </div>
 
-<div class="contact-container">
-        <div class="inquire-text">Inquire Digg</div>
-    <form method="POST" action="/submit-feedback" class="contact-feedback-form"
+<!-- Contact Digg / Contact form -->
+<div class="form-container">
+    <div class="inquiry-box">
+        <div class="inquire-text">Contact Digg</div>
+        <div class="inquire-sub-text">Please fill out the form below and send it to us</div>
+    </div>
+</div>
+
+    <form method="POST" action="/submit-feedback" class="contact-feedback-form">
         <!-- Contact Fields -->
         <input type="text" placeholder="Name" class="contact-input" name="name" required>
         <input type="email" placeholder="Email" class="contact-input" name="email" required>
@@ -91,7 +97,11 @@
             </select>
         </div>
 
-        <!-- Submit Button -->
+    <div class="contact-buttons-container">
+        <!-- Submit/cancel buttons -->
         <input type="submit" value="Send" class="contact-button">
+        <input type="button" value="Cancel" class="contact-cancel-button">
+    </div>
+</form>
     </form>
 </div>
