@@ -333,12 +333,12 @@ app.get("/", function (req, res) {
     res.render("home", model);
 });
 
-app.get('/createaccount', (req, res) => {
-    res.render('createaccount', { isCreateAccountPage: true });
+app.get("/createaccount", (req, res) => {
+    res.render("createaccount", { isCreateAccountPage: true });
 });
 
-app.get('/login', (req, res) => {
-    res.render('login', { isLoginPage: true });
+app.get("/login", (req, res) => {
+    res.render("login", { isLoginPage: true });
 });
 
 app.get("/logout", function (req, res) {
@@ -448,29 +448,46 @@ app.get("/detail", function (req, res) {
  * It's not necessary to hash all information because recovering data can be difficult.
  * Just hashing the password is sufficient.
  */
-app.post('/create-account', async (req, res) => {
-    const { username, emailAddress, password } = req.body;
-    const agreeterms = req.body.agreeterms ? 1 : 0; // Convert checkbox to 1 (true) or 0 (false)
+app.post('/createaccount', (req, res) => {
+    const { username, emailAddress, password, agreeterms } = req.body;
 
-    try {
-        const hash = await bcrypt.hash(password, 12);
+    // Input validation
+    if (!username || !emailAddress || !password || !agreeterms) {
+        return res.status(400).send("All fields are required");
+    }
 
-        db.run('INSERT INTO users (username, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', [username, emailAddress, hash, agreeterms], (err) => {
-            if (err) {
-                console.error('Error inserting user:', err.message); // Print out an error message 
-                return res.status(500).send('Server error');
+    db.get('SELECT * FROM users WHERE emailAddress = ?', [emailAddress], (err, existingUser) => {
+        if (err) {
+            console.error('Error checking for existing user:', err.message);
+            return res.status(500).send('Internal server error');
+        }
+
+        if (existingUser) {
+            return res.status(400).send('User with this email already exists.');
+        }
+
+        // Password hashing
+        bcrypt.hash(password, 12, (hashErr, hash) => {
+            if (hashErr) {
+                console.error('Error hashing password:', hashErr.message);
+                return res.status(500).send('Internal server error');
             }
 
-            console.log("New account has been created."); 
+            // Insert new user into the database
+            db.run('INSERT INTO users (username, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', 
+                [username, emailAddress, hash, agreeterms], 
+                (insertErr) => {
+                    if (insertErr) {
+                        console.error('Error inserting new user:', insertErr.message);
+                        return res.status(500).send('Internal server error');
+                    }
 
-            // Redirect after a use create a new account
-            res.redirect('/');
+                    console.log(`User ${username} created successfully.`);
+                    res.redirect('/login');
+                }
+            );
         });
-
-    } catch (err) {
-        console.error('Error hashing password:', err.message); // Print out a hash error message 
-        return res.status(500).send('Error hashing password');
-    }
+    });
 });
 
 /**

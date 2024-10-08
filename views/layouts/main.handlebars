@@ -16,28 +16,27 @@
             </a>
         </div>
 
-        <!-- Menu items are displyed only when it's not logged in beside the logo -->
-        <!-- This part is executed only if isLoginPage is false. 
-        It displays all items, logo, and search bar when the user is not on the login page -->
+        <!-- Display menu only if NOT on login or create account pages -->
         {{#unless isLoginPage}}
-            <div class="menu-items">
-                <ul>
-                    <li><a href="/registerclass" class="register-class-menu" data-content="register-class">Register Class</a></li>
-                    <li><a href="/upcomingclass" class="menu-item" data-content="upcoming-class">Upcomings</a></li>
-                    <li><a href="/about" data-content="about">About</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
-            </div>
+        {{#unless isCreateAccountPage}}
+        <div class="menu-items">
+            <ul>
+                <li><a href="/registerclass" class="register-class-menu" data-content="register-class">Register Class</a></li>
+                <li><a href="/upcomingclass" class="menu-item" data-content="upcoming-class">Upcomings</a></li>
+                <li><a href="/about" data-content="about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
 
-            <div class="search-container">
+        <div class="search-container">
             <div class="search-bar-wrapper">
                 <input type="text" class="search-bar" placeholder="Find a new hobby">
                 <img src="icons/search-icon.png" alt="Search Icon" class="search-icon">
             </div>
         </div>
 
-            <div class="login-items">
-             <ul>
+        <div class="login-items">
+            <ul>
                 {{#if isLoggedIn}}
                     <li id="menulogin"><a href="/logout">Logout</a></li>
                     <li id="menuuserpage"><a href="/userpage">User Page</a></li>
@@ -50,30 +49,30 @@
             </ul>
         </div>
         {{/unless}}
+        {{/unless}}
     </nav>
 
     {{{body}}}
     
     <footer class="footer">
-    <div class="footer-container">
-        <div class="footer-left">
-            <div class="company-text">
-                <p>DIGG</p>
+        <div class="footer-container">
+            <div class="footer-left">
+                <div class="company-text">
+                    <p>DIGG</p>
+                </div>
+                <div class="copy-right">
+                    <p>&copy; 2024 Digg. All rights reserved.</p>
+                </div>
+                <div class="app-links">
+                    <a href="#">
+                        <img src="/icons/appstore.png" alt="App Store" class="app-logo">
+                    </a>
+                    <a href="#">
+                        <img src="/icons/googleplay.png" alt="Google Play" class="app-logo">
+                    </a>
+                </div>
             </div>
-            <div class="copy-right">
-                <p>&copy; 2024 Digg. All rights reserved.</p>
-            </div>
-            <div class="app-links">
-                <a href="#">
-                    <img src="/icons/appstore.png" alt="App Store" class="app-logo">
-                </a>
-                <a href="#">
-                    <img src="/icons/googleplay.png" alt="Google Play" class="app-logo">
-                </a>
-            </div>
-        </div>        
 
-            <!-- In case, added href-->
             <div class="footer-section">
                 <h4>Information</h4>
                 <ul class="footer-links">
@@ -101,14 +100,14 @@
                 </ul>
             </div>
 
-        <div class="footer-right">
-            <div class="footer-section">
-                <h4>Customer Service</h4>
-                <p>10:00 AM ~ 4:00 PM <br> (Weekends, Public Holidays excluded)</p>
-                <a href="#" class="support-button">Contact Us</a>
+            <div class="footer-right">
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <p>10:00 AM ~ 4:00 PM <br> (Weekends, Public Holidays excluded)</p>
+                    <a href="#" class="support-button">Contact Us</a>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
 </body>
 </html>
