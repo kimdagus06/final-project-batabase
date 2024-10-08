@@ -5,13 +5,55 @@
                 <div class="image-container">
                     <img src="/image/detail-page-right.jpg" alt="Class detail image">
                     <button class="preview">
-                        <img src="/icons/detail-arrow.png" alt="Preview icon" class="icon">Preview</button>
+                        <img src="/icons/detail-arrow.png" alt="Preview icon" class="icon">Preview
+                    </button>
                 </div>
                 <img src="/image/detail-page-left.png" alt="Class detail image">
             </div>
         </div>
+
+        <!-- Sections for each menu item -->
+        <div class="sections">
+            <section id="reviews">
+                <h2>Reviews</h2>
+            </section>
+            <section id="class-introduction">
+                <h2>Class Introduction</h2>
+            </section>
+            <section id="curriculum">
+                <h2>Curriculum</h2>
+            </section>
+            <section id="kit-introduction">
+                <h2>Kit Introduction</h2>
+            </section>
+            <section id="creator">
+                <h2>Creator</h2>
+            </section>
+            <section id="community">
+                <h2>Community</h2>
+            </section>
+            <section id="refund-policy">
+                <h2>Refund Policy</h2>
+            </section>
+            <section id="recommendations">
+                <h2>Recommendations</h2>
+            </section>
+        </div>
+
         <div class="details">
-            <span class="class-name">{{className}}</span>
+            <div class="class-information-title">Class Information</div>
+            <div class="class-name">{{className}}
+                <h3>9 chapters, 27 detailed lectures</h3>
+            </div>
+            
+            <div class="available-dates">Available dates
+                <h3>{{classDate}}</h3>
+            </div>
+            
+            <div class="subtitles-included">Whether subtitles are included
+                <h3>Not included</h3>
+            </div>
+            
             <span class="tutor"><strong>Tutor:</strong> {{user_id}} - {{username}}</span>
             <span class="class-type"><strong>Class Type:</strong> {{classType}}</span>
             <span class="start-time"><strong>Start Time:</strong> {{startTime}}</span>
@@ -19,7 +61,7 @@
             <span class="class-format"><strong>Class Format:</strong> {{classFormat}}</span>
             <span class="address"><strong>Address:</strong> {{address}}</span>
             <span class="postcode"><strong>Postcode:</strong> {{postcode}}</span>
-            <span class="price"><strong>Price:</strong> ${{price}}</span>
+            <span class="price"><strong>Price:</strong> ${{classPrice}}</span> <!-- Fixed to classPrice -->
         </div>
     </div>
 </div>

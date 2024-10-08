@@ -8,6 +8,10 @@ body{
     background-color: #ffffff;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 /* ---------------------------------------------------------------
    Main styles - Menu bar styling 
    --------------------------------------------------------------- */
@@ -1148,20 +1152,25 @@ textarea{
 /* ---------------------------------------------------------------
    Detail page Styling
    --------------------------------------------------------------- */
-   .product-page {
+.product-page{
     display: flex;
     justify-content: center; 
-    align-items: center;
+    align-items: flex-start;
     padding: 2rem;
 }
 
-.product-info {
+.product-info{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
-.image-grid {
+.product-images{
+    display: flex;
+    width: 100%;
+}
+
+.image-grid{
     display: flex;
     width: 100%;
     max-width: 70rem;
@@ -1169,27 +1178,24 @@ textarea{
     justify-content: center;
 }
 
-.image-container {
+.image-container{
     position: relative;
     width: 65%;
 }
 
-.image-grid img {
+.image-grid img{
     height: auto;
-    max-height: 30rem; /* 최대 높이 설정 */
-    width: 100%; /* 너비 100%로 설정하여 비율 유지 */
-    object-fit: cover; /* 비율 유지하면서 크기 조정 */
+    max-height: 30rem;
+    width: 100%;
+    object-fit: cover;
 }
 
-.image-grid img:first-child {
-    height: 100%; /* 이미지 1의 높이를 100%로 설정 */
+/* first-child: image 1 // last child: image 2 */
+.image-grid img:first-child, .image-grid img:last-child{
+    height: 100%;
 }
 
-.image-grid img:last-child {
-    height: 100%; /* 이미지 2의 높이를 100%로 설정 */
-}
-
-.preview {
+.preview{
     position: relative;
     transform: translateY(50%);
     background-color: #1A1A1A;
@@ -1205,7 +1211,7 @@ textarea{
     border-radius: 0.5rem;
 }
 
-.icon {
+.icon{
     width: 0.4rem;
     height: 0.4rem;
     display: inline-block;
@@ -1213,7 +1219,7 @@ textarea{
     margin-left: 0.3rem;
 }
 
-.details {
+.details{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1221,8 +1227,35 @@ textarea{
     margin-top: 1rem;
 }
 
+/* ---------------------------------------------------------------
+   Sections in detail page styles 
+   --------------------------------------------------------------- */
+.sections{
+    display: flex;
+    margin-top: 4rem;
+    width: 100%;
+    flex-direction: row;
+    font-weight: 100;
+}
 
-/* Admin page - only shown when a user is admin */
+section{
+    display: flex;
+    flex-direction: row;
+    font-size: 0.6rem;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.5rem;
+    margin: 1rem 0;
+}
+
+section h2{
+    font-weight: 200;
+    color: #635d61;
+}
+
+/* ---------------------------------------------------------------
+   Admin page styles 
+   --------------------------------------------------------------- */
 #menuadmin{
     font-weight: 600;
 }

@@ -40,21 +40,21 @@ const predefinedUsers = [
   
 /* 15 classes in class table - grade 3 */
 const predefinedClasses = [
-    { userId: 1, className: 'Swedish Painting Class', classType: 'art', classPrice: 500, startTime: '10:00', endTime: '12:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
-    { userId: 2, className: 'Advanced Web Development', classType: 'technology', classPrice: 1500, startTime: '10:00', endTime: '17:00', classFormat: 'offline', address: '123 Developer gatan, Jönköping', postcode: '11432' },
-    { userId: 3, className: 'Baking Artisan Bread', classType: 'baking', classPrice: 800, startTime: '09:00', endTime: '18:00', classFormat: 'offline', address: '12 Dashagatan, Gothenburg', postcode: '41104' },
-    { userId: 4, className: 'Plant Care Basics', classType: 'plants', classPrice: 600, startTime: '09:40', endTime: '14:00', classFormat: 'offline', address: '123 ju, Developer Hall, Malmö', postcode: '21122' },
-    { userId: 5, className: 'Photography 101', classType: 'photography', classPrice: 1200, startTime: '15:00', endTime: '20:00', classFormat: 'offline', address: '456 Wine and Beer Factory, Uppsala', postcode: '98456' },
-    { userId: 6, className: 'Social Media Strategies', classType: 'business', classPrice: 700, startTime: '11:00', endTime: '15:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
-    { userId: 7, className: 'Korean Language Basics', classType: 'language', classPrice: 1000, startTime: '13:00', endTime: '16:00', classFormat: 'offline', address: '789 Design St, Stockholm', postcode: '12345' },
-    { userId: 8, className: 'Yoga for Beginners', classType: 'fitness', classPrice: 600, startTime: '09:00', endTime: '12:00', classFormat: 'offline', address: '321 Baker Lane, Gothenburg', postcode: '41105' },
-    { userId: 9, className: 'Digital Art Techniques', classType: 'art', classPrice: 500, startTime: '17:00', endTime: '18:30', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
-    { userId: 10, className: 'Introduction to AI', classType: 'technology', classPrice: 1400, startTime: '10:00', endTime: '14:00', classFormat: 'offline', address: '654 Code Way, Malmö', postcode: '21123' },
-    { userId: 11, className: 'Watercolor Techniques', classType: 'art', classPrice: 800, startTime: '09:00', endTime: '12:00', classFormat: 'offline', address: '78 Artistic St, Stockholm', postcode: '11223' },
-    { userId: 12, className: 'Web Design Basics', classType: 'technology', classPrice: 900, startTime: '14:00', endTime: '16:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
-    { userId: 13, className: 'Gourmet Cooking Class', classType: 'baking', classPrice: 1100, startTime: '09:00', endTime: '17:00', classFormat: 'offline', address: '45 Chef Ave, Gothenburg', postcode: '41108' },
-    { userId: 14, className: 'Flower Arrangement Workshop', classType: 'plants', classPrice: 650, startTime: '10:00', endTime: '12:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
-    { userId: 15, className: 'Fitness Bootcamp', classType: 'fitness', classPrice: 500, startTime: '18:00', endTime: '20:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 1, className: 'Swedish Painting Class', classType: 'art', classPrice: 500, classDate: '2024-10-15', startTime: '10:00', endTime: '12:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 2, className: 'Advanced Web Development', classType: 'technology', classPrice: 1500, classDate: '2024-10-16', startTime: '10:00', endTime: '17:00', classFormat: 'offline', address: '123 Developer gatan, Jönköping', postcode: '11432' },
+    { userId: 3, className: 'Baking Artisan Bread', classType: 'baking', classPrice: 800, classDate: '2024-10-17', startTime: '09:00', endTime: '18:00', classFormat: 'offline', address: '12 Dashagatan, Gothenburg', postcode: '41104' },
+    { userId: 4, className: 'Plant Care Basics', classType: 'plants', classPrice: 600, classDate: '2024-10-18', startTime: '09:40', endTime: '14:00', classFormat: 'offline', address: '123 ju, Developer Hall, Malmö', postcode: '21122' },
+    { userId: 5, className: 'Photography 101', classType: 'photography', classPrice: 1200, classDate: '2024-10-19', startTime: '15:00', endTime: '20:00', classFormat: 'offline', address: '456 Wine and Beer Factory, Uppsala', postcode: '98456' },
+    { userId: 6, className: 'Social Media Strategies', classType: 'business', classPrice: 700, classDate: '2024-10-20', startTime: '11:00', endTime: '15:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 7, className: 'Korean Language Basics', classType: 'language', classPrice: 1000, classDate: '2024-10-21', startTime: '13:00', endTime: '16:00', classFormat: 'offline', address: '789 Design St, Stockholm', postcode: '12345' },
+    { userId: 8, className: 'Yoga for Beginners', classType: 'fitness', classPrice: 600, classDate: '2024-10-22', startTime: '09:00', endTime: '12:00', classFormat: 'offline', address: '321 Baker Lane, Gothenburg', postcode: '41105' },
+    { userId: 9, className: 'Digital Art Techniques', classType: 'art', classPrice: 500, classDate: '2024-10-23', startTime: '17:00', endTime: '18:30', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 10, className: 'Introduction to AI', classType: 'technology', classPrice: 1400, classDate: '2024-10-24', startTime: '10:00', endTime: '14:00', classFormat: 'offline', address: '654 Code Way, Malmö', postcode: '21123' },
+    { userId: 11, className: 'Watercolor Techniques', classType: 'art', classPrice: 800, classDate: '2024-10-25', startTime: '09:00', endTime: '12:00', classFormat: 'offline', address: '78 Artistic St, Stockholm', postcode: '11223' },
+    { userId: 12, className: 'Web Design Basics', classType: 'technology', classPrice: 900, classDate: '2024-10-26', startTime: '14:00', endTime: '16:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 13, className: 'Gourmet Cooking Class', classType: 'baking', classPrice: 1100, classDate: '2024-10-27', startTime: '09:00', endTime: '17:00', classFormat: 'offline', address: '45 Chef Ave, Gothenburg', postcode: '41108' },
+    { userId: 14, className: 'Flower Arrangement Workshop', classType: 'plants', classPrice: 650, classDate: '2024-10-28', startTime: '10:00', endTime: '12:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 15, className: 'Fitness Bootcamp', classType: 'fitness', classPrice: 500, classDate: '2024-10-29', startTime: '18:00', endTime: '20:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
 ];
 
 app.engine("handlebars", engine());
@@ -240,6 +240,7 @@ db.serialize(() => {
             className TEXT NOT NULL,
             classType TEXT NOT NULL,
             classPrice INTEGER NOT NULL,
+            classDate TEXT NOT NULL, 
             startTime TEXT NOT NULL,
             endTime TEXT NOT NULL,
             classFormat TEXT NOT NULL,
@@ -273,8 +274,8 @@ db.serialize(() => {
             }
   
             if (!existingClass) { // If class does not exist, insert it
-                db.run('INSERT INTO classes (user_id, className, classType, classPrice, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-                    [cls.userId, cls.className, cls.classType, cls.classPrice, cls.startTime, cls.endTime, cls.classFormat, cls.address, cls.postcode], 
+                db.run('INSERT INTO classes (user_id, className, classType, classPrice, classDate, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+                    [cls.userId, cls.className, cls.classType, cls.classPrice, cls.classDate, cls.startTime, cls.endTime, cls.classFormat, cls.address, cls.postcode], 
                     (insertErr) => {
                         if (insertErr) {
                             console.error('Error inserting predefined class:', insertErr.message);
@@ -433,8 +434,35 @@ app.get('/upcomingclass', async (req, res) => {
 });
 
 
-app.get("/detail", function (req, res) {
-    res.render("detail"); 
+app.get('/detail', async (req, res) => {
+    const classId = req.params.id; // Get the class ID from the URL parameter
+
+    // Replace this with your actual database query to fetch class details
+    db.get("SELECT * FROM classes WHERE id = ?", [classId], (err, row) => {
+        if (err) {
+            console.error('Error fetching class details:', err.message);
+            return res.status(500).send('Internal Server Error');
+        }
+
+        if (!row) {
+            return res.status(404).send('Class not found');
+        }
+
+        // Render the detail page with the class details
+        res.render("detail", { 
+            className: row.className,
+            classDate: row.classDate,
+            user_id: row.user_id,
+            username: "Example User", // Fetch the username based on user_id if necessary
+            classType: row.classType,
+            startTime: row.startTime,
+            endTime: row.endTime,
+            classFormat: row.classFormat,
+            address: row.address,
+            postcode: row.postcode,
+            price: row.classPrice
+        }); 
+    });
 });
 
 /**
@@ -609,11 +637,11 @@ app.post('/create-class', async (req, res) => {
         return res.redirect('/login'); // Redirect to login if user ID is missing
     }
 
-    const { className, classType, classPrice, startTime, endTime, classFormat, address, postcode } = req.body;
+    const { className, classType, classPrice, classDate, startTime, endTime, classFormat, address, postcode } = req.body;
 
     // Create a class including user_id
-    db.run('INSERT INTO classes (user_id, className, classType, classPrice, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-        [userId, className, classType, classPrice, startTime, endTime, classFormat, address, postcode], (err) => {
+    db.run('INSERT INTO classes (user_id, className, classType, classPrice, classDate, startTime, endTime, classFormat, address, postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+        [userId, className, classType, classPrice, classDate, startTime, endTime, classFormat, address, postcode], (err) => {
         if (err) {
             console.error('Error creating a class:', err.message);
             return res.status(500).send('Server error'); // Send a server error response
@@ -638,19 +666,23 @@ app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
     });
 });
 
-/**
- * To show class information to users 
- * app.get('/class/:id', (req, res) => {
+app.post('/detail', async (req, res) => {
     const classId = req.params.id;
-    db.get('SELECT * FROM classes WHERE id = ?', [classId], (error, classDetails) => {
-        if (error) {
-            console.error('Error fetching class details:', error.message);
-            return res.status(500).send('Server error');
+    const { className, classDate, startTime, endTime, classFormat, address, postcode, classPrice } = req.body;
+
+    // Replace this with your actual database query to update class details
+    db.run(`UPDATE classes SET className = ?, classDate = ?, startTime = ?, endTime = ?, classFormat = ?, address = ?, postcode = ?, classPrice = ? WHERE id = ?`, 
+    [className, classDate, startTime, endTime, classFormat, address, postcode, classPrice, classId], 
+    function(err) {
+        if (err) {
+            console.error('Error updating class details:', err.message);
+            return res.status(500).send('Internal Server Error');
         }
-        res.render('classDetail', { class: classDetails });
+
+        // After successfully updating, redirect to the detail page to see the changes
+        res.redirect(`/detail/${classId}`);
     });
 });
- */
 
 /* Start a port */
 app.listen (port, () => {
