@@ -2,22 +2,21 @@
     <div class="product-info">
         <div class="product-images">
             <div class="image-grid">
+                <!-- First Image with Class Name and Preview Button -->
                 <div class="image-container">
                     <img src="/image/detail-page-right.jpg" alt="Class detail image">
                     <div class="class-name">
                         <h2>{{classDetail.className}}</h2>
                     </div>
-                    
-                    <!-- Preview button -->
                     <button class="preview">
                         <img src="/icons/detail-arrow.png" alt="Preview icon" class="icon">Preview
                     </button>
                 </div>
+                <!-- Second Image -->
                 <img src="/image/detail-page-left.png" alt="Class detail image">
             </div>
         </div>
 
-        <!-- Sections for each menu item -->
         <div class="sections">
             <section id="reviews">
                 <h2>Reviews</h2>
@@ -45,7 +44,6 @@
             </section>
         </div>
         
-        <!-- Class detail information (Center) -->
         <div class="class-information-title">Class Information</div>
         
         <div class="details">
@@ -67,48 +65,77 @@
 
         <!-- Right side class detail information -->
         <div class="right-side-detail-container">
-    <div class="intro-text">
-        <h2>Welcome to Digg October Class</h2>
-        <p>Join us on an exciting journey where creativity meets skill! This class is designed for both beginners and those looking to enhance their existing knowledge. 
-            You will explore various techniques and gain practical experience that will empower you to express your artistic vision.</p>
-        <p>Throughout this course, we will cover essential topics such as color theory, composition, and digital tools that will help you bring your ideas to life. 
-            Our experienced instructors will provide personalized guidance, 
-            ensuring that you develop the skills needed to succeed in your creative endeavors.</p>
-        <p>Whether you're passionate about painting, graphic design, or any form of artistic expression, 
-            this class will inspire you to unleash your creativity. 
-            Come and be part of a vibrant community where you can connect with fellow art enthusiasts and showcase your work!</p>
+            <div class="intro-text">
+                <h2>Welcome to Digg October Class</h2>
+                <p>Join us on an exciting journey where creativity meets skill! This class is designed for both beginners and those looking to enhance their existing knowledge. You will explore various techniques and gain practical experience that will empower you to express your artistic vision.</p>
+                <p>Throughout this course, we will cover essential topics such as color theory, composition, and digital tools that will help you bring your ideas to life. Our experienced instructors will provide personalized guidance, ensuring that you develop the skills needed to succeed in your creative endeavors.</p>
+                <p>Whether you're passionate about painting, graphic design, or any form of artistic expression, this class will inspire you to unleash your creativity. Come and be part of a vibrant community where you can connect with fellow art enthusiasts and showcase your work!</p>
+            
+            <!-- Additional text for the course -->
+            <div class="intro-text">
+                <h2>1. Why Choose This Course?</h2>
+                <img src="/image/detail-image1.jpg" alt="Course materials image" class="additional-image">
+                <p>This course empowers you to develop your unique artistic voice. With personalized feedback and a collaborative environment, 
+                    you’ll gain practical skills and confidence to excel in your creative projects.</p>
+            </div>
+            
+            <div class="intro-text">
+                <h2>2. Unlock New Techniques</h2>
+                <img src="/image/detail-image2.jpg" alt="Course materials image" class="additional-image">
+                <p>Learn the latest techniques in art and design, from digital illustration to traditional methods. 
+                    Our hands-on approach ensures that you can apply what you learn immediately in real-world projects.</p>
+            </div>
+                
+            <div class="intro-text">
+                <h2>3. Build Your Network</h2>
+                <img src="/image/detail-image3.jpg" alt="Course materials image" class="additional-image">
+                <p>Join a community of like-minded creatives! Collaborate on projects, participate in workshops, 
+                    and connect with industry professionals to enhance your artistic journey.</p>
+            </div>
+            </div>
+
+            <!-- Right side detail card with class information -->
+            <div class="right-side-detail-card">
+                <div class="exclusive-text">
+                    <h3>All classes are exclusively available on Digg</h3>
+                </div>
+
+                <div class="hashtags-container">
+                    <div class="class-keywords">
+                        <span>#OnlineAvailable</span>
+                        <span>#MembershipDiscount</span>
+                        <span>#Certification</span>
+                    </div>
+                </div>
+
+                <div class="details">
+                    <div class="class-price">
+                        <h3>Price</h3>
+                        <div class="class-price-text">{{classDetail.classPrice}} SEK</div>
+                    </div>
+
+                    <div class="class-time">
+                        <h3>Class Time</h3>
+                        <div class="class-start-time-text">{{classDetail.startTime}} - {{classDetail.endTime}}</div>
+                    </div>
+
+                    <div class="class-address">
+                        <h3>Address</h3>
+                        <div class="class-address-text">{{classDetail.address}}, {{classDetail.postcode}}</div>
+                    </div>
+                </div>
+
+                <div class="detail-card-button-container">
+                    <a href="#" class="share-button">
+                        <img src="/icons/share.png" alt="Share icon" class="share-icon">Share
+                    </a>
+                    <a href="#" class="favorite-button">
+                        <img src="/icons/favorite.png" alt="Favorite icon" class="favorite-icon">Favorite
+                    </a>
+                </div>
+
+                <a href="#" class="register-button">Register Now</a>
+            </div>
+        </div>
     </div>
-    
-    <div class="right-side-detail-card">
-        <div class="class-price">
-            <h3>Price</h3>
-            <div class="class-price-text">{{classDetail.classPrice}} SEK</div> <!-- Always display with Swedish krona -->
-        </div>
-
-        <div class="class-time">
-            <h3>Class Time</h3>
-            <div class="class-start-time-text">{{classDetail.startTime}} - {{classDetail.endTime}}</div>
-        </div>
-
-        <div class="class-address">
-            <h3>Address</h3>
-            <div class="class-address-text">{{classDetail.address}}, {{classDetail.postcode}}</div>
-        </div>
-        
-        <!-- Buttons inside of the right side detail card -->
-        <!-- First row buttons -->
-        <a href="/registerclass" class="register-button">Share</a>
-        <a href="/registerclass" class="register-button">Like</a>
-
-        <!-- Second row buttons -->
-        <a href="/registerclass" class="register-button">Register Now</a>
-    </div>
-</div>
-
-
-        <div class="google-review-section">
-            <h2>Vivid Stories from Real Students</h2>
-            <img src="/image/user-rating.png" alt="User rating image" class="user-rating-image">
-        </div>
-    </div>
-</div>
+</div> <!-- End of product-page-container -->
