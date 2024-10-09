@@ -1308,7 +1308,7 @@ section h2{
 /* Register button in the detail page*/
 .register-button{
     display: inline-block;
-    background-color: #ED3B38;
+    background-color: #2b2a2a;
     color: white;
     text-decoration: none; 
     transition: background-color 0.3s;
@@ -1324,7 +1324,7 @@ section h2{
 }
 
 .register-button:hover{
-    background-color: #333;
+    background-color: #ED3B38;
 }
 
 .intro-text{
@@ -1369,6 +1369,9 @@ section h2{
 .google-review-section{
     display: flex; 
     flex-direction: column;
+    background-color: #ebe8e8;
+    width: 70%;  
+    
 }
 
 .class-price, .class-time, .class-address{
