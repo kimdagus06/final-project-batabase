@@ -17,6 +17,7 @@
         </div>
 
         <!-- Display menu only if NOT on login or create account pages -->
+        <!-- Refer to this link: https://handlebarsjs.com/guide/builtin-helpers.html#if -->
         {{#unless isLoginPage}}
         {{#unless isCreateAccountPage}}
         <div class="menu-items">
@@ -29,7 +30,7 @@
         </div>
 
         <div class="search-container">
-            <div class="search-bar-wrapper">
+            <div class="search-bar-in-menu">
                 <input type="text" class="search-bar" placeholder="Find a new hobby">
                 <img src="/icons/search-icon.png" alt="Search Icon" class="search-icon">
             </div>
@@ -39,7 +40,6 @@
             <ul>
                 {{#if isLoggedIn}}
                     <li id="menulogin"><a href="/logout">Logout</a></li>
-                    <li id="menuuserpage"><a href="/userpage">User Page</a></li>
                     {{#if isAdmin}}
                         <li id="menuadmin"><a href="/admin">User manage</a></li>
                     {{/if}}

@@ -402,7 +402,6 @@ app.get('/upcomingclass', async (req, res) => {
             }
 
             if (!rows || rows.length === 0) {
-                // 데이터가 없을 경우에 대한 처리
                 return res.render('upcomingclass', { 
                     classes: [], 
                     page, 
@@ -410,7 +409,7 @@ app.get('/upcomingclass', async (req, res) => {
                     pageMinus1: page > 1 ? page - 1 : null, 
                     showPrev: false, 
                     showNext: false,
-                    totalPages: 0 // 페이지도 0으로 설정
+                    totalPages: 0
                 });
             }
 
@@ -430,7 +429,6 @@ app.get('/upcomingclass', async (req, res) => {
                 const showPrev = page > 1;
                 const showNext = nextPage !== null;
 
-                // `rows`는 classes 데이터로 렌더링할 준비가 되어 있습니다.
                 res.render('upcomingclass', { 
                     classes: rows, 
                     page, 
@@ -475,9 +473,9 @@ app.get('/detail/:id', (req, res) => {
         }
 
         // Render the class detail page with the fetched data
-        res.render('detail', {
-            classDetail: row
-        });
+        // classDetail is a descriptive name for the data being passed to the view, making it clear what data it hold
+        // It doesn't get data from the database if it's just detail.
+        res.render('detail', {classDetail: row});
     });
 });
 

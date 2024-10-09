@@ -53,7 +53,7 @@ html {
     padding-left: 4rem;
 }
 
-.search-bar-wrapper{
+.search-bar-in-menu{
     display: flex;
     align-items: center;
     border-radius: 0.8rem;
@@ -316,7 +316,7 @@ small{
     margin-bottom: 0.625rem;
     color: rgb(255, 244, 244);
     text-align: center;
-    font-weight: bold;
+    font-weight: 800;
     line-height: 1.2;
     padding: 0 1rem;
 }
@@ -434,7 +434,7 @@ small{
 
 .class-details p{
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: 800;
     color: #151415;
     text-align: center;
     text-transform: uppercase;
@@ -1088,7 +1088,7 @@ textarea{
 }
 
 .rating-container label{
-    font-weight: bold;
+    font-weight: 800;
     display: block;
     margin-bottom: 0.5rem;
 }
@@ -1401,6 +1401,7 @@ section h2{
     text-align: left;
     width: 100%;
     max-width: 40rem;
+    gap: 1rem;
 }
 
 .share-button, .favorite-button{
@@ -1478,57 +1479,62 @@ section h2{
     cursor: pointer
 }
 
+.exclusive-text h3{
+    font-size: 1.1rem;
+}
+
 /* ---------------------------------------------------------------
    Admin page styles 
    --------------------------------------------------------------- */
-#menuadmin{
-    font-weight: 600;
+.user-management-text{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
-.user-management{
-    padding: 20px;
-    background-color: #f5f5f5;
-}
-  
-.table-container{
-    margin-top: 20px;
-    overflow-x: auto;
-}
-  
 .user-table{
-    width: 100%;
-    border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 0.1rem solid #ebe8e8; /* Border line */
+}
+
+.table-header{
+    display: flex;
+    background-color: #f2f2f2;
+    font-weight: 600; 
+}
+
+.header-item{
+    flex: 1; 
+    padding: 0.6rem; 
     text-align: left;
+    padding: 0.5rem; 
 }
-  
-.user-table th, .user-table td{
-    padding: 10px;
-    border: 0.1rem solid #ddd;
+
+.table-body{
+    display: flex;
+    flex-direction: column; 
 }
-  
-.user-table th{
-    background-color: #f0f0f0;
+
+.table-row{
+    display: flex; 
+    border-bottom: 0.1rem solid #ebe8e8; /* Border line */
 }
-  
-.user-table tr:nth-child(even){
-    background-color: #fafafa;
+
+.cell{
+    flex: 1; 
+    padding: 0.625rem; 
 }
-  
-.user-table a{
-    color: #007bff;
-    text-decoration: none;
+
+.cell:last-child{
+    display: flex; 
+    justify-content: space-between; 
 }
-  
-.user-table a:hover{
-    text-decoration: underline;
+
+.table-row:hover{
+    background-color: #2b2a2a;
+    color: #fff;
 }
-  
-.user-table button{
-    color: #d9534f;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-}  
 
 /* Log out */
 /* From Uiverse.io by gharsh11032000 */ 
@@ -1652,7 +1658,7 @@ section h2{
 
 .company-text p{
     font-size: 1.6rem;
-    font-weight: bold;
+    font-weight: 800;
     margin: 0;
 }
 
@@ -1683,7 +1689,7 @@ section h2{
 
 .footer-section h4{
     font-size: 1rem;
-    font-weight: bold;
+    font-weight: 800;
     color: #1a1a1a;
     margin-bottom: 0.5rem;
 }

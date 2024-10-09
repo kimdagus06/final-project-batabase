@@ -1,38 +1,48 @@
-<div class="user-management"></div>
-  <h1>User Management</h1>
+<div class="user-management">
+  <div class="user-management-text">
+    <h1>User Management</h1>
+    <h2>You can manage all the registered users here.</h2>
+  </div>
+  
   <div class="table-container">
-    <table class="user-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>User Name</th>
-          <th>Email Address</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
+    <!-- It doesn't work. This is a decoration -->
+    <div class="search-bar-in-admin">
+      <input type="text" placeholder="Search users" class="search-input">
+    </div>
+    
+    <div class="user-table">
+      <div class="table-header">
+        <div class="header-item">ID</div>
+        <div class="header-item">User Name</div>
+        <div class="header-item">Email Address</div>
+        <div class="header-item">Actions</div>
+      </div>
+
+      <div class="table-body">
         {{#each users}}
-        <tr data-id="{{this.id}}">
-          <td>{{this.id}}</td>
-          <td>
+        <div class="table-row" data-id="{{this.id}}">
+          <div class="cell">{{this.id}}</div>
+          <div class="cell">
             <span class="user-name">{{this.username}}</span>
             <input type="text" class="edit-name" value="{{this.username}}" style="display:none;">
-          </td>
-          <td>
+          </div>
+
+          <div class="cell">
             <span class="user-email">{{this.emailAddress}}</span>
             <input type="email" class="edit-email" value="{{this.emailAddress}}" style="display:none;">
-          </td>
-          <td>
-            <!-- Edit and delete buttons -->
-            <button class="edit-btn">Edit</button>
-            <button class="save-btn" style="display:none;">Save</button> |
+          </div>
+
+          <!-- Edit/save/delete buttons in the cell -->
+          <div class="cell">
+            <button class="edit-button">Edit</button>
+            <button class="save-button" style="display:none;">Save</button>
             <form action="/admin/delete-user/{{this.id}}" method="POST" style="display:inline;">
-              <button type="submit" class="delete-btn">Delete</button>
+              <button type="submit" class="delete-button">Delete</button>
             </form>
-          </td>
-        </tr>
+          </div>
+        </div>
         {{/each}}
-      </tbody>
-    </table>
+      </div>
+    </div>
   </div>
 </div>
