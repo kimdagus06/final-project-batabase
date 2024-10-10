@@ -268,93 +268,106 @@ small{
 /* ---------------------------------------------------------------
    Log out page styles 
    --------------------------------------------------------------- */
-/* From Uiverse.io by gharsh11032000 */ 
-.animated-button{
-    position: relative;
+.logout-container{
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 4px;
-    padding: 16px 36px;
-    border: 4px solid;
-    border-color: transparent;
-    font-size: 16px;
-    background-color: inherit;
-    border-radius: 100px;
-    font-weight: 600;
-    color: greenyellow;
-    box-shadow: 0 0 0 2px greenyellow;
-    cursor: pointer;
-    overflow: hidden;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    flex-direction: column;
 }
-  
-.animated-button svg{
-    position: absolute;
-    width: 24px;
-    fill: greenyellow;
-    z-index: 9;
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+
+.logout-title{
+    color: #1e1c1c;
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 6rem;
 }
-  
-.animated-button .arr-1{
-    right: 16px;
+
+.text-link{
+    text-decoration: none;  
+    color: #1a1a1a;     
+    font-size: 1rem;    
+    cursor: default;  
 }
-  
-.animated-button .arr-2{
-    left: -25%;
+
+.text-link:hover, .text-link:focus{
+    font-weight: 800;
 }
-  
-.animated-button .circle{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    background-color: greenyellow;
-    border-radius: 50%;
-    opacity: 0;
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+
+.text-link img.home-icon{
+    width: 1rem;    
+    height: 0.8rem;       
+    vertical-align: center; /* Aligns icon vertically */
+    margin-top: 1rem;
 }
-  
-.animated-button .text{
+
+.back-to-home-container{
+    margin-bottom: 5rem;
+}
+
+.log-out-trigger{
+    text-decoration: none; 
+}
+
+/* Code borrowed from a website - uiverse -->
+/* Source: (mrhyddenn, 2022, "Button", https://uiverse.io/mrhyddenn/brown-penguin-10) */
+.log-out-button-container {
     position: relative;
-    z-index: 1;
-    transform: translateX(-12px);
-    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    background: #ffffff;
+    color: #1a1a1a;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    width: 12rem;
+    height: 3.125rem;
+    font-size: 1.0625rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 0.625rem 0.625rem rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-  
-.animated-button:hover{
-    box-shadow: 0 0 0 12px transparent;
-    color: #212121;
-    border-radius: 12px;
- }
-  
- .animated-button:hover .arr-1{
-    right: -25%;
- }
-  
- .animated-button:hover .arr-2{
-    left: 16px;
- }
-  
- .animated-button:hover .text{
-    transform: translateX(12px);
- }
-  
-.animated-button:hover svg{
-    fill: #212121;
+
+/* Tooltip */
+.tooltip {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.5rem;
+    width: 7rem;
+    border-radius: 0.3125rem;
+    box-shadow: 0 0.625rem 0.625rem rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    visibility: hidden;
+    position: absolute;
+    left: 50%;
+    top: -2rem;
+    transform: translate(-50%, 0); /* Center it horizontally */
 }
-  
-.animated-button:active{
-    scale: 0.95;
-    box-shadow: 0 0 0 4px greenyellow;
+
+.tooltip::before {
+    position: absolute;
+    content: "";
+    height: 0.5rem;
+    width: 0.5rem;
+    background: #ffffff;
+    bottom: -0.1875rem;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    transition: all 0.3s ease;
 }
-  
-.animated-button:hover .circle{
-    width: 220px;
-    height: 220px;
+
+.log-out-button-container:hover .tooltip {
     opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.3s ease;
+}
+
+.log-out-trigger:hover, .log-out-button-container:hover .tooltip, .log-out-button-container:hover .tooltip::before {
+    background: linear-gradient(320deg, rgb(3, 77, 146), rgb(0, 60, 255));
+    color: #ffffff;
 }
 
 /* ---------------------------------------------------------------

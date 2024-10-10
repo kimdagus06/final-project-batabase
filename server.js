@@ -19,6 +19,11 @@ const adminUser = {
     agreeterms: '1'
 };
 
+/*
+=========================================
+        CREATE TABLE DATA
+=========================================
+*/
 /* 15 users in users table - grade 3 */
 const predefinedUsers = [
     { username: 'Kim Gustavsson', emailAddress: 'user1@example.com', password: 'user1password', agreeterms: '1' },
@@ -62,7 +67,11 @@ app.set("view engine", "handlebars");
 app.set("views", "./views");
 app.use(express.static("public"));
 
-// Express middlewares
+/*
+=========================================
+        EXPRESS MIDDLEWARES
+=========================================
+*/
 app.use(express.urlencoded({ extended: true })); // url passing
 app.use(express.json());
 app.use(express.static('public'));
@@ -298,14 +307,12 @@ db.serialize(() => {
 */
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS feedback (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    class_id INT NOT NULL,
-    feedback_text TEXT NOT NULL,
-    rating INT CHECK (rating BETWEEN 1 AND 5),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (class_id) REFERENCES classes(id)
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    contactName TEXT NOT NULL,
+    contactMail TEXT NOT NULL,
+    message TEXT NOT NULL,
+    feedback TEXT, 
+    rating INT CHECK (rating BETWEEN 1 AND 5)
     );`, (err) => {
         if (err) {
             console.error("Error creating feedback table:", err.message);
@@ -605,12 +612,15 @@ app.post('/login-class', async (req, res) => {
   });
 
 /**
- * Log out
+ * app.post('/logout-class', async (req, res)
+ * Description:
+ * Log Out = clear the session
+ * It clears the session and redirects a user to the home page. 
  * 
  */
 app.post('/logout-class', async (req, res) => {
-    req.session.destroy(); // Log out = Clear the session
-    res.redirect('/'); // After log out a user is sent to main 
+    req.session.destroy(); // destroy() helps to clear the session
+    res.redirect('/');
 });
 
 app.post('/upcomingclass', async (req, res) => {
