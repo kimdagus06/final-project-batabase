@@ -53,7 +53,7 @@ const predefinedClasses = [
     { userId: 6, className: 'Social Media Strategies', classType: 'business', classPrice: 700, classDate: '2024-10-20', startTime: '11:00', endTime: '15:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
     { userId: 7, className: 'Korean Language Basics', classType: 'language', classPrice: 1000, classDate: '2024-10-21', startTime: '13:00', endTime: '16:00', classFormat: 'offline', address: '789 Design St, Stockholm', postcode: '12345' },
     { userId: 8, className: 'Yoga for Beginners', classType: 'fitness', classPrice: 600, classDate: '2024-10-22', startTime: '09:00', endTime: '12:00', classFormat: 'offline', address: '321 Baker Lane, Gothenburg', postcode: '41105' },
-    { userId: 9, className: 'Digital Art Techniques', classType: 'art', classPrice: 500, classDate: '2024-10-23', startTime: '17:00', endTime: '18:30', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
+    { userId: 9, className: 'Graphic Design for next step - advanced course', classType: 'art', classPrice: 500, classDate: '2024-10-23', startTime: '17:00', endTime: '18:30', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
     { userId: 10, className: 'Introduction to AI', classType: 'technology', classPrice: 1400, classDate: '2024-10-24', startTime: '10:00', endTime: '14:00', classFormat: 'offline', address: '654 Code Way, Malmö', postcode: '21123' },
     { userId: 11, className: 'Watercolor Techniques', classType: 'art', classPrice: 800, classDate: '2024-10-25', startTime: '09:00', endTime: '12:00', classFormat: 'offline', address: '78 Artistic St, Stockholm', postcode: '11223' },
     { userId: 12, className: 'Web Design Basics', classType: 'technology', classPrice: 900, classDate: '2024-10-26', startTime: '14:00', endTime: '16:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
@@ -66,13 +66,13 @@ const predefinedClasses = [
 const predefinedFeedback = [
     { contactName: 'Jérôme Landré', contactMail: 'jerome.landre@example.com', message: 'Great class! Learned a lot.', feedbacks: 'The instructor was very knowledgeable and engaging.', rating: 5 },
     { contactName: 'Elias Gustavsson', contactMail: 'happy.elias@example.com', message: 'Very informative session.', feedbacks: 'I love this platform.', rating: 5 },
-    { contactName: 'Charlie Brown', contactMail: 'charlie.brown@example.com', message: 'Had an amazing experience!', feedbacks: 'The class exceeded my expectations!', rating: 5 },
+    { contactName: 'Baby Kori', contactMail: 'kori@example.com', message: 'Meow, meeeow, meow.', feedbacks: 'Meow Meow!', rating: 5 },
     { contactName: 'Dasha Gustavsson', contactMail: 'dasha.gustavsson@example.com', message: 'Overall good!', feedbacks: 'The pacing was a bit fast for beginners.', rating: 5 },
-    { contactName: 'Ethan Hunt', contactMail: 'ethan.hunt@example.com', message: 'Enjoyed it very much.', feedbacks: 'Great content, but the audio quality was poor.', rating: 4 },
-    { contactName: 'Fiona Gallagher', contactMail: 'fiona.gallagher@example.com', message: 'Not worth the price.', feedbacks: 'I expected more hands-on activities.', rating: 2 },
+    { contactName: 'Mario Marcus', contactMail: 'mario.marcus@example.com', message: 'Enjoyed it very much.', feedbacks: 'Great content, but the audio quality was poor.', rating: 4 },
+    { contactName: 'Emily Helen', contactMail: 'emily.helen@example.com', message: 'It was worth for the price.', feedbacks: 'Much better than I expected and good to have a certication.', rating: 4 },
     { contactName: 'George Lucas', contactMail: 'george.lucas@example.com', message: 'Absolutely loved it!', feedbacks: 'Best class I have ever taken. Highly recommend!', rating: 5 },
     { contactName: 'Hannah Baker', contactMail: 'hannah.baker@example.com', message: 'Okay class.', feedbacks: 'Some parts were interesting, but others felt repetitive.', rating: 3 },
-    { contactName: 'Ian Fleming', contactMail: 'ian.fleming@example.com', message: 'Very helpful instructor.', feedbacks: 'I liked the interactive elements of the course.', rating: 4 },
+    { contactName: 'Moa Österling', contactMail: 'moa@example.com', message: 'Very helpful instructor.', feedbacks: 'I liked the interactive elements of the course.', rating: 4 },
     { contactName: 'Isak Arbman', contactMail: 'isak.arbman@example.com', message: 'Fantastic', feedbacks: 'The material was outdated.', rating: 4 }
 ];
 
@@ -340,7 +340,7 @@ db.serialize(() => {
 
 function insertPredefinedFeedback() {
     predefinedFeedback.forEach(fed => {
-        // Check if the class already exists by contactName and contactMail to avoid duplicates
+        // Check if the feedback already exists to avoid duplicates
         db.get('SELECT * FROM feedback WHERE contactName = ? AND contactMail = ?', [fed.contactName, fed.contactMail], (err, existingFeedback) => {
             if (err) {
                 console.error('Error checking predefined feedback:', err.message);
@@ -349,21 +349,21 @@ function insertPredefinedFeedback() {
   
             if (!existingFeedback) { // If feedback does not exist, insert it
                 db.run('INSERT INTO feedback (contactName, contactMail, message, feedbacks, rating) VALUES (?, ?, ?, ?, ?)', 
-                    [fed.userId, fed.contactName, fed.contactMail, fed.message, fed.feedbacks, fed.rating], 
+                    [fed.contactName, fed.contactMail, fed.message, fed.feedbacks, fed.rating], 
                     (insertErr) => {
                         if (insertErr) {
                             console.error('Error inserting predefined feedback:', insertErr.message);
                         } else {
-                            console.log(`Predefined feedback created successfully.`);
+                            console.log(`Predefined feedback from "${fed.contactName}" created successfully.`);
                         }
                     }
                 );                
             } else {
-                console.log(`Class "${fed.contactName}" at ${fed.contactMail} already exists in the database.`);
+                console.log(`Feedback from "${fed.contactName}" with email "${fed.contactMail}" already exists in the database.`);
             }
         });
     });
-  }
+}
 
 // -----------
 // ---ROUTE---
