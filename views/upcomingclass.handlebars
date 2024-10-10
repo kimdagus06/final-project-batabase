@@ -3,7 +3,7 @@
     <ul id="class-list">
         {{#if classes.length}}
             {{#each classes}}
-                <li class="class-item card">
+                <li class="class-item">
                     <div class="class-info">
                         <div class="upcomings-image-container">
                             <a href="/detail/{{this.id}}">
@@ -13,9 +13,6 @@
                         </div>
                         <span><strong>{{className}}</strong></span><br>
                         <span><strong>Tutor:</strong> {{username}}</span><br>
-                    </div>
-                    <div class="upcoming-button">
-                        <a href="/detail/{{this.id}}" class="upcomingclass-button">Register class</a>
                     </div>
                 </li>
             {{/each}}
@@ -49,6 +46,8 @@
     
     <!-- Sticky Banner -->
     <div class="sticky-banner">
-        <p>sticky banner test <a href="#">Click here</a> for more information</p>
+        <p>Are you interested in becoming a creator?  
+            <a href="/registerclass" class="btn">For more information</a>
+        </p>
     </div>
 </div>

@@ -426,7 +426,7 @@ app.get('/admin', isAdmin, (req, res) => {
  * app.get('/upcomingclass', async (req, res)
  * Description: 
  * 1. 
- * 2. Pagination 
+ * 2. Pagination - grade 4: This part is connected to upcomingclass.handlebars 
  * 
  * Refer to this link: https://www.w3schools.com/sql/sql_join_inner.asp
  * Refer to this link: https://gent.tistory.com/376
@@ -435,7 +435,7 @@ app.get('/admin', isAdmin, (req, res) => {
 app.get('/upcomingclass', async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1; // Get the current page
-        const limit = 10; // Number of items per page
+        const limit = 8; // Number of items per page
         const offset = (page - 1) * limit; // Calculate offset for SQL query
 
         const query = `
