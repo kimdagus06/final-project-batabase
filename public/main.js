@@ -1,7 +1,6 @@
 /**
 * This is about edit/delete/save button in admin page
 * Inline editor 
-* 
 */
 document.querySelectorAll('.edit-button').forEach(button => {
   button.addEventListener('click', function() {
@@ -28,18 +27,18 @@ document.querySelectorAll('.edit-button').forEach(button => {
       editNameInput.style.display = editNameInput.style.display === 'none' ? 'inline' : 'none';
       editEmailInput.style.display = editEmailInput.style.display === 'none' ? 'inline' : 'none';
 
-      // Hide the "Edit" button after it's clicked
+      // Hide the edit button after it's clicked
       this.style.display = 'none';
-      // Show the "Save" button
+      // Show the save button
       saveBtn.style.display = 'inline';
   });
 });
 
-// Add click event listeners to all "Save" buttons
+// Add click event listeners to all save buttons
 document.querySelectorAll('.save-button').forEach(button => {
   button.addEventListener('click', function() {
-      // Find the closest table row to the clicked "Save" button
-      const row = this.closest('.table-row');
+      // Find the closest table row to the clicked save button
+      const row = this.closest('.table-row'); // Same logic as delete 
 
       // Get the spans that display the user's name and email
       const userNameSpan = row.querySelector('.user-name');
@@ -53,7 +52,6 @@ document.querySelectorAll('.save-button').forEach(button => {
       userNameSpan.textContent = editNameInput.value;
       userEmailSpan.textContent = editEmailInput.value;
 
-      // Show the spans and hide the input fields after saving
       userNameSpan.style.display = 'inline';
       userEmailSpan.style.display = 'inline';
 

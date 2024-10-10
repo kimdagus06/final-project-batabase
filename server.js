@@ -129,7 +129,6 @@ function isAdmin(req, res, next) {
 // ---CREATE--
 // ---TABLE---
 // -----------
-
 /**
  * Table one | Create users  
  * Create predefined 5 users and create a users table if it doens't exist 
