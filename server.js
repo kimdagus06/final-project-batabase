@@ -64,16 +64,16 @@ const predefinedClasses = [
 
 /* 15 feedbacks in feedback table - grade 4 */
 const predefinedFeedback = [
-    { contactName: 'Alice Johnson', contactMail: 'alice.johnson@example.com', message: 'Great class! Learned a lot.', feedback: 'The instructor was very knowledgeable and engaging.', rating: 5 },
-    { contactName: 'Bob Smith', contactMail: 'bob.smith@example.com', message: 'Very informative session.', feedback: 'I appreciate the practical examples provided.', rating: 4 },
-    { contactName: 'Charlie Brown', contactMail: 'charlie.brown@example.com', message: 'Had an amazing experience!', feedback: 'The class exceeded my expectations!', rating: 5 },
-    { contactName: 'Diana Prince', contactMail: 'diana.prince@example.com', message: 'Could use some improvement.', feedback: 'The pacing was a bit fast for beginners.', rating: 3 },
-    { contactName: 'Ethan Hunt', contactMail: 'ethan.hunt@example.com', message: 'Enjoyed it very much.', feedback: 'Great content, but the audio quality was poor.', rating: 4 },
-    { contactName: 'Fiona Gallagher', contactMail: 'fiona.gallagher@example.com', message: 'Not worth the price.', feedback: 'I expected more hands-on activities.', rating: 2 },
-    { contactName: 'George Lucas', contactMail: 'george.lucas@example.com', message: 'Absolutely loved it!', feedback: 'Best class I have ever taken. Highly recommend!', rating: 5 },
-    { contactName: 'Hannah Baker', contactMail: 'hannah.baker@example.com', message: 'Okay class.', feedback: 'Some parts were interesting, but others felt repetitive.', rating: 3 },
-    { contactName: 'Ian Fleming', contactMail: 'ian.fleming@example.com', message: 'Very helpful instructor.', feedback: 'I liked the interactive elements of the course.', rating: 4 },
-    { contactName: 'Jane Doe', contactMail: 'jane.doe@example.com', message: 'Could be better.', feedback: 'The material was outdated.', rating: 2 }
+    { contactName: 'Jérôme Landré', contactMail: 'jerome.landre@example.com', message: 'Great class! Learned a lot.', feedbacks: 'The instructor was very knowledgeable and engaging.', rating: 5 },
+    { contactName: 'Elias Gustavsson', contactMail: 'happy.elias@example.com', message: 'Very informative session.', feedbacks: 'I love this platform.', rating: 5 },
+    { contactName: 'Charlie Brown', contactMail: 'charlie.brown@example.com', message: 'Had an amazing experience!', feedbacks: 'The class exceeded my expectations!', rating: 5 },
+    { contactName: 'Dasha Gustavsson', contactMail: 'dasha.gustavsson@example.com', message: 'Overall good!', feedbacks: 'The pacing was a bit fast for beginners.', rating: 5 },
+    { contactName: 'Ethan Hunt', contactMail: 'ethan.hunt@example.com', message: 'Enjoyed it very much.', feedbacks: 'Great content, but the audio quality was poor.', rating: 4 },
+    { contactName: 'Fiona Gallagher', contactMail: 'fiona.gallagher@example.com', message: 'Not worth the price.', feedbacks: 'I expected more hands-on activities.', rating: 2 },
+    { contactName: 'George Lucas', contactMail: 'george.lucas@example.com', message: 'Absolutely loved it!', feedbacks: 'Best class I have ever taken. Highly recommend!', rating: 5 },
+    { contactName: 'Hannah Baker', contactMail: 'hannah.baker@example.com', message: 'Okay class.', feedbacks: 'Some parts were interesting, but others felt repetitive.', rating: 3 },
+    { contactName: 'Ian Fleming', contactMail: 'ian.fleming@example.com', message: 'Very helpful instructor.', feedbacks: 'I liked the interactive elements of the course.', rating: 4 },
+    { contactName: 'Isak Arbman', contactMail: 'isak.arbman@example.com', message: 'Fantastic', feedbacks: 'The material was outdated.', rating: 4 }
 ];
 
 app.engine("handlebars", engine());
@@ -321,20 +321,49 @@ db.serialize(() => {
 */
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS feedback (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    contactName TEXT NOT NULL,
-    contactMail TEXT NOT NULL,
-    message TEXT NOT NULL,
-    feedback TEXT, 
-    rating INT CHECK (rating BETWEEN 1 AND 5)
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        contactName TEXT NOT NULL,
+        contactMail TEXT NOT NULL,
+        message TEXT NOT NULL,
+        feedbacks TEXT, 
+        rating INT CHECK (rating BETWEEN 1 AND 5)
     );`, (err) => {
         if (err) {
             console.error("Error creating feedback table:", err.message);
         } else {
-            console.log("feedback table created successfully.");
+            console.log("Feedback table created successfully.");
+            // Call the function to insert predefined feedback right after table creation
+            insertPredefinedFeedback();
         }
     });
 });
+
+function insertPredefinedFeedback() {
+    predefinedFeedback.forEach(fed => {
+        // Check if the class already exists by contactName and contactMail to avoid duplicates
+        db.get('SELECT * FROM feedback WHERE contactName = ? AND contactMail = ?', [fed.contactName, fed.contactMail], (err, existingFeedback) => {
+            if (err) {
+                console.error('Error checking predefined feedback:', err.message);
+                return;
+            }
+  
+            if (!existingFeedback) { // If feedback does not exist, insert it
+                db.run('INSERT INTO feedback (contactName, contactMail, message, feedbacks, rating) VALUES (?, ?, ?, ?, ?)', 
+                    [fed.userId, fed.contactName, fed.contactMail, fed.message, fed.feedbacks, fed.rating], 
+                    (insertErr) => {
+                        if (insertErr) {
+                            console.error('Error inserting predefined feedback:', insertErr.message);
+                        } else {
+                            console.log(`Predefined feedback created successfully.`);
+                        }
+                    }
+                );                
+            } else {
+                console.log(`Class "${fed.contactName}" at ${fed.contactMail} already exists in the database.`);
+            }
+        });
+    });
+  }
 
 // -----------
 // ---ROUTE---
