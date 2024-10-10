@@ -3,13 +3,14 @@
     <h1>User Management</h1>
     <h2>You can manage all the registered users here.</h2>
   </div>
-  
-  <div class="table-container">
-    <!-- It doesn't work. This is a decoration -->
+
+  <div class="search-bar-container">
     <div class="search-bar-in-admin">
       <input type="text" placeholder="Search users" class="search-input">
     </div>
-    
+  </div>
+
+  <div class="table-container">
     <div class="user-table">
       <div class="table-header">
         <div class="header-item">ID</div>
@@ -32,13 +33,12 @@
             <input type="email" class="edit-email" value="{{this.emailAddress}}" style="display:none;">
           </div>
 
-          <!-- Edit/save/delete buttons in the cell -->
           <div class="cell">
-            <button class="edit-button">Edit</button>
-            <button class="save-button" style="display:none;">Save</button>
-            <form action="/admin/delete-user/{{this.id}}" method="POST" style="display:inline;">
-              <button type="submit" class="delete-button">Delete</button>
-            </form>
+            <div class="user-management-buttons">
+              <button class="edit-button">Edit</button>
+              <button class="save-button" style="display:none;">Save</button>
+              <button class="delete-button">Delete</button>
+            </div>
           </div>
         </div>
         {{/each}}

@@ -628,6 +628,9 @@ app.post('/upcomingclass', async (req, res) => {
     });
 });
 
+/**
+ * 
+ */
 app.post('/registerclass', async (req, res) => {
     const { user_id, classes_id } = req.body;
 
@@ -642,6 +645,9 @@ app.post('/registerclass', async (req, res) => {
     });
 });
 
+/**
+ * 
+ */
 app.post('/create-class', async (req, res) => {
     const userId = req.session.userId; // Bring user id from the session 
 
@@ -665,6 +671,9 @@ app.post('/create-class', async (req, res) => {
     });
 });
 
+/**
+ * 
+ */
 app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
     const userId = req.params.id;
     const { username, emailAddress } = req.body;
@@ -679,6 +688,33 @@ app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
         return res.json({ success: true });
     });
 });
+
+/**
+ * https://forum.freecodecamp.org/t/delete-a-record-from-database-using-node-js-express-js/454100
+ * Description:
+ * 
+ */
+app.delete('/admin/delete-user/:id', isAdmin, (req, res) => {
+    const userId = req.params.id;
+
+    console.log(`DELETE request made to: /admin/delete-user/${userId}`);
+
+    db.run('DELETE FROM users WHERE id = ?', [userId], function(err) {
+        if (err) {
+            console.error('Error deleting user:', err.message);
+            return res.status(500).json({ success: false, message: 'Server error' });
+        }
+
+        if (this.changes === 0) {
+            console.log("No user found with the given ID.");
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        console.log("User deleted from the database.");
+        return res.json({ success: true, message: 'User deleted successfully' });
+    });
+});
+
 
 /* Start a port */
 app.listen (port, () => {

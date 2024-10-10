@@ -1,7 +1,6 @@
 /**
 * This is about edit/delete/save button in admin page
-* https://docs.netlify.com/visual-editor/visual-editing/inline-editor/
-* https://chatgpt.com/c/66f9b4e6-4308-800f-89c4-4d525efca4ec
+* Inline editor 
 * 
 */
 document.querySelectorAll('.edit-button').forEach(button => {
@@ -20,6 +19,7 @@ document.querySelectorAll('.edit-button').forEach(button => {
       // Get the "Save" button in the current row
       const saveBtn = row.querySelector('.save-button');
 
+      // https://chatgpt.com/c/66f9b4e6-4308-800f-89c4-4d525efca4ec
       // Toggle the display of the spans and input fields
       // If the span is currently displayed, hide it and show the input field
       // If the span is hidden, show it and hide the input field
@@ -56,13 +56,41 @@ document.querySelectorAll('.save-button').forEach(button => {
       // Show the spans and hide the input fields after saving
       userNameSpan.style.display = 'inline';
       userEmailSpan.style.display = 'inline';
+
       editNameInput.style.display = 'none';
       editEmailInput.style.display = 'none';
 
       // Hide the "Save" button after saving the changes
       this.style.display = 'none';
-      // Show the "Edit" button again for further editing if needed
       row.querySelector('.edit-button').style.display = 'inline';
+  });
+});
+
+/**
+ * https://chatgpt.com/share/6707b378-2e20-800f-a235-175a7d153139
+ */
+document.querySelectorAll('.delete-button').forEach(button => {
+  button.addEventListener('click', function() {
+      const row = this.closest('.table-row');
+      const userId = row.dataset.id; // Get user id from data-id
+
+      // Send DELETE request
+      fetch(`/admin/delete-user/${userId}`, {
+          method: 'DELETE', // Use delete method 
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              row.remove();
+              alert('User deleted successfully!');
+          } else {
+              alert('Error deleting user: ' + data.message);
+          }
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          alert('Error deleting user.');
+      });
   });
 });
 
