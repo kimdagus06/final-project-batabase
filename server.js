@@ -62,6 +62,20 @@ const predefinedClasses = [
     { userId: 15, className: 'Fitness Bootcamp', classType: 'fitness', classPrice: 500, classDate: '2024-10-29', startTime: '18:00', endTime: '20:00', classFormat: 'online', address: 'N/A', postcode: 'N/A' },
 ];
 
+/* 15 feedbacks in feedback table - grade 4 */
+const predefinedFeedback = [
+    { contactName: 'Alice Johnson', contactMail: 'alice.johnson@example.com', message: 'Great class! Learned a lot.', feedback: 'The instructor was very knowledgeable and engaging.', rating: 5 },
+    { contactName: 'Bob Smith', contactMail: 'bob.smith@example.com', message: 'Very informative session.', feedback: 'I appreciate the practical examples provided.', rating: 4 },
+    { contactName: 'Charlie Brown', contactMail: 'charlie.brown@example.com', message: 'Had an amazing experience!', feedback: 'The class exceeded my expectations!', rating: 5 },
+    { contactName: 'Diana Prince', contactMail: 'diana.prince@example.com', message: 'Could use some improvement.', feedback: 'The pacing was a bit fast for beginners.', rating: 3 },
+    { contactName: 'Ethan Hunt', contactMail: 'ethan.hunt@example.com', message: 'Enjoyed it very much.', feedback: 'Great content, but the audio quality was poor.', rating: 4 },
+    { contactName: 'Fiona Gallagher', contactMail: 'fiona.gallagher@example.com', message: 'Not worth the price.', feedback: 'I expected more hands-on activities.', rating: 2 },
+    { contactName: 'George Lucas', contactMail: 'george.lucas@example.com', message: 'Absolutely loved it!', feedback: 'Best class I have ever taken. Highly recommend!', rating: 5 },
+    { contactName: 'Hannah Baker', contactMail: 'hannah.baker@example.com', message: 'Okay class.', feedback: 'Some parts were interesting, but others felt repetitive.', rating: 3 },
+    { contactName: 'Ian Fleming', contactMail: 'ian.fleming@example.com', message: 'Very helpful instructor.', feedback: 'I liked the interactive elements of the course.', rating: 4 },
+    { contactName: 'Jane Doe', contactMail: 'jane.doe@example.com', message: 'Could be better.', feedback: 'The material was outdated.', rating: 2 }
+];
+
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./views");
