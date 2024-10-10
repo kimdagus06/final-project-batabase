@@ -458,7 +458,7 @@ small{
     text-align: center;
 }
 
-.class-image{
+.home-class-image{
     width: 100%;
     border-radius: 0.5rem;
 }
@@ -671,14 +671,14 @@ small{
 
 .class-image{
     max-width: 100%;
-    height: 10rem;
+    height: auto;
     border-radius: 0.3rem;
 }
 
 .bookmark{
     position: absolute;
-    top: 1.8rem;
-    right: 1.7rem;
+    top: 1rem;
+    right: 4rem;
     width: 1.5rem;
     height: auto;
     cursor: pointer;
