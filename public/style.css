@@ -88,15 +88,15 @@ html {
 .login-items a{
     color: #2b2a2a;
     text-decoration: none;
-    border-radius: 1rem;
-    padding: 1rem;
+    border-radius: 0.5rem;
+    padding: 0.6rem; 
     background-color: transparent;
     transition: background-color 0.3s, color 0.3s;
 }
 
 .login-items a:hover{
     color: #fff;
-    background-color: #625deb;
+    background-color: #082e60;
 }
 
 /* ---------------------------------------------------------------
@@ -147,7 +147,7 @@ html {
 }
 
 .create-an-account-button:hover{
-    background-color: #625deb;
+    background-color: #082e60;
     transform: scale(1.05);
 }
 
@@ -197,7 +197,7 @@ html {
 }
 
 .login-button:hover{
-    background-color: #625deb;
+    background-color: #082e60;
     transform: scale(1.05); /* Slightly grow on hover */
 }
 
@@ -519,49 +519,40 @@ small{
     gap: 1rem; 
 }
 
+/* For hover effect; overflow part */
 .class-item{
     width: 18rem;
     border: none; 
     font-size: 0.8rem;
     box-sizing: border-box;
     text-align: center;
+    overflow: hidden;
+    position: relative; 
 }
 
 .home-class-image{
-    max-width: 100%;
+    width: 100%;
     height: auto;
+    transition: transform 0.3s ease;
     display: block;
+    max-height: 13rem;
 }
+
+.home-class-image:hover{
+    transform: scale(1.02); /* Slight zoom to avoid drastic size change */
+}
+
 
 /* Home card titles */
 .class-title{
-    margin-top: 0.6;
+    margin-top: 0.6rem;
     font-size: 1rem;
     color: #333;
+    text-decoration: none;
 }
 
-/* Home banner */
-.home-banner-item{
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    align-items: flex-end;
-    background-color: #1b1b30;
-    width: 50%;
-    padding-right: 8.3rem;
-    padding-left: 8.3rem; 
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
-    margin: 3rem; 
-    color: #fff;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    background-image: url(/image/detail-image1.jpg);
-}
-
-.home-banner{
-    font-size: 1.2rem;
-    font-weight: 100;
+.class-description{
+    text-decoration: none;
 }
 
 /* ---------------------------------------------------------------
@@ -788,7 +779,7 @@ small{
     justify-content: center;    
     align-items: center;
     gap: 0; /* No gap between cards */
-    max-width: 75rem;
+    max-width: 77rem;
     margin: 0 auto; /* Center the grid horizontally */
     padding: 0;
 }
@@ -1151,6 +1142,12 @@ span{
     margin-left: 1.5rem;
 }
 
+.help-center-icon{
+    margin-top: 3rem;
+    width: 3rem;
+    height: 3rem;
+}
+
 .guide-text{
     display: flex;
     flex-direction: column;
@@ -1264,7 +1261,7 @@ span{
 
 .inquiry-box{
     padding: 1.5rem;
-    background-color: #F7F7F7;
+    background-color: #FF5600;
     text-align: center;
     width: 100%;
 }
@@ -1272,11 +1269,15 @@ span{
 .inquire-text{
     font-size: 1.5rem;
     font-weight: 800;
+    padding: 1rem;
+    color: #fff;
 }
 
 .inquire-sub-text{
     font-size: 1rem;
     margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
 }
 
 .contact-feedback-form{
