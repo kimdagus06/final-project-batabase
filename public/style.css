@@ -562,17 +562,34 @@ small{
    Register Class page styles
    --------------------------------------------------------------- */
 .register-class-cover-image{
-    position: relative;
-    background-image: url('/image/register-class-cover.png');
     background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 105vh;
-    font-size: 1.5rem;
+    background-size: cover;
+    height: 95vh;
+    width: 100%;
+}
+
+.text-container{
+    display: flex;                  
+    flex-direction: column;            
+    align-items: center;              
+    justify-content: center;          
     text-align: center;
+    margin: 0; 
+    padding: 0;
+}
+
+.upcoming-main-text{
+    margin-bottom: 0.5rem;
+    font-size: 3rem;
+    line-height: 3.75rem;
     font-weight: 800;
-    overflow: hidden;
-    margin-bottom: 7rem; 
+}
+
+.upcoming-sub-text{
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+    font-weight: 400;
 }
 
 .become-creator-button{
@@ -583,35 +600,10 @@ small{
     text-decoration: none;
     font-size: 0.9rem;
     cursor: pointer;
-    margin-left: 1rem;
     border: none;
     font-family: "Red Hat Display", sans-serif;
     font-weight: 600;
     margin-top: 1rem;
-}
-
-/* Write a small description for the class. This text */
-.register-class-sub-text{
-    font-size: 0.8rem;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #0C0C0C; 
-}
-
-.upcoming-main-text{
-    margin-top: 6rem;
-    margin-bottom: 1rem;
-    font-size: 3rem;
-    line-height: 3.75rem;
-    word-spacing: 0rem;
-    font-weight: 800;
-}
-
-/* Begin Your Journey as a World-Changing Creator on DIGG This text */
-.upcoming-sub-text{
-    font-size: 1.25rem;
-    line-height: 1.625rem;
-    font-weight: 400;
 }
 
 /* ---------------------------------------------------------------
@@ -747,7 +739,7 @@ small{
 }
 
 /* Guide message for creators */
-.apply-guide-message p {
+.apply-guide-message p{
     font-size: 0.8rem;
     color: #333;
     font-weight: 200;
@@ -879,7 +871,6 @@ span{
     display: flex;
     justify-content: center; 
 }
-
 
 .sticky-banner a{
     text-decoration: underline;
@@ -2077,7 +2068,7 @@ section h2{
         display: none;
     }
 
-    /* Home */
+    /* HOME */
     .home-sections{
         display: none;
     }
@@ -2151,7 +2142,7 @@ section h2{
         max-width: none;
     }
 
-    /* Home */
+    /* HOME */
     .home-sections{
         display: none;
     }
@@ -2163,6 +2154,27 @@ section h2{
 
     .hashtag-suggestions{
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* REGISTER CLASS */
+    .button-container{
+        padding: 0;
+        margin: 0; 
+        text-align: center;
+    }
+
+    .upcoming-main-text{
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .upcoming-sub-text{
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+        text-align: center;
     }
 }
 
@@ -2214,7 +2226,7 @@ section h2{
         padding: 0.5rem 1rem;
     }
 
-    /* Footer */
+    /* FOOTER */
     .footer-left, .footer-right{
         text-align: center;
     }
@@ -2253,6 +2265,8 @@ section h2{
     .hashtag-suggestions{
         grid-template-columns: repeat(1, 1fr);
     }
+
+    /* REGISTER CLASS */
 }
 
 @media (max-width: 480px) {
@@ -2325,5 +2339,47 @@ section h2{
 
     .hashtag-suggestions{
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    /* REGISTER CLASS */
+    .button-container{
+        padding: 0;
+        margin: 0; 
+    }
+
+    .upcoming-main-text, .upcoming-sub-text{
+        font-size: 2rem;
+        line-height: 2.5rem;
+        margin-bottom: 0.5rem;
+        padding: 0 1rem;
+    }
+
+    .upcoming-sub-text{
+        font-size: 1.2rem;
+        line-height: 2.5rem;
+    }
+
+    .become-creator-button-text{
+        font-size: 1rem;
+    }
+
+    .class-creating{
+        max-width: 90%;
+        padding: 0 1rem;
+    }
+
+    .form-group{
+        flex-direction: column;
+    }
+
+    .form-input{
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+
+    .apply-guide-message p{
+        display: flex;
+        justify-content: center;
+        font-size: 0.7rem;
     }
 }

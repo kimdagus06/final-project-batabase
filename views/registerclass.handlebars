@@ -1,6 +1,6 @@
 <div class="class-container">
-    <!-- Cover image wrapper -->
-    <div class="register-class-cover-image">
+    <!-- Separate text elements -->
+    <div class="text-container">
         <p class="upcoming-main-text">Build a Better World by <br>Doing What You Love</p>
         <p class="upcoming-sub-text">Begin Your Journey as a World-Changing Creator on DIGG</p>
 
@@ -8,94 +8,95 @@
             <span class="become-creator-text">Become Digg Creator</span>
         </button>
     </div>
+
+    <!-- Cover image wrapper -->
+    <div class="register-class-cover-image" style="background-image: url('/image/register-class-cover.png');">
+        <!-- This section is for the background image only -->
+    </div>
 </div>
 
-    <form class="class-creating" method="POST" action="/create-class">
-        <div class="class-details" id="register-creator">
-            <p>Class DETAILS</p>
-            <h2 class="register-class-sub-text">Write a small description for the class.</h2>
 
+<form class="class-creating" method="POST" action="/create-class">
+    <div class="class-details" id="register-creator">
+        <p>Class DETAILS</p>
+        <h2 class="register-class-sub-text">Write a small description for the class.</h2>
+
+        <div class="form-group">
+            <label for="class-name">Class Name</label>
+            <input type="text" id="class-name" name="className" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+            <label for="class-type">Class Type</label>
+            <select id="class-type" name="classType" class="form-input" required>
+                <option value="">Select Class Type</option>
+                <option value="freeclass">Art</option>
+                <option value="onedayclass">Technology</option>
+                <option value="conference">Baking/Cooking</option>
+                <option value="workshop">Plants</option>
+                <option value="webinar">Photography</option>
+                <option value="webinar">Business</option>
+                <option value="webinar">Language</option>
+                <option value="webinar">Fitness</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="class-price">Price</label>
+            <input type="text" id="class-price" name="classPrice" class="form-input" required>
+        </div>
+
+        <div class="time-duration-container">
             <div class="form-group">
-                <label for="class-name">Class Name</label>
-                <input type="text" id="class-name" name="className" class="form-input" required>
-            </div>
-
-            <div class="form-group">
-                <label for="class-type">Class Type</label>
-                <select id="class-type" name="classType" class="form-input" required>
-                    <option value="">Select Class Type</option>
-                    <option value="freeclass">Art</option>
-                    <option value="onedayclass">Technology</option>
-                    <option value="conference">Baking/Cooking</option>
-                    <option value="workshop">Plants</option>
-                    <option value="webinar">Photography</option>
-                    <option value="webinar">Business</option>
-                    <option value="webinar">Language</option>
-                    <option value="webinar">Fitness</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="class-price">Price</label>
-                <input type="text" id="class-price" name="classPrice" class="form-input" required>
-            </div>
-
-            <div class="time-duration-container">
-                <div class="form-group">
-                    <label for="date">Date</label>
-                    <input type="date" id="date" name="classDate" class="form-input" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="start-time">Start Time</label>
-                    <input type="time" id="start-time" name="startTime" class="form-input" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="end-time">End Time</label>
-                    <input type="time" id="end-time" name="endTime" class="form-input" required>
-                </div>
-            </div>
-
-            <input type="hidden" name="classFormat" value="offline">
-            <div class="checkbox-container">
-                <div class="form-group">
-                    <input type="checkbox" id="online-check" name="classFormat" value="online">
-                    <label for="online-check">Set as Online</label>
-                </div>
+                <label for="date">Date</label>
+                <input type="date" id="date" name="classDate" class="form-input" required>
             </div>
 
             <div class="form-group">
-                <p>Class PLACE</p>
-                <label for="address-line-1">Address</label>
-                <input type="text" id="address-line-1" name="address" placeholder="Please enter the location where the class will be held" class="form-input" required>
+                <label for="start-time">Start Time</label>
+                <input type="time" id="start-time" name="startTime" class="form-input" required>
             </div>
 
             <div class="form-group">
-                <label for="address-line-2">Postcode</label>
-                <input type="text" id="address-line-2" name="postcode" placeholder="Please enter the postcode" class="form-input" required>
-            </div>
-
-            <div class="button-container">
-                <button type="submit" class="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
-                    </svg>
-                    <div class="text">Submit</div>
-                </button>
-
-            <div>
-
-            <!-- Apply for becoming a creator in Digg -->
-            <button type="button" class="remove-button" onclick="resetForm()">
-                    <div class="text">Remove</div>
-                </button>
+                <label for="end-time">End Time</label>
+                <input type="time" id="end-time" name="endTime" class="form-input" required>
             </div>
         </div>
-    </form>
-            
-            <div class="apply-guide-message">
-            <p class="creator-guide-text">Once you apply to become a creator, <br>
-                we will review your application and it will be posted on the upcomings shortly.</p>
+
+        <input type="hidden" name="classFormat" value="offline">
+        <div class="checkbox-container">
+            <div class="form-group">
+                <input type="checkbox" id="online-check" name="classFormat" value="online">
+                <label for="online-check">Set as Online</label>
             </div>
+        </div>
+
+        <div class="form-group">
+            <p>Class PLACE</p>
+            <label for="address-line-1">Address</label>
+            <input type="text" id="address-line-1" name="address" placeholder="Please enter the location where the class will be held" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address-line-2">Postcode</label>
+            <input type="text" id="address-line-2" name="postcode" placeholder="Please enter the postcode" class="form-input" required>
+        </div>
+
+        <div class="button-container">
+            <button type="submit" class="button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+                </svg>
+                <div class="text">Submit</div>
+            </button>
+            <button type="button" class="remove-button" onclick="resetForm()">
+                <div class="text">Remove</div>
+            </button>
+        </div>
+    </div>
+</form>
+
+<div class="apply-guide-message">
+    <p class="creator-guide-text">Once you apply to become a creator, <br>
+        we will review your application and it will be posted on the upcomings shortly.</p>
 </div>
