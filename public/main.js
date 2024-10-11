@@ -133,13 +133,15 @@ accordionItems.forEach(item => {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Get the button and target section
+    // Ensure that the button and target section exist before trying to access them
     const button = document.getElementById("become-creator-btn");
     const targetSection = document.getElementById("register-creator");
 
-    // Add click event listener to the button
-    button.addEventListener("click", function() {
-        // Scroll to the target section smoothly
-        targetSection.scrollIntoView({ behavior: 'smooth' });
-    });
+    if (button && targetSection) { // Check if both elements exist
+        // Add click event listener to the button
+        button.addEventListener("click", function() {
+            // Scroll to the target section smoothly
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
 });
