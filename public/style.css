@@ -472,30 +472,65 @@ small{
 /* ---------------------------------------------------------------
    Register Class page styles
    --------------------------------------------------------------- */
-.register-class-main-text{
-    color: #f6f1f1; 
+.register-class-cover-image{
+    position: relative;
+    background-image: url('/image/register-class-cover.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 105vh;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: 800;
+    overflow: hidden;
+    margin-bottom: 7rem; 
 }
 
+.become-creator-button{
+    background-color: #FF5600;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    border: none;
+    font-family: "Red Hat Display", sans-serif;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+/* Write a small description for the class. This text */
 .register-class-sub-text{
     font-size: 0.8rem;
     text-align: center;
     margin-bottom: 2rem;
-    color: #151415; 
+    color: #0C0C0C; 
 }
 
+.upcoming-main-text{
+    margin-top: 6rem;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    line-height: 3.75rem;
+    word-spacing: 0rem;
+    font-weight: 800;
+}
+
+/* Begin Your Journey as a World-Changing Creator on DIGG This text */
+.upcoming-sub-text{
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+    font-weight: 400;
+}
+
+/* ---------------------------------------------------------------
+   Form for registering a class 
+   --------------------------------------------------------------- */
 .checkbox-container{
     display: flex;
     flex-direction: row;
-}
-
-.class-box{
-    background-color: #FF5000;  
-    border-radius: 0.5rem;
-    padding: 2rem;
-    margin: 1.7rem 0;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
 }
 
 .class-box ul{    
@@ -513,22 +548,12 @@ small{
     font-size: 1rem;
 }
 
-.class-container{
+.class-creating{
     max-width: 50rem;
     box-sizing: border-box;
     font-size: 0.8rem;
     margin: 0 auto; 
     font-family: "Red Hat Display", sans-serif;
-}
-
-.three-icons{
-    display: flex;
-    justify-content: flex-end; /* Arrange rightside */
-    align-items: center;
-}
-
-.class-creating{
-    font-size: 1rem;
 }
 
 .class-details p{
@@ -546,9 +571,6 @@ small{
     gap: 2rem;
 }
 
-/* ---------------------------------------------------------------
-   Form for registering a class 
-   --------------------------------------------------------------- */
 .form-group{
     flex: 1;
     margin-bottom: 2rem;
@@ -586,7 +608,7 @@ small{
 .button{
     width: 9rem;
     height: 2.9rem;
-    background-color: #0d0b5f;
+    background-color: #0038a8;
     cursor: pointer;
     color: #fff;
     border-radius: 1rem;
@@ -635,10 +657,28 @@ small{
     margin: 0 1.5rem; 
 }
 
+/* Guide message for creators */
+.apply-guide-message p {
+    font-size: 0.8rem;
+    color: #333;
+    font-weight: 200;
+}
+
 /* ---------------------------------------------------------------
    Upcoming Class page styles - upcomings
    --------------------------------------------------------------- */
-   .trending-title{
+.upcoming-page-container{
+    margin-top: 3rem;
+}
+
+.trending-title{
+    font-size: 1.5rem;
+    color: #2b2a2a;
+    text-align: center;
+    padding-bottom: 0.5rem;
+}
+
+.new-title{
     font-size: 1.5rem;
     color: #2b2a2a;
     text-align: center;
@@ -660,7 +700,8 @@ small{
 
 .class-info{
     text-align: center;
-    color: #444;
+    color: #212020;
+    margin-bottom: 1rem;
 }
 
 .upcomings-image-container{
@@ -678,7 +719,7 @@ small{
 .bookmark{
     position: absolute;
     top: 1rem;
-    right: 4rem;
+    right: 3.7rem;
     width: 1.5rem;
     height: auto;
     cursor: pointer;
@@ -756,7 +797,7 @@ span{
     color: #ffd700;
 }
 
-.sticky-banner .btn{
+.sticky-banner .for-more-information-button{
     display: inline-block;
     justify-content: center;
     background-color: #FF5600;
@@ -923,7 +964,7 @@ span{
     font-weight: 800;
 }
 
-.join-us-section::before {
+.join-us-section::before{
     content: '';
     position: absolute;
     top: 0;

@@ -1,15 +1,17 @@
 <div class="class-container">
-    <div class="class-box">
-        <h2 class="register-class-main-text">Do you want to hold a class?</h2>
-        <div class="three-icons">
-            <img src="/icons/upload-picture.png" alt="Upload Picture icon" width="28" height="28" class="icon">
-            <img src="/icons/edit.png" alt="Edit icon" width="28" height="28" class="icon">
-            <img src="/icons/delete.png" alt="Delete icon" width="28" height="28" class="icon">
-        </div>
+    <!-- Cover image wrapper -->
+    <div class="register-class-cover-image">
+        <p class="upcoming-main-text">Build a Better World by <br>Doing What You Love</p>
+        <p class="upcoming-sub-text">Begin Your Journey as a World-Changing Creator on DIGG</p>
+
+        <button class="become-creator-button" id="become-creator-btn">
+            <span class="become-creator-text">Become Digg Creator</span>
+        </button>
     </div>
+</div>
 
     <form class="class-creating" method="POST" action="/create-class">
-        <div class="class-details">
+        <div class="class-details" id="register-creator">
             <p>Class DETAILS</p>
             <h2 class="register-class-sub-text">Write a small description for the class.</h2>
 
@@ -21,7 +23,7 @@
             <div class="form-group">
                 <label for="class-type">Class Type</label>
                 <select id="class-type" name="classType" class="form-input" required>
-                    <option value="">Select Class Type</option> <!-- Fixed value -->
+                    <option value="">Select Class Type</option>
                     <option value="freeclass">Art</option>
                     <option value="onedayclass">Technology</option>
                     <option value="conference">Baking/Cooking</option>
@@ -38,24 +40,24 @@
                 <input type="text" id="class-price" name="classPrice" class="form-input" required>
             </div>
 
-<div class="time-duration-container">
-    <div class="form-group">
-        <label for="date">Date</label>
-        <input type="date" id="date" name="classDate" class="form-input" required>
-    </div>
+            <div class="time-duration-container">
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="classDate" class="form-input" required>
+                </div>
 
-    <div class="form-group">
-        <label for="start-time">Start Time</label>
-        <input type="time" id="start-time" name="startTime" class="form-input" required>
-    </div>
+                <div class="form-group">
+                    <label for="start-time">Start Time</label>
+                    <input type="time" id="start-time" name="startTime" class="form-input" required>
+                </div>
 
-    <div class="form-group">
-        <label for="end-time">End Time</label>
-        <input type="time" id="end-time" name="endTime" class="form-input" required>
-    </div>
-</div>
+                <div class="form-group">
+                    <label for="end-time">End Time</label>
+                    <input type="time" id="end-time" name="endTime" class="form-input" required>
+                </div>
+            </div>
 
-            <input type="hidden" name="classFormat" value="offline"> <!-- Default value setting to avoid server error -->
+            <input type="hidden" name="classFormat" value="offline">
             <div class="checkbox-container">
                 <div class="form-group">
                     <input type="checkbox" id="online-check" name="classFormat" value="online">
@@ -82,11 +84,18 @@
                     <div class="text">Submit</div>
                 </button>
 
-                <!-- When the remove button is clicked all the input fields are cleared. -->
-                <button type="button" class="remove-button" onclick="resetForm()">
+            <div>
+
+            <!-- Apply for becoming a creator in Digg -->
+            <button type="button" class="remove-button" onclick="resetForm()">
                     <div class="text">Remove</div>
                 </button>
             </div>
         </div>
     </form>
+            
+            <div class="apply-guide-message">
+            <p class="creator-guide-text">Once you apply to become a creator, <br>
+                we will review your application and it will be posted on the upcomings shortly.</p>
+            </div>
 </div>

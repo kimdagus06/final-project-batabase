@@ -131,3 +131,15 @@ accordionItems.forEach(item => {
         arrowIcons[1].style.display = isActive ? 'none' : 'block'; // Down arrow
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the button and target section
+    const button = document.getElementById("become-creator-btn");
+    const targetSection = document.getElementById("register-creator");
+
+    // Add click event listener to the button
+    button.addEventListener("click", function() {
+        // Scroll to the target section smoothly
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+    });
+});
