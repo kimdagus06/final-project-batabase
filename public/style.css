@@ -1953,569 +1953,792 @@ section h2{
 /* ---------------------------------------------------------------
    Responsive Design - grade 5
    --------------------------------------------------------------- */
+/* ---------------------------------------------------------------
+   (min-width: 768px) and (max-width: 1024px)
+   --------------------------------------------------------------- */
 @media (min-width: 768px) and (max-width: 1024px) {
-    /* MAIN */
-    .menubar{
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 0.8rem 2rem;
-    }
-
-    .menu-items ul{
-        flex-direction: column;
-        justify-content: flex-start;
-        gap: 1.5rem;
-    }
-
-    .menu-items li{
-        font-size: 1rem;
-        margin-right: 1.5rem;
-    }
-
-    .search-container{
-        width: auto;
-        margin-left: auto;
-    }
-
-    .search-bar-in-menu{
-        width: 18rem;
-    }
-
-    .login-items{
-        margin-left: 2rem;
-        display: flex;
-        justify-content: center;
-    }
-
-    .login-items a{
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-    }
-
-    /* HOME */
-    .home-sections{
-        display: none;
-    }
-
-    .class-items{
-        grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
-    }
-
-    .hashtag-suggestions{
-        grid-template-columns: repeat(2, 1fr); /* 2 hashtag items per row */
-    }
-
-    /* REGISTER CLASS */
-    .apply-guide-message p{
-        display: flex;
-        justify-content: center;
-    }
-
-    /* UPCOMING CLASS */
-    #class-list{
-        grid-template-columns: repeat(3, 1fr); /* 3 cards per row on medium screens */
-        justify-content: center;
-    }
+/* MAIN */
+.menubar{
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.8rem 2rem;
 }
 
+.menu-items ul{
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1.5rem;
+}
+
+.menu-items li{
+    font-size: 1rem;
+    margin-right: 1.5rem;
+}
+
+.search-container{
+    width: auto;
+    margin-left: auto;
+}
+
+.search-bar-in-menu{
+    width: 18rem;
+}
+
+.login-items{
+    margin-left: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.login-items a{
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+/* HOME */
+.home-sections{
+    display: none;
+}
+
+.class-items{
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+}
+
+.hashtag-suggestions{
+    grid-template-columns: repeat(2, 1fr); /* 2 hashtag items per row */
+}
+
+/* REGISTER CLASS */
+.apply-guide-message p{
+    display: flex;
+    justify-content: center;
+}
+
+/* UPCOMING CLASS */
+#class-list{
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row on medium screens */
+    justify-content: center;
+}
+
+/* ABOUT */
+.about-title{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.about-sub-title{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+    
+.about-sub-sub-title{
+    text-align: center;
+}
+
+.about-core-values li{
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0; 
+    text-align: center;
+    padding: 1rem;
+}
+
+.about-digg-container{
+    max-width: 100%;
+    padding: 0.5rem;
+}
+
+.about-digg-card{
+    max-width: 100%; 
+    font-size: 0.7rem;
+    padding: 0.5rem;
+}
+}
+
+/* ---------------------------------------------------------------
+   (max-width: 768px)
+   --------------------------------------------------------------- */
 @media (max-width: 768px) {
-    /* MAIN */
-    .menubar{
-        flex-direction: column;
-        align-items: center; 
-        justify-content: center;
-        width: 100%;
-        box-sizing: border-box; 
-        padding: 0.5rem;
-    }
-
-    .menu-items ul{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        list-style-type: none;
-        gap: 1rem;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .menu-items li{
-        margin-right: 0.5rem;
-        font-weight: 700;
-        font-size: 0.9rem;
-    }
-
-    .menubar ul li a{
-        padding: 0.5rem 0.8rem;
-        font-size: 0.9rem;
-        text-align: center;
-        white-space: nowrap;
-    }
-
-    .search-container{
-        width: 100%;
-        padding-left: 0;
-        justify-content: center;
-        margin-top: 0.5rem;
-    }
-
-    .search-bar-in-menu{
-        width: 90%;
-        padding: 0.5rem 1rem;
-    }
-
-    .login-items{
-        padding-left: 0;
-        margin-top: 0.5rem;
-        width: 100%;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-    }
-
-    .login-items a{
-        font-size: 0.9rem;
-        padding: 0.4rem 0.6rem;
-    }
-
-    .hero-image{
-        width: 90%;
-        max-width: 25rem;
-    }
-
-    .footer-right{
-        display: none;
-    }
-
-    /* HOME */
-    .home-sections{
-        display: none;
-    }
-
-    .class-items{
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .hashtag-suggestions{
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* REGISTER CLASS */
-    .form-input{
-        width: 100%;
-    }
-
-    .time-duration-container{
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .form-group{
-        flex: 1;
-        margin-right: 0.2rem; 
-        padding: 0.6rem; 
-    }
-
-    /* UPCOMING CLASS */
-    #class-list{
-        grid-template-columns: repeat(2, 1fr);
-        justify-items: center;
-    }
-
-    @media (min-width: 576px) and (max-width: 767px) {
-        .menubar{
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            text-align: center;
-        }
-    
-        .menu-items ul{
-            flex-direction: column;
-            gap: 0.5rem;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            margin: 0;
-            text-align: center;
-        }
-    
-        .menu-items li{
-            margin-right: 0;
-            font-size: 0.8rem;
-            text-align: center;
-        }
-    
-        .search-container{
-            margin-top: 0.5rem;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            text-align: center;
-        }
-    
-        .search-bar-in-menu{
-            width: 90%;
-            margin: 0 auto;
-        }
-    
-        .login-items{
-            margin-top: 0.5rem;
-            display: flex;
-            justify-content: center;
-            text-align: center;
-        }
-    
-        .footer-section{
-            width: 100%;
-            padding: 1rem 0;
-        }
-    
-        .footer-right{
-            display: none;
-        }
-    
-        .hero-image{
-            width: 100%;
-            max-width: none;
-            margin: 0 auto;
-        }
-    
-        .home-sections{
-            display: none;
-        }
-    
-        .class-items{
-            grid-template-columns: repeat(2, 1fr);
-            padding: 0 1rem;
-        }
-    
-        .hashtag-suggestions{
-            grid-template-columns: repeat(2, 1fr);
-        }
-    
-        .form-input{
-            width: 100%;
-            margin: 0 auto;
-        }
-    
-        .time-duration-container{
-            flex-direction: row;
-            justify-content: center;
-        }
-    
-        .form-group{
-            flex: 1;
-            margin-right: 0.2rem;
-            padding: 0.6rem; 
-        }
-
-        /* UPCOMING CLASS */
-        #class-list{
-            grid-template-columns: repeat(2, 1fr);
-            justify-items: center;
-        }  
-    }    
-
-   @media (max-width: 576px) {
-    .menubar{
-        flex-direction: column;
-        align-items: center;
-        padding: 1rem;
-        text-align: center;
-    }
-
-    .menu-items ul{
-        flex-direction: column;
-        align-items: center;
-        padding: 0;
-        margin: 0;
-        width: 100%;
-    }
-
-    .search-container{
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        padding: 0.5rem;
-    }
-
-    .search-bar-in-menu{
-        width: 90%; 
-        padding: 0.5rem 1rem
-    }
-
-    .search-bar{
-        font-size: 0.8rem
-    }
-
-    .search-icon{
-        margin-left: 0.5rem;
-    }
-
-    .login-items{
-        margin-top: 0.5rem;
-        display: flex;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .login-items a{
-        font-size: 0.9rem;
-        padding: 0.5rem 1rem;
-    }
-
-    /* FOOTER */
-    .footer-left, .footer-right{
-        text-align: center;
-    }
-
-    .footer-section h4{
-        font-size: 0.9rem;
-    }
-
-    .footer-links{
-        display: none;
-    }
-
-    .footer-section{
-        display: none;
-    }
-
-    .app-links{
-        justify-content: center;
-    }
-
-    /* HOME */
-    .hero-image{
-        width: 100%;
-        max-width: none;
-    }
-
-    .home-sections{
-        display: none;
-    }
-
-    .class-items{
-        grid-template-columns: repeat(1, 1fr);
-        padding: 0 1rem;
-    }
-
-    .hashtag-suggestions{
-        grid-template-columns: repeat(1, 1fr);
-    }
-
-    /* REGISTER CLASS */
-    .time-duration-container{
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-
-    /* UPCOMING CLASS */
-    #class-list{
-        grid-template-columns: repeat(2, 1fr);
-        justify-items: center;
-    }  
+/* MAIN */
+.menubar{
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box; 
+    padding: 0.5rem;
 }
 
+.menu-items ul{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.menu-items li{
+    margin-right: 0.5rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.menubar ul li a{
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.search-container{
+    width: 100%;
+    padding-left: 0;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.search-bar-in-menu{
+    width: 90%;
+    padding: 0.5rem 1rem;
+}
+
+.login-items{
+    padding-left: 0;
+    margin-top: 0.5rem;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.login-items a{
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+}
+
+.hero-image{
+    width: 90%;
+    max-width: 25rem;
+}
+
+.footer-right{
+    display: none;
+}
+
+/* HOME */
+.home-sections{
+    display: none;
+}
+
+.class-items{
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.hashtag-suggestions{
+    grid-template-columns: repeat(2, 1fr);
+}
+
+/* REGISTER CLASS */
+.form-input{
+    width: 100%;
+}
+
+.time-duration-container{
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.form-group{
+    flex: 1;
+    margin-right: 0.2rem; 
+    padding: 0.6rem; 
+}
+
+/* UPCOMING CLASS */
+#class-list{
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+}
+
+/* ABOUT */
+.about-title{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.about-sub-title{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+    
+.about-sub-sub-title{
+    text-align: center;
+}
+
+.about-core-values ul{
+    list-style-type: none; 
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.about-core-values li{
+    padding: 0.5rem;
+}
+
+.about-digg-container{
+    max-width: 100%;
+    padding: 0.5rem;
+}
+
+.about-digg-card{
+    max-width: 100%; 
+    font-size: 0.7rem;
+    padding: 0.5rem;
+}
+}
+
+/* ---------------------------------------------------------------
+   (min-width: 576px) and (max-width: 767px)
+   --------------------------------------------------------------- */
+@media (min-width: 576px) and (max-width: 767px) {
+.menubar{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    text-align: center;
+}
+
+.menu-items ul{
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.menu-items li{
+    margin-right: 0;
+    font-size: 0.8rem;
+    text-align: center;
+}
+        
+.search-container{
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+.search-bar-in-menu{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.login-items{
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.footer-section{
+    width: 100%;
+    padding: 1rem 0;
+}
+
+.footer-right{
+    display: none;
+}
+
+.hero-image{
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+}
+
+.home-sections{
+    display: none;
+}
+
+.class-items{
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 1rem;
+}
+
+.hashtag-suggestions{
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.form-input{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.time-duration-container{
+    flex-direction: row;
+    justify-content: center;
+}
+
+.form-group{
+    flex: 1;
+    margin-right: 0.2rem;
+    padding: 0.6rem;
+}
+
+#class-list{
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+}
+}
+
+/* ABOUT */
+.about-title{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.about-sub-title{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+    
+.about-sub-sub-title{
+    text-align: center;
+}
+
+.about-core-values ul{
+    list-style-type: none; 
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.about-core-values li{
+    padding: 0.5rem;
+}
+
+/* ---------------------------------------------------------------
+   (max-width: 576px)
+   --------------------------------------------------------------- */
+@media (max-width: 576px) {
+/* MENUBAR */
+.menubar{
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
+}
+    
+/* MENU ITEMS */
+.menu-items ul{
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+    
+/* SEARCH CONTAINER */
+.search-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem;
+}
+    
+.search-bar-in-menu{
+    width: 90%;
+    padding: 0.5rem 1rem;
+}
+    
+.search-bar{
+    font-size: 0.8rem;
+}
+    
+.search-icon{
+    margin-left: 0.5rem;
+}
+    
+/* LOGIN ITEMS */
+.login-items{
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+    
+.login-items a{
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+    
+/* FOOTER */
+.footer-left, .footer-right{
+    text-align: center;
+}
+    
+.footer-section h4{
+    font-size: 0.9rem;
+}
+    
+.footer-links, .footer-section{
+    display: none;
+}
+    
+.app-links{
+    justify-content: center;
+}
+    
+/* HOME */
+.hero-image{
+    width: 100%;
+    max-width: none;
+}
+    
+.home-sections{
+    display: none;
+}
+    
+.class-items{
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0 1rem;
+}
+    
+.hashtag-suggestions{
+    grid-template-columns: repeat(1, 1fr);
+    }
+    
+/* REGISTER CLASS */
+.time-duration-container{
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+    
+/* UPCOMING CLASS */
+#class-list{
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+}
+    
+/* ABOUT */
+.about-title, .about-sub-title{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+    
+.about-sub-sub-title{
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+    
+.about-core-values ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+    
+.about-core-values li{
+    padding: 0.5rem;
+    text-align: center;
+}
+}    
+
+/* ---------------------------------------------------------------
+   (max-width: 480px)
+   --------------------------------------------------------------- */
 @media (max-width: 480px) {
-    .menubar{
-        padding: 1rem;
-        width: 100%;
-        text-align: center; 
-    }
-
-    .menu-items ul{
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        text-align: center;
-    }
-
-    .search-container{
-        width: 100%;
-        justify-content: center;
-    }
-
-    .search-bar-in-menu{
-        width: 95%; 
-        padding: 0.4rem;
-    }
-
-    .search-bar{
-        font-size: 0.7rem;
-    }
-
-    .search-icon{
-        margin-left: 0.4rem;
-    }
-
-    .login-items{
-        margin-top: 0.4rem;
-        justify-content: center;
-    }
-
-    .login-items a{
-        font-size: 0.8rem;
-        padding: 0.3rem 0.6rem;
-    }
-
-    .footer-section h4{
-        font-size: 0.4rem;
-    }
-
-    .footer-links{
-        display: none;
-    }
-
-    .footer-section{
-        display: none;
-    }
-
-    .app-links{
-        justify-content: center;
-    }
-
-    /* HOME */
-    .hero-image{
-        width: 100%;
-        max-width: none;
-    }
-
-    .class-items{
-        padding: 0;
-    }
-
-    .hashtag-suggestions{
-        grid-template-columns: repeat(1, 1fr);
-    }
-
-    /* REGISTER CLASS */
-    .time-duration-container{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        flex-wrap: wrap;
-    }
-
-    .form-group{
-        flex: 1; 
-        min-width: 30%; 
-        margin-right: 0.5rem;
-        margin-bottom: 0.5rem;
-        padding: 0.6rem; 
-    }
-
-    .form-group:last-child{
-        margin-right: 0;
-    }
-
-    .form-input{
-        width: 100%;
-        padding: 0.4rem;
-        font-size: 0.85rem;
-    }
-
-    /* UPCOMING CLASS */
-    #class-list{
-        grid-template-columns: repeat(1, 1fr);
-    }
-
-    .sticky-banner{
-        font-size: 0.7rem; 
-        padding: 0.7rem;
-        justify-items: center;
-    }
-
-    .for-more-information-button{
-        margin-top: 0.8rem;
-    }
-
-    .pagination-container{
-        font-size: 0.7rem;
-    }
-    
-    .pagination{
-        font-size: inherit;
-    }
-    
-    .pagination li{
-        font-size: inherit;
-    }
-    
-    .pagination li a, .pagination li span{
-        font-size: inherit;
-    }
+/* MENU */
+.menubar{
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
 }
 
+.menu-items ul{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.search-container{
+    width: 100%;
+    justify-content: center;
+}
+
+.search-bar-in-menu{
+    width: 95%;
+    padding: 0.4rem;
+}
+
+.search-bar{
+    font-size: 0.7rem;
+}
+
+.search-icon{
+    margin-left: 0.4rem;
+}
+
+.login-items{
+    margin-top: 0.4rem;
+    justify-content: center;
+}
+
+.login-items a{
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+}
+
+.footer-section h4{
+    font-size: 0.4rem;
+}
+
+.footer-links{
+    display: none;
+}
+
+.footer-section{
+   display: none;
+}
+
+.app-links{
+    justify-content: center;
+}
+
+.hero-image{
+    width: 100%;
+    max-width: none;
+}
+
+/* REGISTER CLASS */
+.class-items{
+    padding: 0;
+}
+
+.hashtag-suggestions{
+    grid-template-columns: repeat(1, 1fr);
+}
+
+/* UPCOMING CLASS */
+.time-duration-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.form-group{
+    flex: 1;
+    min-width: 30%;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.6rem;
+}
+
+.form-group:last-child{
+    margin-right: 0;
+}
+
+.form-input{
+    width: 100%;
+    padding: 0.4rem;
+    font-size: 0.85rem;
+}
+
+#class-list{
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.sticky-banner{
+    font-size: 0.7rem;
+    padding: 0.7rem;
+    justify-items: center;
+}
+
+.for-more-information-button{
+    margin-top: 0.8rem;
+}
+
+.pagination-container{
+    font-size: 0.7rem;
+}
+
+.pagination{
+    font-size: inherit;
+}
+
+.pagination li{
+    font-size: inherit;
+}
+
+.pagination li a, .pagination li span{
+    font-size: inherit;
+}
+
+/* ABOUT */
+.about-title{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.about-sub-title{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+.about-sub-sub-title{
+    text-align: center;
+}
+
+.about-core-values ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.about-core-values li{
+    padding: 0.5rem;
+}
+}
+
+/* ---------------------------------------------------------------
+   (max-width: 320px)
+   --------------------------------------------------------------- */
 @media (max-width: 320px) {
-    /* MENU */
-    .menubar{
-        padding: 0.8rem;
-    }
+/* MENU */
+.menubar{
+    padding: 0.8rem;
+}
 
-    .menu-items ul{
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        text-align: center;
-    }
+.menu-items ul{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
 
-    .search-bar-in-menu{
-        width: 90%; 
-        padding: 0.3rem;
-    }
+.search-bar-in-menu{
+    width: 90%; 
+    padding: 0.3rem;
+}
 
-    .search-bar{
-        font-size: 0.6rem; 
-    }
+.search-bar{
+    font-size: 0.6rem; 
+}
 
-    .search-icon{
-        margin-left: 0.3rem; 
-    }
+.search-icon{
+    margin-left: 0.3rem; 
+}
 
-    .login-items{
-        margin-top: 0.3rem;
-        justify-content: center;
-    }
+.login-items{
+    margin-top: 0.3rem;
+    justify-content: center;
+}
 
-    .login-items a{
-        font-size: 0.7rem; 
-        padding: 0.2rem 0.4rem; 
-    }
+.login-items a{
+    font-size: 0.7rem; 
+    padding: 0.2rem 0.4rem; 
+}
 
-    .footer-section h4{
-        font-size: 0.3rem; 
-    }
+.footer-section h4{
+    font-size: 0.3rem; 
+}
 
-    .hero-image{
-        width: 100%; 
-        height: auto; 
-    }
+.hero-image{
+    width: 100%; 
+    height: auto; 
+}
 
-    /* UPCOMING CLASS */
-    .class-items{
-        padding: 0; 
-    }
+/* UPCOMING CLASS */
+.class-items{
+    padding: 0; 
+}
 
-    #class-list{
-        grid-template-columns: repeat(1, 1fr); 
-        justify-items: center;
-    }
+#class-list{
+    grid-template-columns: repeat(1, 1fr); 
+    justify-items: center;
+}
 
-    .sticky-banner{
-        font-size: 0.7rem; 
-        padding: 0.7rem;
-        justify-items: center;
-    }
+.sticky-banner{
+    font-size: 0.7rem; 
+    padding: 0.7rem;
+    justify-items: center;
+}
 
-    .for-more-information-button{
-        margin-top: 0.8rem;
-    }
-}}
+.for-more-information-button{
+    margin-top: 0.8rem;
+}
+
+/* ABOUT */
+.about-title{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+    
+.about-sub-title{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+        
+.about-sub-sub-title{
+    text-align: center;
+}
+    
+.about-core-values ul{
+    list-style-type: none; 
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+    
+.about-core-values li{
+    padding: 0.5rem;
+}
+}
