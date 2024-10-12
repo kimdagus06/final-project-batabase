@@ -545,7 +545,6 @@ small{
     transform: scale(1.02); /* Slight zoom to avoid drastic size change */
 }
 
-
 /* Home card titles */
 .class-title{
     margin-top: 0.6rem;
@@ -770,6 +769,7 @@ small{
    --------------------------------------------------------------- */
 .upcoming-page-container{
     margin-top: 3rem;
+    justify-content: center;
 }
 
 .trending-title{
@@ -796,7 +796,6 @@ small{
     gap: 0; /* No gap between cards */
     max-width: 77rem;
     margin: 0 auto; /* Center the grid horizontally */
-    padding: 0;
 }
 
 .class-info{
@@ -817,15 +816,6 @@ small{
     border-radius: 0.3rem;
 }
 
-.bookmark{
-    position: absolute;
-    top: 1rem;
-    right: 3.7rem;
-    width: 1.5rem;
-    height: auto;
-    cursor: pointer;
-}
-
 span{
     display: block;
     font-size: 1rem;
@@ -837,6 +827,7 @@ span{
 .pagination-container{
     display: flex;
     justify-content: center;
+    justify-items: center;
 }
 
 .pagination{
@@ -844,6 +835,7 @@ span{
     cursor: pointer;
     justify-content: space-between;
     align-items: center;
+    justify-items: center;
 }
 
 .pagination ul{
@@ -1961,7 +1953,7 @@ section h2{
 /* ---------------------------------------------------------------
    Responsive Design - grade 5
    --------------------------------------------------------------- */
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1024px) {
     /* MAIN */
     .menubar{
         flex-direction: column;
@@ -2016,6 +2008,12 @@ section h2{
     /* REGISTER CLASS */
     .apply-guide-message p{
         display: flex;
+        justify-content: center;
+    }
+
+    /* UPCOMING CLASS */
+    #class-list{
+        grid-template-columns: repeat(3, 1fr); /* 3 cards per row on medium screens */
         justify-content: center;
     }
 }
@@ -2121,6 +2119,12 @@ section h2{
         padding: 0.6rem; 
     }
 
+    /* UPCOMING CLASS */
+    #class-list{
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+    }
+
     @media (min-width: 576px) and (max-width: 767px) {
         .menubar{
             flex-direction: column;
@@ -2209,6 +2213,12 @@ section h2{
             margin-right: 0.2rem;
             padding: 0.6rem; 
         }
+
+        /* UPCOMING CLASS */
+        #class-list{
+            grid-template-columns: repeat(2, 1fr);
+            justify-items: center;
+        }  
     }    
 
    @media (max-width: 576px) {
@@ -2305,6 +2315,12 @@ section h2{
         align-items: center;
         width: 100%;
     }
+
+    /* UPCOMING CLASS */
+    #class-list{
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+    }  
 }
 
 @media (max-width: 480px) {
@@ -2405,5 +2421,101 @@ section h2{
         padding: 0.4rem;
         font-size: 0.85rem;
     }
+
+    /* UPCOMING CLASS */
+    #class-list{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .sticky-banner{
+        font-size: 0.7rem; 
+        padding: 0.7rem;
+        justify-items: center;
+    }
+
+    .for-more-information-button{
+        margin-top: 0.8rem;
+    }
+
+    .pagination-container{
+        font-size: 0.7rem;
+    }
+    
+    .pagination{
+        font-size: inherit;
+    }
+    
+    .pagination li{
+        font-size: inherit;
+    }
+    
+    .pagination li a, .pagination li span{
+        font-size: inherit;
+    }
 }
-}
+
+@media (max-width: 320px) {
+    /* MENU */
+    .menubar{
+        padding: 0.8rem;
+    }
+
+    .menu-items ul{
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .search-bar-in-menu{
+        width: 90%; 
+        padding: 0.3rem;
+    }
+
+    .search-bar{
+        font-size: 0.6rem; 
+    }
+
+    .search-icon{
+        margin-left: 0.3rem; 
+    }
+
+    .login-items{
+        margin-top: 0.3rem;
+        justify-content: center;
+    }
+
+    .login-items a{
+        font-size: 0.7rem; 
+        padding: 0.2rem 0.4rem; 
+    }
+
+    .footer-section h4{
+        font-size: 0.3rem; 
+    }
+
+    .hero-image{
+        width: 100%; 
+        height: auto; 
+    }
+
+    /* UPCOMING CLASS */
+    .class-items{
+        padding: 0; 
+    }
+
+    #class-list{
+        grid-template-columns: repeat(1, 1fr); 
+        justify-items: center;
+    }
+
+    .sticky-banner{
+        font-size: 0.7rem; 
+        padding: 0.7rem;
+        justify-items: center;
+    }
+
+    .for-more-information-button{
+        margin-top: 0.8rem;
+    }
+}}
