@@ -1263,6 +1263,7 @@ span{
     justify-content: center;
     flex-direction: row;
     margin-top: 1.5rem;
+    width: 100%;
 }
 
 .inquiry-box{
@@ -1287,7 +1288,7 @@ span{
 }
 
 .contact-feedback-form{
-    max-width: 35%;
+    max-width: 35rem;
     margin: 0 auto;
     padding: 1.5rem;
     border-radius: 0.6rem;
@@ -2640,6 +2641,20 @@ section h2{
 .about-core-values li{
     padding: 0.5rem;
 }
+
+
+/* CONTACT */
+.contact-sub-text{
+    font-size: 0.7rem;
+}
+
+.frequently-asked-questions-text{
+    width: 30%;
+    text-align: left;
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin-top: 1.2rem;
+}
 }
 
 /* ---------------------------------------------------------------
@@ -2740,5 +2755,18 @@ section h2{
     
 .about-core-values li{
     padding: 0.5rem;
+}
+
+/* CONTACT */
+.contact-sub-text{
+    font-size: 0.7rem;
+}
+
+.frequently-asked-questions-text{
+    width: 30%;
+    text-align: left;
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin-top: 1.2rem;
 }
 }
