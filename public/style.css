@@ -561,6 +561,13 @@ small{
 /* ---------------------------------------------------------------
    Register Class page styles
    --------------------------------------------------------------- */
+.class-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .register-class-cover-image{
     background-position: center;
     background-size: cover;
@@ -637,6 +644,10 @@ small{
     font-family: "Red Hat Display", sans-serif;
 }
 
+.register-class-sub-text h2{
+    justify-content: center;
+}
+
 .class-details p{
     font-size: 1.2rem;
     font-weight: 800;
@@ -645,6 +656,13 @@ small{
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     margin: 2rem;
+}
+
+.register-class-sub-text{
+    text-align: center; 
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 2rem;
 }
 
 .time-duration-container{
@@ -743,6 +761,8 @@ small{
     font-size: 0.8rem;
     color: #333;
     font-weight: 200;
+    display: flex;
+    justify-content: center;
 }
 
 /* ---------------------------------------------------------------
@@ -1994,6 +2014,10 @@ section h2{
     }
 
     /* REGISTER CLASS */
+    .apply-guide-message p{
+        display: flex;
+        justify-content: center;
+    }
 }
 
 @media (max-width: 768px) {
@@ -2082,101 +2106,110 @@ section h2{
     }
 
     /* REGISTER CLASS */
-}
-
-   @media (min-width: 576px) and (max-width: 767px) {
-    .menubar{
-        flex-direction: column;
-        justify-content: center;
-        padding: 0.5rem 1rem;
-        align-items: center;
-    }
-
-    .menu-items ul{
-        flex-direction: column;
-        gap: 0.5rem;
-        align-items: center;
-        padding: 0;
-        margin: 0;
-    }
-
-    .menu-items li{
-        margin-right: 0;
-        font-size: 0.8rem;
-        text-align: center;
-    }
-
-    .search-container{
-        margin-top: 0.5rem;
-        display: flex;
-        justify-content: center;
+    .form-input{
         width: 100%;
     }
 
-    .search-bar-in-menu{
-        width: 90%;
+    .time-duration-container{
+        flex-direction: row;
+        justify-content: space-between;
     }
 
-    .login-items{
-        margin-top: 0.5rem;
-        display: flex;
-        justify-content: center;
-        text-align: center;
+    .form-group{
+        flex: 1;
+        margin-right: 0.2rem; 
+        padding: 0.6rem; 
     }
 
-    .footer-section{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        padding: 1rem 0;
-    }
-
-    .footer-right{
-        display: none;
-    }
-
-    .hero-image{
-        width: 100%;
-        max-width: none;
-    }
-
-    /* HOME */
-    .home-sections{
-        display: none;
-    }
-
-    .class-items{
-        grid-template-columns: repeat(2, 1fr);
-        padding: 0 1rem;
-    }
-
-    .hashtag-suggestions{
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* REGISTER CLASS */
-    .button-container{
-        padding: 0;
-        margin: 0; 
-        text-align: center;
-    }
-
-    .upcoming-main-text{
-        margin-top: 1rem;
-        margin-bottom: 0.5rem;
-        font-size: 1rem;
-        text-align: center;
-    }
-
-    .upcoming-sub-text{
-        margin-top: 0;
-        margin-bottom: 1.5rem;
-        font-size: 1rem;
-        text-align: center;
-    }
-}
+    @media (min-width: 576px) and (max-width: 767px) {
+        .menubar{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            text-align: center;
+        }
+    
+        .menu-items ul{
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+    
+        .menu-items li{
+            margin-right: 0;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+    
+        .search-container{
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            text-align: center;
+        }
+    
+        .search-bar-in-menu{
+            width: 90%;
+            margin: 0 auto;
+        }
+    
+        .login-items{
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+    
+        .footer-section{
+            width: 100%;
+            padding: 1rem 0;
+        }
+    
+        .footer-right{
+            display: none;
+        }
+    
+        .hero-image{
+            width: 100%;
+            max-width: none;
+            margin: 0 auto;
+        }
+    
+        .home-sections{
+            display: none;
+        }
+    
+        .class-items{
+            grid-template-columns: repeat(2, 1fr);
+            padding: 0 1rem;
+        }
+    
+        .hashtag-suggestions{
+            grid-template-columns: repeat(2, 1fr);
+        }
+    
+        .form-input{
+            width: 100%;
+            margin: 0 auto;
+        }
+    
+        .time-duration-container{
+            flex-direction: row;
+            justify-content: center;
+        }
+    
+        .form-group{
+            flex: 1;
+            margin-right: 0.2rem;
+            padding: 0.6rem; 
+        }
+    }    
 
    @media (max-width: 576px) {
     .menubar{
@@ -2267,6 +2300,11 @@ section h2{
     }
 
     /* REGISTER CLASS */
+    .time-duration-container{
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -2342,44 +2380,30 @@ section h2{
     }
 
     /* REGISTER CLASS */
-    .button-container{
-        padding: 0;
-        margin: 0; 
-    }
-
-    .upcoming-main-text, .upcoming-sub-text{
-        font-size: 2rem;
-        line-height: 2.5rem;
-        margin-bottom: 0.5rem;
-        padding: 0 1rem;
-    }
-
-    .upcoming-sub-text{
-        font-size: 1.2rem;
-        line-height: 2.5rem;
-    }
-
-    .become-creator-button-text{
-        font-size: 1rem;
-    }
-
-    .class-creating{
-        max-width: 90%;
-        padding: 0 1rem;
+    .time-duration-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        flex-wrap: wrap;
     }
 
     .form-group{
-        flex-direction: column;
+        flex: 1; 
+        min-width: 30%; 
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding: 0.6rem; 
+    }
+
+    .form-group:last-child{
+        margin-right: 0;
     }
 
     .form-input{
-        font-size: 0.75rem;
-        padding: 0.5rem;
+        width: 100%;
+        padding: 0.4rem;
+        font-size: 0.85rem;
     }
-
-    .apply-guide-message p{
-        display: flex;
-        justify-content: center;
-        font-size: 0.7rem;
-    }
+}
 }
