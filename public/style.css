@@ -2057,6 +2057,11 @@ section h2{
     padding: 0.4rem 0.6rem;
 }
 
+.search-container{
+    width: 100%;
+    padding: 1rem; 
+}
+
 /* FOOTER */
 .footer{
     margin: 0.6rem;
@@ -2136,41 +2141,43 @@ section h2{
    (min-width: 576px) and (max-width: 767px)
    --------------------------------------------------------------- */
 @media (min-width: 576px) and (max-width: 767px) {
+/* MAIN */
 .menubar{
     flex-direction: column;
+    align-items: center; 
     justify-content: center;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    text-align: center;
+    width: 100%;
+    box-sizing: border-box; 
 }
 
 .menu-items ul{
+    display: flex;
     flex-direction: column;
-    gap: 0.5rem;
     align-items: center;
     justify-content: center;
+    list-style-type: none;
+    gap: 1rem;
     padding: 0;
     margin: 0;
-    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.menu-items li{
-    margin-right: 0;
-    font-size: 0.8rem;
-    text-align: center;
-}
-        
-.search-container{
-    margin-top: 0.5rem;
-    display: flex;
-    justify-content: center;
+.login-items{
     width: 100%;
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
-.search-bar-in-menu{
-    width: 90%;
-    margin: 0 auto;
+.login-items a{
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+}
+
+.search-container{
+    width: 100%;
+    padding: 1rem; 
 }
 
 .login-items{
@@ -2282,28 +2289,7 @@ section h2{
     margin: 0;
     width: 100%;
 }
-    
-/* SEARCH CONTAINER */
-.search-container{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 0.5rem;
-}
-    
-.search-bar-in-menu{
-    width: 90%;
-    padding: 0.5rem 1rem;
-}
-    
-.search-bar{
-    font-size: 0.8rem;
-}
-    
-.search-icon{
-    margin-left: 0.5rem;
-}
-    
+
 /* LOGIN ITEMS */
 .login-items{
     margin-top: 0.5rem;
@@ -2417,24 +2403,6 @@ section h2{
     margin: 0;
     width: 100%;
     text-align: center;
-}
-
-.search-container{
-    width: 100%;
-    justify-content: center;
-}
-
-.search-bar-in-menu{
-    width: 95%;
-    padding: 0.4rem;
-}
-
-.search-bar{
-    font-size: 0.7rem;
-}
-
-.search-icon{
-    margin-left: 0.4rem;
 }
 
 .login-items{
@@ -2608,19 +2576,6 @@ section h2{
     margin: 0;
     width: 100%;
     text-align: center;
-}
-
-.search-bar-in-menu{
-    width: 90%; 
-    padding: 0.3rem;
-}
-
-.search-bar{
-    font-size: 0.6rem; 
-}
-
-.search-icon{
-    margin-left: 0.3rem; 
 }
 
 .login-items{
