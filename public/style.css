@@ -4,6 +4,10 @@ body{
     background-color: #ffffff;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 /* ---------------------------------------------------------------
    Main styles - Menu bar styling 
    --------------------------------------------------------------- */
@@ -393,7 +397,7 @@ small{
 
 /* Home cover image */
 .hero-image{
-    width: 80%; /* Use percentage to adjust size smoothly */
+    width: 100%;
     max-width: 27rem; 
     height: auto;
     display: block; /* Centering */
@@ -928,7 +932,6 @@ span{
     color: #3d3d3d;
 }
 
-/* Digg 10 core values */
 /* Digg 10 core values */
 .about-core-values{
     display: flex;
@@ -1955,44 +1958,6 @@ section h2{
    (min-width: 768px) and (max-width: 1024px)
    --------------------------------------------------------------- */
 @media (min-width: 768px) and (max-width: 1024px) {
-/* MAIN */
-.menubar{
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0.8rem 2rem;
-}
-
-.menu-items ul{
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 1.5rem;
-}
-
-.menu-items li{
-    font-size: 1rem;
-    margin-right: 1.5rem;
-}
-
-.search-container{
-    width: auto;
-    margin-left: auto;
-}
-
-.search-bar-in-menu{
-    width: 18rem;
-}
-
-.login-items{
-    margin-left: 2rem;
-    display: flex;
-    justify-content: center;
-}
-
-.login-items a{
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-}
-
 /* HOME */
 .home-sections{
     display: none;
@@ -2004,6 +1969,11 @@ section h2{
 
 .hashtag-suggestions{
     grid-template-columns: repeat(2, 1fr); /* 2 hashtag items per row */
+}
+
+/* FOOTER */
+.footer{
+    margin: 0.6rem;
 }
 
 /* REGISTER CLASS */
@@ -2060,7 +2030,6 @@ section h2{
     justify-content: center;
     width: 100%;
     box-sizing: border-box; 
-    padding: 0.5rem;
 }
 
 .menu-items ul{
@@ -2076,34 +2045,7 @@ section h2{
     box-sizing: border-box;
 }
 
-.menu-items li{
-    margin-right: 0.5rem;
-    font-weight: 700;
-    font-size: 0.9rem;
-}
-
-.menubar ul li a{
-    padding: 0.5rem 0.8rem;
-    font-size: 0.9rem;
-    text-align: center;
-    white-space: nowrap;
-}
-
-.search-container{
-    width: 100%;
-    padding-left: 0;
-    justify-content: center;
-    margin-top: 0.5rem;
-}
-
-.search-bar-in-menu{
-    width: 90%;
-    padding: 0.5rem 1rem;
-}
-
 .login-items{
-    padding-left: 0;
-    margin-top: 0.5rem;
     width: 100%;
     text-align: center;
     display: flex;
@@ -2115,9 +2057,9 @@ section h2{
     padding: 0.4rem 0.6rem;
 }
 
-.hero-image{
-    width: 90%;
-    max-width: 25rem;
+/* FOOTER */
+.footer{
+    margin: 0.6rem;
 }
 
 .footer-right{
@@ -2125,10 +2067,6 @@ section h2{
 }
 
 /* HOME */
-.home-sections{
-    display: none;
-}
-
 .class-items{
     grid-template-columns: repeat(2, 1fr);
 }
@@ -2462,6 +2400,12 @@ section h2{
    --------------------------------------------------------------- */
 @media (max-width: 480px) {
 /* MENU */
+.digg-logo{
+    flex: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .menubar{
     padding: 1rem;
     width: 100%;
@@ -2635,6 +2579,19 @@ section h2{
     font-size: 1.2rem;
     margin-top: 1.2rem;
 }
+
+/* LOG IN / LOG OUT / CREATE ACCOUNT */
+.login-forms, .login-container{
+    margin: 0.2rem;
+}
+
+.log-out-button-container{
+    margin: 0.6rem; 
+}
+
+.create-account-forms{
+    margin: 0.6rem;
+}
 }
 
 /* ---------------------------------------------------------------
@@ -2748,5 +2705,18 @@ section h2{
     font-weight: 800;
     font-size: 1.2rem;
     margin-top: 1.2rem;
+}
+
+/* LOG IN / LOG OUT / CREATE ACCOUNT */
+.login-forms, .login-container{
+    margin: 0.2rem;
+}
+
+.log-out-button-container{
+    margin: 0.6rem; 
+}
+
+.create-account-forms{
+    margin: 0.6rem;
 }
 }
