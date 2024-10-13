@@ -24,6 +24,7 @@ const adminUser = {
         CREATE TABLE DATA
 =========================================
 */
+
 /* 15 users in users table - grade 3 */
 const predefinedUsers = [
     { username: 'Kim Gustavsson', emailAddress: 'user1@example.com', password: 'user1password', agreeterms: '1' },
@@ -87,44 +88,48 @@ app.use(express.static("public"));
 =========================================
 */
 app.use(express.urlencoded({ extended: true })); // url passing
-app.use(express.json());
-app.use(express.static('public'));
+app.use(express.json()); // Parsing request data in JSON format 
 
  /**
   * 'secret' is the key used to sign and encrypt session IDs stored in cookies.
   * It ensures the integrity and security of session data between the client and server.
   * Note: This part shouldn't be hardcoded for security reasons (.env file)
   * 
-  * Define the session 
-  */
+  * Define and configure session management:
+  * 
+  * resave: false (Do not save session if it wasn't modified)
+  * saveUninitialized: false (Do not create a session until something is stored in the session)
+  * store: Stores session data in an SQLite3 database ('session-db.db')
+  * cookie: Configures session cookie settings, such as maxAge
+ */
  app.use(session({
     secret: 'd384@#s#$#juihss.sijsge',
     resave: false,
     saveUninitialized: false,
     store: new SQLite3Store({db: "session-db.db"}),
     cookie: {
-        maxAge: 24 * 60 * 60 * 1000 // 24 hours 
+        maxAge: 24 * 60 * 60 * 1000 // Expire after 24 hours 
     }
 }));
 
 /**
  * Session middleware
- * This middleware sets up local variables to hold session information
- * that can be accessed in views rendered in response to requests.
+ * This middleware sets up local variables that are accessible in views,
+ * allowing session data (e.g., login status, user information) to be passed 
+ * to templates and used when rendering responses.
+ * 
+ * res.locals: Holds data that will be available to the views/templates.
+ * isLoggedIn: Indicates if the user is logged in (defaults to false if not).
+ * name: Stores the user's name (defaults to an empty string if not available).
+ * emailAddress: Stores the user's email address (defaults to an empty string if not available).
+ * isAdmin: Indicates if the user has admin privileges (defaults to false if not).
+ * isCreateAccountPage: Tracks if the user is on the account creation page (defaults to false if not).
  */
 app.use((req, res, next) => {
-    // Check if the user is logged in; default to false if not
     res.locals.isLoggedIn = req.session.isLoggedIn || false;
-
-    // Store the user's name in a local variable; default to an empty string if not available
     res.locals.name = req.session.name || '';
-
-    // Store the user's email address in a local variable; default to an empty string if not available
     res.locals.emailAddress = req.session.emailAddress || '';
-
-    // Check if the user is an admin; default to false if not
     res.locals.isAdmin = req.session.isAdmin || false;
-
     res.locals.isCreateAccountPage = req.session.isCreateAccountPage || false; 
 
     // Call the next middleware in the stack
@@ -133,18 +138,22 @@ app.use((req, res, next) => {
 
 /**
  * function isAdmin(req, res, next)
- * Description: 
  * 
+ * Middleware that checks if the user is logged in and has admin one.
+ * If both conditions are met (login and admin), the middleware passes control to the next.
+ * If the user is not logged in or not an admin, it returns a 403 response: Log in error.
  * 
- * @param {*} req 
- * @param {*} res 
- * @param {*} next 
- * @returns 
+ * @param {*} req - The request object, which contains session data (isLoggedIn, isAdmin).
+ * @param {*} res - The response object, used to send the 403 status if the user is not an admin.
+ * @param {*} next - The next middleware function in the stack, called if the user is an admin.
+ * @returns - Either calls `next()` to continue or sends a 403 error response.
  */
 function isAdmin(req, res, next) {
     if (req.session.isLoggedIn && req.session.isAdmin) {
-        return next(); // If a user log in with admin account it goes to next 
+        return next();
     }
+
+    // If not an admin or not logged in, show error
     res.status(403).send('Log in error');
 }
 
