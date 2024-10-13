@@ -96,17 +96,18 @@ app.use(express.json()); // Parsing request data in JSON format
   * Note: This part shouldn't be hardcoded for security reasons (.env file)
   * 
   * Define and configure session management:
-  * 
   * resave: false (Do not save session if it wasn't modified)
   * saveUninitialized: false (Do not create a session until something is stored in the session)
   * store: Stores session data in an SQLite3 database ('session-db.db')
   * cookie: Configures session cookie settings, such as maxAge
+  * name: Changed a cookes file name. otherwise, it would have been 'connect.sid'  
  */
  app.use(session({
     secret: 'd384@#s#$#juihss.sijsge',
     resave: false,
     saveUninitialized: false,
     store: new SQLite3Store({db: "session-db.db"}),
+    name: 'dasha-cookies',
     cookie: {
         maxAge: 24 * 60 * 60 * 1000 // Expire after 24 hours 
     }
@@ -138,7 +139,8 @@ app.use((req, res, next) => {
 
 /**
  * function isAdmin(req, res, next)
- * 
+ * Description:
+ * Middleware function. 
  * Middleware that checks if the user is logged in and has admin one.
  * If both conditions are met (login and admin), the middleware passes control to the next.
  * If the user is not logged in or not an admin, it returns a 403 response: Log in error.
@@ -157,17 +159,34 @@ function isAdmin(req, res, next) {
     res.status(403).send('Log in error');
 }
 
-// -----------
-// ---CREATE--
-// ---TABLE---
-// -----------
+/*
+=========================================
+        DATABASE TABLES
+=========================================
 /**
- * Table one | Create users  
- * Create predefined 5 users and create a users table if it doens't exist 
+ * Table one | Create users 
+ * Description:
+ * This block of code is responsible for creating the "users" table in the database (if it doesn't already exist)
+ * and inserting an admin user along with predefined users into the table.
  * 
- * NOT NULL: Can't have a NULL value. So it can't be left empty.
- * UNIQUE: All values in a column are distinct from each other. So no two users can have the same email address.
+ * The "users" table contains 5 columns:
+ * id: Auto-incrementing primary key for each user.
+ * username: User's name (cannot be NULL).
+ * emailAddress: User's unique email address (cannot be NULL or duplicate).
+ * password: Hashed password for user authentication (cannot be NULL).
+ * agreeterms: Integer indicating whether the user agreed to terms (0 or 1, cannot be NULL. 1 is agreed).
  * 
+ * The table has the following constraints:
+ * NOT NULL: Ensures that the column must have a value.
+ * UNIQUE: Ensures that no two users can have the same email address.
+ * 
+ * 1. The `CREATE TABLE IF NOT EXISTS` checks if the "users" table exists. 
+ *    If it doesn't, the table is created with the specified columns.
+ * 2. After creating the table, the code checks if an admin user already exists in the table using the admin's email address.
+ * 3. If the admin user does not exist:
+ *    The admin's password is securely hashed using `bcrypt`.
+ *    The hashed password and other user details (username, email, agreeterms) are inserted into the "users" table.
+ * 4. Once the admin user is created, the function `insertPredefinedUsers()` is called to add 15 predefined users.
  */
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS users (
@@ -215,56 +234,83 @@ db.serialize(() => {
 });
 
 /**
+ * function insertPredefinedUsers()
+ * Description: 
+ * This function inserts a list of predefined users into the "users" table in the database.
+ *
+ * 1. The function first checks if a user with the same `emailAddress` already exists in the database.
+ * 2. If the user does not exist:
+ *    The password is securely hashed using `bcrypt`.
+ *    The user data (username, hashed password, email, and agreeterms) is then inserted into the "users" table.
  * 
+ * bcrypt.hash: This function is used to hash the user's password before storing it in the database to ensure security.
+ * db.get: Runs a SQL query to check if the user already exists by checking their email address.
+ * db.run: Inserts the new user into the database with their hashed password.
  */
 function insertPredefinedUsers() {
-            // Insert predefined users into the database
-            // Using predefinedUsers global variable 
-            predefinedUsers.forEach(user => {
-                // Check if the user already exists by email
-                db.get('SELECT * FROM users WHERE emailAddress = ?', [user.emailAddress], (err, existingUser) => {
-                    if (err) {
-                        console.error('Error checking predefined user:', err.message);
+    // Insert predefined users into the database using the predefinedUsers array
+    predefinedUsers.forEach(user => {
+        // Check if the user already exists by email
+        db.get('SELECT * FROM users WHERE emailAddress = ?', [user.emailAddress], (err, existingUser) => {
+            if (err) {
+                console.error('Error checking predefined user:', err.message); // Log any error during user lookup
+                return;
+            }
+            if (!existingUser) { // If the user does not exist
+                // Hash the password before storing it in the database
+                bcrypt.hash(user.password, 12, (hashErr, hash) => {
+                    if (hashErr) {
+                        console.error('Error hashing predefined user password:', hashErr.message); // Log any error during password hashing
                         return;
                     }
-                    if (!existingUser) { // If user does not exist
-                        // Hash the password before storing it
-                        bcrypt.hash(user.password, 12, (hashErr, hash) => {
-                            if (hashErr) {
-                                console.error('Error hashing predefined user password:', hashErr.message);
-                                return;
-                            }
 
-                            // Insert the predefined user into the database
-                            db.run('INSERT INTO users (username, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', 
-                                [user.username, user.emailAddress, hash, user.agreeterms], 
-                                (insertErr) => {
-                                    if (insertErr) {
-                                        console.error('Error inserting predefined user:', insertErr.message);
-                                    } else {
-                                        console.log(`Predefined user ${user.username} created successfully.`);
-                                    }
-                                }
-                            );
-                        });
-                    }
+                    // Insert the predefined user into the 'users' table
+                    db.run('INSERT INTO users (username, emailAddress, password, agreeterms) VALUES (?, ?, ?, ?)', 
+                        [user.username, user.emailAddress, hash, user.agreeterms], 
+                        (insertErr) => {
+                            if (insertErr) {
+                                console.error('Error inserting predefined user:', insertErr.message); // Log any error during user insertion
+                            } else {
+                                console.log(`Predefined user ${user.username} created successfully.`); // Log success after user creation
+                            }
+                        }
+                    );
                 });
-            });
+            }
+        });
+    });
 }
 
 /**
- * Table two | Create classes
- * Create predefined 5 classes and create a classes table if it doens't exist 
+ * Table two | Create classes 
+ * Description:
+ * This block of code is responsible for creating the "classes" table in the database (if it doesn't already exist)
+ * To avoid a confilct, had to change the name from class to classes.
+ *
+ * The "classes" table contains 5 columns:
+ *   user_id: A foreign key referencing the `id` from the "users" table.
+ *   id`: Autoincrementing primary key for each class.
+ *   className: Name of the class (cannot be NULL).
+ *   classType: Type or category of the class (cannot be NULL).
+ *   classPrice: Price of the class in integer format (cannot be NULL).
+ *   classDate: Date of the class (cannot be NULL).
+ *   startTime: Class start time (cannot be NULL).
+ *   endTime: Class end time (cannot be NULL).
+ *   classFormat: Format of the class (e.g., online, in-person) (cannot be NULL).
+ *   address: Address where the class is held (cannot be NULL).
+ *   postcode: Optional postal code of the class location.
+ * 
+ * The table has the following constraints:
+ * NOT NULL: Ensures that the column must contain a value.
+ * FOREIGN KEY (user_id) REFERENCES users(id): Each time a class is added to the database, 
+ * the user who created the class must already be registered in the users table.
+ * 
+ * 1. The `DROP TABLE IF EXISTS` command is executed to remove the existing "classes" table if it exists.
+ *    This ensures that any previous version of the table is removed before creating a new one.
+ * 2. The `CREATE TABLE IF NOT EXISTS` command is then used to create the new "classes" table with the specified columns and constraints.
+ * 3. After the table is successfully created, the function `insertPredefinedClasses()` is called to populate the table with predefined class data.
  */
-db.serialize(() => {
-    // Drop the classes table if it exists
-    db.run(`DROP TABLE IF EXISTS classes`, (err) => {
-        if (err) {
-            console.error('Error dropping classes table:', err.message);
-        } else {
-            console.log("Classes table dropped successfully.");
-        }
-  
+db.serialize(() => {  
         // Create the classes table
         db.run(`CREATE TABLE IF NOT EXISTS classes (
             user_id INTEGER NOT NULL,
@@ -291,7 +337,6 @@ db.serialize(() => {
             }
         });
     });
-  });
 
   /**
    * 
