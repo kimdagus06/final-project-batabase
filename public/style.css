@@ -14,7 +14,6 @@ html{
 .menubar{
     display: flex;
     align-items: center; 
-    justify-content: space-between; /* Space between logo, menu, and login */
     padding: 0 2rem; /* Padding for overall space management */
     width: 100%;
     box-sizing: border-box;
@@ -1086,7 +1085,7 @@ span{
 }
 
 /* Right side Q&A */
-/* Refered to this link: https://codepen.io/Tuna_/pen/KKzXEVO */
+/* Learned from this link: https://codepen.io/Tuna_/pen/KKzXEVO */
 .frequently-asked-questions-content{
     width: 60%;
     text-align: left;
@@ -1292,8 +1291,6 @@ textarea{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    position: relative;
-    justify-content: space-between;
 }
 
 .product-images{
@@ -1330,7 +1327,7 @@ textarea{
     transform: translateY(50%);
     background-color: #1A1A1A;
     border: none;
-    padding: 0.4rem 0.9rem;
+    padding: 0.3rem 0.6rem;
     cursor: pointer;
     font-size: 0.8rem;
     font-weight: 300;
@@ -1365,6 +1362,7 @@ textarea{
     width: 100%;
     flex-direction: row;
     font-weight: 800;
+    font-size: 1.1rem;
 }
 
 .sections{
@@ -1408,10 +1406,6 @@ section h2{
     display: flex;
     flex-direction: row;
     gap: 1.5rem;
-}
-
-.class-information-title{
-    font-size: 1.1rem;
 }
 
 /* Title */
@@ -1918,6 +1912,12 @@ section h2{
     font-size: 0.7rem;
     padding: 0.5rem;
 }
+
+/* DETAIL */
+.class-name h2{
+    width: 100%;
+    white-space: nowrap;
+}
 }
 
 /* ---------------------------------------------------------------
@@ -1930,11 +1930,11 @@ section h2{
 }
 
 .menubar{
+    display: flex;
     flex-direction: column;
     align-items: center; 
     justify-content: center;
     width: 100%;
-    box-sizing: border-box; 
 }
 
 .menu-items ul{
@@ -1948,6 +1948,10 @@ section h2{
     margin: 0;
     width: 100%;
     box-sizing: border-box;
+}
+
+.search-bar-in-menu{
+    max-width: 18rem;
 }
 
 .login-items{
@@ -2040,21 +2044,36 @@ section h2{
     font-size: 0.7rem;
     padding: 0.5rem;
 }
+
+/* DETAIL */
+.product-page-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+}
+
+.image-container{
+    display: none;
+}
+
+.right-side-detail-card{
+    display: none; 
+}
+
+section{
+    font-size: 0.5rem;
+}
+
+.sections{
+    margin: 0; 
+}
 }
 
 /* ---------------------------------------------------------------
    (min-width: 576px) and (max-width: 767px)
    --------------------------------------------------------------- */
 @media (min-width: 576px) and (max-width: 767px) {
-/* MAIN */
-.menubar{
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center;
-    width: 100%;
-    box-sizing: border-box; 
-}
-
 .menu-items ul{
     display: flex;
     flex-direction: column;
@@ -2073,6 +2092,10 @@ section h2{
     text-align: center;
     display: flex;
     justify-content: center;
+}
+
+.search-bar-in-menu{
+    max-width: 18rem;
 }
 
 .login-items a{
@@ -2140,7 +2163,6 @@ section h2{
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
 }
-}
 
 /* ABOUT */
 .about-title{
@@ -2173,19 +2195,12 @@ section h2{
 .about-core-values li{
     padding: 0.5rem;
 }
+}
 
 /* ---------------------------------------------------------------
    (max-width: 576px)
    --------------------------------------------------------------- */
-@media (max-width: 576px) {
-/* MENUBAR */
-.menubar{
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-    text-align: center;
-}
-    
+@media (max-width: 576px) {    
 /* MENU ITEMS */
 .menu-items ul{
     flex-direction: column;
@@ -2202,7 +2217,11 @@ section h2{
     justify-content: center;
     text-align: center;
 }
-    
+
+.search-bar-in-menu{
+    max-width: 18rem;
+}
+
 .login-items a{
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
@@ -2284,6 +2303,62 @@ section h2{
     padding: 0.5rem;
     text-align: center;
 }
+
+/* DETAIL */
+.product-page-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.product-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.image-grid{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 0.6rem; 
+}
+
+.class-information-title{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin: 1rem 0;
+}
+
+.intro-text{
+    text-align: center;
+    margin: 1rem 0
+}
+
+.sections{
+    display: none;
+}
+
+.right-side-detail-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 }    
 
 /* ---------------------------------------------------------------
@@ -2293,15 +2368,6 @@ section h2{
 /* MENU */
 .digg-logo{
     margin: 0; 
-    flex: center;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.menubar{
-    padding: 1rem;
-    width: 100%;
-    text-align: center;
 }
 
 .menu-items ul{
@@ -2472,14 +2538,7 @@ section h2{
    (max-width: 320px)
    --------------------------------------------------------------- */
 @media (max-width: 320px) {
-/* MENU */
-.menubar{
-    padding: 0.8rem;
-}
-
 .menu-items ul{
-    padding: 0;
-    margin: 0;
     width: 100%;
     text-align: center;
 }
