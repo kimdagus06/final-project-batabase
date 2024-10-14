@@ -1,4 +1,5 @@
-<div class="upcoming-page-container"> <!-- To change the background color -->
+<!-- Upcoming Class Page -->
+<div class="upcoming-page-container">
     <h2 class="trending-title">Trending Classes</h2>
     <ul id="class-list">
         {{#if classes.length}}
@@ -11,11 +12,12 @@
                             </a>
                         </div>
                         <span><strong>{{className}}</strong></span><br>
-                        <span><strong>Tutor:</strong> {{username}}</span><br>
+                        <span><strong>Tutor </strong> {{username}}</span><br>
                     </div>
                 </li>
             {{/each}}
         {{else}}
+        <!-- Guide message for users -->
             <li>No upcoming classes available.</li>
         {{/if}}
     </ul>

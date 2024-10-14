@@ -1,3 +1,4 @@
+<!-- Register Class Page -->
 <div class="class-container">
     <!-- Separate text elements -->
     <div class="text-container">
@@ -15,7 +16,7 @@
     </div>
 </div>
 
-
+<!-- Class creat form -->
 <form class="class-creating" method="POST" action="/create-class">
     <div class="class-details" id="register-creator">
         <p>Class DETAILS</p>
@@ -82,11 +83,14 @@
             <input type="text" id="address-line-2" name="postcode" placeholder="Please enter the postcode" class="form-input" required>
         </div>
 
-        <div class="button-container">
+        <!-- Code borrowed from a website - BEGIN -->
+        <!-- Source: (Reshades. (n.d.). Dull Snake 38. Uiverse. Retrieved October 14, 2024, from https://uiverse.io/reshades/dull-snake-38) -->
+        <div class="button-container"> <!-- This code is connected to css -->
             <button type="submit" class="button">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
                 </svg>
+        <!-- Code borrowed from a website - END -->
                 <div class="text">Submit</div>
             </button>
             <button type="button" class="remove-button" onclick="resetForm()">
@@ -96,6 +100,7 @@
     </div>
 </form>
 
+<!-- Guide message for users -->
 <div class="apply-guide-message">
     <p class="creator-guide-text">Once you apply to become a creator,
         we will review your application and it will be posted on the upcomings shortly.</p>

@@ -1,10 +1,11 @@
-<body class="{{#if isCreatedAccountPage}}create-account-page{{/if}}">
-    <h1 class="create-title">Create an account</h1>
+<!-- Create Accound Page -->
+<h1 class="create-title">Create an account</h1>
     <div class="create-container">
         <h2 class="description">Already have an account?</h2>
         <a href="/login" class="have-an-account">Log in</a>
     </div>
 
+    <!-- Create account form -->
     <div class="create-account-forms">
         <form action="/create-account" method="POST" class="create-form">
             <label for="username">What should we call you?</label>
@@ -17,6 +18,7 @@
             <input type="password" id="password" name="password" placeholder="Enter your password" class="form-input" required>
             <small>Use 8 or more characters with a mix of letters, numbers & symbols</small>
             
+            <!-- 0/1 agree is 1 -->
             <label for="agreeterms">
                 <input type="checkbox" id="agreeterms" name="agreeterms" required>
                 I agree to all the Terms and Privacy Policy
@@ -25,4 +27,3 @@
             <input type="submit" value="Create an account" class="create-an-account-button">
         </form>
     </div>
-</body>

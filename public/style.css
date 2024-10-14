@@ -172,7 +172,7 @@ html{
     font-size: 1rem;
     
     /* Code borrowed from a website - BEGIN */
-    /* Source: UI Glass. (n.d.). Glass UI Generator. Retrieved October 14, 2024, from https://generator.ui.glass/ */
+    /* Source: (UI Glass. (n.d.). Glass UI Generator. Retrieved October 14, 2024, from https://generator.ui.glass/) */
     backdrop-filter: blur(1rem) saturate(180%);
     -webkit-backdrop-filter: blur(1rem) saturate(180%);
     background-color: rgba(255, 255, 255, 0.75);
@@ -988,7 +988,7 @@ span{
 }
 
 /* Code borrowed from a website - BEGIN */
-/* Source: Madflows. (n.d.). Stale Baboon 45. Uiverse. Retrieved October 14, 2024, from https://uiverse.io/Madflows/stale-baboon-45 */
+/* Source: *(Madflows. (n.d.). Stale Baboon 45. Uiverse. Retrieved October 14, 2024, from https://uiverse.io/Madflows/stale-baboon-45) */
 .view-job-offer-button:hover::before{
     transform: scaleX(1);
 }
