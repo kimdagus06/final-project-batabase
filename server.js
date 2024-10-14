@@ -93,12 +93,9 @@ app.use(express.json()); // Parsing request data in JSON format
  /**
   * 'secret' is the key used to sign and encrypt session IDs stored in cookies.
   * It ensures the integrity and security of session data between the client and server.
-  * Note: This part shouldn't be hardcoded for security reasons (.env file)
   * 
-  * Define and configure session management:
-  * resave: false (Do not save session if it wasn't modified)
-  * saveUninitialized: false (Do not create a session until something is stored in the session)
-  * store: Stores session data in an SQLite3 database ('session-db.db')
+  * Just note for studies: This part shouldn't be hardcoded for security reasons (.env file)
+  * 
   * cookie: Configures session cookie settings, such as maxAge
   * name: Changed a cookes file name. otherwise, it would have been 'connect.sid'  
  */
@@ -144,11 +141,6 @@ app.use((req, res, next) => {
  * Middleware that checks if the user is logged in and has admin one.
  * If both conditions are met (login and admin), the middleware passes control to the next.
  * If the user is not logged in or not an admin, it returns a 403 response: Log in error.
- * 
- * @param {*} req - The request object, which contains session data (isLoggedIn, isAdmin).
- * @param {*} res - The response object, used to send the 403 status if the user is not an admin.
- * @param {*} next - The next middleware function in the stack, called if the user is an admin.
- * @returns - Either calls `next()` to continue or sends a 403 error response.
  */
 function isAdmin(req, res, next) {
     if (req.session.isLoggedIn && req.session.isAdmin) {
@@ -163,19 +155,11 @@ function isAdmin(req, res, next) {
 =========================================
         DATABASE TABLES
 =========================================
-/**
+*/
+/*
  * Table one | Create users 
  * Description:
- * This block of code is responsible for creating the "users" table in the database (if it doesn't already exist)
- * and inserting an admin user along with predefined users into the table.
- * 
- * The "users" table contains 5 columns:
- * id: Auto-incrementing primary key for each user.
- * username: User's name (cannot be NULL).
- * emailAddress: User's unique email address (cannot be NULL or duplicate).
- * password: Hashed password for user authentication (cannot be NULL).
- * agreeterms: Integer indicating whether the user agreed to terms (0 or 1, cannot be NULL. 1 is agreed).
- * 
+ * This code is about to users class table columns 
  * The table has the following constraints:
  * NOT NULL: Ensures that the column must have a value.
  * UNIQUE: Ensures that no two users can have the same email address.
@@ -235,17 +219,14 @@ db.serialize(() => {
 
 /**
  * function insertPredefinedUsers()
- * Description: 
- * This function inserts a list of predefined users into the "users" table in the database.
+ * Description:
+ * This function is for making db.serialize(() function short! 
  *
  * 1. The function first checks if a user with the same `emailAddress` already exists in the database.
  * 2. If the user does not exist:
  *    The password is securely hashed using `bcrypt`.
  *    The user data (username, hashed password, email, and agreeterms) is then inserted into the "users" table.
- * 
- * bcrypt.hash: This function is used to hash the user's password before storing it in the database to ensure security.
- * db.get: Runs a SQL query to check if the user already exists by checking their email address.
- * db.run: Inserts the new user into the database with their hashed password.
+ * bcrypt.hash: This function is used to hash the user's password before storing it in the database to ensure security. - grade 5 
  */
 function insertPredefinedUsers() {
     // Insert predefined users into the database using the predefinedUsers array
@@ -284,34 +265,17 @@ function insertPredefinedUsers() {
 /**
  * Table two | Create classes 
  * Description:
- * This block of code is responsible for creating the "classes" table in the database (if it doesn't already exist)
- * To avoid a confilct, had to change the name from class to classes.
- *
- * The "classes" table contains 5 columns:
- *   user_id: A foreign key referencing the `id` from the "users" table.
- *   id`: Autoincrementing primary key for each class.
- *   className: Name of the class (cannot be NULL).
- *   classType: Type or category of the class (cannot be NULL).
- *   classPrice: Price of the class in integer format (cannot be NULL).
- *   classDate: Date of the class (cannot be NULL).
- *   startTime: Class start time (cannot be NULL).
- *   endTime: Class end time (cannot be NULL).
- *   classFormat: Format of the class (e.g., online, in-person) (cannot be NULL).
- *   address: Address where the class is held (cannot be NULL).
- *   postcode: Optional postal code of the class location.
+ * This code is about to create class table columns 
  * 
  * The table has the following constraints:
  * NOT NULL: Ensures that the column must contain a value.
  * FOREIGN KEY (user_id) REFERENCES users(id): Each time a class is added to the database, 
  * the user who created the class must already be registered in the users table.
  * 
- * 1. The `DROP TABLE IF EXISTS` command is executed to remove the existing "classes" table if it exists.
- *    This ensures that any previous version of the table is removed before creating a new one.
- * 2. The `CREATE TABLE IF NOT EXISTS` command is then used to create the new "classes" table with the specified columns and constraints.
- * 3. After the table is successfully created, the function `insertPredefinedClasses()` is called to populate the table with predefined class data.
+ * 1. The `CREATE TABLE IF NOT EXISTS` command is then used to create the new "classes" table with the specified columns and constraints.
+ * 2. After the table is successfully created, the function `insertPredefinedClasses()` is called to populate the table with predefined class data.
  */
 db.serialize(() => {  
-        // Create the classes table
         db.run(`CREATE TABLE IF NOT EXISTS classes (
             user_id INTEGER NOT NULL,
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -339,11 +303,17 @@ db.serialize(() => {
     });
 
   /**
+   * function insertPredefinedClasses()
+   * Description: 
+   * This function inserts a list of predefined users into the "classes" table in the database.
+   *    * This function is for making db.serialize(() function short! 
    * 
+   * 1. The function check if the class already exists by className and startTime to avoid duplicates
+   * 2. If the class does not exist inserts into the "classes" table.
+   * 3. If the class exists then prints out className and startTime already exist in the database. 
    */
   function insertPredefinedClasses() {
     predefinedClasses.forEach(cls => {
-        // Check if the class already exists by className and startTime to avoid duplicates
         db.get('SELECT * FROM classes WHERE className = ? AND startTime = ?', [cls.className, cls.startTime], (err, existingClass) => {
             if (err) {
                 console.error('Error checking predefined class:', err.message);
@@ -371,7 +341,9 @@ db.serialize(() => {
 /**
  * Table three | Create feedback - grade 4
  * Description:
+ * This table is to create feedback table columns 
  * rating INT CHECK (rating BETWEEN 1 AND 5): Allow users to give feedback to classes 
+ *
 */
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS feedback (
@@ -392,6 +364,13 @@ db.serialize(() => {
     });
 });
 
+/**
+ * function insertPredefinedFeedback()
+ * Description:
+ * 1. This function checks if predefined feedback already exists in the database by comparing `contactName` and `contactMail`.
+ * 2. If the feedback does not exist, it inserts the predefined feedback into the "feedback" table.
+ * 3. If feedback already exists, it logs a message indicating that feedback for that user is already in the database.
+ */
 function insertPredefinedFeedback() {
     predefinedFeedback.forEach(fed => {
         // Check if the feedback already exists to avoid duplicates
@@ -419,9 +398,18 @@ function insertPredefinedFeedback() {
     });
 }
 
-// -----------
-// ---ROUTE---
-// -----------
+/*
+=========================================
+               ROUTES
+=========================================
+*/
+/**
+ * app.get("/", (req, res) =>
+ * Description: 
+ * Handles GET request for the / page (main)
+ * Passes session data (isLoggedIn, name, email, etc.) to the view (home.ejs).
+ * Logs the model if the user is not logged in.
+ */
 app.get("/", (req, res) => {
     const model = {
         isLoggedIn: req.session.isLoggedIn,
@@ -463,8 +451,9 @@ app.get("/registerclass", (req, res) => {
 });
 
 /**
- * Hidden page
- * When an admin account is logged in it checks
+ * app.get('/admin', isAdmin, (req, res) =>
+ * Description:
+ * It's about "Hidden page" if a user log in with admin, it checks 
  */
 app.get('/admin', isAdmin, (req, res) => {
     db.all('SELECT * FROM users', (err, users) => {
@@ -477,14 +466,16 @@ app.get('/admin', isAdmin, (req, res) => {
 });
 
 /**
- * app.get('/upcomingclass', async (req, res)
+ * app.get('/upcomingclass', async (req, res) =>
  * Description: 
- * 1. 
- * 2. Pagination - grade 4: This part is connected to upcomingclass.handlebars 
+ * 1. Handles upcoming class listing with pagination.
+ * 2. Joins 'classes' and 'users' tables to display class info along with user details.
+ * 3. Pagination - grade 4
+ * 4. Renders 'upcomingclass.handlebars' with class data, current page, and pagination controls.
  * 
- * Refer to this link: https://www.w3schools.com/sql/sql_join_inner.asp
- * Refer to this link: https://gent.tistory.com/376
- * Getting data from the tables: lab-4-v1.1 (1).pdf
+ * Learned from this link: https://www.w3schools.com/sql/sql_join_inner.asp
+ * Learned from this link: https://gent.tistory.com/376
+ * Learned from: lab-4-v1.1 (1).pdf
  */
 app.get('/upcomingclass', async (req, res) => {
     try {
