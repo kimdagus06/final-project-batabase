@@ -592,7 +592,7 @@ app.get('/detail/:id', (req, res) => {
  * 
  * Just note for studies: It's not necessary to hash all information because recovering data can be difficult. Just hashing the password is sufficient.
  */
-app.post('/createaccount', (req, res) => {
+app.post('/create-account', (req, res) => {
     // Just node for studies: Can access username, emailAddress, password, and agreeterms easily without using long expressions 
     // like req.body.username, req.body.emailAddress, req.body.password, and req.body.agreeterms, one by one.
     const { username, emailAddress, password, agreeterms } = req.body;

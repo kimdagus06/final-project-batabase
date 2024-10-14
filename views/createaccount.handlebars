@@ -1,29 +1,28 @@
-<!-- Create Accound Page -->
+<!-- Create Account Page -->
 <h1 class="create-title">Create an account</h1>
-    <div class="create-container">
-        <h2 class="description">Already have an account?</h2>
-        <a href="/login" class="have-an-account">Log in</a>
-    </div>
+<div class="create-container">
+    <h2 class="description">Already have an account?</h2>
+    <a href="/login" class="have-an-account">Log in</a>
+</div>
 
-    <!-- Create account form -->
-    <div class="create-account-forms">
-        <form action="/create-account" method="POST" class="create-form">
-            <label for="username">What should we call you?</label>
-            <input type="text" id="username" name="username" placeholder="Enter your profile name" class="form-input" required>
+<!-- Create account form -->
+<div class="create-account-forms">
+    <form action="/create-account" method="POST" class="create-form">
+        <label for="username">What should we call you?</label>
+        <input type="text" id="username" name="username" placeholder="Enter your profile name" class="form-input" required autocomplete="username">
 
-            <label for="email">What is your email?</label>
-            <input type="email" id="emailAddress" name="emailAddress" placeholder="Enter your email address" class="form-input" required>
+        <label for="emailAddress">What is your email?</label>
+        <input type="email" id="emailAddress" name="emailAddress" placeholder="Enter your email address" class="form-input" required autocomplete="email">
 
-            <label for="password">Create a password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" class="form-input" required>
-            <small>Use 8 or more characters with a mix of letters, numbers & symbols</small>
-            
-            <!-- 0/1 agree is 1 -->
-            <label for="agreeterms">
-                <input type="checkbox" id="agreeterms" name="agreeterms" required>
-                I agree to all the Terms and Privacy Policy
-            </label>
-            
-            <input type="submit" value="Create an account" class="create-an-account-button">
-        </form>
-    </div>
+        <label for="password">Create a password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" class="form-input" required autocomplete="new-password">
+        <small>Use 8 or more characters with a mix of letters, numbers & symbols</small>
+        
+        <label for="agreeterms">
+            <input type="checkbox" id="agreeterms" name="agreeterms" required>
+            I agree to all the Terms and Privacy Policy
+        </label>
+        
+        <input type="submit" value="Create an account" class="create-an-account-button">
+    </form>
+</div>
