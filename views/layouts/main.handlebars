@@ -16,8 +16,8 @@
             </a>
         </div>
 
-        <!-- Refer to this link: https://handlebarsjs.com/guide/builtin-helpers.html#if 
-        The internal code is rendered when the condition for isLoginPage/isCreatAccoundPage are false. If it's not the login page, 
+        <!-- Refer to this link: https://handlebarsjs.com/guide/builtin-helpers.html#if -->
+        <!-- The internal code is rendered when the condition for isLoginPage/isCreatAccoundPage are false. If it's not the login page, 
         the menu items are displayed; otherwise, only the logo is visible by design.-->
         {{#unless isLoginPage}} <!-- unless log in page -->
         {{#unless isCreateAccountPage}} <!-- unless create account page -->
@@ -41,7 +41,11 @@
         <div class="login-items">
             <ul>
                 {{#if isLoggedIn}} <!-- if logged in -->
-                    <li id="menulogin"><a href="/logout">Logout</a></li>
+                    <li id="menulogin">
+                        <form action="/logout-class" method="POST" style="display: inline;">
+                            <button type="submit" class="logout-button">Logout</button>
+                        </form>
+                    </li>
                     {{#if isAdmin}} <!-- if user is admin -->
                         <li id="menuadmin"><a href="/admin">User manage</a></li>
                     {{/if}}
@@ -56,6 +60,7 @@
 
     {{{body}}}
     
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-left">

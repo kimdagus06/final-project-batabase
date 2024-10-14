@@ -422,7 +422,7 @@ function insertPredefinedFeedback() {
 // -----------
 // ---ROUTE---
 // -----------
-app.get("/", function (req, res) {
+app.get("/", (req, res) => {
     const model = {
         isLoggedIn: req.session.isLoggedIn,
         name: req.session.name,
@@ -446,19 +446,19 @@ app.get("/login", (req, res) => {
     res.render("login", { isLoginPage: true });
 });
 
-app.get("/logout", function (req, res) {
+app.get("/logout", (req, res) => {
     res.render("logout"); 
 });
 
-app.get("/about", function (req, res) {
+app.get("/about", (req, res) => {
     res.render("about");
 });
 
-app.get("/contact", function (req, res) {
+app.get("/contact", (req, res) => {
     res.render("contact");
 });
 
-app.get("/registerclass", function (req, res) {
+app.get("/registerclass", (req, res) => {
     res.render("registerclass"); 
 });
 
