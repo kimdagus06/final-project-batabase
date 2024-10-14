@@ -471,7 +471,7 @@ app.get('/admin', isAdmin, (req, res) => {
  * 1. Handles upcoming class listing with pagination.
  * 2. Joins 'classes' and 'users' tables to display class info along with user details.
  * 3. Pagination - grade 4
- * 4. Renders 'upcomingclass.handlebars' with class data, current page, and pagination controls.
+ * 4. Set ? because the page number shouldn't fix. It expends based on the number of pages. More item = more pages. 
  * 
  * Learned from this link: https://www.w3schools.com/sql/sql_join_inner.asp
  * Learned from this link: https://gent.tistory.com/376
@@ -515,7 +515,7 @@ app.get('/upcomingclass', async (req, res) => {
                 }
 
                 const totalClasses = countRow.count; // Total number of classes
-                const totalPages = Math.ceil(totalClasses / limit); // Total pages
+                const totalPages = Math.ceil(totalClasses / limit); // Total pages / Math.ceil: Rounds the given number up. 
                 const nextPage = page < totalPages ? page + 1 : null; // Calculate next page number
                 const pageMinus1 = page > 1 ? page - 1 : null; // Calculate previous page number
 
@@ -545,6 +545,9 @@ app.get('/upcomingclass', async (req, res) => {
  * Description:
  * This is for each detail page. When a user clicks one of cards in the upcoming classes page, 
  * it brings saved data from the database.
+ * 
+ * INNER JOIN is used to combine users and classes tables.
+ * In this case, it joins the 'classes' table and the 'users' table using the 'user_id' from the 'classes' table and the 'id' from the 'users' table.
  */
 app.get('/detail/:id', (req, res) => {
     const classId = req.params.id; // Get the class ID from the URL
@@ -576,15 +579,22 @@ app.get('/detail/:id', (req, res) => {
 /**
  * app.post('/create-account', async (req, res)
  * Description:
- * Create Account
- * 
+ * This function is about Create Account page
  * Hash Passwords with bcrypt in Node.js
- * https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
+ * Learned from this link: https://www.freecodecamp.org/news/how-to-hash-passwords-with-bcrypt-in-nodejs/
  * 
- * It's not necessary to hash all information because recovering data can be difficult.
- * Just hashing the password is sufficient.
+ * 1. Handles user account creation on the Create Account page.
+ * 2. Validates input fields to ensure all required information is provided.
+ * 3. Checks if the email already exists in the database to prevent duplicates. Because email is more unique 
+ * 4. Hashes the password using bcrypt for security.
+ * 5. Inserts the new user into the database with hashed password and other details.
+ * 6. Redirects to the login page upon successful account creation.
+ * 
+ * Just note for studies: It's not necessary to hash all information because recovering data can be difficult. Just hashing the password is sufficient.
  */
 app.post('/createaccount', (req, res) => {
+    // Just node for studies: Can access username, emailAddress, password, and agreeterms easily without using long expressions 
+    // like req.body.username, req.body.emailAddress, req.body.password, and req.body.agreeterms, one by one.
     const { username, emailAddress, password, agreeterms } = req.body;
 
     // Input validation
@@ -602,7 +612,7 @@ app.post('/createaccount', (req, res) => {
             return res.status(400).send('User with this email already exists.');
         }
 
-        // Password hashing
+        // Password hashing / it is 12, but normally 10 numbers (Read it from Google)
         bcrypt.hash(password, 12, (hashErr, hash) => {
             if (hashErr) {
                 console.error('Error hashing password:', hashErr.message);
@@ -629,12 +639,13 @@ app.post('/createaccount', (req, res) => {
 /**
  * app.post('/login-class', async (req, res)
  * Description:
- * Login-class 
- * This code is from 5-authentication-slides.pdf 
+ * 1. Login-class to check user inputs: username, emailaddress, password.
+ * 2. Compare them if it's actually registered in the database.
+ * 3. Handle two different account types: Admin/General users 
+ * 
+ * Learned from this link: 5-authentication-slides.pdf 
  */
 app.post('/login-class', async (req, res) => {
-    console.log("Login attempt with:", req.body);
-  
     const { username, emailAddress, password } = req.body;
   
     // Validate if it's the admin account
@@ -702,15 +713,20 @@ app.post('/login-class', async (req, res) => {
 /**
  * app.post('/logout-class', async (req, res)
  * Description:
- * Log Out = clear the session
- * It clears the session and redirects a user to the home page. 
- * 
+ * 1. Log Out = clear the session
+ * 2. It clears the session and redirects a user to the home page. 
  */
 app.post('/logout-class', async (req, res) => {
     req.session.destroy(); // destroy() helps to clear the session
     res.redirect('/');
 });
 
+/**
+ * app.post('/upcomingclass', async (req, res) =>
+ * Description:
+ * 1. Handles the POST request for the upcoming class feature.
+ * 2. Inserts the user ID and class ID into the "upcomings" table (displaying them in cards)
+ */
 app.post('/upcomingclass', async (req, res) => {
     const { user_id, classes_id } = req.body;
 
@@ -725,9 +741,6 @@ app.post('/upcomingclass', async (req, res) => {
     });
 });
 
-/**
- * 
- */
 app.post('/registerclass', async (req, res) => {
     const { user_id, classes_id } = req.body;
 
@@ -743,7 +756,10 @@ app.post('/registerclass', async (req, res) => {
 });
 
 /**
- * 
+ * app.post('/create-class', async (req, res) =>
+ * Description:
+ * 1. Handles the POST request to create a new class.
+ * 2. Insert a new class to the database. It will display in upcoming page, thus redirect a user to the upcoming class page.
  */
 app.post('/create-class', async (req, res) => {
     const userId = req.session.userId; // Bring user id from the session 
@@ -768,9 +784,6 @@ app.post('/create-class', async (req, res) => {
     });
 });
 
-/**
- * 
- */
 app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
     const userId = req.params.id;
     const { username, emailAddress } = req.body;
@@ -787,15 +800,19 @@ app.post('/admin/edit-user/:id', isAdmin, (req, res) => {
 });
 
 /**
- * https://forum.freecodecamp.org/t/delete-a-record-from-database-using-node-js-express-js/454100
+ * app.delete('/admin/delete-user/:id', isAdmin, (req, res) =>
  * Description:
+ * 1. This function is about deleting a user from the user management table.
+ * 2. It works with main.js code.
+ * 3. Find a user by searching for user id.
  * 
+ * Learned from this link: https://forum.freecodecamp.org/t/delete-a-record-from-database-using-node-js-express-js/454100
+ * Learned from this link: lab-6-v1.0 (3).pdf
  */
 app.delete('/admin/delete-user/:id', isAdmin, (req, res) => {
     const userId = req.params.id;
 
-    console.log(`DELETE request made to: /admin/delete-user/${userId}`);
-
+    // Remove the user from the database
     db.run('DELETE FROM users WHERE id = ?', [userId], function(err) {
         if (err) {
             console.error('Error deleting user:', err.message);
@@ -812,8 +829,11 @@ app.delete('/admin/delete-user/:id', isAdmin, (req, res) => {
     });
 });
 
-
-/* Start a port */
+/*
+=========================================
+        START A PORT
+=========================================
+*/
 app.listen (port, () => {
     console.log('Server up on port '+port+'...');
 }); 
