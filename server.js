@@ -480,7 +480,7 @@ app.get('/admin', isAdmin, (req, res) => {
 app.get('/upcomingclass', async (req, res) => {
     try {
         const page = parseInt(req.query.page) || 1; // Get the current page
-        const limit = 8; // Number of items per page
+        const limit = 4; // Number of items per page
         const offset = (page - 1) * limit; // Calculate offset for SQL query
 
         const query = `
