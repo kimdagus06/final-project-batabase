@@ -16,10 +16,11 @@
             </a>
         </div>
 
-        <!-- Display menu only if NOT on login or create account pages -->
-        <!-- Refer to this link: https://handlebarsjs.com/guide/builtin-helpers.html#if -->
-        {{#unless isLoginPage}}
-        {{#unless isCreateAccountPage}}
+        <!-- Refer to this link: https://handlebarsjs.com/guide/builtin-helpers.html#if 
+        The internal code is rendered when the condition for isLoginPage/isCreatAccoundPage are false. If it's not the login page, 
+        the menu items are displayed; otherwise, only the logo is visible by design.-->
+        {{#unless isLoginPage}} <!-- unless log in page -->
+        {{#unless isCreateAccountPage}} <!-- unless create account page -->
         <div class="menu-items">
             <ul>
                 <li><a href="/registerclass" class="register-class-menu" data-content="register-class">Register Class</a></li>
@@ -29,6 +30,7 @@
             </ul>
         </div>
 
+        <!-- Search bar in the menu bar -->
         <div class="search-container">
             <div class="search-bar-in-menu">
                 <input type="text" class="search-bar" placeholder="Find a new hobby">
@@ -38,9 +40,9 @@
 
         <div class="login-items">
             <ul>
-                {{#if isLoggedIn}}
+                {{#if isLoggedIn}} <!-- if logged in -->
                     <li id="menulogin"><a href="/logout">Logout</a></li>
-                    {{#if isAdmin}}
+                    {{#if isAdmin}} <!-- if user is admin -->
                         <li id="menuadmin"><a href="/admin">User manage</a></li>
                     {{/if}}
                 {{else}}
